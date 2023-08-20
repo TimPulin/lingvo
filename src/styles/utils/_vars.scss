@@ -1,0 +1,27 @@
+// COLOR VARS
+$color-primary: #00a0ff;
+$color-secondary: #ff6c00;
+$color-grey_max_light: #eaeaea;
+
+$page-background: $color-grey_max_light;
+
+
+[data-lingvo-cards-theme="light"] {
+  --color-primary: #00a0ff;
+  --color-secondary: #ff6c00;
+  --page-background: #fff;
+  --button-basic-background: #f1f1f1;
+}
+
+
+
+[data-lingvo-cards-theme="dark"] {
+  --color-primary: #00a0ff;
+  --color-secondary: #ff6c00;
+  --page-background: black;
+
+}
+
+// COMMON VARS
+$border-radius-basic: 10px;
+$small-screen: 575px;
