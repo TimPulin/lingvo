@@ -1,1 +1,8 @@
+@import './utils/vars';
+@import './mixins/reset-mixins';
+@import './mixins/components-mixins';
+@import './assets/bootstrap-reboot.css';
 @import './utils/common';
+
+@import './components/button';
+@import './components/main-screen';
