@@ -1,13 +1,15 @@
-const languagesList = {
-  russian: {
+const languagePackBasic = {
+  ru: {
     CREATE_NEW_CARD: 'Создать новую карточку',
     CARDS: 'Карточки',
+    SETTINGS: 'Настройки',
   },
 
-  english: {
+  en: {
     CREATE_NEW_CARD: 'Create new card',
     CARDS: 'Cards',
+    SETTINGS: 'Settings',
   },
 };
 
-export default languagesList;
+export default languagePackBasic;

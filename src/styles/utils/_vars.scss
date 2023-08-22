@@ -1,6 +1,8 @@
 // COLOR VARS
 $color-primary: #00a0ff;
+$color-primary_shade: #0068A6;
 $color-secondary: #ff6c00;
+$color-grey: #999999;
 $color-grey_max_light: #eaeaea;
 
 $page-background: $color-grey_max_light;
@@ -11,6 +13,8 @@ $page-background: $color-grey_max_light;
   --color-secondary: #ff6c00;
   --page-background: #fff;
   --button-basic-background: #f1f1f1;
+  --color-hover: #0068A6;
+  --link-color: #000;
 }
 
 
@@ -19,7 +23,9 @@ $page-background: $color-grey_max_light;
   --color-primary: #00a0ff;
   --color-secondary: #ff6c00;
   --page-background: black;
-
+  --button-basic-background: #f1f1f1;
+  --color-hover: #0068A6;
+  --link-color: #000;
 }
 
 // COMMON VARS

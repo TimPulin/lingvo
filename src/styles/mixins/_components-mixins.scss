@@ -8,3 +8,9 @@
   border-style: solid;
   border-radius: $border-radius-basic;
 }
+
+@mixin background {
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
