@@ -8,6 +8,11 @@
   outline: none;
 }
 
+@mixin list-reset {
+  @include reset;
+  list-style: none;
+}
+
 @mixin btn-reset {
   @include reset;
   border: none;
