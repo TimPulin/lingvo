@@ -6,10 +6,10 @@ import { getCurrentLangPack } from '../utils/lang-pack/get-current-lang-pack';
 export default function HeaderSite() {
   const currentLang = useSelector((store: RootStateType) => store.currentLang.value);
   const { SETTINGS } = getCurrentLangPack({ langCode: currentLang });
+
   return (
     <header>
       <nav className="nav">
-
         <div className="nav__panel">
           <ul className="nav__list">
             <li className="nav__item">

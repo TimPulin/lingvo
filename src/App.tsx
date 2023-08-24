@@ -6,9 +6,7 @@ import { router } from './router';
 function App() {
   return (
     <div data-lingvo-cards-theme="light" className="app">
-      <div className="container">
-        <RouterProvider router={router} />
-      </div>
+      <RouterProvider router={router} />
     </div>
   );
 }
