@@ -1,0 +1,14 @@
+.options-flat {
+  &__list {
+    @include list-reset;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.options-flat--row {
+  .options-flat__list {
+    flex-direction: row;
+  }
+}
