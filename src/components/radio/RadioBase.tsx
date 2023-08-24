@@ -1,29 +1,30 @@
-export interface IRadioBaseProps {
+export interface IRadioBaseList {
   name: string;
   label: string;
   value: string | number;
 }
 
-export default function RadioBase(props: IRadioBaseProps) {
-  const { name, label, value } = props;
+interface IRadioBaseProps extends IRadioBaseList {
+  onChange(value: string | number): void;
+  currentLang: string;
+}
 
-  function handleChange(event: any) {
-    if (event.target.checked) {
-      console.log('checked');
-    } else {
-      console.log('not');
-    }
-  }
+export default function RadioBase(props: IRadioBaseProps) {
+  const {
+    name, label, value, onChange, currentLang,
+  } = props;
+
+  const checkedClass = () => (currentLang === value ? 'radio-custom--checked' : '');
 
   return (
-    <label className="radio-custom">
+    <label className={`radio-custom ${checkedClass()}`}>
       {label}
       <input
         className="radio-custom__input"
         type="radio"
         name={name}
         value={value}
-        onChange={(event) => handleChange(event)}
+        onChange={() => onChange(value)}
       />
     </label>
   );
