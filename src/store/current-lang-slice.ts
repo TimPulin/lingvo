@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Languages } from '../utils/lang-pack/lang-pack-basic';
 
 interface ICurrentLang {
-  value: string;
+  value: Languages;
 }
 interface ActionType {
   type: string;
-  payload: string;
+  payload: Languages;
 }
 
 const initialState: ICurrentLang = {
-  value: 'en',
+  value: Languages.EN,
 };
 
 export const updateCurrentLangSlice = createSlice({
