@@ -2,27 +2,28 @@ import { useSelector, connect } from 'react-redux';
 import RadioBlock from '../components/radio/RadioBlock';
 import { RootStateType } from '../store';
 import { updateCurrentLang } from '../store/current-lang-slice';
+import { Languages } from '../utils/lang-pack/lang-pack-basic';
 
 const radioPropertiesList = [
   {
     name: 'lang',
     label: 'Русский',
-    value: 'ru',
+    value: Languages.RU,
   },
   {
     name: 'lang',
     label: 'English',
-    value: 'en',
+    value: Languages.EN,
   },
   {
     name: 'lang',
     label: 'Español',
-    value: 'esl',
+    value: Languages.ESL,
   },
   {
     name: 'lang',
     label: 'עברית',
-    value: 'hebrew',
+    value: Languages.HBW,
   },
 ];
 
