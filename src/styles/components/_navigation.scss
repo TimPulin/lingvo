@@ -1,4 +1,6 @@
 .nav {
+  --nav-show-duration: .2s;
+
   position: relative;
   width: 100%;
 
@@ -20,11 +22,9 @@
     background-color: #fff;
     box-shadow: -3px 0 5px 0 $color-grey;
     overflow-y: auto;
-    // visibility: hidden;
-    // opacity: 0;
-    opacity: 1;
-    // transform: translateX(105%);
-    transition: visibility .3s ease, transform .3s ease-out, opacity .3s ease;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(105%);
     z-index: 1000;
 
     .svg {
@@ -34,8 +34,10 @@
 
   &__panel--open {
     visibility: visible;
-    opacity: 1;
-    transform: translateX(0)
+    transform: translateX(0);
+    animation:
+      nav-show var(--nav-show-duration) ease forwards,
+      nav-move-forward .4s ease-in-out forwards .4s;
   }
 
   &__list {
