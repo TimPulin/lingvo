@@ -35,6 +35,7 @@ function SettingsPage(props: any) {
 
   return (
     <div>
+
       <RadioBlock
         componentClass="options-flat"
         list={radioPropertiesList}
