@@ -2,7 +2,7 @@
 
   --move-sides-duration: .2s;
   --transform-center-duration: .3s;
-  --move-center: .6s;
+  --move-center: .2s;
 
   display: block;
   text-align: right;
@@ -33,18 +33,15 @@
 
     &:nth-child(1) {
       top: 0;
-      animation: top-move-to-top var(--move-sides-duration) ease-in forwards;
     }
 
     &:nth-child(2) {
       top: 50%;
       transform: translateY(-50%);
-      animation: center-2-turn-to-burger var(--move-sides-duration) ease-in forwards;
     }
 
     &:nth-child(3) {
       bottom: 0;
-      animation: bottom-move-to-bottom var(--move-sides-duration) ease-in forwards;
     }
   }
 }
@@ -60,7 +57,7 @@
 
   .burger__line:nth-child(2) {
     animation:
-      center-transform-forward var(--transform-center-duration) ease-out forwards var(--move-sides-duration),
-      center-move-forward var(--move-center) ease-in forwards var(--transform-center-duration);
+      center-transform var(--transform-center-duration) ease-out forwards var(--move-sides-duration),
+      center-opacity var(--move-center) ease-in forwards var(--transform-center-duration);
   }
 }

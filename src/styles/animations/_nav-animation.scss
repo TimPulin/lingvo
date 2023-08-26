@@ -1,21 +1,36 @@
-@keyframes nav-show {
+@keyframes nav-move-forward {
   0% {
-    opacity: 0;
+    opacity: 1;
+    visibility: visible;
     transform: translateX(100%);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(100%)
+    visibility: visible;
+    transform: translateX(5px)
   }
 }
 
-@keyframes nav-move-forward {
+@keyframes nav-move-backward {
   0% {
-    transform: translateX(100%);
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0;
+    visibility: visible;
   }
 
   100% {
-    transform: translateX(0)
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%)
   }
 }
