@@ -15,10 +15,30 @@ body {
   background-color: var(--page-background);
 }
 
+.overlay {
+  z-index: -1000;
+}
+
+.overlay.modal-opened {
+  @include wrap-absolute;
+  z-index: 900;
+}
+
+.content {
+  filter: blur(0);
+  transition: filter .4s ease-in-out;
+}
+
+.content.modal-opened {
+  filter: blur(2px);
+}
+
 .container {
   margin: 0 auto;
   padding: 0 20px;
   max-width: 992px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .disabled {

@@ -1,11 +1,13 @@
 .nav {
+  --nav-show-duration: .2s;
+
   position: relative;
   width: 100%;
 
   &__panel {
     position: absolute;
     top: 0;
-    right: -20px;
+    right: 0;
 
     display: flex;
     flex-direction: column;
@@ -20,12 +22,9 @@
     background-color: #fff;
     box-shadow: -3px 0 5px 0 $color-grey;
     overflow-y: auto;
-    // visibility: hidden;
-    // opacity: 0;
-    opacity: 1;
-    // transform: translateX(105%);
-    transition: visibility .3s ease, transform .3s ease-out, opacity .3s ease;
     z-index: 1000;
+
+    animation: nav-move-backward .4s ease-in-out forwards;
 
     .svg {
       fill: #333;
@@ -33,9 +32,8 @@
   }
 
   &__panel--open {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0)
+    display: flex;
+    animation: nav-move-forward .4s ease-in-out forwards;
   }
 
   &__list {
