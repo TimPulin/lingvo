@@ -1,0 +1,63 @@
+@keyframes turn-native-to-foreign {
+  0% {
+    rotate: 0;
+    background-color: var(--color-primary);
+  }
+
+  49% {
+    rotate: x 90deg;
+    background-color: var(--color-primary);
+  }
+
+  51% {
+    rotate: x 90deg;
+    background-color: var(--color-secondary);
+  }
+
+  100% {
+    rotate: x 180deg;
+    background-color: var(--color-secondary);
+  }
+}
+
+@keyframes turn-foreign-to-native {
+  0% {
+    rotate: 0;
+    background-color: var(--color-secondary);
+  }
+
+  49% {
+    rotate: x 90deg;
+    background-color: var(--color-secondary);
+  }
+
+  51% {
+    rotate: x 90deg;
+    background-color: var(--color-primary);
+  }
+
+  100% {
+    rotate: x 180deg;
+    background-color: var(--color-primary);
+  }
+}
+
+@keyframes turn-content-native {
+  0% {
+    rotate: x 180deg;
+  }
+
+  100% {
+    rotate: x 0;
+  }
+}
+
+@keyframes turn-content-foreign {
+  0% {
+    rotate: x 180deg;
+  }
+
+  100% {
+    rotate: x 0;
+  }
+}

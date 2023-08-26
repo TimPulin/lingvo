@@ -10,4 +10,6 @@
 @import './animations/burger-animation';
 @import './components/navigation';
 @import './animations/nav-animation';
-@import './components/main-screen';
+@import './components/main-screen'; // TODO проверить на необходимость
+@import './components/card/card';
+@import './components/card/card-animation';
