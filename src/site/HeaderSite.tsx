@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { RootStateType } from '../store';
-import { getCurrentLangPack } from '../utils/lang-pack/get-current-lang-pack';
+import { useCurrentLangPack } from '../store/selectors';
 
 interface IHeaderSiteProps {
   changeIsModalOpen(isOpen:boolean): void;
@@ -10,8 +8,7 @@ interface IHeaderSiteProps {
 
 export default function HeaderSite(props: IHeaderSiteProps) {
   const { changeIsModalOpen } = props;
-  const currentLang = useSelector((store: RootStateType) => store.currentLang.value);
-  const { SETTINGS } = getCurrentLangPack({ langCode: currentLang });
+  const { SETTINGS } = useCurrentLangPack();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBurgerTransform, setIsBurgerTransform] = useState(false);

@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootStateType } from '../store';
-// import HeaderSite from '../site/HeaderSite';
-import { getCurrentLangPack } from '../utils/lang-pack/get-current-lang-pack';
+import { useCurrentLangPack } from '../store/selectors';
 
 export default function HomePage() {
-  const currentLang = useSelector((store: RootStateType) => store.currentLang.value);
-  const { CARDS, CREATE_NEW_CARD } = getCurrentLangPack({ langCode: currentLang });
+  const { CARDS, CREATE_NEW_CARD } = useCurrentLangPack();
 
   return (
     <div className="main-screen">
