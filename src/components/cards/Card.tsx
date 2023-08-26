@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 const CARD_NATIVE = 'card--native';
 const CARD_FOREIGN = 'card--foreign';
@@ -11,7 +11,6 @@ const CONTENT_HIDE = 'card__content--hide';
 export default function Card() {
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
-  const [animationDuration, setAnimationDuration] = useState(0);
   const cardRef = useRef(null);
 
   const cardClass = () => (isCardNative ? CARD_NATIVE : CARD_FOREIGN);
@@ -22,23 +21,12 @@ export default function Card() {
   const nativeContentHide = () => (isContentNative ? '' : CONTENT_HIDE);
   const foreignContentHide = () => (isContentNative ? CONTENT_HIDE : '');
 
-  function getAnimationDuration() {
-    if (cardRef.current !== null) {
-      const durationFromCss = getComputedStyle(cardRef.current).getPropertyValue('--turn-duration');
-      const duration = Number(durationFromCss.slice(0, durationFromCss.length - 1)) * 1000;
-      setAnimationDuration(duration);
-    }
-  }
-
-  useEffect(() => {
-    getAnimationDuration();
-  }, []);
-
   function turnCard():void {
     setIsCardNative(!isCardNative);
+
     setTimeout(() => {
       setIsContentNative(!isContentNative);
-    }, animationDuration / 2);
+    }, 250);
   }
 
   return (
@@ -54,8 +42,6 @@ export default function Card() {
         Тест ТестТестТест Тест ТестТест Тест
       </div>
       <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-        {/* <div className={`card__content ${foreignContentClass()}`}> */}
-
         First Test Test Test TestTest Test Test TestTest
       </div>
     </div>

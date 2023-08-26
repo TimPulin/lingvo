@@ -1,6 +1,5 @@
 .card {
-  // использовать полную запись времени (например: 0.5s)
-  --turn-duration: 1s;
+  --turn-duration: .5s;
 
   display: flex;
   flex-wrap: wrap;
@@ -26,29 +25,19 @@
 
 .card--native {
   animation: turn-foreign-to-native var(--turn-duration) ease-in-out forwards;
-
-  // .card__content--native {
-  //   animation: turn-content var(--turn-duration) ease-in-out forwards;
-  // }
-
-  .card__content--foreign {
-    animation: turn-content-foreign var(--turn-duration) ease-in-out forwards;
-  }
 }
 
 .card--foreign {
   animation: turn-native-to-foreign var(--turn-duration) ease-in-out forwards;
-
-  .card__content--native {
-    animation: turn-content-native var(--turn-duration) ease-in-out forwards;
-  }
-
-  // .card__content--foreign {
-  //   animation: turn-content-backward var(--turn-duration) ease-in-out forwards;
-  // }
 }
 
+.card__content--native {
+  animation: turn-content-native var(--turn-duration) ease-in-out forwards;
+}
 
+.card__content--foreign {
+  animation: turn-content-foreign var(--turn-duration) ease-in-out forwards;
+}
 
 .card__content--hide {
   display: none;
