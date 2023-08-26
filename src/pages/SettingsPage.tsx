@@ -3,6 +3,7 @@ import RadioBlock from '../components/radio/RadioBlock';
 import { RootStateType } from '../store';
 import { updateCurrentLang } from '../store/current-lang-slice';
 import { Languages } from '../utils/lang-pack/lang-pack-basic';
+import { useCurrentLangPack } from '../store/selectors';
 
 const radioPropertiesList = [
   {
@@ -33,9 +34,11 @@ function SettingsPage(props: any) {
     props.updateCurrentLang(itemValue);
   };
 
+  const { LANGUAGE } = useCurrentLangPack();
+
   return (
     <div>
-
+      <h2>{LANGUAGE}</h2>
       <RadioBlock
         componentClass="options-flat"
         list={radioPropertiesList}

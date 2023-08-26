@@ -1,4 +1,5 @@
 export interface ILangPack {
+  MAIN: string,
   CREATE_NEW_CARD: string,
   CARDS: string,
   SETTINGS: string,
@@ -18,6 +19,7 @@ export type DataLangType = {
 
 export const dataLangs = {
   ru: {
+    MAIN: 'Главная',
     CREATE_NEW_CARD: 'Создать новую карточку',
     CARDS: 'Карточки',
     SETTINGS: 'Настройки',
@@ -25,6 +27,7 @@ export const dataLangs = {
   },
 
   en: {
+    MAIN: 'Main',
     CREATE_NEW_CARD: 'Create new card',
     CARDS: 'Cards',
     SETTINGS: 'Settings',
@@ -32,6 +35,7 @@ export const dataLangs = {
   },
 
   esl: {
+    MAIN: 'Principal',
     CREATE_NEW_CARD: 'Crear una nueva tarjeta',
     CARDS: 'Tarjetas',
     SETTINGS: 'Ajustes',
@@ -39,6 +43,7 @@ export const dataLangs = {
   },
 
   hebrew: {
+    MAIN: 'Main',
     CREATE_NEW_CARD: 'Create new card',
     CARDS: 'Cards',
     SETTINGS: 'Settings',
