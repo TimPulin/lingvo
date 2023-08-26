@@ -8,7 +8,7 @@ interface IHeaderSiteProps {
 
 export default function HeaderSite(props: IHeaderSiteProps) {
   const { changeIsModalOpen } = props;
-  const { SETTINGS } = useCurrentLangPack();
+  const { SETTINGS, MAIN } = useCurrentLangPack();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBurgerTransform, setIsBurgerTransform] = useState(false);
@@ -49,6 +49,15 @@ export default function HeaderSite(props: IHeaderSiteProps) {
                 onClick={() => closeMenu()}
               >
                 {SETTINGS}
+              </Link>
+            </li>
+            <li className="nav__item">
+              <Link
+                className="nav__link"
+                to="/"
+                onClick={() => closeMenu()}
+              >
+                {MAIN}
               </Link>
             </li>
           </ul>
