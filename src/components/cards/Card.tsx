@@ -31,18 +31,20 @@ export default function Card() {
 
   return (
     <div
-      className={`card ${cardClass()}`}
+      className="card"
       onClick={turnCard}
       onKeyUp={turnCard}
       role="button"
       tabIndex={0}
       ref={cardRef}
     >
-      <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
-        Тест ТестТестТест Тест ТестТест Тест
-      </div>
-      <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-        First Test Test Test TestTest Test Test TestTest
+      <div className={`card__body ${cardClass()}`}>
+        <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
+          Тест ТестТестТест Тест ТестТест Тест
+        </div>
+        <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
+          First Test Test Test TestTest Test Test TestTest
+        </div>
       </div>
     </div>
   );

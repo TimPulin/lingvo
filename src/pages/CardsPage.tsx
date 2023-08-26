@@ -1,7 +1,7 @@
-import Card from '../components/cards/Card';
+import Swiper from '../components/swiper/Swiper';
 
 export default function CardsPage() {
   return (
-    <Card />
+    <Swiper />
   );
 }
