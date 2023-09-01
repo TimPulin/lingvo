@@ -3,21 +3,31 @@
   height: 300px;
   overflow: hidden;
 
-  &__window {
-    // position: absolute;
+  border: 1px solid red;
+  padding-inline: 5px;
+
+  &__list {
+    position: relative;
+    // padding-left: 300px;
     // top: 0;
-    // left: 0;
+    // left: 0px;
     display: flex;
+    justify-content: space-between;
     flex-wrap: nowrap;
     flex-shrink: 0;
     flex-grow: 0;
-    column-gap: 20px;
+    column-gap: 200px;
     min-width: 100%;
+    width: 1700px;
     touch-action: pan-x;
+
+    border: 1px solid green;
   }
 
   &__item {
-    position: absolute;
-    display: inline-block;
+    position: relative;
+    border: 1px solid red;
+    // display: inline-block;
+    // margin-right: 100px;
   }
 }
