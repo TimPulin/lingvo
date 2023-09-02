@@ -1,7 +1,7 @@
-import Swiper from '../components/swiper/Swiper';
+import SwiperTest from '../components/swiper/SwiperTest';
 
 export default function CardsPage() {
   return (
-    <Swiper />
+    <SwiperTest />
   );
 }

@@ -27,6 +27,7 @@
   border: 1px solid red;
 
   &__list {
+    @include list-reset;
     position: relative;
     display: flex;
     justify-content: flex-end;

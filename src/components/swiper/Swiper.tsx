@@ -14,8 +14,9 @@ const cardList = [
 export default function Swiper() {
   const refSwiperList = useRef<HTMLDivElement>(null);
   const throttle = useRef<boolean>(false);
-  const swiperOffset = useRef<number>(0);
-  const touchedPosition = useRef<number>(0);
+  let swiperOffset = 0;
+  let touchedPosition = 0;
+
   function onTouchMove(event: TouchEvent | MouseEvent):boolean {
     event.preventDefault();
 
@@ -24,8 +25,8 @@ export default function Swiper() {
         if (!throttle.current) {
           throttle.current = true;
           const { pageX } = event.changedTouches[0];
-          const distance = pageX - touchedPosition.current;
-          refSwiperList.current.style.left = `${swiperOffset.current + distance}px`;
+          const distance = pageX - touchedPosition;
+          refSwiperList.current.style.left = `${swiperOffset + distance}px`;
           setTimeout(() => {
             throttle.current = false;
           }, 16);
@@ -39,13 +40,13 @@ export default function Swiper() {
 
   const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     document.addEventListener('touchmove', onTouchMove);
-    touchedPosition.current = event.changedTouches[0].pageX;
+    touchedPosition = event.changedTouches[0].pageX;
   };
 
   const onTouchEnd = () => {
     document.removeEventListener('touchmove', onTouchMove);
     if (refSwiperList.current) {
-      swiperOffset.current = refSwiperList.current.offsetLeft;
+      swiperOffset = refSwiperList.current.offsetLeft;
     }
   };
 
