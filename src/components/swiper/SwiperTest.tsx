@@ -1,27 +1,45 @@
 /* eslint-disable-next-line */
 import { useRef } from 'react';
+import { throttle } from 'lodash';
 import { getRefValue, useStateRef } from '../../lib/hooks';
 // import { getClientX } from '../../lib/dom';
 import SwiperItemTest from './SwiperItemTest';
 
 export default function SwiperTest() {
   const startXRef = useRef(0);
+  const currentX = useRef(0);
   const currentOffsetXRef = useRef(0);
   const [offsetX, setOffsetX, offsetXRef] = useStateRef(0);
 
+  // function throttle<S>(callee:(args:S) => void, timeout:number) {
+  //   let timer: ReturnType<typeof setTimeout> | undefined;
+
+  //   return function perform<T>(...args:Array<T>):void {
+  //     if (timer !== null) return;
+  //     timer = setTimeout(() => {
+  //       callee(...args);
+  //       clearTimeout(timer);
+  //       timer = undefined;
+  //     }, timeout);
+  //   };
+  // }
+
   function onTouchMove(event: TouchEvent | MouseEvent) {
-    let currentX = 0;
+    const previousX = currentX.current;
 
     if (window.TouchEvent && event instanceof TouchEvent) {
-      currentX = event.changedTouches[0].clientX;
+      currentX.current = event.changedTouches[0].clientX;
     } else if (event instanceof MouseEvent) {
-      currentX = event.clientX;
+      currentX.current = event.clientX;
     }
-
-    const distance = getRefValue(startXRef) - currentX;
-    const newOffsetX = getRefValue(currentOffsetXRef) - distance;
-    setOffsetX(newOffsetX);
+    if (currentX.current < previousX) {
+      const distance = getRefValue(startXRef) - currentX.current;
+      const newOffsetX = getRefValue(currentOffsetXRef) - distance;
+      setOffsetX(newOffsetX);
+    }
   }
+
+  const throttleOnTouchMove = throttle(onTouchMove, 16);
 
   function onTouchEnd() {
     window.removeEventListener('touchmove', onTouchMove);
@@ -36,7 +54,7 @@ export default function SwiperTest() {
     if (window.TouchEvent && event.nativeEvent instanceof TouchEvent) {
       startXRef.current = event.nativeEvent.changedTouches[0].clientX;
 
-      window.addEventListener('touchmove', onTouchMove);
+      window.addEventListener('touchmove', throttleOnTouchMove);
       window.addEventListener('touchend', onTouchEnd);
     } else if (event.nativeEvent instanceof MouseEvent) {
       startXRef.current = event.nativeEvent.clientX;
