@@ -1,24 +1,40 @@
 .swiper {
+  --screen-width: calc(991px - 40px);
+  --item-amount: 3;
+  --item-width: calc(var(--screen-width) * 0.5);
+  --item-margin-right: calc(var(--screen-width) * 0.125);
+  --swiper-padding-left: calc(var(--screen-width) * 0.25);
+  --list-width: calc(var(--item-width) * var(--item-amount));
+
   position: relative;
-  height: 300px;
   overflow: hidden;
 
+  height: 160px;
+  padding-left: var(--swiper-padding-left);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: var(--swiper-padding-left);
+    height: 100%;
+    z-index: 100;
+    background-color: #fff;
+  }
+
   border: 1px solid red;
-  padding-inline: 5px;
 
   &__list {
     position: relative;
-    // padding-left: 300px;
-    // top: 0;
-    // left: 0px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-wrap: nowrap;
     flex-shrink: 0;
     flex-grow: 0;
-    column-gap: 200px;
-    min-width: 100%;
-    width: 1700px;
+
+    min-width: var(--list-width);
     touch-action: pan-x;
 
     border: 1px solid green;
@@ -26,8 +42,21 @@
 
   &__item {
     position: relative;
-    border: 1px solid red;
-    // display: inline-block;
-    // margin-right: 100px;
+    width: var(--item-width);
+    height: 160px;
+    margin-right: var(--item-margin-right);
+
+
+    border: 1px solid purple;
+  }
+
+  .card {
+    height: 100%;
+
+    &__body {
+      width: 100%;
+      height: 100%;
+    }
+
   }
 }

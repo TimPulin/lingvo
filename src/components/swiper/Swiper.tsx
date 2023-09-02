@@ -1,7 +1,6 @@
 import { v4 as getUniqId } from 'uuid';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import SwiperItem from './SwiperItem';
-// import { useRef } from 'react';
 
 const cardList = [
   { key: getUniqId(), number: 1 },
@@ -13,15 +12,10 @@ const cardList = [
 ];
 
 export default function Swiper() {
-  // const [touchedPosition, setTouchedPosition] = useState<number>(0);
-  // const [distance, setDistance] = useState<number>(0);
-  const [isTouched, setIsTouched] = useState<boolean>(false);
-  // const [swiperOffset, setSwiperOffset] = useState<number>(0);
   const refSwiperList = useRef<HTMLDivElement>(null);
   const throttle = useRef<boolean>(false);
   const swiperOffset = useRef<number>(0);
   const touchedPosition = useRef<number>(0);
-  const distance = 0;
   function onTouchMove(event: TouchEvent | MouseEvent):boolean {
     event.preventDefault();
 
@@ -30,8 +24,8 @@ export default function Swiper() {
         if (!throttle.current) {
           throttle.current = true;
           const { pageX } = event.changedTouches[0];
-          const d = pageX - touchedPosition.current;
-          refSwiperList.current.style.left = `${swiperOffset.current + d}px`;
+          const distance = pageX - touchedPosition.current;
+          refSwiperList.current.style.left = `${swiperOffset.current + distance}px`;
           setTimeout(() => {
             throttle.current = false;
           }, 16);
@@ -49,7 +43,6 @@ export default function Swiper() {
   };
 
   const onTouchEnd = () => {
-    setIsTouched(false);
     document.removeEventListener('touchmove', onTouchMove);
     if (refSwiperList.current) {
       swiperOffset.current = refSwiperList.current.offsetLeft;
@@ -69,8 +62,6 @@ export default function Swiper() {
             <SwiperItem
               key={item.number}
               itemIndex={index}
-              distance={distance}
-              isTouched={isTouched}
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
             />
