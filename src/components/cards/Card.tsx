@@ -37,10 +37,21 @@ export default function Card() {
     >
       <div className={`card__body ${cardClass()}`}>
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
-          Тест ТестТестТест Тест ТестТест Тест
+          <div className="card__text">
+            Тест ТестТестТест Тест ТестТест Тест
+          </div>
+          <div className="card__input">
+            <input type="text" />
+          </div>
         </div>
+
         <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-          First Test Test Test TestTest Test Test TestTest
+          <div className="card__text">
+            First Test Test Test TestTest Test Test TestTest
+          </div>
+          <div className="card__input">
+            <input type="text" />
+          </div>
         </div>
       </div>
     </div>
