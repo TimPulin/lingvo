@@ -1,7 +1,8 @@
 .swiper {
-  --screen-width: calc(991px - 40px);
+  --screen-width: calc(100vw - 40px);
   --item-amount: 3;
   --item-width: calc(var(--screen-width) * 0.5);
+  --item-height: calc(var(--item-width) * 0.53);
   --item-margin-right: calc(var(--screen-width) * 0.125);
   --swiper-padding-left: calc(var(--screen-width) * 0.25);
   --list-width: calc(var(--item-width) * var(--item-amount));
@@ -9,20 +10,19 @@
   position: relative;
   overflow: hidden;
 
-  height: 160px;
   padding-left: var(--swiper-padding-left);
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: inline-block;
-    width: var(--swiper-padding-left);
-    height: 100%;
-    z-index: 100;
-    background-color: #fff;
-  }
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   display: inline-block;
+  //   width: var(--swiper-padding-left);
+  //   height: 100%;
+  //   z-index: 100;
+  //   background-color: #fff;
+  // }
 
   border: 1px solid red;
 
@@ -30,25 +30,22 @@
     @include list-reset;
     position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: nowrap;
-    flex-shrink: 0;
-    flex-grow: 0;
-
-    min-width: var(--list-width);
+    // min-width: var(--list-width);
     touch-action: pan-x;
 
     border: 1px solid green;
+    transition: transform .3s ease-out;
   }
 
   &__item {
+    flex-shrink: 0;
+    flex-grow: 0;
     position: relative;
     width: var(--item-width);
-    height: 160px;
+    height: var(--item-height);
     margin-right: var(--item-margin-right);
-
-
-    border: 1px solid purple;
   }
 
   .card {
@@ -59,5 +56,11 @@
       height: 100%;
     }
 
+  }
+}
+
+@media (min-width: 992px) {
+  .swiper {
+    --screen-width: calc(991px - 40px);
   }
 }

@@ -1,28 +1,31 @@
 /* eslint-disable-next-line */
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { throttle } from 'lodash';
 import { getRefValue, useStateRef } from '../../lib/hooks';
 // import { getClientX } from '../../lib/dom';
 import SwiperItemTest from './SwiperItemTest';
 
+const cardList = [
+  { number: 1 },
+  { number: 2 },
+  { number: 3 },
+  // {  number: 4 },
+  // {  number: 5 },
+  // {  number: 6 },
+];
+
 export default function SwiperTest() {
   const startXRef = useRef(0);
   const currentX = useRef(0);
   const currentOffsetXRef = useRef(0);
+  const swiperRef = useRef<HTMLDivElement>(null);
+
   const [offsetX, setOffsetX, offsetXRef] = useStateRef(0);
 
-  // function throttle<S>(callee:(args:S) => void, timeout:number) {
-  //   let timer: ReturnType<typeof setTimeout> | undefined;
-
-  //   return function perform<T>(...args:Array<T>):void {
-  //     if (timer !== null) return;
-  //     timer = setTimeout(() => {
-  //       callee(...args);
-  //       clearTimeout(timer);
-  //       timer = undefined;
-  //     }, timeout);
-  //   };
-  // }
+  function swipeSwiper(distance:number) {
+    const newOffsetX = getRefValue(currentOffsetXRef) - distance;
+    setOffsetX(newOffsetX);
+  }
 
   function onTouchMove(event: TouchEvent | MouseEvent) {
     const previousX = currentX.current;
@@ -33,9 +36,23 @@ export default function SwiperTest() {
       currentX.current = event.clientX;
     }
     if (currentX.current < previousX) {
-      const distance = getRefValue(startXRef) - currentX.current;
-      const newOffsetX = getRefValue(currentOffsetXRef) - distance;
-      setOffsetX(newOffsetX);
+      console.log('backward');
+    }
+
+    let distance = getRefValue(startXRef) - currentX.current;
+
+    if (distance > 50) {
+      if (swiperRef.current !== null) {
+        if (swiperRef.current.children[0].children[0] instanceof HTMLLIElement) {
+          const swiperItem = swiperRef.current.children[0].children[0];
+          const nodeStyle = window.getComputedStyle(swiperItem);
+          const marginRight = Number(nodeStyle.getPropertyValue('margin-right').slice(0, -2));
+          distance = swiperItem.offsetWidth + marginRight;
+        }
+      }
+      swipeSwiper(distance);
+    } else {
+      swipeSwiper(distance);
     }
   }
 
@@ -71,14 +88,19 @@ export default function SwiperTest() {
       onTouchStart={onTouchStart}
       role="button"
       tabIndex={0}
+      ref={swiperRef}
     >
       <ul
         className="swiper__list"
         style={{ transform: `translate3d(${offsetX}px, 0, 0)` }}
       >
-        <SwiperItemTest />
-        <SwiperItemTest />
-        <SwiperItemTest />
+        {
+          cardList.map((item) => (
+
+            <SwiperItemTest itemNumber={item.number} key={item.number} />
+
+          ))
+        }
       </ul>
     </div>
   );

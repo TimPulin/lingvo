@@ -17,6 +17,19 @@ export default function Swiper() {
   let swiperOffset = 0;
   let touchedPosition = 0;
 
+  // function throttle<S>(callee:(args:S) => void, timeout:number) {
+  //   let timer: ReturnType<typeof setTimeout> | undefined;
+
+  //   return function perform<T>(...args:Array<T>):void {
+  //     if (timer !== null) return;
+  //     timer = setTimeout(() => {
+  //       callee(...args);
+  //       clearTimeout(timer);
+  //       timer = undefined;
+  //     }, timeout);
+  //   };
+  // }
+
   function onTouchMove(event: TouchEvent | MouseEvent):boolean {
     event.preventDefault();
 
