@@ -1,88 +1,110 @@
-import { v4 as getUniqId } from 'uuid';
-import { useRef } from 'react';
+/* eslint-disable-next-line */
+import { useRef} from 'react';
+import { throttle } from 'lodash';
+import { getRefValue, useStateRef } from '../../lib/hooks';
+// import { getClientX } from '../../lib/dom';
 import SwiperItem from './SwiperItem';
 
 const cardList = [
-  { key: getUniqId(), number: 1 },
-  { key: getUniqId(), number: 2 },
-  { key: getUniqId(), number: 3 },
-  // { key: getUniqId(), number: 4 },
-  // { key: getUniqId(), number: 5 },
-  // { key: getUniqId(), number: 6 },
+  { number: 1 },
+  { number: 2 },
+  { number: 3 },
+  // {  number: 4 },
+  // {  number: 5 },
+  // {  number: 6 },
 ];
 
-export default function Swiper() {
-  const refSwiperList = useRef<HTMLDivElement>(null);
-  const throttle = useRef<boolean>(false);
-  let swiperOffset = 0;
-  let touchedPosition = 0;
+const DISTANCE_FOR_START_AUTO_SWIPE = 30;
 
-  // function throttle<S>(callee:(args:S) => void, timeout:number) {
-  //   let timer: ReturnType<typeof setTimeout> | undefined;
+export default function SwiperTest() {
+  const startXRef = useRef(0);
+  const currentX = useRef(0);
+  const currentOffsetXRef = useRef(0);
+  const swiperRef = useRef<HTMLDivElement>(null);
 
-  //   return function perform<T>(...args:Array<T>):void {
-  //     if (timer !== null) return;
-  //     timer = setTimeout(() => {
-  //       callee(...args);
-  //       clearTimeout(timer);
-  //       timer = undefined;
-  //     }, timeout);
-  //   };
-  // }
+  const [offsetX, setOffsetX, offsetXRef] = useStateRef(0);
 
-  function onTouchMove(event: TouchEvent | MouseEvent):boolean {
-    event.preventDefault();
+  let distance: number;
 
-    if (event instanceof TouchEvent) {
-      if (refSwiperList.current) {
-        if (!throttle.current) {
-          throttle.current = true;
-          const { pageX } = event.changedTouches[0];
-          const distance = pageX - touchedPosition;
-          refSwiperList.current.style.left = `${swiperOffset + distance}px`;
-          setTimeout(() => {
-            throttle.current = false;
-          }, 16);
-        } else {
-          return false;
-        }
-      }
-    }
-    return false;
+  function swipeSwiper(distanceLocal:number) {
+    const newOffsetX = getRefValue(currentOffsetXRef) - distanceLocal;
+    setOffsetX(newOffsetX);
   }
 
-  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    document.addEventListener('touchmove', onTouchMove);
-    touchedPosition = event.changedTouches[0].pageX;
-  };
-
-  const onTouchEnd = () => {
-    document.removeEventListener('touchmove', onTouchMove);
-    if (refSwiperList.current) {
-      swiperOffset = refSwiperList.current.offsetLeft;
+  function onTouchMove(event: TouchEvent | MouseEvent) {
+    if (window.TouchEvent && event instanceof TouchEvent) {
+      currentX.current = event.changedTouches[0].clientX;
+    } else if (event instanceof MouseEvent) {
+      currentX.current = event.clientX;
     }
-  };
+
+    distance = getRefValue(startXRef) - currentX.current;
+
+    if (distance > DISTANCE_FOR_START_AUTO_SWIPE) {
+      if (swiperRef.current !== null) {
+        const swiperItem = swiperRef.current.children[0].children[0];
+        if (swiperItem instanceof HTMLLIElement) {
+          const swiperItemStyle = window.getComputedStyle(swiperItem);
+          const marginRight = Number(swiperItemStyle.getPropertyValue('margin-right').slice(0, -2));
+          distance = swiperItem.offsetWidth + marginRight;
+        }
+      }
+      swipeSwiper(distance);
+    } else {
+      swipeSwiper(distance);
+    }
+  }
+
+  const throttleOnTouchMove = throttle(onTouchMove, 16);
+
+  function onTouchEnd() {
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('touchend', onTouchEnd);
+    window.removeEventListener('mousemove', onTouchMove);
+    window.removeEventListener('mouseup', onTouchEnd);
+
+    if (distance <= DISTANCE_FOR_START_AUTO_SWIPE) {
+      setOffsetX(getRefValue(currentOffsetXRef));
+    }
+  }
+
+  function onTouchStart(event:React.TouchEvent | React.MouseEvent) {
+    currentOffsetXRef.current = getRefValue(offsetXRef);
+
+    if (window.TouchEvent && event.nativeEvent instanceof TouchEvent) {
+      startXRef.current = event.nativeEvent.changedTouches[0].clientX;
+
+      window.addEventListener('touchmove', throttleOnTouchMove);
+      window.addEventListener('touchend', onTouchEnd);
+    } else if (event.nativeEvent instanceof MouseEvent) {
+      startXRef.current = event.nativeEvent.clientX;
+
+      window.addEventListener('mousemove', onTouchMove);
+      window.addEventListener('mouseup', onTouchEnd);
+    }
+  }
 
   return (
-    <div className="swiper" key="swiper">
-      <div
+    <div
+      className="swiper"
+      onMouseDown={onTouchStart}
+      onTouchStart={onTouchStart}
+      role="button"
+      tabIndex={0}
+      ref={swiperRef}
+    >
+      <ul
         className="swiper__list"
-        key="swiper-window"
-        ref={refSwiperList}
+        style={{ transform: `translate3d(${offsetX}px, 0, 0)` }}
       >
         {
-          cardList.map((item, index) => (
+          cardList.map((item) => (
 
-            <SwiperItem
-              key={item.number}
-              itemIndex={index}
-              onTouchStart={onTouchStart}
-              onTouchEnd={onTouchEnd}
-            />
+            <SwiperItem itemNumber={item.number} key={item.number} />
 
           ))
         }
-      </div>
+      </ul>
     </div>
   );
 }

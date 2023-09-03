@@ -1,5 +1,5 @@
 .swiper {
-  --screen-width: calc(100vw - 40px);
+  --screen-width: calc(100vw);
   --item-amount: 3;
   --item-width: calc(var(--screen-width) * 0.5);
   --item-height: calc(var(--item-width) * 0.53);
@@ -24,8 +24,6 @@
   //   background-color: #fff;
   // }
 
-  border: 1px solid red;
-
   &__list {
     @include list-reset;
     position: relative;
@@ -35,11 +33,11 @@
     // min-width: var(--list-width);
     touch-action: pan-x;
 
-    border: 1px solid green;
     transition: transform .3s ease-out;
   }
 
   &__item {
+    @include noselect;
     flex-shrink: 0;
     flex-grow: 0;
     position: relative;
@@ -59,7 +57,18 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (max-width: $small-screen) {
+  .swiper {
+    --item-amount: 3;
+    --item-width: calc(var(--screen-width) * 0.75);
+    --item-height: calc(var(--item-width) * 0.53);
+    --item-margin-right: calc(var(--screen-width) * 0.0625);
+    --swiper-padding-left: calc(var(--screen-width) * 0.125);
+    --list-width: calc(var(--item-width) * var(--item-amount));
+  }
+}
+
+@media (min-width: $medium-screen) {
   .swiper {
     --screen-width: calc(991px - 40px);
   }

@@ -25,6 +25,7 @@ body {
 }
 
 .content {
+  height: 100%;
   filter: blur(0);
   transition: filter .4s ease-in-out;
 }
@@ -39,6 +40,12 @@ body {
   max-width: $medium-screen;
   height: 100%;
   overflow: hidden;
+}
+
+@media (max-width: $medium-screen) {
+  .container {
+    padding: 0;
+  }
 }
 
 .disabled {

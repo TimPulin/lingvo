@@ -1,7 +1,9 @@
-import SwiperTest from '../components/swiper/SwiperTest';
+import Swiper from '../components/swiper/Swiper';
 
 export default function CardsPage() {
   return (
-    <SwiperTest />
+    <div className="page-content-wrapper page-content-wrapper--card-page">
+      <Swiper />
+    </div>
   );
 }

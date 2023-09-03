@@ -10,7 +10,7 @@
   }
 }
 
-@media (max-width: $small-screen) {
+@media (max-width: $mobile-screen) {
   .main-screen {
     grid-template-columns: repeat(1, 1fr);
   }
