@@ -1,7 +1,9 @@
-import Card from '../components/cards/Card';
+import Swiper from '../components/swiper/Swiper';
 
 export default function CardsPage() {
   return (
-    <Card />
+    <div className="page-content-wrapper page-content-wrapper--card-page">
+      <Swiper />
+    </div>
   );
 }

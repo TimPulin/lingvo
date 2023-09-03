@@ -1,0 +1,8 @@
+.page-content-wrapper {
+  --screen-height: 100vh;
+  height: 100%;
+}
+
+.page-content-wrapper--card-page {
+  margin-top: calc(var(--screen-height) * 0.3);
+}

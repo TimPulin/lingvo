@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 const CARD_NATIVE = 'card--native';
 const CARD_FOREIGN = 'card--foreign';
@@ -11,7 +11,6 @@ const CONTENT_HIDE = 'card__content--hide';
 export default function Card() {
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
-  const cardRef = useRef(null);
 
   const cardClass = () => (isCardNative ? CARD_NATIVE : CARD_FOREIGN);
 
@@ -31,18 +30,18 @@ export default function Card() {
 
   return (
     <div
-      className={`card ${cardClass()}`}
-      onClick={turnCard}
-      onKeyUp={turnCard}
+      className="card"
+      onMouseUp={turnCard}
       role="button"
       tabIndex={0}
-      ref={cardRef}
     >
-      <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
-        Тест ТестТестТест Тест ТестТест Тест
-      </div>
-      <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-        First Test Test Test TestTest Test Test TestTest
+      <div className={`card__body ${cardClass()}`}>
+        <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
+          Тест ТестТестТест Тест ТестТест Тест
+        </div>
+        <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
+          First Test Test Test TestTest Test Test TestTest
+        </div>
       </div>
     </div>
   );
