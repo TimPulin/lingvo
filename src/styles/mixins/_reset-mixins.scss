@@ -20,3 +20,12 @@
   outline: none;
   cursor: pointer;
 }
+
+@mixin input-reset {
+  padding: 0;
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+}

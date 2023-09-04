@@ -1,0 +1,25 @@
+.three-dots {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+
+  &__btn {
+    @include btn-reset;
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+  }
+
+  &__line {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+
+  &__line:not(:last-child) {
+    margin-right: 5px;
+  }
+}

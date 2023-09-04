@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import Input from '../form/Input';
+import CardForm from './CardForm';
 
 const CARD_NATIVE = 'card--native';
 const CARD_FOREIGN = 'card--foreign';
@@ -9,10 +9,19 @@ const CONTENT_FOREIGN = 'card__content--foreign';
 
 const CONTENT_HIDE = 'card__content--hide';
 
-export default function Card() {
+// interface INewCard {
+//   foreignWord: string;
+//   nativeWord: string;
+//   transcription: string;
+// }
+
+export default function NewCard() {
+  const [foreignWord, setForeignWord] = useState('');
+  const [transcription, setTranscription] = useState('');
+  const [nativeWord, setNativeWord] = useState('');
+
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
-  const [isEdit, setIsEdit] = useState(false);
 
   const cardClass = () => (isCardNative ? CARD_NATIVE : CARD_FOREIGN);
 
@@ -23,9 +32,6 @@ export default function Card() {
 
   const foreignContentHide = () => (isContentNative ? CONTENT_HIDE : '');
 
-  const contentHide = () => (isEdit ? CONTENT_HIDE : '');
-  const inputHide = () => (isEdit ? '' : CONTENT_HIDE);
-
   function turnCard() {
     setIsCardNative(!isCardNative);
 
@@ -34,60 +40,42 @@ export default function Card() {
     }, 250);
   }
 
-  function onClickEdit(event: React.MouseEvent) {
-    event.stopPropagation();
-    setIsEdit(true);
-  }
-
   return (
     <div
-      className="card"
+      className="card card--edit"
       onMouseUp={turnCard}
       role="button"
       tabIndex={0}
     >
 
-      <div className="three-dots">
-        <button
-          type="button"
-          className="three-dots__btn"
-          onMouseUp={onClickEdit}
-        >
-          <span className="three-dots__line" />
-          <span className="three-dots__line" />
-          <span className="three-dots__line" />
-        </button>
-      </div>
-
       <div className={`card__body ${cardClass()}`}>
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
-          <div className={`card__text ${contentHide()}`}>
-            Родной
-          </div>
           <div
-            className={`card__input ${inputHide()}`}
+            className="card__input"
             onMouseUp={(event) => event.stopPropagation()}
             role="button"
             tabIndex={0}
           >
-            {/* <Input /> */}
-            <button type="button" className="button">Save</button>
+            <CardForm words={[
+              { word: nativeWord, updateFunction: () => setNativeWord, key: 1 },
+            ]}
+            />
           </div>
         </div>
 
         <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-          <div className={`card__text ${contentHide()}`}>
-            Foreign
-          </div>
           <div
-            className={`card__input ${inputHide()}`}
+            className="card__input"
             onMouseUp={(event) => event.stopPropagation()}
             role="button"
             tabIndex={0}
           >
-            {/* <Input /> */}
-            <button type="button" className="button">Save</button>
+            <CardForm words={[
+              { word: foreignWord, updateFunction: () => setForeignWord, key: 2 },
+              { word: transcription, updateFunction: () => setTranscription, key: 3 },
+            ]}
+            />
           </div>
         </div>
       </div>

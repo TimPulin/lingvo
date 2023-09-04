@@ -1,0 +1,14 @@
+.custom-input {
+  &__input {
+    @include input-reset;
+    padding: 3px 5px;
+    width: 100%;
+    background-color: #fff;
+    cursor: text;
+    border-radius: $border-radius-basic;
+  }
+
+  // &__placeholder {
+
+  // }
+}
