@@ -1,4 +1,7 @@
 .custom-input {
+  position: relative;
+  display: block;
+
   &__input {
     @include input-reset;
     padding: 3px 5px;
@@ -8,7 +11,24 @@
     border-radius: $border-radius-basic;
   }
 
-  // &__placeholder {
+  &__placeholder {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    color: $color-grey;
+    transition:
+      transform .3s ease-out,
+      color .4s ease-out,
+      font-size .3s ease-out;
+  }
+}
 
-  // }
+.custom-input--filled,
+.custom-input:focus {
+  .custom-input__placeholder {
+    transform: translateY(-100%);
+    font-size: 25px;
+    line-height: 1;
+    color: #fff
+  }
 }

@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 type InputPropsType = {
   value: string | number;
   updateFunction: (value: string | number) => void;
@@ -5,6 +7,7 @@ type InputPropsType = {
 
 export default function Input(props:InputPropsType) {
   const { value, updateFunction } = props;
+  const labelRef = useRef<HTMLLabelElement>(null);
 
   function onChange(event: React.FormEvent<HTMLInputElement>):void {
     if (event.target instanceof HTMLInputElement) {
@@ -13,13 +16,14 @@ export default function Input(props:InputPropsType) {
   }
 
   return (
-    <label className="custom-input">
-      <span className="custom-input_placeholder"> text</span>
+    <label className="custom-input" tabIndex={0} ref={labelRef}>
+      <span className="custom-input__placeholder"> text</span>
       <input
         className="custom-input__input"
         type="text"
         value={value}
         onInput={onChange}
+        onFocus={() => labelRef.current?.focus()}
       />
     </label>
   );
