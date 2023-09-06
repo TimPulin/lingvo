@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addNewWord } from '../../store/add-new-word-slice';
 import CardForm from './CardForm';
 
 const CARD_NATIVE = 'card--native';
@@ -11,16 +13,12 @@ const CONTENT_FOREIGN = 'card__content--foreign';
 
 const CONTENT_HIDE = 'card__content--hide';
 
-// interface INewCard {
-//   foreignWord: string;
-//   nativeWord: string;
-//   transcription: string;
-// }
-
 export default function NewCard() {
+  const dispatch = useDispatch();
+
+  const [nativeWord, _setNativeWord] = useState<string>('');
   const [foreignWord, _setForeignWord] = useState<string>('');
   const [transcription, _setTranscription] = useState<string>('');
-  const [nativeWord, _setNativeWord] = useState<string>('');
 
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
@@ -60,9 +58,17 @@ export default function NewCard() {
   };
 
   const onSubmitForeign = (event: React.FormEvent) => {
-    console.log('foreign');
     event.preventDefault();
-    turnCard();
+    dispatch(addNewWord(
+      {
+        word: {
+          nativeWord,
+          foreignWord,
+          transcription,
+        },
+        key: 'defaultCollection',
+      },
+    ));
   };
 
   const onCancelNative = () => {
