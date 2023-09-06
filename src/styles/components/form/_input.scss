@@ -1,10 +1,11 @@
 .custom-input {
   position: relative;
   display: block;
+  width: 100%;
 
   &__input {
     @include input-reset;
-    padding: 3px 5px;
+    padding: 3px 5px 3px 10px;
     width: 100%;
     background-color: #fff;
     cursor: text;
@@ -13,8 +14,8 @@
 
   &__placeholder {
     position: absolute;
-    top: 0;
-    left: 5px;
+    top: 3px;
+    left: 10px;
     color: $color-grey;
     transition:
       transform .3s ease-out,
@@ -25,9 +26,11 @@
 
 .custom-input--filled,
 .custom-input:focus {
+  outline: none;
+
   .custom-input__placeholder {
-    transform: translateY(-100%);
-    font-size: 25px;
+    transform: translateY(calc(-100% - 6px)) translateX(-5px);
+    font-size: 20px;
     line-height: 1;
     color: #fff
   }

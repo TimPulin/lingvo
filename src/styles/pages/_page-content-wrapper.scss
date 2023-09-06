@@ -9,7 +9,7 @@
 
 .page-content-wrapper--new-card-page {
   --item-width: calc(var(--screen-width) * 0.95);
-  --item-height: calc(var(--item-width) * 0.53);
+  --item-height: calc(var(--item-width) * 0.56);
 
   padding-top: 50px;
 
@@ -18,5 +18,12 @@
     margin-inline: auto;
     width: var(--item-width);
     height: var(--item-height);
+  }
+
+}
+
+@media (min-width: $small-screen) {
+  .page-content-wrapper--new-card-page {
+    --item-width: calc(var(--screen-width) * 0.75);
   }
 }

@@ -8,8 +8,8 @@
 
   &__body {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
 
     padding: 10px;
@@ -23,13 +23,17 @@
     color: #fff;
 
     transform: rotateX(180deg);
+  }
 
-    &__content {
-      width: 100%;
-      max-height: 100%;
-      overflow: hidden;
-      line-height: 1.1;
-    }
+  &__content {
+    width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    line-height: 1.1;
+  }
+
+  &__text {
+    text-align: center;
   }
 }
 
@@ -56,12 +60,10 @@
 .card--edit {
   .card__content {
     height: 100%;
+    line-height: 1.2;
 
     .card__input {
       height: 100%;
     }
   }
-
-
-
 }

@@ -63,7 +63,7 @@ export default function Card() {
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
           <div className={`card__text ${contentHide()}`}>
-            Родной
+            РоднойРодной Родной РоднойРоднойРодной
           </div>
           <div
             className={`card__input ${inputHide()}`}

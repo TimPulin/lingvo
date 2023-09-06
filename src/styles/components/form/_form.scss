@@ -13,7 +13,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 20px;
+    row-gap: 30px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
   }
 
   .button {
@@ -21,5 +26,11 @@
     border: none;
     font-size: 25px;
     color: #fff;
+  }
+}
+
+.card--edit {
+  .form__body {
+    padding-top: 10px;
   }
 }
