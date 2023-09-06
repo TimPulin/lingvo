@@ -34,3 +34,14 @@ $border-radius-basic: 10px;
 $medium-screen: 991px;
 $small-screen: 767px;
 $mobile-screen: 575px;
+
+:root {
+  --medium-screen: 991px;
+  --screen-width: calc(100vw);
+}
+
+@media (min-width: $medium-screen) {
+  :root {
+    --screen-width: calc(var(--medium-screen) - 40px);
+  }
+}

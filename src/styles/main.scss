@@ -6,12 +6,17 @@
 
 @import './utils/common';
 
-@import './components/button';
+@import './components/form/button';
+@import './components/form/input';
+@import './components/form/form';
+
 @import './components/radio-custom';
 @import './components/options-flat';
 
 @import './components/burger';
 @import './animations/burger-animation';
+
+@import './components/three-dots';
 
 @import './components/navigation';
 @import './animations/nav-animation';
