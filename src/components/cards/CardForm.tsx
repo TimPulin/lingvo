@@ -1,14 +1,14 @@
 import Input from '../form/Input';
 
 type WordType = {
-  word: string;
+  newWord: string;
   updateFunction(value: string | number): void;
   placeholderText: string;
   key: number;
 }[];
 
-type CardFormPropsType = {
-  words: WordType;
+export type CardFormPropsType = {
+  newWordsList: WordType;
   primaryButtonName?: string;
   onSubmit(event: React.FormEvent):void;
   onCancel():void;
@@ -16,17 +16,17 @@ type CardFormPropsType = {
 
 export default function CardForm(props: CardFormPropsType) {
   const {
-    words, onSubmit, onCancel, primaryButtonName,
+    newWordsList, onSubmit, onCancel, primaryButtonName,
   } = props;
 
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="form__body">
         {
-          words.map((item) => (
+          newWordsList.map((item) => (
             <Input
               placeholderText={item.placeholderText}
-              value={item.word}
+              value={item.newWord}
               updateFunction={item.updateFunction}
               key={item.key}
             />
