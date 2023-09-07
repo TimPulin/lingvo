@@ -37,10 +37,6 @@
   }
 }
 
-.card__content--hide {
-  display: none;
-}
-
 .card--native {
   animation: turn-foreign-to-native var(--turn-duration) ease-in-out forwards;
 }
