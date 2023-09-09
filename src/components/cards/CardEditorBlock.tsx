@@ -2,22 +2,20 @@ import CardForm, { CardFormPropsType } from './CardForm';
 
 type CardEditorBlockPropsType = {
   form: CardFormPropsType;
-  inputHide: () => string;
 };
 
 export default function CardEditorBlock(props: CardEditorBlockPropsType) {
-  const { form, inputHide } = props;
+  const { form } = props;
   return (
     <div
-      className={`card__input ${inputHide()}`}
+      className="card__input"
       onMouseUp={(event) => event.stopPropagation()}
       role="button"
       tabIndex={-1}
     >
-      {/* {Native Card} */}
       <CardForm
         newWordsList={form.newWordsList}
-        primaryButtonName="Forward"
+        primaryButtonName={form.primaryButtonName}
         onSubmit={form.onSubmit}
         onCancel={form.onCancel}
       />

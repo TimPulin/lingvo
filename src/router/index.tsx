@@ -1,14 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import RootPage from '../pages/RootPage';
 import HomePage from '../pages/HomePage';
 import NewCardPage from '../pages/NewCardPage';
 import CardsPage from '../pages/CardsPage';
 import SettingsPage from '../pages/SettingsPage';
+import ContextProvider from '../components/context-provider/ContextProvider';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootPage />,
+    element: <ContextProvider />,
     children: [
       {
         path: '/',

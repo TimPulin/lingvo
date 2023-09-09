@@ -35,13 +35,17 @@
   &__text {
     text-align: center;
   }
+
+  &__input {
+    display: none;
+  }
 }
 
-.card--native {
+.card__body--native {
   animation: turn-foreign-to-native var(--turn-duration) ease-in-out forwards;
 }
 
-.card--foreign {
+.card__body--foreign {
   animation: turn-native-to-foreign var(--turn-duration) ease-in-out forwards;
 }
 
@@ -54,11 +58,17 @@
 }
 
 .card--edit {
+
   .card__content {
     height: 100%;
     line-height: 1.2;
 
+    .card__text {
+      display: none;
+    }
+
     .card__input {
+      display: block;
       height: 100%;
     }
   }

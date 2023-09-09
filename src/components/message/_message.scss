@@ -1,0 +1,30 @@
+.message {
+  --side-size: min(300px, calc(var(--screen-width)));
+  @include wrap-absolute;
+  z-index: -5;
+
+  &__body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: var(--side-size);
+    height: var(--side-size);
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--color-primary_light);
+  }
+
+  &__text {
+    display: inline-block;
+    text-align: center;
+    font-size: 24px;
+    color: rgba(0, 0, 0, .7);
+  }
+}
