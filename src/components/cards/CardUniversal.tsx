@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewWord } from '../../store/add-new-word-slice';
-
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 
@@ -15,11 +14,12 @@ const defaultPairWords: IPairWords = {
 type CardUniversalPropsType = {
   pairWords?: IPairWords;
   isModeEdit?: boolean;
+  setIsNewPairWordSaved: (isSaved: boolean) => void;
 };
 
 export default function CardUniversal(props: CardUniversalPropsType) {
   const {
-    pairWords = defaultPairWords, isModeEdit = false,
+    pairWords = defaultPairWords, isModeEdit = false, setIsNewPairWordSaved,
   } = props;
 
   const dispatch = useDispatch();
@@ -41,8 +41,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   const onSubmitNative = (event: React.FormEvent) => {
-    console.log('univers');
-
     event.preventDefault();
   };
 
@@ -58,6 +56,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         key: 'defaultCollection',
       },
     ));
+    setIsNewPairWordSaved(true);
   };
 
   const onCancelNative = () => {
@@ -95,11 +94,13 @@ export default function CardUniversal(props: CardUniversalPropsType) {
               newWord: transcription, updateFunction: setTranscription, placeholderText: 'transcription', key: 3,
             },
           ],
+          primaryButtonName: 'Save',
           onSubmit: onSubmitForeign,
           onCancel: onCancelForeign,
         }
       }
     />
+
   );
 }
 

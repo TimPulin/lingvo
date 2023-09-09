@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import CardEditorBlock from './CardEditorBlock';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
+import { HIDE } from '../../utils/constants';
 
-const CARD_NATIVE = 'card--native';
-const CARD_FOREIGN = 'card--foreign';
+const CARD_EDIT = 'card--edit';
+const CARD_BODY_NATIVE = 'card__body--native';
+const CARD_BODY_FOREIGN = 'card__body--foreign';
 
-const CONTENT_NATIVE = 'card__content--native';
-const CONTENT_FOREIGN = 'card__content--foreign';
-
-const CONTENT_HIDE = 'hide';
+const CARD_CONTENT_NATIVE = 'card__content--native';
+const CARD_CONTENT_FOREIGN = 'card__content--foreign';
 
 type CardBasePropsType = {
   isModeEdit?: boolean;
@@ -30,17 +30,14 @@ export default function CardBase(props: CardBasePropsType) {
     setIsEdit(isModeEdit);
   }, [isModeEdit]);
 
-  const cardClass = () => (isCardNative ? CARD_NATIVE : CARD_FOREIGN);
+  const cardEditMode = () => (isEdit ? CARD_EDIT : '');
+  const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
 
-  const nativeContentClass = () => (isCardNative ? '' : CONTENT_NATIVE);
-  const foreignContentClass = () => (isCardNative ? CONTENT_FOREIGN : '');
+  const nativeContentClass = () => (isCardNative ? '' : CARD_CONTENT_NATIVE);
+  const foreignContentClass = () => (isCardNative ? CARD_CONTENT_FOREIGN : '');
 
-  const nativeContentHide = () => (isContentNative ? '' : CONTENT_HIDE);
-
-  const foreignContentHide = () => (isContentNative ? CONTENT_HIDE : '');
-
-  const textHide = () => (isEdit ? CONTENT_HIDE : '');
-  const inputHide = () => (isEdit ? '' : CONTENT_HIDE);
+  const nativeContentHide = () => (isContentNative ? '' : HIDE);
+  const foreignContentHide = () => (isContentNative ? HIDE : '');
 
   function turnCard() {
     setIsCardNative(!isCardNative);
@@ -58,8 +55,6 @@ export default function CardBase(props: CardBasePropsType) {
   const onSubmitNative = Object.assign(formNative.onSubmit, {});
 
   const localOnSubmitNative = (event: React.FormEvent) => {
-    console.log('local');
-
     turnCard();
     onSubmitNative(event);
   };
@@ -68,7 +63,7 @@ export default function CardBase(props: CardBasePropsType) {
 
   return (
     <div
-      className="card"
+      className={`card ${cardEditMode()}`}
       onMouseUp={turnCard}
       role="button"
       tabIndex={0}
@@ -86,26 +81,23 @@ export default function CardBase(props: CardBasePropsType) {
         </button>
       </div>
 
-      <div className={`card__body ${cardClass()}`}>
+      <div className={`card__body ${cardBodyClass()}`}>
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
-          <div className={`card__text ${textHide()}`}>
+          <div className="card__text">
             {pairWords.nativeWord}
           </div>
           <CardEditorBlock
             form={formNative}
-            inputHide={inputHide}
           />
         </div>
-
         <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-          <div className={`card__text ${textHide()}`}>
+          <div className="card__text">
             {pairWords.foreignWord}
             {pairWords.transcription}
           </div>
           <CardEditorBlock
             form={formForeign}
-            inputHide={inputHide}
           />
         </div>
       </div>
