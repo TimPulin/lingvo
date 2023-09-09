@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import HeaderSite from '../site/HeaderSite';
+import Message from '../components/message/Message';
 
 export default function RootPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function RootPage() {
       <HeaderSite
         changeIsModalOpen={changeIsModalOpen}
       />
+      <Message />
 
       <div className={`content ${classModalOpened()}`}>
         <Outlet />

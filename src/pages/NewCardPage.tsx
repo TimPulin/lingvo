@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { useState } from 'react';
-import CardUniversal from '../components/cards/CardUniversal';
 import { useStaticMessage } from '../components/context-provider/context-hooks';
-import Message from '../components/message/Message';
+import CardUniversal from '../components/cards/CardUniversal';
+import BigButton from '../components/BigButton/BigButton';
 
 export default function NewCardPage() {
-  const { setIsShow } = useStaticMessage();
+  const { setIsShow, setText } = useStaticMessage();
   const [isNewPairWordSaved, _setIsNewPairWordSaved] = useState(false);
 
   const cardAnimationClass = () => (isNewPairWordSaved ? 'hide' : '');
@@ -14,6 +14,7 @@ export default function NewCardPage() {
   const setIsNewPairWordSaved = (isSaved: boolean) => {
     _setIsNewPairWordSaved(isSaved);
     setIsShow(true);
+    setText('Новую карточку бережно сохранили');
   };
 
   return (
@@ -24,8 +25,7 @@ export default function NewCardPage() {
           setIsNewPairWordSaved={setIsNewPairWordSaved}
         />
       </div>
-      <Message text="Новую карточку бережно сохранили" />
-
+      <BigButton />
     </div>
   );
 }
