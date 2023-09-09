@@ -23,10 +23,10 @@
 
 @import './components/main-screen'; // TODO проверить на необходимость
 
-@import './components/card/card';
-@import './components/card/card-animation';
+@import '../../components/cards/card-styles/card.scss';
+@import '../../components/cards/card-styles/card-animation.scss';
 
-@import '../components/message/message.scss';
+@import '../../components/message/message.scss';
 
 @import './components/swiper';
 

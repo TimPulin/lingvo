@@ -1,7 +1,9 @@
 .message {
   --side-size: min(300px, calc(var(--screen-width)));
   @include wrap-absolute;
-  z-index: -5;
+  background-color: #fff;
+  animation: message-hide .5s ease-in-out forwards;
+
 
   &__body {
     position: absolute;
@@ -26,5 +28,51 @@
     text-align: center;
     font-size: 24px;
     color: rgba(0, 0, 0, .7);
+  }
+}
+
+.message--show {
+  z-index: 100;
+  animation: message-show .5s ease-in-out forwards;
+}
+
+@keyframes message-show {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes message-hide {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+  }
+
+  50% {
+    opacity: 1;
+    z-index: 100;
+  }
+
+  99% {
+    opacity: 0;
+    transform: scale(0.3);
+    z-index: 100;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+    z-index: -1000;
   }
 }
