@@ -1,31 +1,42 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useStaticMessage } from '../components/context-provider/context-hooks';
 import CardUniversal from '../components/cards/CardUniversal';
-import BigButton from '../components/BigButton/BigButton';
+
+import { CONTENT_ITEM_HIDE, ANIMATION_SHOW_MESSAGE_DURATION, MESSAGE_SHOW_DURATION } from '../utils/constants';
 
 export default function NewCardPage() {
-  const { setIsShow, setText } = useStaticMessage();
-  const [isNewPairWordSaved, _setIsNewPairWordSaved] = useState(false);
+  const [isNewPairWordSaved, setIsNewPairWordSaved] = useState(false);
+  const { setIsShow: setIsMessageShow, setText } = useStaticMessage();
+  const [isCardShow, setIsCardShow] = useState(true);
 
-  const cardAnimationClass = () => (isNewPairWordSaved ? 'hide' : '');
+  const cardAnimationClass = () => (isCardShow ? '' : CONTENT_ITEM_HIDE);
 
-  const setIsNewPairWordSaved = (isSaved: boolean) => {
-    _setIsNewPairWordSaved(isSaved);
-    setIsShow(true);
-    setText('Новую карточку бережно сохранили');
-  };
+  function onNewPairWordSaved() {
+    setIsCardShow(false);
+    setTimeout(() => {
+      setIsMessageShow(true);
+      setText('Новую карточку бережно сохранили');
+    }, 300);
+    setTimeout(() => {
+      setIsCardShow(true);
+      setIsNewPairWordSaved(false);
+    }, ANIMATION_SHOW_MESSAGE_DURATION * 2 + MESSAGE_SHOW_DURATION);
+  }
+
+  useEffect(() => {
+    if (isNewPairWordSaved) onNewPairWordSaved();
+  }, [isNewPairWordSaved]);
 
   return (
-    <div className="page-content-wrapper page-content-wrapper--new-card-page">
-      <div className={`page-content-wrapper_item ${cardAnimationClass()}`}>
+    <div className="content__list content__list--new-card-page">
+      <div className={`content__item ${cardAnimationClass()}`}>
         <CardUniversal
           isModeEdit
           setIsNewPairWordSaved={setIsNewPairWordSaved}
         />
       </div>
-      <BigButton />
     </div>
   );
 }

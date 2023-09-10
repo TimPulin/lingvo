@@ -1,23 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useStaticMessage } from '../context-provider/context-hooks';
 
 const MESSAGE_SHOW = 'message--show';
 
 export default function Message() {
-  const { text, isShow } = useStaticMessage();
+  const { text, isShow, setIsShow } = useStaticMessage();
 
-  const [localIsShow, setLocalIsShow] = useState(false);
-
-  const classShow = () => (localIsShow ? MESSAGE_SHOW : '');
+  const classShow = () => (isShow ? MESSAGE_SHOW : '');
 
   function startTimerToHideMessage() {
     setTimeout(() => {
-      setLocalIsShow(false);
+      setIsShow(false);
     }, 3000);
   }
 
   useEffect(() => {
-    setLocalIsShow(isShow);
     if (isShow) startTimerToHideMessage();
   }, [isShow]);
 

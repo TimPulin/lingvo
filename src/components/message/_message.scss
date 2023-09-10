@@ -1,3 +1,5 @@
+// TODO попробовать добавить visible
+
 .message {
   --side-size: min(300px, calc(var(--screen-width)));
   @include wrap-absolute;

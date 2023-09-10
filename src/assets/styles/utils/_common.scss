@@ -25,16 +25,6 @@ body {
   z-index: 900;
 }
 
-.content {
-  height: 100%;
-  filter: blur(0);
-  transition: filter .4s ease-in-out;
-}
-
-.content.modal-opened {
-  filter: blur(2px);
-}
-
 .container {
   position: relative;
   margin: 0 auto;

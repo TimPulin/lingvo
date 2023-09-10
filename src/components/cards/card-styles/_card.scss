@@ -73,3 +73,9 @@
     }
   }
 }
+
+.content__list--new-card-page {
+  .card {
+    z-index: 50;
+  }
+}

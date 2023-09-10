@@ -12,6 +12,8 @@ const CARD_CONTENT_NATIVE = 'card__content--native';
 const CARD_CONTENT_FOREIGN = 'card__content--foreign';
 
 type CardBasePropsType = {
+  isRefresh: boolean;
+  setIsRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   isModeEdit?: boolean;
   pairWords: IPairWords;
   formNative: CardFormPropsType;
@@ -20,7 +22,7 @@ type CardBasePropsType = {
 
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isModeEdit = false, pairWords, formNative, formForeign,
+    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
   } = props;
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
@@ -51,6 +53,15 @@ export default function CardBase(props: CardBasePropsType) {
     event.stopPropagation();
     setIsEdit(true);
   }
+
+  function refreshCard() {
+    turnCard();
+    setIsRefresh(false);
+  }
+
+  useEffect(() => {
+    if (isRefresh) refreshCard();
+  }, [isRefresh]);
 
   const onSubmitNative = Object.assign(formNative.onSubmit, {});
 

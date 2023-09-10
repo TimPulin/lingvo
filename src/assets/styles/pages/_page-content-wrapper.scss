@@ -1,29 +1,31 @@
-.page-content-wrapper {
-  --screen-height: 100vh;
-  height: 100%;
-}
+// TODO удалить весь файл после проверки
 
-.page-content-wrapper--cards-list-page {
-  margin-top: calc(var(--screen-height) * 0.3);
-}
+// .page-content-wrapper {
+//   --screen-height: 100vh;
+//   height: 100%;
+// }
 
-.page-content-wrapper--new-card-page {
-  --item-width: calc(var(--screen-width) * 0.95);
-  --item-height: calc(var(--item-width) * 0.56);
+// .page-content-wrapper--cards-list-page {
+//   margin-top: calc(var(--screen-height) * 0.3);
+// }
 
-  padding-top: 50px;
+// .page-content-wrapper--new-card-page {
+//   --item-width: calc(var(--screen-width) * 0.95);
+//   --item-height: calc(var(--item-width) * 0.56);
+
+//   padding-top: 50px;
 
 
-  .page-content-wrapper_item {
-    margin-inline: auto;
-    width: var(--item-width);
-    height: var(--item-height);
-  }
+//   .page-content-wrapper_item {
+//     margin-inline: auto;
+//     width: var(--item-width);
+//     height: var(--item-height);
+//   }
 
-}
+// }
 
-@media (min-width: $small-screen) {
-  .page-content-wrapper--new-card-page {
-    --item-width: calc(var(--screen-width) * 0.75);
-  }
-}
+// @media (min-width: $small-screen) {
+//   .page-content-wrapper--new-card-page {
+//     --item-width: calc(var(--screen-width) * 0.75);
+//   }
+// }
