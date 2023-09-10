@@ -1,16 +1,9 @@
-import Card from '../cards/Card';
+import CardUniversal from '../cards/CardUniversal';
 
-type PropsType = {
-  itemNumber: number;
-};
-
-export default function SwiperItemTest(props:PropsType) {
-  const { itemNumber } = props;
-  console.log(itemNumber);
-
+export default function SwiperItemTest() {
   return (
     <li className="swiper__item">
-      <Card />
+      <CardUniversal />
     </li>
   );
 }

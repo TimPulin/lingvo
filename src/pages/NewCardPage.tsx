@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import CardPageBase from '../components/cards/CardPageBase';
+import CardContentItem from '../components/cards/CardContentItem';
 import CardUniversal from '../components/cards/CardUniversal';
 import { isCardModeEditContext, isNewPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 
@@ -14,7 +14,9 @@ export default function TestPage() {
   return (
     <isCardModeEditContext.Provider value={isCardModeEdit}>
       <isNewPairWordSavedContext.Provider value={newPairWordSaved}>
-        <CardPageBase ElementJSX={<CardUniversal />} />
+        <div className="content__list content__list--new-card-page">
+          <CardContentItem ElementJSX={<CardUniversal />} />
+        </div>
       </isNewPairWordSavedContext.Provider>
     </isCardModeEditContext.Provider>
   );

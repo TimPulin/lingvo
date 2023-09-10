@@ -57,11 +57,15 @@ export default function SwiperTest() {
 
   const throttleOnTouchMove = throttle(onTouchMove, 16);
 
-  function onTouchEnd() {
+  function onTouchEnd(event: TouchEvent | MouseEvent) {
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('touchend', onTouchEnd);
     window.removeEventListener('mousemove', onTouchMove);
-    window.removeEventListener('mouseup', onTouchEnd);
+    window.removeEventListener('mouseup', onTouchEnd, true);
+
+    if (event instanceof MouseEvent) {
+      event.stopImmediatePropagation();
+    }
 
     if (distance <= DISTANCE_FOR_START_AUTO_SWIPE) {
       setOffsetX(getRefValue(currentOffsetXRef));
@@ -80,7 +84,7 @@ export default function SwiperTest() {
       startXRef.current = event.nativeEvent.clientX;
 
       window.addEventListener('mousemove', onTouchMove);
-      window.addEventListener('mouseup', onTouchEnd);
+      window.addEventListener('mouseup', onTouchEnd, true);
     }
   }
 
@@ -99,9 +103,7 @@ export default function SwiperTest() {
       >
         {
           cardList.map((item) => (
-
-            <SwiperItem itemNumber={item.number} key={item.number} />
-
+            <SwiperItem key={item.number} />
           ))
         }
       </ul>
