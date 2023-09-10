@@ -3,12 +3,12 @@ import HomePage from '../pages/HomePage';
 import NewCardPage from '../pages/NewCardPage';
 import CardsPage from '../pages/CardsPage';
 import SettingsPage from '../pages/SettingsPage';
-import ContextProvider from '../components/context-provider/ContextProvider';
+import GlobalContextProvider from '../components/global-context-provider/GlobalContextProvider';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <ContextProvider />,
+    element: <GlobalContextProvider />,
     children: [
       {
         path: '/',

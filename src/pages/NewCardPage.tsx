@@ -1,42 +1,21 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
-import { useState, useEffect } from 'react';
-import { useStaticMessage } from '../components/context-provider/context-hooks';
+import { useMemo, useState } from 'react';
+import CardPageBase from '../components/cards/CardPageBase';
 import CardUniversal from '../components/cards/CardUniversal';
+import { isCardModeEditContext, isNewPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 
-import { CONTENT_ITEM_HIDE, ANIMATION_SHOW_MESSAGE_DURATION, MESSAGE_SHOW_DURATION } from '../utils/constants';
-
-export default function NewCardPage() {
+export default function TestPage() {
+  const isCardModeEdit = true;
   const [isNewPairWordSaved, setIsNewPairWordSaved] = useState(false);
-  const { setIsShow: setIsMessageShow, setText } = useStaticMessage();
-  const [isCardShow, setIsCardShow] = useState(true);
 
-  const cardAnimationClass = () => (isCardShow ? '' : CONTENT_ITEM_HIDE);
-
-  function onNewPairWordSaved() {
-    setIsCardShow(false);
-    setTimeout(() => {
-      setIsMessageShow(true);
-      setText('Новую карточку бережно сохранили');
-    }, 300);
-    setTimeout(() => {
-      setIsCardShow(true);
-      setIsNewPairWordSaved(false);
-    }, ANIMATION_SHOW_MESSAGE_DURATION * 2 + MESSAGE_SHOW_DURATION);
-  }
-
-  useEffect(() => {
-    if (isNewPairWordSaved) onNewPairWordSaved();
-  }, [isNewPairWordSaved]);
+  const newPairWordSaved = useMemo(() => ({
+    isNewPairWordSaved, setIsNewPairWordSaved,
+  }), [isNewPairWordSaved]);
 
   return (
-    <div className="content__list content__list--new-card-page">
-      <div className={`content__item ${cardAnimationClass()}`}>
-        <CardUniversal
-          isModeEdit
-          setIsNewPairWordSaved={setIsNewPairWordSaved}
-        />
-      </div>
-    </div>
+    <isCardModeEditContext.Provider value={isCardModeEdit}>
+      <isNewPairWordSavedContext.Provider value={newPairWordSaved}>
+        <CardPageBase ElementJSX={<CardUniversal />} />
+      </isNewPairWordSavedContext.Provider>
+    </isCardModeEditContext.Provider>
   );
 }

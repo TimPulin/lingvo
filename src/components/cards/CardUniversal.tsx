@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addNewWord } from '../../store/add-new-word-slice';
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
+import { useCardModeEdit, useNewPairWordSaved } from './card-context-hooks/card-context-hooks';
 
 const defaultPairWords: IPairWords = {
   nativeWord: '',
@@ -13,16 +14,14 @@ const defaultPairWords: IPairWords = {
 
 type CardUniversalPropsType = {
   pairWords?: IPairWords;
-  isModeEdit?: boolean;
-  setIsNewPairWordSaved: (isSaved: boolean) => void;
 };
 
 export default function CardUniversal(props: CardUniversalPropsType) {
-  const {
-    pairWords = defaultPairWords, isModeEdit = false, setIsNewPairWordSaved,
-  } = props;
+  const { pairWords = defaultPairWords } = props;
 
   const dispatch = useDispatch();
+  const isModeEdit = useCardModeEdit();
+  const { setIsNewPairWordSaved } = useNewPairWordSaved();
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -118,5 +117,4 @@ CardUniversal.defaultProps = {
     foreignWord: '',
     transcription: '',
   },
-  isModeEdit: false,
 };

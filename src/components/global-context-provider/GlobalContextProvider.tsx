@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useState, useMemo } from 'react';
-
 import RootPage from '../../pages/RootPage';
-
 import { StaticMessageContext } from './context-hooks';
 
-export default function ContextProvider() {
+export default function GlobalContextProvider() {
   const [isStaticMessageShow, setIsStaticMessageShow] = useState(false);
   const [staticMessageText, setStaticMessageText] = useState('');
   const staticMessage = useMemo(() => (
