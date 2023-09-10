@@ -4,7 +4,7 @@
   transition: filter .4s ease-in-out;
 
   &__list {
-    --screen-height: 100vh;
+    --screen-height: calc(100vh - 50px);
     height: 100%;
   }
 
@@ -30,6 +30,11 @@
   justify-content: center;
   align-items: center;
 
+  // TODO здесь центровка карточки ввода нового слова
+  padding-bottom: calc((var(--screen-height) - var(--item-height)) / 2);
+
+  height: calc(100vh - 50px);
+
   .content__item {
     position: absolute;
 
@@ -49,11 +54,10 @@
   animation: hide-item .3s ease-in forwards;
 }
 
-
-
 @media (min-width: $small-screen) {
   .content__list--new-card-page {
     --item-width: calc(var(--screen-width) * 0.75);
+    padding-bottom: 0;
   }
 }
 
