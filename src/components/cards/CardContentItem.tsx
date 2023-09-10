@@ -8,7 +8,7 @@ type CardPageBaseProps = {
   ElementJSX: any;
 };
 
-export default function CardPageBase(props: CardPageBaseProps) {
+export default function CardContentItem(props: CardPageBaseProps) {
   const { ElementJSX } = props;
 
   const { isNewPairWordSaved, setIsNewPairWordSaved } = useNewPairWordSaved();
@@ -35,11 +35,11 @@ export default function CardPageBase(props: CardPageBaseProps) {
   }, [isNewPairWordSaved]);
 
   return (
-    <div className="content__list content__list--new-card-page">
-      <div className={`content__item ${cardAnimationClass()}`}>
 
-        {ElementJSX}
-      </div>
+    <div className={`content__item ${cardAnimationClass()}`}>
+
+      {ElementJSX}
+
     </div>
   );
 }
