@@ -5,6 +5,7 @@
 @import './assets/bootstrap-reboot.css';
 
 @import './utils/common';
+@import './components/content.scss';
 
 @import './components/form/button';
 @import './components/form/input';
@@ -15,6 +16,8 @@
 
 @import './components/burger';
 @import './animations/burger-animation';
+
+@import '../../components/button-plus/button-plus.scss';
 
 @import './components/three-dots';
 

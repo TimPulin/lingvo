@@ -2,7 +2,7 @@ import Swiper from '../components/swiper/Swiper';
 
 export default function CardsPage() {
   return (
-    <div className="page-content-wrapper page-content-wrapper--cards-list-page">
+    <div className="content__list content__list--card-list-page">
       <Swiper />
     </div>
   );

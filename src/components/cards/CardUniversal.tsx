@@ -24,6 +24,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   const dispatch = useDispatch();
 
+  const [isRefresh, setIsRefresh] = useState(false);
+
   const [nativeWord, _setNativeWord] = useState<string>('');
   const [foreignWord, _setForeignWord] = useState<string>('');
   const [transcription, _setTranscription] = useState<string>('');
@@ -57,10 +59,14 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       },
     ));
     setIsNewPairWordSaved(true);
+    setIsRefresh(true);
+    _setNativeWord('');
+    _setForeignWord('');
+    _setTranscription('');
   };
 
   const onCancelNative = () => {
-    setNativeWord('');
+    _setNativeWord('');
   };
 
   const onCancelForeign = () => {
@@ -70,6 +76,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   return (
     <CardBase
+      isRefresh={isRefresh}
+      setIsRefresh={setIsRefresh}
       isModeEdit={isModeEdit}
       pairWords={pairWords}
       formNative={
