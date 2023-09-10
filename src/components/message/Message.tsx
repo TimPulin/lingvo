@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useStaticMessage } from '../context-provider/context-hooks';
+import { useStaticMessage } from '../global-context-provider/context-hooks';
 
 const MESSAGE_SHOW = 'message--show';
 
