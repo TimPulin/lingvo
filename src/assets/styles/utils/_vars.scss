@@ -50,5 +50,6 @@ $mobile-screen: 575px;
 @media (min-width: $medium-screen) {
   :root {
     --screen-width: calc(var(--medium-screen) - 40px);
+    --screen-real-width: calc(var(--medium-screen) - 40px);
   }
 }

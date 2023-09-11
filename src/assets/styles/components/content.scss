@@ -8,9 +8,6 @@
     height: calc(100vh - 50px);
     display: flex;
     align-items: center;
-    // padding-bottom: calc(calc((var(--screen-height) - var(--item-height))) / 1);
-
-    // padding-bottom: 150px;
   }
 
   &__item {
@@ -20,10 +17,6 @@
 
 .content.modal-opened {
   filter: blur(2px);
-}
-
-.content__list--cards-list-page {
-  // margin-top: calc(var(--screen-height) * 0.3);
 }
 
 .content__list--new-card-page {

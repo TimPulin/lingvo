@@ -1,6 +1,4 @@
-// TODO удалить item-amount и list-width
 .swiper {
-  --item-amount: 3;
   --item-width: calc(var(--screen-width) * 0.9);
   --item-height: calc(var(--item-width) * 0.6);
   --item-margin-right: calc((var(--screen-real-width) - var(--item-width)) / 4);
@@ -12,25 +10,12 @@
 
   padding-left: var(--swiper-padding-left);
 
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   display: inline-block;
-  //   width: var(--swiper-padding-left);
-  //   height: 100%;
-  //   z-index: 100;
-  //   background-color: #fff;
-  // }
-
   &__list {
     @include list-reset;
     position: relative;
     display: flex;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    // min-width: var(--list-width);
     touch-action: pan-x;
 
     transition: transform .3s ease-out;
@@ -47,14 +32,9 @@
   }
 }
 
-@media (max-width: $small-screen) {
+@media (min-width: $medium-screen) {
   .swiper {
-    // --item-amount: 3;
-    // --item-width: calc(var(--screen-width) * 0.95);
-    // --item-height: calc(var(--item-width) * 0.6);
-    // --item-margin-right: calc((var(--screen-width) - var(--item-width)) / 4);
-    // --swiper-padding-left: calc(var(--item-margin-right) * 2);
-
-    // --list-width: calc(var(--item-width) * var(--item-amount));
+    --item-width: calc(var(--screen-width) * 0.70);
+    --item-height: calc(var(--item-width) * 0.56);
   }
 }
