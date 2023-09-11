@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import CardEditorBlock from './CardEditorBlock';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
+import { useNewPairWordSaved } from './card-context-hooks/card-context-hooks';
 import { HIDE } from '../../utils/constants';
 
 const CARD_EDIT = 'card--edit';
@@ -24,6 +25,7 @@ export default function CardBase(props: CardBasePropsType) {
   const {
     isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
   } = props;
+  const { isNewPairWordSaved } = useNewPairWordSaved();
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
@@ -31,6 +33,10 @@ export default function CardBase(props: CardBasePropsType) {
   useEffect(() => {
     setIsEdit(isModeEdit);
   }, [isModeEdit]);
+
+  useEffect(() => {
+    if (isNewPairWordSaved && !isModeEdit) setIsEdit(false);
+  }, [isNewPairWordSaved]);
 
   const cardEditMode = () => (isEdit ? CARD_EDIT : '');
   const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
