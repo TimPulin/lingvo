@@ -1,11 +1,11 @@
 // TODO удалить item-amount и list-width
 .swiper {
-  // --item-amount: 3;
-  --item-width: calc(var(--screen-width) * 0.5);
-  --item-height: calc(var(--item-width) * 0.56);
-  --item-margin-right: calc(var(--screen-width) * 0.125);
-  --swiper-padding-left: calc(var(--screen-width) * 0.25);
-  // --list-width: calc(var(--item-width) * var(--item-amount));
+  --item-amount: 3;
+  --item-width: calc(var(--screen-width) * 0.9);
+  --item-height: calc(var(--item-width) * 0.6);
+  --item-margin-right: calc((var(--screen-real-width) - var(--item-width)) / 4);
+  --swiper-padding-left: calc(var(--item-margin-right) * 2);
+
 
   position: relative;
   overflow: hidden;
@@ -49,11 +49,12 @@
 
 @media (max-width: $small-screen) {
   .swiper {
-    --item-amount: 3;
-    --item-width: calc(var(--screen-width) * 0.75);
-    --item-height: calc(var(--item-width) * 0.53);
-    --item-margin-right: calc(var(--screen-width) * 0.0625);
-    --swiper-padding-left: calc(var(--screen-width) * 0.125);
+    // --item-amount: 3;
+    // --item-width: calc(var(--screen-width) * 0.95);
+    // --item-height: calc(var(--item-width) * 0.6);
+    // --item-margin-right: calc((var(--screen-width) - var(--item-width)) / 4);
+    // --swiper-padding-left: calc(var(--item-margin-right) * 2);
+
     // --list-width: calc(var(--item-width) * var(--item-amount));
   }
 }
