@@ -16,7 +16,7 @@ const cardList = [
 
 const DISTANCE_FOR_START_AUTO_SWIPE = 30;
 
-export default function SwiperTest() {
+export default function Swiper() {
   const isSwipingRef = useRef(false);
   const startXRef = useRef(0);
   const currentX = useRef(0);
@@ -76,7 +76,7 @@ export default function SwiperTest() {
     }
   }
 
-  function onTouchStart(event:React.TouchEvent | React.MouseEvent) {
+  const onTouchStart = (event:React.TouchEvent | React.MouseEvent) => {
     currentOffsetXRef.current = getRefValue(offsetXRef);
 
     if (window.TouchEvent && event.nativeEvent instanceof TouchEvent) {
@@ -90,15 +90,11 @@ export default function SwiperTest() {
       window.addEventListener('mousemove', onTouchMove);
       window.addEventListener('mouseup', onTouchEnd, true);
     }
-  }
+  };
 
   return (
     <div
       className="swiper"
-      onMouseDown={onTouchStart}
-      onTouchStart={onTouchStart}
-      role="button"
-      tabIndex={0}
       ref={swiperRef}
     >
       <ul
@@ -107,7 +103,10 @@ export default function SwiperTest() {
       >
         {
           cardList.map((item) => (
-            <SwiperItem key={item.number} />
+            <SwiperItem
+              onInteraction={onTouchStart}
+              key={item.number}
+            />
           ))
         }
       </ul>
