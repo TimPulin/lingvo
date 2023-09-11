@@ -5,7 +5,9 @@
 
   &__list {
     --screen-height: calc(100vh - 50px);
-    height: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
   }
 
   &__item {
@@ -17,36 +19,19 @@
   filter: blur(2px);
 }
 
-.content__list--cards-list-page {
-  // margin-top: calc(var(--screen-height) * 0.3);
-}
-
 .content__list--new-card-page {
   --item-width: calc(var(--screen-width) * 0.95);
   --item-height: calc(var(--item-width) * 0.56);
   position: relative;
-
-  display: flex;
   justify-content: center;
-  align-items: center;
-
-  // TODO здесь центровка карточки ввода нового слова
-  padding-bottom: calc((var(--screen-height) - var(--item-height)) / 2);
 
   height: calc(100vh - 50px);
 
   .content__item {
     position: absolute;
-
     margin-inline: auto;
     width: var(--item-width);
     height: var(--item-height);
-  }
-
-  .content__item--button-plus {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 

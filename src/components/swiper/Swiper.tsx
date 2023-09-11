@@ -17,6 +17,7 @@ const cardList = [
 const DISTANCE_FOR_START_AUTO_SWIPE = 30;
 
 export default function SwiperTest() {
+  const isSwipingRef = useRef(false);
   const startXRef = useRef(0);
   const currentX = useRef(0);
   const currentOffsetXRef = useRef(0);
@@ -32,6 +33,8 @@ export default function SwiperTest() {
   }
 
   function onTouchMove(event: TouchEvent | MouseEvent) {
+    isSwipingRef.current = true;
+
     if (window.TouchEvent && event instanceof TouchEvent) {
       currentX.current = event.changedTouches[0].clientX;
     } else if (event instanceof MouseEvent) {
@@ -58,14 +61,15 @@ export default function SwiperTest() {
   const throttleOnTouchMove = throttle(onTouchMove, 16);
 
   function onTouchEnd(event: TouchEvent | MouseEvent) {
+    if (event instanceof MouseEvent && isSwipingRef.current) {
+      event.stopImmediatePropagation();
+      isSwipingRef.current = false;
+    }
+
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('touchend', onTouchEnd);
     window.removeEventListener('mousemove', onTouchMove);
     window.removeEventListener('mouseup', onTouchEnd, true);
-
-    if (event instanceof MouseEvent) {
-      event.stopImmediatePropagation();
-    }
 
     if (distance <= DISTANCE_FOR_START_AUTO_SWIPE) {
       setOffsetX(getRefValue(currentOffsetXRef));

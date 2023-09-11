@@ -44,10 +44,12 @@ $mobile-screen: 575px;
 :root {
   --medium-screen: 991px;
   --screen-width: min(100vw, 100vh);
+  --screen-real-width: 100vw;
 }
 
 @media (min-width: $medium-screen) {
   :root {
     --screen-width: calc(var(--medium-screen) - 40px);
+    --screen-real-width: calc(var(--medium-screen) - 40px);
   }
 }
