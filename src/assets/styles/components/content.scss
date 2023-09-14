@@ -19,6 +19,17 @@
   filter: blur(2px);
 }
 
+.content__list--cards-list-page {
+  position: relative;
+  display: block;
+
+  .content__item {
+    position: relative;
+    top: 20%;
+    padding-inline: 5px;
+  }
+}
+
 .content__list--new-card-page {
   --item-width: calc(var(--screen-width) * 0.95);
   --item-height: calc(var(--item-width) * 0.56);
@@ -43,6 +54,12 @@
   .content__list--new-card-page {
     --item-width: calc(var(--screen-width) * 0.75);
     padding-bottom: 0;
+  }
+
+  .content__list--cards-list-page {
+    .content__item {
+      padding-inline: 30px;
+    }
   }
 }
 

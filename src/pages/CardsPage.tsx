@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import CardContentItem from '../components/cards/CardContentItem';
-import Swiper from '../components/swiper/Swiper';
+// import Swiper from '../components/swiper/Swiper';
+import SwiperReact from '../components/swiper-react/SwiperReact';
 import { isCardModeEditContext, isNewPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 
 export default function CardsPage() {
@@ -15,7 +16,7 @@ export default function CardsPage() {
     <isCardModeEditContext.Provider value={isCardModeEdit}>
       <isNewPairWordSavedContext.Provider value={newPairWordSaved}>
         <div className="content__list content__list--cards-list-page">
-          <CardContentItem ElementJSX={<Swiper />} />
+          <CardContentItem ElementJSX={<SwiperReact />} />
         </div>
       </isNewPairWordSavedContext.Provider>
     </isCardModeEditContext.Provider>

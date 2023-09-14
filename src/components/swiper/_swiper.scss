@@ -17,15 +17,15 @@
     justify-content: flex-start;
     flex-wrap: nowrap;
     touch-action: pan-x;
-
     transition: transform .3s ease-out;
   }
 
   &__item {
     @include noselect;
+    position: relative;
+
     flex-shrink: 0;
     flex-grow: 0;
-    position: relative;
     width: var(--item-width);
     height: var(--item-height);
     margin-right: var(--item-margin-right);
