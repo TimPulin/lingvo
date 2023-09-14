@@ -3,6 +3,7 @@
 .message {
   --side-size: min(300px, calc(var(--screen-width)));
   @include wrap-absolute;
+  padding-top: 40px;
   background-color: #fff;
   animation: message-hide .5s ease-in-out forwards;
 

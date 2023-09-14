@@ -1,8 +1,10 @@
+/* eslint-disable*/
 import { useState, useEffect } from 'react';
 import CardEditorBlock from './CardEditorBlock';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
 import { useNewPairWordSaved } from './card-context-hooks/card-context-hooks';
+import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
 import { HIDE } from '../../utils/constants';
 
 const CARD_EDIT = 'card--edit';
@@ -25,12 +27,14 @@ export default function CardBase(props: CardBasePropsType) {
   const {
     isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
   } = props;
+
   const { isNewPairWordSaved } = useNewPairWordSaved();
+  const isSwiperSlideInProgress = useSwiperSlide();
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
 
-  useEffect(() => {
+    useEffect(() => {
     setIsEdit(isModeEdit);
   }, [isModeEdit]);
 
@@ -48,11 +52,13 @@ export default function CardBase(props: CardBasePropsType) {
   const foreignContentHide = () => (isContentNative ? HIDE : '');
 
   function turnCard() {
-    setIsCardNative(!isCardNative);
+    if (!isSwiperSlideInProgress) {
+      setIsCardNative(!isCardNative);
 
-    setTimeout(() => {
-      setIsContentNative(!isContentNative);
-    }, 250);
+      setTimeout(() => {
+        setIsContentNative(!isContentNative);
+      }, 250);
+    }
   }
 
   function onClickEdit(event: React.MouseEvent) {
@@ -61,27 +67,37 @@ export default function CardBase(props: CardBasePropsType) {
   }
 
   function refreshCard() {
-    turnCard();
-    setIsRefresh(false);
+    setIsCardNative(true);
+
+    setTimeout(() => {
+      setIsContentNative(true);
+      setIsRefresh(false);
+    }, 250);
+
   }
 
   useEffect(() => {
-    if (isRefresh) refreshCard();
+    if (isRefresh) {
+      setTimeout(() => {
+        refreshCard()
+      }, 500)
+    };
   }, [isRefresh]);
 
-  const onSubmitNative = Object.assign(formNative.onSubmit, {});
+  // чтобы при сохранении карточка не переворачивалась
+  const onSubmitForeign = Object.assign(formForeign.onSubmit, {});
 
-  const localOnSubmitNative = (event: React.FormEvent) => {
-    turnCard();
-    onSubmitNative(event);
+  const localOnSubmitForeign = (event: React.FormEvent) => {
+    event.stopPropagation();
+    onSubmitForeign(event);
   };
 
-  formNative.onSubmit = localOnSubmitNative;
+  formForeign.onSubmit = localOnSubmitForeign;
 
   return (
     <div
       className={`card ${cardEditMode()}`}
-      onMouseUp={turnCard}
+      onClick={turnCard}
       role="button"
       tabIndex={0}
     >
@@ -90,7 +106,7 @@ export default function CardBase(props: CardBasePropsType) {
         <button
           type="button"
           className="three-dots__btn"
-          onMouseUp={onClickEdit}
+          onClick={onClickEdit}
         >
           <span className="three-dots__line" />
           <span className="three-dots__line" />
@@ -108,10 +124,11 @@ export default function CardBase(props: CardBasePropsType) {
             form={formNative}
           />
         </div>
+        {/* TODO транскриптицю сделать меньше и на следующей строке */}
         <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
           <div className="card__text">
-            {pairWords.foreignWord}
-            {pairWords.transcription}
+            <div>{pairWords.foreignWord}</div>
+            <div className='card__transcription'>[{pairWords.transcription}]</div>
           </div>
           <CardEditorBlock
             form={formForeign}

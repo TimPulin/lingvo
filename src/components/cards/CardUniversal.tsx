@@ -64,6 +64,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     _setTranscription('');
   };
 
+  // TODO на странице просмотра карточек на cancel повесить выключение режима редакции
+
   const onCancelNative = () => {
     _setNativeWord('');
   };
