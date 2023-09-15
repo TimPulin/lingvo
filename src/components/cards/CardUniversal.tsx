@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addNewWord } from '../../store/add-new-word-slice';
+import { addNewWord, editWord } from '../../store/dictionary-slice';
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
-import { useCardModeEdit, useNewPairWordSaved } from './card-context-hooks/card-context-hooks';
+import { useCardModeEdit, usePairWordSaved } from './card-context-hooks/card-context-hooks';
+import { useStaticMessage } from '../global-context-provider/context-hooks';
 
 const defaultPairWords: IPairWords = {
+  id: 0,
   nativeWord: '',
   foreignWord: '',
   transcription: '',
@@ -21,13 +23,21 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   const dispatch = useDispatch();
   const isModeEdit = useCardModeEdit();
-  const { setIsNewPairWordSaved } = useNewPairWordSaved();
+  const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
+  const { setText } = useStaticMessage();
 
   const [isRefresh, setIsRefresh] = useState(false);
 
   const [nativeWord, _setNativeWord] = useState<string>('');
   const [foreignWord, _setForeignWord] = useState<string>('');
   const [transcription, _setTranscription] = useState<string>('');
+  const [id, setId] = useState<number | null>(null);
+  const localPairWords = {
+    id,
+    nativeWord,
+    foreignWord,
+    transcription,
+  };
 
   const setNativeWord = (value:string) => {
     _setNativeWord(value);
@@ -41,22 +51,38 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     _setTranscription(value);
   };
 
+  useEffect(() => {
+    if (pairWords) {
+      setNativeWord(pairWords.nativeWord);
+      setForeignWord(pairWords.foreignWord);
+      setTranscription(pairWords.transcription);
+      if (pairWords.id) setId(pairWords.id);
+    }
+  }, []);
+
   const onSubmitNative = (event: React.FormEvent) => {
     event.preventDefault();
   };
 
   const onSubmitForeign = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(addNewWord(
-      {
-        word: {
-          nativeWord,
-          foreignWord,
-          transcription,
+    if (isModeEdit) {
+      dispatch(addNewWord(
+        {
+          word: localPairWords,
+          key: 'defaultCollection',
         },
-        key: 'defaultCollection',
-      },
-    ));
+      ));
+      setText('Новую карточку бережно сохранили');
+    } else {
+      dispatch(editWord(
+        {
+          word: localPairWords,
+          key: 'defaultCollection',
+        },
+      ));
+      setText('Изменения аккуратно внесены');
+    }
     setIsNewPairWordSaved(true);
     setIsRefresh(true);
     _setNativeWord('');
@@ -85,7 +111,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         {
           newWordsList: [
             {
-              newWord: nativeWord, updateFunction: setNativeWord, placeholderText: 'native', key: 1,
+              newWord: nativeWord, updateFunction: setNativeWord, placeholderText: 'native',
             },
           ],
           primaryButtonName: 'Forward',
@@ -97,10 +123,10 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         {
           newWordsList: [
             {
-              newWord: foreignWord, updateFunction: setForeignWord, placeholderText: 'foreign', key: 2,
+              newWord: foreignWord, updateFunction: setForeignWord, placeholderText: 'foreign',
             },
             {
-              newWord: transcription, updateFunction: setTranscription, placeholderText: 'transcription', key: 3,
+              newWord: transcription, updateFunction: setTranscription, placeholderText: 'transcription',
             },
           ],
           primaryButtonName: 'Save',
@@ -115,6 +141,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
 CardUniversal.defaultProps = {
   pairWords: {
+    id: 0,
     nativeWord: '',
     foreignWord: '',
     transcription: '',

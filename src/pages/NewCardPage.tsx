@@ -1,23 +1,23 @@
 import { useMemo, useState } from 'react';
 import CardContentItem from '../components/cards/CardContentItem';
 import CardUniversal from '../components/cards/CardUniversal';
-import { isCardModeEditContext, isNewPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
+import { isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 
-export default function TestPage() {
+export default function NewCardPage() {
   const isCardModeEdit = true;
-  const [isNewPairWordSaved, setIsNewPairWordSaved] = useState(false);
+  const [isPairWordSaved, setIsPairWordSaved] = useState(false);
 
-  const newPairWordSaved = useMemo(() => ({
-    isNewPairWordSaved, setIsNewPairWordSaved,
-  }), [isNewPairWordSaved]);
+  const pairWordSaved = useMemo(() => ({
+    isPairWordSaved, setIsPairWordSaved,
+  }), [isPairWordSaved]);
 
   return (
     <isCardModeEditContext.Provider value={isCardModeEdit}>
-      <isNewPairWordSavedContext.Provider value={newPairWordSaved}>
+      <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="content__list content__list--new-card-page">
           <CardContentItem ElementJSX={<CardUniversal />} />
         </div>
-      </isNewPairWordSavedContext.Provider>
+      </isPairWordSavedContext.Provider>
     </isCardModeEditContext.Provider>
   );
 }

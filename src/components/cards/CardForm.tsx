@@ -4,7 +4,6 @@ type WordType = {
   newWord: string;
   updateFunction(value: string | number): void;
   placeholderText: string;
-  key: number;
 }[];
 
 export type CardFormPropsType = {
@@ -19,16 +18,22 @@ export default function CardForm(props: CardFormPropsType) {
     newWordsList, onSubmit, onCancel, primaryButtonName,
   } = props;
 
+  function onBodyClick(event: React.TouchEvent | React.MouseEvent) {
+    event.stopPropagation();
+  }
+
   return (
     <form className="form" onSubmit={onSubmit}>
-      <div className="form__body">
+      {/* eslint-disable-next-line */}
+      <div className="form__body" onClick={onBodyClick}>
         {
           newWordsList.map((item) => (
             <Input
               placeholderText={item.placeholderText}
               value={item.newWord}
               updateFunction={item.updateFunction}
-              key={item.key}
+              key={item.placeholderText}
+
             />
           ))
         }

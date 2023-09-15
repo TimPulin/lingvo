@@ -5,45 +5,50 @@ import SwiperType from 'swiper/types/swiper-class';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import CardUniversal from '../cards/CardUniversal';
 import {SwiperSlideInProgressContext} from './swiper-react-context-hooks';
+import {CollectionType} from '../../utils/dictionary/dictionary-types';
 
-const cardList = [
-  {
-    number: 1,
-    nativeWord: 'тест1',
-    foreignWord: 'test1',
-    transcription: 'тест',
-  },
-  {
-    number: 2,
-    nativeWord: 'тест2',
-    foreignWord: 'test2',
-    transcription: 'тест',
-  },
-  {
-    number: 3,
-    nativeWord: 'тест3',
-    foreignWord: 'test3',
-    transcription: 'тест',
-  },
-  {
-    number: 4,
-    nativeWord: 'тест4',
-    foreignWord: 'test4',
-    transcription: 'тест',
-  },
-  {
-    number: 5,
-    nativeWord: 'тест5',
-    foreignWord: 'test5',
-    transcription: 'тест',
-  },
-  {
-    number: 6,
-    nativeWord: 'тест6',
-    foreignWord: 'test6',
-    transcription: 'тест',
-  },
-];
+// const cardList = [
+//   {
+//     id: 1,
+//     nativeWord: 'тест1',
+//     foreignWord: 'test1',
+//     transcription: 'тест',
+//   },
+//   {
+//     id: 2,
+//     nativeWord: 'тест2',
+//     foreignWord: 'test2',
+//     transcription: 'тест',
+//   },
+//   {
+//     id: 3,
+//     nativeWord: 'тест3',
+//     foreignWord: 'test3',
+//     transcription: 'тест',
+//   },
+//   {
+//     id: 4,
+//     nativeWord: 'тест4',
+//     foreignWord: 'test4',
+//     transcription: 'тест',
+//   },
+//   {
+//     id: 5,
+//     nativeWord: 'тест5',
+//     foreignWord: 'test5',
+//     transcription: 'тест',
+//   },
+//   {
+//     id: 6,
+//     nativeWord: 'тест6',
+//     foreignWord: 'test6',
+//     transcription: 'тест',
+//   },
+// ];
+
+type SwiperReactPropsType = {
+  cardsList:CollectionType
+}
 
 const swiperParams:SwiperOptions = {
   spaceBetween: 20,
@@ -58,7 +63,8 @@ const swiperParams:SwiperOptions = {
 
 const SWIPER_ACTIVE = 'swiper--active';
 
-export default function SwiperReact() {
+export default function SwiperReact(props:SwiperReactPropsType) {
+  const {cardsList} = props;
   const [isSwiperSlideInProgress, setIsSwiperSlideInProgress] = useState(false)
   const swiperSlide = useMemo(() => isSwiperSlideInProgress, [isSwiperSlideInProgress])
 
@@ -94,10 +100,11 @@ export default function SwiperReact() {
         <div className="swiper">
           <div className="swiper-wrapper">
             {
-              cardList.map((item) => (
-                <div className="swiper-slide" style={{ height: getSlideWidth() }} key={item.number} ref={slideRef}>
+              cardsList.map((item) => (
+                <div className="swiper-slide" style={{ height: getSlideWidth() }} key={item.id} ref={slideRef}>
                   <CardUniversal
                     pairWords={{
+                      id: item.id,
                       nativeWord: item.nativeWord,
                       foreignWord: item.foreignWord,
                       transcription: item.transcription,

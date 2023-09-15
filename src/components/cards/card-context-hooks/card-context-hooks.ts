@@ -10,18 +10,18 @@ export function useCardModeEdit() {
   return useContext(isCardModeEditContext);
 }
 
-type IsNewPairWordSavedType = {
-  isNewPairWordSaved: boolean;
-  setIsNewPairWordSaved: React.Dispatch<React.SetStateAction<boolean>>;
+type IsPairWordSavedType = {
+  isPairWordSaved: boolean;
+  setIsPairWordSaved: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const isNewPairWordSavedState = {
-  isNewPairWordSaved: false,
-  setIsNewPairWordSaved: () => {},
+const isPairWordSavedState = {
+  isPairWordSaved: false,
+  setIsPairWordSaved: () => {},
 };
 
-export const isNewPairWordSavedContext = createContext<IsNewPairWordSavedType>(isNewPairWordSavedState);
+export const isPairWordSavedContext = createContext<IsPairWordSavedType>(isPairWordSavedState);
 
-export function useNewPairWordSaved() {
-  return useContext(isNewPairWordSavedContext);
+export function usePairWordSaved() {
+  return useContext(isPairWordSavedContext);
 }
