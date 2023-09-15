@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useStaticMessage } from '../global-context-provider/context-hooks';
-import { useNewPairWordSaved } from './card-context-hooks/card-context-hooks';
+import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
 
 import { CONTENT_ITEM_HIDE, ANIMATION_SHOW_MESSAGE_DURATION, MESSAGE_SHOW_DURATION } from '../../utils/constants';
 
@@ -11,9 +11,9 @@ type CardPageBaseProps = {
 export default function CardContentItem(props: CardPageBaseProps) {
   const { ElementJSX } = props;
 
-  const { isNewPairWordSaved, setIsNewPairWordSaved } = useNewPairWordSaved();
+  const { isPairWordSaved, setIsPairWordSaved } = usePairWordSaved();
 
-  const { setIsShow: setIsMessageShow, setText } = useStaticMessage();
+  const { setIsShow: setIsMessageShow } = useStaticMessage();
   const [isCardShow, setIsCardShow] = useState(true);
 
   const cardAnimationClass = () => (isCardShow ? '' : CONTENT_ITEM_HIDE);
@@ -22,17 +22,16 @@ export default function CardContentItem(props: CardPageBaseProps) {
     setIsCardShow(false);
     setTimeout(() => {
       setIsMessageShow(true);
-      setText('Новую карточку бережно сохранили');
     }, 300);
     setTimeout(() => {
       setIsCardShow(true);
-      setIsNewPairWordSaved(false);
+      setIsPairWordSaved(false);
     }, ANIMATION_SHOW_MESSAGE_DURATION * 2 + MESSAGE_SHOW_DURATION);
   }
 
   useEffect(() => {
-    if (isNewPairWordSaved) onNewPairWordSaved();
-  }, [isNewPairWordSaved]);
+    if (isPairWordSaved) onNewPairWordSaved();
+  }, [isPairWordSaved]);
 
   return (
 

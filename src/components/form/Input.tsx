@@ -30,7 +30,11 @@ export default function Input(props: InputPropsType) {
   }
 
   useEffect(() => {
-    if (!value) setIsFocus(false);
+    if (value) {
+      setIsFocus(true);
+    } else {
+      setIsFocus(false);
+    }
   }, [value]);
 
   return (

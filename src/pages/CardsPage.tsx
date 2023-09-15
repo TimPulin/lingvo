@@ -1,24 +1,25 @@
 import { useMemo, useState } from 'react';
 import CardContentItem from '../components/cards/CardContentItem';
-// import Swiper from '../components/swiper/Swiper';
 import SwiperReact from '../components/swiper-react/SwiperReact';
-import { isCardModeEditContext, isNewPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
+import { isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
+import { useCollection } from '../store/selectors';
 
 export default function CardsPage() {
   const isCardModeEdit = false;
-  const [isNewPairWordSaved, setIsNewPairWordSaved] = useState(false);
+  const [isPairWordSaved, setIsPairWordSaved] = useState(false);
+  const cardsCollection = useCollection('defaultCollection');
 
-  const newPairWordSaved = useMemo(() => ({
-    isNewPairWordSaved, setIsNewPairWordSaved,
-  }), [isNewPairWordSaved]);
+  const pairWordSaved = useMemo(() => ({
+    isPairWordSaved, setIsPairWordSaved,
+  }), [isPairWordSaved]);
 
   return (
     <isCardModeEditContext.Provider value={isCardModeEdit}>
-      <isNewPairWordSavedContext.Provider value={newPairWordSaved}>
+      <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="content__list content__list--cards-list-page">
-          <CardContentItem ElementJSX={<SwiperReact />} />
+          <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection} />} />
         </div>
-      </isNewPairWordSavedContext.Provider>
+      </isPairWordSavedContext.Provider>
     </isCardModeEditContext.Provider>
   );
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import CardEditorBlock from './CardEditorBlock';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
-import { useNewPairWordSaved } from './card-context-hooks/card-context-hooks';
+import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
 import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
 import { HIDE } from '../../utils/constants';
 
@@ -28,7 +28,7 @@ export default function CardBase(props: CardBasePropsType) {
     isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
   } = props;
 
-  const { isNewPairWordSaved } = useNewPairWordSaved();
+  const { isPairWordSaved: isNewPairWordSaved } = usePairWordSaved();
   const isSwiperSlideInProgress = useSwiperSlide();
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
@@ -124,7 +124,7 @@ export default function CardBase(props: CardBasePropsType) {
             form={formNative}
           />
         </div>
-        {/* TODO транскриптицю сделать меньше и на следующей строке */}
+        {/* TODO транскрипцию сделать меньше и на следующей строке */}
         <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
           <div className="card__text">
             <div>{pairWords.foreignWord}</div>

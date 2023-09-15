@@ -3,7 +3,7 @@
 // import React from 'react';
 import { useSelector } from 'react-redux';
 import { dataLangs, Languages, ILangPack } from '../utils/lang-pack/lang-pack-basic';
-import { DictionaryType } from '../utils/dictionary/dictionary-types';
+import { DictionaryType, CollectionType } from '../utils/dictionary/dictionary-types';
 import { RootStateType } from './index';
 
 export function useCurrentLangPack():ILangPack {
@@ -14,4 +14,8 @@ export function useCurrentLangPack():ILangPack {
 
 export function useDictionary():DictionaryType {
   return useSelector((store: RootStateType) => store.dictionary.value);
+}
+
+export function useCollection(collectionKey:string):CollectionType {
+  return useSelector((store: RootStateType) => store.dictionary.value[collectionKey]);
 }
