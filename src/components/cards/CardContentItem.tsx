@@ -18,7 +18,7 @@ export default function CardContentItem(props: CardPageBaseProps) {
 
   const cardAnimationClass = () => (isCardShow ? '' : CONTENT_ITEM_HIDE);
 
-  function onNewPairWordSaved() {
+  function onPairWordSaved() {
     setIsCardShow(false);
     setTimeout(() => {
       setIsMessageShow(true);
@@ -30,7 +30,7 @@ export default function CardContentItem(props: CardPageBaseProps) {
   }
 
   useEffect(() => {
-    if (isPairWordSaved) onNewPairWordSaved();
+    if (isPairWordSaved) onPairWordSaved();
   }, [isPairWordSaved]);
 
   return (

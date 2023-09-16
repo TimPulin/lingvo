@@ -45,7 +45,6 @@ export default function SwiperReact(props:SwiperReactPropsType) {
 
     /* eslint-disable-next-line */
      swiper.current = new Swipe('.swiper', swiperParams);
-     console.log(swiperParams, cardsList.length);
 
     if (slideRef.current != null) {
       setSlideWidth(slideRef.current.clientWidth);

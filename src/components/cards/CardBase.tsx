@@ -6,6 +6,7 @@ import { CardFormPropsType } from './CardForm';
 import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
 import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
 import { HIDE } from '../../utils/constants';
+import CardControlBlock from './CardControlBlock';
 
 const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
@@ -33,6 +34,7 @@ export default function CardBase(props: CardBasePropsType) {
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [isControlBlockShow, setIsControlBlockShow] = useState(false);
 
     useEffect(() => {
     setIsEdit(isModeEdit);
@@ -61,9 +63,10 @@ export default function CardBase(props: CardBasePropsType) {
     }
   }
 
-  function onClickEdit(event: React.MouseEvent) {
+  function onCallControlBlock(event: React.MouseEvent) {
     event.stopPropagation();
-    setIsEdit(true);
+    setIsControlBlockShow(true)
+    // setIsEdit(true);
   }
 
   function refreshCard() {
@@ -86,13 +89,33 @@ export default function CardBase(props: CardBasePropsType) {
 
   // чтобы при сохранении карточка не переворачивалась
   const onSubmitForeign = Object.assign(formForeign.onSubmit, {});
-
   const localOnSubmitForeign = (event: React.FormEvent) => {
     event.stopPropagation();
     onSubmitForeign(event);
   };
-
   formForeign.onSubmit = localOnSubmitForeign;
+
+const onCancelNative = Object.assign(formNative.onCancel, {});
+const localOnCancelNative = (event:React.FormEvent) => {
+  event.stopPropagation();
+  if (isModeEdit) {
+    onCancelNative(event);
+  } else {
+    setIsEdit(false);
+  }
+}
+formNative.onCancel = localOnCancelNative;
+
+const onCancelForeign = Object.assign(formForeign.onCancel, {});
+const localOnCancelForeign = (event:React.FormEvent) => {
+  event.stopPropagation();
+  if (isModeEdit) {
+    onCancelForeign(event);
+  } else {
+    setIsEdit(false);
+  }
+}
+formForeign.onCancel = localOnCancelForeign;
 
   return (
     <div
@@ -106,7 +129,7 @@ export default function CardBase(props: CardBasePropsType) {
         <button
           type="button"
           className="three-dots__btn"
-          onClick={onClickEdit}
+          onClick={onCallControlBlock}
         >
           <span className="three-dots__line" />
           <span className="three-dots__line" />
@@ -114,7 +137,14 @@ export default function CardBase(props: CardBasePropsType) {
         </button>
       </div>
 
+
       <div className={`card__body ${cardBodyClass()}`}>
+
+      <CardControlBlock
+        isShow={isControlBlockShow}
+        setIsShow={setIsControlBlockShow}
+        onEdit={setIsEdit}
+      />
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
           <div className="card__text">

@@ -10,7 +10,7 @@ export type CardFormPropsType = {
   newWordsList: WordType;
   primaryButtonName?: string;
   onSubmit(event: React.FormEvent):void;
-  onCancel():void;
+  onCancel(event: React.FormEvent):void;
 };
 
 export default function CardForm(props: CardFormPropsType) {
