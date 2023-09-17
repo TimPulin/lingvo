@@ -1,4 +1,5 @@
 import Input from '../form/Input';
+import { useCurrentLangPack } from '../../store/selectors';
 
 type WordType = {
   newWord: string;
@@ -17,6 +18,7 @@ export default function CardForm(props: CardFormPropsType) {
   const {
     newWordsList, onSubmit, onCancel, primaryButtonName,
   } = props;
+  const { CANCEL } = useCurrentLangPack();
 
   function onBodyClick(event: React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();
@@ -39,7 +41,7 @@ export default function CardForm(props: CardFormPropsType) {
         }
       </div>
       <div className="form__footer">
-        <button type="button" className="button" onClick={onCancel}>Cancel</button>
+        <button type="button" className="button" onClick={onCancel}>{CANCEL}</button>
         <button type="button" className="button" onClick={onSubmit}>{primaryButtonName}</button>
       </div>
 

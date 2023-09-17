@@ -2,7 +2,7 @@ import { useSelector, connect } from 'react-redux';
 import RadioBlock from '../components/radio/RadioBlock';
 import { RootStateType } from '../store';
 import { updateCurrentLang } from '../store/current-lang-slice';
-import { Languages } from '../utils/lang-pack/lang-pack-basic';
+import { Languages } from '../utils/lang-pack/lang-pack-types';
 import { useCurrentLangPack } from '../store/selectors';
 
 const radioPropertiesList = [

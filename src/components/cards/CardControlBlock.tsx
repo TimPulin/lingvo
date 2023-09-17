@@ -1,3 +1,5 @@
+import { useCurrentLangPack } from '../../store/selectors';
+
 const ACTIVE_CLASS = 'control-block--active';
 const HIDE_CLASS = 'control-block--hide';
 
@@ -9,6 +11,7 @@ type CardControlBlockPropsType = {
 
 export default function CardControlBlock(props:CardControlBlockPropsType) {
   const { isShow, setIsShow, onEdit } = props;
+  const { EDIT, DELETE } = useCurrentLangPack();
 
   function closeControlBlock(event: React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();
@@ -34,9 +37,9 @@ export default function CardControlBlock(props:CardControlBlockPropsType) {
           type="button"
           onClick={onClickEdit}
         >
-          Edit
+          {EDIT}
         </button>
-        <button className="control-block__button" type="button">Delete</button>
+        <button className="control-block__button" type="button">{DELETE}</button>
       </div>
     </div>
   );

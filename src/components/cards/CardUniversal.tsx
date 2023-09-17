@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useCurrentLangPack } from '../../store/selectors';
 import { addNewWord, editWord } from '../../store/dictionary-slice';
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
@@ -20,6 +21,7 @@ type CardUniversalPropsType = {
 
 export default function CardUniversal(props: CardUniversalPropsType) {
   const { pairWords = defaultPairWords } = props;
+  const langPack = useCurrentLangPack();
 
   const dispatch = useDispatch();
   const isModeEdit = useCardModeEdit();
@@ -73,7 +75,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           key: 'defaultCollection',
         },
       ));
-      setText('Новую карточку бережно сохранили');
+      setText(langPack.CARD_CHANGES_MADE);
     } else {
       dispatch(editWord(
         {
@@ -81,7 +83,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           key: 'defaultCollection',
         },
       ));
-      setText('Изменения аккуратно внесены');
+      setText(langPack.CARD_SAVED);
     }
     setIsNewPairWordSaved(true);
     setIsRefresh(true);
@@ -109,10 +111,10 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         {
           newWordsList: [
             {
-              newWord: nativeWord, updateFunction: setNativeWord, placeholderText: 'native',
+              newWord: nativeWord, updateFunction: setNativeWord, placeholderText: langPack.NATIVE,
             },
           ],
-          primaryButtonName: 'Forward',
+          primaryButtonName: langPack.FORWARD,
           onSubmit: onSubmitNative,
           onCancel: onCancelNative,
         }
@@ -121,13 +123,13 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         {
           newWordsList: [
             {
-              newWord: foreignWord, updateFunction: setForeignWord, placeholderText: 'foreign',
+              newWord: foreignWord, updateFunction: setForeignWord, placeholderText: langPack.FOREIGN,
             },
             {
-              newWord: transcription, updateFunction: setTranscription, placeholderText: 'transcription',
+              newWord: transcription, updateFunction: setTranscription, placeholderText: langPack.TRANSCRIPTION,
             },
           ],
-          primaryButtonName: 'Save',
+          primaryButtonName: langPack.SAVE,
           onSubmit: onSubmitForeign,
           onCancel: onCancelForeign,
         }

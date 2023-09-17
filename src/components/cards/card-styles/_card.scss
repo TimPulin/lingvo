@@ -11,10 +11,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-    // z-index: 50;
 
     .control-block__body {
-      width: 50%;
+      min-width: 50%;
     }
   }
 
