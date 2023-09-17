@@ -14,6 +14,7 @@ const CARD_BODY_FOREIGN = 'card__body--foreign';
 
 const CARD_CONTENT_NATIVE = 'card__content--native';
 const CARD_CONTENT_FOREIGN = 'card__content--foreign';
+const THREE_DOTS_HIDE = 'three-dots--hide';
 
 type CardBasePropsType = {
   isRefresh: boolean;
@@ -53,6 +54,8 @@ export default function CardBase(props: CardBasePropsType) {
   const nativeContentHide = () => (isContentNative ? '' : HIDE);
   const foreignContentHide = () => (isContentNative ? HIDE : '');
 
+  const threeDotsHide = () => (isControlBlockShow ? THREE_DOTS_HIDE : '' );
+
   function turnCard() {
     if (!isSwiperSlideInProgress) {
       setIsCardNative(!isCardNative);
@@ -66,7 +69,6 @@ export default function CardBase(props: CardBasePropsType) {
   function onCallControlBlock(event: React.MouseEvent) {
     event.stopPropagation();
     setIsControlBlockShow(true)
-    // setIsEdit(true);
   }
 
   function refreshCard() {
@@ -124,10 +126,8 @@ formForeign.onCancel = localOnCancelForeign;
       role="button"
       tabIndex={0}
     >
-
-      <div className={`card__body ${cardBodyClass()}`}>
-
-      <div className="three-dots">
+      {/* TODO переделать threedots, чтобы крутился вместе с карточкой (перенести для начала в card__body) */}
+      <div className={`three-dots ${threeDotsHide()}`}>
         <button
           type="button"
           className="three-dots__btn"
@@ -139,11 +139,13 @@ formForeign.onCancel = localOnCancelForeign;
         </button>
       </div>
 
-      <CardControlBlock
-        isShow={isControlBlockShow}
-        setIsShow={setIsControlBlockShow}
-        onEdit={setIsEdit}
-      />
+      <div className={`card__body ${cardBodyClass()}`}>
+
+        <CardControlBlock
+          isShow={isControlBlockShow}
+          setIsShow={setIsControlBlockShow}
+          onEdit={setIsEdit}
+        />
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
           <div className="card__text">

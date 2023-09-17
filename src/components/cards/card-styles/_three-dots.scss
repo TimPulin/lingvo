@@ -2,7 +2,9 @@
   position: absolute;
   top: 0;
   right: 0;
+  opacity: 1;
   z-index: 20;
+  transition: opacity .3s ease;
 
   &__btn {
     @include btn-reset;
@@ -36,4 +38,8 @@
   .three-dots__line {
     box-shadow: 0 0 4px 2px #fff;
   }
+}
+
+.three-dots--hide {
+  opacity: 0;
 }
