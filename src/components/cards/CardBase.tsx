@@ -125,6 +125,8 @@ formForeign.onCancel = localOnCancelForeign;
       tabIndex={0}
     >
 
+      <div className={`card__body ${cardBodyClass()}`}>
+
       <div className="three-dots">
         <button
           type="button"
@@ -136,9 +138,6 @@ formForeign.onCancel = localOnCancelForeign;
           <span className="three-dots__line" />
         </button>
       </div>
-
-
-      <div className={`card__body ${cardBodyClass()}`}>
 
       <CardControlBlock
         isShow={isControlBlockShow}

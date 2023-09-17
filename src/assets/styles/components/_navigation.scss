@@ -33,7 +33,7 @@
 
   &__panel--open {
     display: flex;
-    animation: nav-move-forward .4s ease-in-out forwards;
+    animation: nav-move-forward .4s ease forwards;
   }
 
   &__list {

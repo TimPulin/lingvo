@@ -1,6 +1,15 @@
 .control-block {
-  visibility: hidden;
-  z-index: -1000;
+  --animation-duration: .3s;
+  animation: control-block-hide calc(var(--animation-duration) + .2s) ease forwards;
+
+
+  &::after {
+    content: '';
+    @include wrap-absolute;
+    background-color: var(--current-color);
+    z-index: -10;
+    animation: after-hide calc(var(--animation-duration) + .1s) ease-out calc(var(--animation-duration)) forwards;
+  }
 
   &__body {
     display: flex;
@@ -19,22 +28,16 @@
     border-radius: $border-radius-basic;
     font-size: 25px;
     color: #fff;
-    opacity: 0;
-    transform: translateY(-100%);
+    animation: buttons-hide var(--animation-duration) ease forwards;
   }
 }
 
 .control-block--active {
-  --animation-duration: .3s;
-  z-index: unset;
-  visibility: visible;
+  animation: control-block-visible var(--animation-duration) ease-in forwards;
 
-  .control-block__button:nth-child(2) {
-    animation: buttons-move var(--animation-duration) ease-out var(--animation-duration) forwards;
-  }
-
-  .control-block__button:nth-child(1) {
-    animation: buttons-move var(--animation-duration) ease-out calc(var(--animation-duration) * 2) forwards;
+  .control-block__button {
+    opacity: 0;
+    animation: buttons-visible 1s ease forwards .4s;
   }
 
   &::after {
@@ -43,6 +46,41 @@
     background-color: var(--current-color);
     z-index: -10;
     animation: after-visible var(--animation-duration) ease-in forwards;
+  }
+}
+
+@keyframes control-block-hide {
+  0% {
+    visibility: visible;
+    z-index: 50;
+  }
+
+  99% {
+    visibility: visible;
+    z-index: 50;
+  }
+
+  100% {
+    visibility: hidden;
+    z-index: -1000;
+  }
+}
+
+@keyframes control-block-visible {
+  0% {
+    visibility: hidden;
+    z-index: -1000;
+  }
+
+  1% {
+    visibility: visible;
+    z-index: 50;
+
+  }
+
+  100% {
+    visibility: visible;
+    z-index: 50;
   }
 }
 
@@ -56,18 +94,32 @@
   }
 }
 
-@keyframes buttons-move {
+@keyframes after-hide {
   0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-
-  25% {
     opacity: 1;
   }
 
   100% {
+    opacity: 0;
+  }
+}
+
+@keyframes buttons-visible {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
     opacity: 1;
-    transform: translateY(0%);
+  }
+}
+
+@keyframes buttons-hide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

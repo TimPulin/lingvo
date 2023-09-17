@@ -1,4 +1,5 @@
 const ACTIVE_CLASS = 'control-block--active';
+const HIDE_CLASS = 'control-block--hide';
 
 type CardControlBlockPropsType = {
   isShow: boolean;
@@ -20,7 +21,7 @@ export default function CardControlBlock(props:CardControlBlockPropsType) {
     setIsShow(false);
   }
 
-  const activeClass = () => (isShow ? ACTIVE_CLASS : '');
+  const activeClass = () => (isShow ? ACTIVE_CLASS : HIDE_CLASS);
   return (
   /* eslint-disable-next-line */
     <div
