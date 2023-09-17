@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import CardContentItem from '../components/cards/CardContentItem';
 import SwiperReact from '../components/swiper-react/SwiperReact';
 import { isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
@@ -8,6 +8,10 @@ export default function CardsPage() {
   const isCardModeEdit = false;
   const [isPairWordSaved, setIsPairWordSaved] = useState(false);
   const cardsCollection = useCollection('defaultCollection');
+
+  useEffect(() => {
+    console.log(cardsCollection);
+  }, [cardsCollection.length]);
 
   const pairWordSaved = useMemo(() => ({
     isPairWordSaved, setIsPairWordSaved,

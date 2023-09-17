@@ -70,7 +70,11 @@ export default function SwiperReact(props:SwiperReactPropsType) {
           <div className="swiper-wrapper">
             {
               cardsList.map((item) => (
-                <div className="swiper-slide" style={{ height: getSlideWidth() }} key={item.id} ref={slideRef}>
+                <div
+                  className="swiper-slide"
+                  style={{ height: getSlideWidth() }}
+                  key={item.id} ref={slideRef}
+                >
                   <CardUniversal
                     pairWords={{
                       id: item.id,

@@ -139,7 +139,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
 CardUniversal.defaultProps = {
   pairWords: {
-    id: 0,
+    id: 3,
     nativeWord: '',
     foreignWord: '',
     transcription: '',
