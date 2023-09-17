@@ -155,7 +155,6 @@ formForeign.onCancel = localOnCancelForeign;
             form={formNative}
           />
         </div>
-        {/* TODO транскрипцию сделать меньше и на следующей строке */}
         <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
           <div className="card__text">
             <div>{pairWords.foreignWord}</div>
