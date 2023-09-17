@@ -6,6 +6,19 @@
   overflow: hidden;
   position: relative;
 
+  &__control-block {
+    @include wrap-absolute;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    // z-index: 50;
+
+    .control-block__body {
+      width: 50%;
+    }
+  }
+
+
   &__body {
     display: flex;
     justify-content: center;
@@ -46,10 +59,12 @@
 }
 
 .card__body--native {
+  --current-color: var(--color-primary);
   animation: turn-foreign-to-native var(--turn-duration) ease-in-out forwards;
 }
 
 .card__body--foreign {
+  --current-color: var(--color-secondary);
   animation: turn-native-to-foreign var(--turn-duration) ease-in-out forwards;
 }
 

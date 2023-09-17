@@ -58,7 +58,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       setTranscription(pairWords.transcription);
       if (pairWords.id) setId(pairWords.id);
     }
-  }, []);
+  }, [pairWords]);
 
   const onSubmitNative = (event: React.FormEvent) => {
     event.preventDefault();
@@ -89,8 +89,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     _setForeignWord('');
     _setTranscription('');
   };
-
-  // TODO на странице просмотра карточек на cancel повесить выключение режима редакции
 
   const onCancelNative = () => {
     _setNativeWord('');
