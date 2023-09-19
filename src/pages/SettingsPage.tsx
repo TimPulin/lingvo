@@ -1,4 +1,6 @@
-import { useSelector, connect } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { useEffect } from 'react';
+import { updateCurrentPageName } from '../store/current-page-slice';
 import RadioBlock from '../components/radio/RadioBlock';
 import { RootStateType } from '../store';
 import { updateCurrentLang } from '../store/current-lang-slice';
@@ -29,22 +31,31 @@ const radioPropertiesList = [
 ];
 
 function SettingsPage(props: any) {
+  // TODO разобраться, почему не использовал useCurrentLangPack()
   const currentLang = useSelector((store: RootStateType) => store.currentLang.value);
+
   const getSelectedLang = (itemValue: string | number) => {
     props.updateCurrentLang(itemValue);
   };
+  const dispatch = useDispatch();
 
-  const { LANGUAGE } = useCurrentLangPack();
+  const { LANGUAGE, SETTING_PAGE } = useCurrentLangPack();
+
+  useEffect(() => {
+    dispatch(updateCurrentPageName(SETTING_PAGE));
+  }, [SETTING_PAGE]);
 
   return (
-    <div>
-      <h2>{LANGUAGE}</h2>
-      <RadioBlock
-        componentClass="options-flat"
-        list={radioPropertiesList}
-        currentLang={currentLang}
-        onChange={getSelectedLang}
-      />
+    <div className="content__list content__list--settings-page">
+      <div className="content__item">
+        <h2>{LANGUAGE}</h2>
+        <RadioBlock
+          componentClass="options-flat"
+          list={radioPropertiesList}
+          currentLang={currentLang}
+          onChange={getSelectedLang}
+        />
+      </div>
     </div>
   );
 }

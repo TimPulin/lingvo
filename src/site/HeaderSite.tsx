@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useCurrentLangPack } from '../store/selectors';
+import { useCurrentLangPack, useCurrentPageName } from '../store/selectors';
+import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
 
 interface IHeaderSiteProps {
   changeIsModalOpen(isOpen:boolean): void;
 }
 
 export default function HeaderSite(props: IHeaderSiteProps) {
+  const navigate = useNavigate();
   const { changeIsModalOpen } = props;
   const { SETTINGS, MAIN } = useCurrentLangPack();
+  const pageName = useCurrentPageName();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBurgerTransform, setIsBurgerTransform] = useState(false);
@@ -37,45 +40,62 @@ export default function HeaderSite(props: IHeaderSiteProps) {
     }, 500);
   }
 
-  return (
-    <header>
-      <nav className="nav">
-        <div className={`nav__panel ${navPanelOperateClass()}`}>
-          <ul className="nav__list">
-            <li className="nav__item">
-              <Link
-                className="nav__link"
-                to="/settings"
-                onClick={() => closeMenu()}
-              >
-                {SETTINGS}
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link
-                className="nav__link"
-                to="/"
-                onClick={() => closeMenu()}
-              >
-                {MAIN}
-              </Link>
-            </li>
-          </ul>
-        </div>
+  function goBack() {
+    navigate(-1);
+  }
 
-        <div className="burger">
-          <button
-            type="button"
-            className={`burger__btn ${burgerAnimationClasses()}`}
-            aria-label="open-navigation"
-            onClick={handleBurgerClick}
-          >
-            <span key={1} className="burger__line" />
-            <span key={2} className="burger__line" />
-            <span key={3} className="burger__line" />
+  return (
+    <header className="header">
+      <div className="header__wrap">
+
+        <div className="header__compass compass">
+          <button type="button" className="compass__button" onClick={goBack}>
+            <ArrowLeftIcon />
           </button>
         </div>
-      </nav>
+
+        <div>
+          <h1 className="header__page-title multicolor-text">{pageName}</h1>
+        </div>
+
+        <nav className="nav">
+          <div className={`nav__panel ${navPanelOperateClass()}`}>
+            <ul className="nav__list">
+              <li className="nav__item">
+                <Link
+                  className="nav__link"
+                  to="/settings"
+                  onClick={() => closeMenu()}
+                >
+                  {SETTINGS}
+                </Link>
+              </li>
+              <li className="nav__item">
+                <Link
+                  className="nav__link"
+                  to="/"
+                  onClick={() => closeMenu()}
+                >
+                  {MAIN}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="burger">
+            <button
+              type="button"
+              className={`burger__btn ${burgerAnimationClasses()}`}
+              aria-label="open-navigation"
+              onClick={handleBurgerClick}
+            >
+              <span key={1} className="burger__line" />
+              <span key={2} className="burger__line" />
+              <span key={3} className="burger__line" />
+            </button>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }

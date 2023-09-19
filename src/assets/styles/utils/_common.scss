@@ -49,3 +49,23 @@ body {
 .hide {
   display: none;
 }
+
+.svg {
+  &__root {
+    width: 45px;
+    height: 45px;
+    fill: $color-primary;
+    transition: fill .3s ease;
+  }
+
+  &:active .svg__root,
+  .svg__root:active {
+    fill: $color-primary_shade;
+  }
+}
+
+.multicolor-text {
+  background: linear-gradient(to Right, $color-primary, $color-secondary 70%);
+  color: transparent;
+  -webkit-background-clip: text;
+}
