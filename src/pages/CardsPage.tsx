@@ -13,11 +13,6 @@ export default function CardsPage() {
   const { CARDS_PAGE } = useCurrentLangPack();
   const dispatch = useDispatch();
 
-  // TODO проверить и удалить по возможности
-  useEffect(() => {
-    console.log(cardsCollection);
-  }, [cardsCollection.length]);
-
   useEffect(() => {
     dispatch(updateCurrentPageName(CARDS_PAGE));
   }, [CARDS_PAGE]);

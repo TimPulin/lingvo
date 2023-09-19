@@ -17,8 +17,9 @@
     }
   }
 
-
   &__body {
+    --fade-duration: 0.5s;
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -35,6 +36,17 @@
     color: #fff;
 
     transform: rotateX(180deg);
+  }
+
+  &__body-fade-in-out {
+    &::after {
+      content: '';
+      @include wrap-absolute;
+      background-color: var(--current-color);
+      z-index: 100;
+      opacity: 0;
+      animation: body-fade-in-out 1s ease-in-out;
+    }
   }
 
   &__content {
@@ -56,6 +68,8 @@
     display: none;
   }
 }
+
+
 
 .card__body--native {
   --current-color: var(--color-primary);

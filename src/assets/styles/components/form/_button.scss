@@ -8,6 +8,7 @@
   align-items: center;
   padding: 5px 8px;
   align-self: flex-end;
+  transition-duration: .1s;
   transition-property: color, background-color, background-image, box-shadow;
 }
 
@@ -15,8 +16,19 @@
   border-color: var(--color-primary);
   color: var(--color-primary);
 
-  &:hover,
   &:active {
+    border-color: var(--color-hover);
+    background-color: var(--color-hover);
+    color: #fff;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .button {
+    transition-duration: .3s;
+  }
+
+  .button--outline:hover {
     border-color: var(--color-hover);
     background-color: var(--color-hover);
     color: #fff;

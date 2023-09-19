@@ -1,5 +1,5 @@
 /* eslint-disable*/
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CardEditorBlock from './CardEditorBlock';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
@@ -15,6 +15,7 @@ const CARD_BODY_FOREIGN = 'card__body--foreign';
 const CARD_CONTENT_NATIVE = 'card__content--native';
 const CARD_CONTENT_FOREIGN = 'card__content--foreign';
 const THREE_DOTS_HIDE = 'three-dots--hide';
+const FADE_IN_OUT_CLASS = 'card__body-fade-in-out'
 
 type CardBasePropsType = {
   isRefresh: boolean;
@@ -30,12 +31,15 @@ export default function CardBase(props: CardBasePropsType) {
     isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
   } = props;
 
+  const cardBodyRef = useRef<HTMLDivElement>(null);
+
   const { isPairWordSaved: isNewPairWordSaved } = usePairWordSaved();
   const isSwiperSlideInProgress = useSwiperSlide();
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [isControlBlockShow, setIsControlBlockShow] = useState(false);
+  const [isFadeInOutRunning, setIsFadeInOutRunning] = useState(false);
 
     useEffect(() => {
     setIsEdit(isModeEdit);
@@ -55,6 +59,8 @@ export default function CardBase(props: CardBasePropsType) {
   const foreignContentHide = () => (isContentNative ? HIDE : '');
 
   const threeDotsHide = () => (isControlBlockShow ? THREE_DOTS_HIDE : '' );
+
+  const fadeInOutClass = () => (isFadeInOutRunning ? FADE_IN_OUT_CLASS : '');
 
   function turnCard() {
     if (!isSwiperSlideInProgress) {
@@ -97,13 +103,28 @@ export default function CardBase(props: CardBasePropsType) {
   };
   formForeign.onSubmit = localOnSubmitForeign;
 
+function localOnCancel() {
+  if (cardBodyRef.current) {
+    const fadeDurationProp = getComputedStyle(cardBodyRef.current).getPropertyValue('--fade-duration');
+    const animationDuration = Number(fadeDurationProp.slice(0, -1)) * 1000;
+
+    setIsFadeInOutRunning(true)
+    setTimeout(() => {
+      setIsEdit(false);
+    }, animationDuration / 2);
+    setTimeout(() => {
+      setIsFadeInOutRunning(false);
+    }, animationDuration);
+  }
+}
+
 const onCancelNative = Object.assign(formNative.onCancel, {});
 const localOnCancelNative = (event:React.FormEvent) => {
   event.stopPropagation();
   if (isModeEdit) {
     onCancelNative(event);
   } else {
-    setIsEdit(false);
+    localOnCancel();
   }
 }
 formNative.onCancel = localOnCancelNative;
@@ -114,7 +135,7 @@ const localOnCancelForeign = (event:React.FormEvent) => {
   if (isModeEdit) {
     onCancelForeign(event);
   } else {
-    setIsEdit(false);
+    localOnCancel()
   }
 }
 formForeign.onCancel = localOnCancelForeign;
@@ -139,7 +160,7 @@ formForeign.onCancel = localOnCancelForeign;
         </button>
       </div>
 
-      <div className={`card__body ${cardBodyClass()}`}>
+      <div ref={cardBodyRef} className={`card__body ${cardBodyClass()} ${fadeInOutClass()}`}>
 
         <CardControlBlock
           isShow={isControlBlockShow}
