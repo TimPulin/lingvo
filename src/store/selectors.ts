@@ -9,7 +9,6 @@ import { RootStateType } from './index';
 
 export function useCurrentLangPack():ILangPack {
   const currentLang:Languages = useSelector((store: RootStateType) => store.currentLang.value);
-
   return dataLangs[currentLang];
 }
 
@@ -19,4 +18,8 @@ export function useDictionary():DictionaryType {
 
 export function useCollection(collectionKey:string):CollectionType {
   return useSelector((store: RootStateType) => store.dictionary.value[collectionKey]);
+}
+
+export function useCurrentPageName():string {
+  return useSelector((store:RootStateType) => store.currentPageName.value);
 }

@@ -4,7 +4,7 @@ import { Languages } from '../utils/lang-pack/lang-pack-types';
 interface ICurrentLang {
   value: Languages;
 }
-interface ActionType {
+interface IActionType {
   type: string;
   payload: Languages;
 }
@@ -18,7 +18,7 @@ export const updateCurrentLangSlice = createSlice({
   initialState,
 
   reducers: {
-    updateCurrentLang: (state: ICurrentLang, action: ActionType) => {
+    updateCurrentLang: (state: ICurrentLang, action: IActionType) => {
       state.value = action.payload;
     },
   },
@@ -27,5 +27,5 @@ export const updateCurrentLangSlice = createSlice({
 export const { updateCurrentLang } = updateCurrentLangSlice.actions;
 export const currentLangReducer = updateCurrentLangSlice.reducer;
 export interface ICurrentLangReducer {
-  updateCurrentLang: (state: ICurrentLang, action: ActionType) => void;
+  updateCurrentLang: (state: ICurrentLang, action: IActionType) => void;
 }

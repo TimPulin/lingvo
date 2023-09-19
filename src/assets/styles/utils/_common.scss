@@ -49,3 +49,17 @@ body {
 .hide {
   display: none;
 }
+
+.svg {
+  &__root {
+    width: 45px;
+    height: 45px;
+    fill: $color-primary;
+    transition: fill .3s ease;
+  }
+
+  &:active .svg__root,
+  .svg__root:active {
+    fill: $color-primary_shade;
+  }
+}
