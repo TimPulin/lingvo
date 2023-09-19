@@ -61,3 +61,17 @@
     rotate: x 0;
   }
 }
+
+@keyframes body-fade-in-out {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
