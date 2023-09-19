@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useCurrentLangPack } from '../store/selectors';
+import { useCurrentLangPack, useCurrentPageName } from '../store/selectors';
 import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
 
 interface IHeaderSiteProps {
@@ -11,6 +11,7 @@ export default function HeaderSite(props: IHeaderSiteProps) {
   const navigate = useNavigate();
   const { changeIsModalOpen } = props;
   const { SETTINGS, MAIN } = useCurrentLangPack();
+  const pageName = useCurrentPageName();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBurgerTransform, setIsBurgerTransform] = useState(false);
@@ -51,7 +52,10 @@ export default function HeaderSite(props: IHeaderSiteProps) {
           <button type="button" className="compass__button" onClick={goBack}>
             <ArrowLeftIcon />
           </button>
+        </div>
 
+        <div>
+          <h1 className="header__page-title multicolor-text">{pageName}</h1>
         </div>
 
         <nav className="nav">

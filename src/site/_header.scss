@@ -6,6 +6,10 @@
     padding-inline: 5px;
   }
 
+  &__page-title {
+    @include reset;
+  }
+
   .nav {
     width: auto;
   }
@@ -37,4 +41,10 @@
 .modal-opened .header__icon,
 .modal-opened .header__compass {
   filter: blur(2px);
+}
+
+@media (min-width: $medium-screen) {
+  .header__wrap {
+    padding-inline: 0;
+  }
 }

@@ -63,3 +63,9 @@ body {
     fill: $color-primary_shade;
   }
 }
+
+.multicolor-text {
+  background: linear-gradient(to Right, $color-primary, $color-secondary 70%);
+  color: transparent;
+  -webkit-background-clip: text;
+}

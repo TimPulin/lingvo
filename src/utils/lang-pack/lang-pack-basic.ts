@@ -1,5 +1,12 @@
 export const dataLangs = {
   ru: {
+    // страницы
+    MAIN_PAGE: 'Лингво',
+    CARDS_PAGE: 'Коллекция карточек',
+    NEW_CARD_PAGE: 'Новая карточка',
+    SETTING_PAGE: 'Настройки',
+    COLLECTIONS_PAGE: 'Коллекции',
+
     MAIN: 'Главная',
     CREATE_NEW_CARD: 'Создать новую карточку',
     CARDS: 'Карточки',
@@ -21,6 +28,13 @@ export const dataLangs = {
   },
 
   en: {
+    // страницы
+    MAIN_PAGE: 'Main',
+    CARDS_PAGE: 'Cards collection',
+    NEW_CARD_PAGE: 'New card',
+    SETTING_PAGE: 'Settings',
+    COLLECTIONS_PAGE: 'Collections',
+
     MAIN: 'Main',
     CREATE_NEW_CARD: 'Create new card',
     CARDS: 'Cards',
@@ -42,6 +56,13 @@ export const dataLangs = {
   },
 
   esl: {
+    // страницы
+    MAIN_PAGE: 'Principal',
+    CARDS_PAGE: 'Tarjetas',
+    NEW_CARD_PAGE: 'Nueva tarjeta',
+    SETTING_PAGE: 'Ajustes',
+    COLLECTIONS_PAGE: 'Colecciones',
+
     MAIN: 'Principal',
     CREATE_NEW_CARD: 'Crear una nueva tarjeta',
     CARDS: 'Tarjetas',
@@ -63,6 +84,13 @@ export const dataLangs = {
   },
 
   hebrew: {
+    // страницы
+    MAIN_PAGE: 'to_be_done',
+    CARDS_PAGE: 'to_be_done',
+    NEW_CARD_PAGE: 'to_be_done',
+    SETTING_PAGE: 'to_be_done',
+    COLLECTIONS_PAGE: 'to_be_done',
+
     MAIN: 'to_be_done',
     CREATE_NEW_CARD: 'to_be_done',
     CARDS: 'to_be_done',
