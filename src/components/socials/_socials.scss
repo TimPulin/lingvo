@@ -1,0 +1,15 @@
+.socials {
+  &__list {
+    @include list-reset;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .svg {
+    &__root {
+      width: 30px;
+      height: 30px;
+      fill: $color-primary_shade;
+    }
+  }
+}

@@ -112,6 +112,7 @@ function localOnCancel() {
     setTimeout(() => {
       setIsEdit(false);
     }, animationDuration / 2);
+
     setTimeout(() => {
       setIsFadeInOutRunning(false);
     }, animationDuration);

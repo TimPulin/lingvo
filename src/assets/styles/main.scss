@@ -27,6 +27,9 @@
 
 @import './components/main-screen'; // TODO проверить на необходимость
 
+@import '../../components/user/user.scss';
+@import '../../components//socials/socials.scss';
+
 @import '../../components/cards/card-styles/card.scss';
 @import '../../components/cards/card-styles/card-animation.scss';
 
