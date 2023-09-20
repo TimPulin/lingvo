@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useCurrentLangPack, useCurrentPageName } from '../store/selectors';
 import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
+import UserBlock from '../components/user/UserBlock';
 
 interface IHeaderSiteProps {
   changeIsModalOpen(isOpen:boolean): void;
@@ -60,26 +61,33 @@ export default function HeaderSite(props: IHeaderSiteProps) {
 
         <nav className="nav">
           <div className={`nav__panel ${navPanelOperateClass()}`}>
-            <ul className="nav__list">
-              <li className="nav__item">
-                <Link
-                  className="nav__link"
-                  to="/settings"
-                  onClick={() => closeMenu()}
-                >
-                  {SETTINGS}
-                </Link>
-              </li>
-              <li className="nav__item">
-                <Link
-                  className="nav__link"
-                  to="/"
-                  onClick={() => closeMenu()}
-                >
-                  {MAIN}
-                </Link>
-              </li>
-            </ul>
+
+            <div className="nav__panel-card nav__panel-top">
+              <UserBlock />
+            </div>
+
+            <div className="nav__panel-card nav__panel-navigation ">
+              <ul className="nav__list">
+                <li className="nav__item">
+                  <Link
+                    className="nav__link"
+                    to="/settings"
+                    onClick={() => closeMenu()}
+                  >
+                    {SETTINGS}
+                  </Link>
+                </li>
+                <li className="nav__item">
+                  <Link
+                    className="nav__link"
+                    to="/"
+                    onClick={() => closeMenu()}
+                  >
+                    {MAIN}
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="burger">
