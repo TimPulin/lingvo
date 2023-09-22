@@ -1,11 +1,10 @@
-// TODO поправить смещение внешнего border у = before = на мобильном Chrome
-
 .radio-custom {
 
   position: relative;
-  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
   cursor: pointer;
-  border: 1px solid green;
 
   &__input {
     position: absolute;
@@ -15,55 +14,46 @@
     z-index: -1000;
   }
 
-  &::before {
+  &__checkbox {
     @include transition-basic;
     transition-property: border-color;
     --circle-diameter: 12px;
-    content: '';
-    position: absolute;
-    display: inline-block;
-    top: 50%;
-    left: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: var(--circle-diameter);
     height: var(--circle-diameter);
     border: 2px solid var(--color-primary);
     border-radius: 50%;
-    translate: 0 -50%;
   }
 
   &:active {
-    &::before {
-      content: '';
+    .radio-custom__outer-circle {
       border-color: var(--color-primary_shade);
     }
   }
 
-  &::after {
+  &__check-mark {
     @include transition-basic;
     transition-property: background-color;
     --circle-diameter: 6px;
-    content: '';
-    position: absolute;
+
     display: inline-block;
-    top: 50%;
-    left: 3px;
     width: var(--circle-diameter);
     height: var(--circle-diameter);
     background-color: transparent;
     border-radius: 50%;
-    translate: 0 -50%;
   }
-
 }
 
 .radio-custom--checked {
 
-  &::before {
+  .radio-custom__checkbox {
     border-color: var(--color-primary_shade);
   }
 
-  &::after {
-    @include transition-basic;
+  .radio-custom__check-mark {
     background-color: var(--color-primary_shade);
   }
 }
