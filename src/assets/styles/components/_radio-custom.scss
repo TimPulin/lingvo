@@ -5,6 +5,7 @@
   position: relative;
   padding-left: 20px;
   cursor: pointer;
+  border: 1px solid green;
 
   &__input {
     position: absolute;
@@ -15,7 +16,6 @@
   }
 
   &::before {
-    @include transition-basic;
     @include transition-basic;
     transition-property: border-color;
     --circle-diameter: 12px;
@@ -31,7 +31,6 @@
     translate: 0 -50%;
   }
 
-  &:hover,
   &:active {
     &::before {
       content: '';

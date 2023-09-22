@@ -2,14 +2,22 @@
   &__list {
     @include list-reset;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    column-gap: 10px;
   }
 
-  .svg {
-    &__root {
-      width: 30px;
+  .svg-icon {
+    display: inline-block;
+
+    .svg__root {
       height: 30px;
-      fill: $color-primary_shade;
+      width: 30px;
+    }
+  }
+
+  .svg-icon--google {
+    .svg__root {
+      width: 25px;
     }
   }
 }
