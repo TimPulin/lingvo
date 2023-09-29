@@ -62,11 +62,11 @@ export default function HeaderSite(props: IHeaderSiteProps) {
         <nav className="nav">
           <div className={`nav__panel ${navPanelOperateClass()}`}>
 
-            <div className="nav__panel-card nav__panel-top">
+            <div className="nav__panel-card nav__panel-card--top">
               <UserBlock />
             </div>
 
-            <div className="nav__panel-card nav__panel-navigation ">
+            <div className="nav__panel-card nav__panel-card--navigation ">
               <ul className="nav__list">
                 <li className="nav__item">
                   <Link

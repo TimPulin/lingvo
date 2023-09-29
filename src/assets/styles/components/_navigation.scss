@@ -34,10 +34,15 @@
     background-color: #fff;
   }
 
-  &__panel-top {
+  &__panel-card:last-child {
+    flex-grow: 2;
+  }
+
+  &__panel-card--top {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
 
   &__panel--open {
     display: flex;

@@ -18,7 +18,12 @@ export default function RadioBase(props: IRadioBaseProps) {
 
   return (
     <label className={`radio-custom ${checkedClass()}`}>
-      {label}
+
+      <span className="radio-custom__checkbox">
+        <span className="radio-custom__check-mark" />
+      </span>
+
+      <span className="radio-custom__text">{label}</span>
       <input
         className="radio-custom__input"
         type="radio"

@@ -48,7 +48,7 @@ function SettingsPage(props: any) {
   return (
     <div className="content__list content__list--settings-page">
       <div className="content__item">
-        <h2>{LANGUAGE}</h2>
+        <h5>{LANGUAGE}</h5>
         <RadioBlock
           componentClass="options-flat"
           list={radioPropertiesList}

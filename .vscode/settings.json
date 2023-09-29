@@ -7,5 +7,6 @@
         "swiper",
         "TTFB",
         "עברית"
-    ]
+    ],
+    "todo-tree.tree.showBadges": false
 }

@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-size: 16px;
+  // font-size: 16px;
   font-weight: 400;
 }
 
@@ -51,6 +51,8 @@ body {
 }
 
 .svg {
+  display: inline-block;
+
   &__root {
     width: 45px;
     height: 45px;
@@ -64,8 +66,20 @@ body {
   }
 }
 
+
+
 .multicolor-text {
   background: linear-gradient(to Right, $color-primary, $color-secondary 70%);
   color: transparent;
   -webkit-background-clip: text;
+}
+
+.img {
+  max-width: 100%;
+}
+
+.icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
 }
