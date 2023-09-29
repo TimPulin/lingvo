@@ -13,17 +13,19 @@
   .nav {
     width: auto;
   }
-
-  &__compass {
-    filter: blur(0);
-    transition: filter .4s ease-in-out;
-  }
 }
 
 .compass {
   &__button {
     @include btn-reset;
   }
+}
+
+.header__page-title,
+.header__icon,
+.header__compass {
+  filter: blur(0);
+  transition: filter .4s ease-in-out;
 }
 
 .modal-opened .header__page-title,
