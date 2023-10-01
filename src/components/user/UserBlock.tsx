@@ -1,4 +1,4 @@
-import SocialsList from '../socials/SocialsList';
+import SocialsAuthorizationList from '../socials/SocialsAuthorizationList';
 
 export default function UserBlock() {
   return (
@@ -7,7 +7,7 @@ export default function UserBlock() {
         <img className="user__img" src="./images/icons/icon-user-default.png" alt="" />
       </div>
       <div className="user__login">
-        <SocialsList />
+        <SocialsAuthorizationList />
       </div>
     </div>
   );
