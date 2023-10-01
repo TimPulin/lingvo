@@ -6,6 +6,7 @@ export const dataLangs = {
     NEW_CARD_PAGE: 'Новая карточка',
     SETTING_PAGE: 'Настройки',
     COLLECTIONS_PAGE: 'Коллекции',
+    NEW_COLLECTION_PAGE: 'Новая коллекция',
 
     MAIN: 'Главная',
     CREATE_NEW_CARD: 'Создать новую карточку',
@@ -34,6 +35,7 @@ export const dataLangs = {
     NEW_CARD_PAGE: 'New card',
     SETTING_PAGE: 'Settings',
     COLLECTIONS_PAGE: 'Collections',
+    NEW_COLLECTION_PAGE: 'New collection',
 
     MAIN: 'Main',
     CREATE_NEW_CARD: 'Create new card',
@@ -62,6 +64,7 @@ export const dataLangs = {
     NEW_CARD_PAGE: 'Nueva tarjeta',
     SETTING_PAGE: 'Ajustes',
     COLLECTIONS_PAGE: 'Colecciones',
+    NEW_COLLECTION_PAGE: 'Nueva Coleccione',
 
     MAIN: 'Principal',
     CREATE_NEW_CARD: 'Crear una nueva tarjeta',
@@ -90,6 +93,7 @@ export const dataLangs = {
     NEW_CARD_PAGE: 'to_be_done',
     SETTING_PAGE: 'to_be_done',
     COLLECTIONS_PAGE: 'to_be_done',
+    NEW_COLLECTION_PAGE: 'to_be_done',
 
     MAIN: 'to_be_done',
     CREATE_NEW_CARD: 'to_be_done',

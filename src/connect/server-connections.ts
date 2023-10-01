@@ -18,10 +18,6 @@ export function getCollectionsList(token:string) {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    .then((response) => response)
+    .catch((error) => error);
 }
