@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { updateCurrentPageName } from '../store/current-page-slice';
 import { useCurrentLangPack } from '../store/selectors';
-import { getCollectionsList } from '../connect/server-connections';
 
 export default function HomePage() {
   const { CARDS, CREATE_NEW_CARD, MAIN_PAGE } = useCurrentLangPack();
@@ -12,10 +11,6 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(updateCurrentPageName(MAIN_PAGE));
   }, [MAIN_PAGE]);
-
-  useEffect(() => {
-    getCollectionsList();
-  });
 
   return (
     <div className="main-screen">
