@@ -6,9 +6,7 @@ export function getAuthorizationVKToken() {
     .then((response) => {
       console.log(response);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => { throw new Error(error); });
 }
 
 export function getCollectionsList(token:string) {
@@ -19,5 +17,16 @@ export function getCollectionsList(token:string) {
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => { throw new Error(error); });
+}
+
+export function getLanguagesList(token:string) {
+  return axios
+    .get('/languages', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => response)
+    .catch((error) => { throw new Error(error); });
 }

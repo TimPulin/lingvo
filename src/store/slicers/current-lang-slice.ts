@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Languages } from '../utils/lang-pack/lang-pack-types';
+import { Languages } from '../../utils/lang-pack/lang-pack-types';
 
 interface ICurrentLang {
   value: Languages;

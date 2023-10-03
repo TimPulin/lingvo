@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCurrentPageName } from '../store/current-page-slice';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import CardContentItem from '../components/cards/CardContentItem';
 import SwiperReact from '../components/swiper-react/SwiperReact';
 import { isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';

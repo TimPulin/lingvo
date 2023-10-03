@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCurrentPageName } from '../store/current-page-slice';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { useCurrentLangPack } from '../store/selectors';
 import CardContentItem from '../components/cards/CardContentItem';
 import CardUniversal from '../components/cards/CardUniversal';

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { useEffect } from 'react';
-import { updateCurrentPageName } from '../store/current-page-slice';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import RadioBlock from '../components/radio/RadioBlock';
 import { RootStateType } from '../store';
-import { updateCurrentLang } from '../store/current-lang-slice';
+import { updateCurrentLang } from '../store/slicers/current-lang-slice';
 import { Languages } from '../utils/lang-pack/lang-pack-types';
 import { useCurrentLangPack } from '../store/selectors';
 

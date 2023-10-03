@@ -2,15 +2,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCollectionsList } from '../connect/server-connections';
-import { useCurrentLangPack } from '../store/selectors';
-import { updateCurrentPageName } from '../store/current-page-slice';
+import { useCurrentLangPack, useUserToken } from '../store/selectors';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { CollectionsListType } from '../utils/types';
-
-/* eslint-disable-next-line */
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoi0KLQtdC50LzRg9GA0LDQtyDQn9GD0LvQuNC9IiwiZW1haWwiOiJ0aW1wdXZrY29tQGdtYWlsLmNvbSIsImlhdCI6MTY5NjE5NTk1MywiZXhwIjoxNjk2MjgyMzUzfQ.JtwGhaPdjzLU77aSzDy5SbMPIuobaJLmzvOoX-NNLDQ';
 
 export default function CollectionsListPage() {
   const [collectionsList, setCollectionsList] = useState<CollectionsListType>([]);
+  const userToken = useUserToken();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { COLLECTIONS_PAGE } = useCurrentLangPack();
@@ -18,13 +16,15 @@ export default function CollectionsListPage() {
   const classHide = () => (collectionsList.length > 0 ? 'hide' : '');
 
   function getCollectionsListLocal() {
-    getCollectionsList(token)
-      .then((response) => {
-        setCollectionsList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error); /* TODO обработать ошибку */
-      });
+    if (userToken) {
+      getCollectionsList(userToken)
+        .then((response) => {
+          setCollectionsList(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error); /* TODO обработать ошибку */
+        });
+    }
   }
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function CollectionsListPage() {
 
   useEffect(() => {
     getCollectionsListLocal();
-  });
+  }, []);
 
   const gotoCreateCollectionPage = () => {
     navigate('/create-collection');
