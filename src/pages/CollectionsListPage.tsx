@@ -36,7 +36,7 @@ export default function CollectionsListPage() {
   }, []);
 
   const gotoCreateCollectionPage = () => {
-    navigate('/create-collection');
+    navigate('/create-new-collection');
   };
 
   return (

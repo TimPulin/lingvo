@@ -7,9 +7,9 @@
 @import './utils/common';
 @import './components/content.scss';
 
-@import './components/form/button';
 @import './components/form/input';
 @import './components/form/form';
+@import './components/form/button';
 
 @import './components/radio-custom';
 @import './components/options-flat';
@@ -32,6 +32,8 @@
 
 @import '../../components/cards/card-styles/card.scss';
 @import '../../components/cards/card-styles/card-animation.scss';
+
+@import '../../components/collection/cards-collection.scss';
 
 @import '../../components/message/message.scss';
 

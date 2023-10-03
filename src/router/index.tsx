@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import CollectionsListPage from '../pages/CollectionsListPage';
-import CreateCollectionPage from '../pages/CreateCollectionPage';
+import NewCollectionPage from '../pages/NewCollectionPage';
 import NewCardPage from '../pages/NewCardPage';
 import CardsPage from '../pages/CardsPage';
 import SettingsPage from '../pages/SettingsPage';
@@ -21,8 +21,8 @@ export const router = createBrowserRouter([
         element: <CollectionsListPage />,
       },
       {
-        path: '/create-collection',
-        element: <CreateCollectionPage />,
+        path: '/create-new-collection',
+        element: <NewCollectionPage />,
       },
 
       {

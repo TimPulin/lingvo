@@ -64,10 +64,12 @@ body {
   }
 }
 
-
+@mixin multicolor-background-mixin {
+  background: linear-gradient(to Right, $color-primary, $color-secondary 70%);
+}
 
 .multicolor-text {
-  background: linear-gradient(to Right, $color-primary, $color-secondary 70%);
+  @include multicolor-background-mixin;
   color: transparent;
   -webkit-background-clip: text;
 }
