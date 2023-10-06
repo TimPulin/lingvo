@@ -54,6 +54,16 @@
   }
 }
 
+.content__list--single-top {
+  align-items: flex-start;
+  padding-top: 50px; // TODO если будет часто встречаться подобное - вынести в общий стиль
+
+  .content__item {
+    width: 100%;
+    padding-inline: 10px;
+  }
+}
+
 .content__item--hide {
   animation: hide-item .3s ease-in forwards;
 }

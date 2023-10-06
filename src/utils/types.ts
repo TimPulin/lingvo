@@ -28,3 +28,10 @@ export type CollectionType = {
 };
 
 export type CollectionsListType = CollectionType[];
+
+export type CollectionFormType = {
+  name: string,
+  description: string,
+  languageId: number,
+  translationLanguageId: number
+};

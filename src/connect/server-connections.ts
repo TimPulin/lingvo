@@ -1,4 +1,5 @@
 import { axiosInstanceLingvo as axios } from './axios-instance';
+import { CollectionFormType } from '../utils/types';
 
 export function getAuthorizationVKToken() {
   return axios
@@ -29,4 +30,19 @@ export function getLanguagesList(token:string) {
     })
     .then((response) => response)
     .catch((error) => { throw new Error(error); });
+}
+
+export function addCollection(token:string, collectionData:CollectionFormType) {
+  console.log('key', token);
+  console.log(collectionData);
+
+  return axios
+    .post('collections', {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      bodyParameters: collectionData,
+
+    });
 }
