@@ -5,10 +5,10 @@ import SwiperType from 'swiper/types/swiper-class';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import CardUniversal from '../cards/CardUniversal';
 import {SwiperSlideInProgressContext} from './swiper-react-context-hooks';
-import {CollectionType} from '../../utils/dictionary/dictionary-types';
+import { CardsListType } from '../../utils/types';
 
 type SwiperReactPropsType = {
-  cardsList:CollectionType
+  cardsList:CardsListType;
 }
 
 const swiperParams:SwiperOptions = {
@@ -69,6 +69,7 @@ export default function SwiperReact(props:SwiperReactPropsType) {
         <div className="swiper">
           <div className="swiper-wrapper">
             {
+              // cardsListLocal.map((item) => (
               cardsList.map((item) => (
                 <div
                   className="swiper-slide"
@@ -78,9 +79,9 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   <CardUniversal
                     pairWords={{
                       id: item.id,
-                      nativeWord: item.nativeWord,
-                      foreignWord: item.foreignWord,
-                      transcription: item.transcription,
+                      nativeWord: item.phrase.value,
+                      foreignWord: item.translationPhrase.value,
+                      transcription: '',
                     }}
                   />
                 </div>

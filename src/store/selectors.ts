@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import type { DefaultOptionType } from 'antd/es/select';
 import { Languages, ILangPack } from '../utils/lang-pack/lang-pack-types';
 import { dataLangs } from '../utils/lang-pack/lang-pack-basic';
-import { DictionaryType, CollectionType } from '../utils/dictionary/dictionary-types';
+import { DictionaryType } from '../utils/dictionary/dictionary-types';
 import { RootStateType } from './index';
 
 export function useCurrentLangPack():ILangPack {
@@ -15,10 +15,6 @@ export function useCurrentLangPack():ILangPack {
 
 export function useDictionary():DictionaryType {
   return useSelector((store: RootStateType) => store.dictionary.value);
-}
-
-export function useCollection(collectionKey:string):CollectionType {
-  return useSelector((store: RootStateType) => store.dictionary.value[collectionKey]);
 }
 
 export function useCurrentPageName():string {

@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { cloneDeep } from 'lodash';
-import { CollectionType } from '../../utils/types';
+import { CardsCollectionType } from '../../utils/types';
 
 type CurrentCardsCollectionType = {
-  value: CollectionType | null
+  value: CardsCollectionType | null
 };
 
 type ActionType = {
   type: string;
-  payload: CollectionType;
+  payload: CardsCollectionType;
 };
 
 const initialState:CurrentCardsCollectionType = {

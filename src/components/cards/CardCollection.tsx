@@ -16,12 +16,14 @@ export default function CardCollection(props:CardCollectionPropsType) {
 
           </h2>
           <p className="card__description">{collection.description}</p>
-          <span className="card__langs">
-            {collection.language.iso}
-            {' '}
-            -
-            {' '}
-            {collection.translationLanguage.iso}
+          <span className="card__additional-info">
+            <span className="card__langs">
+              {collection.language.iso}
+              {' '}
+              -
+              {' '}
+              {collection.translationLanguage.iso}
+            </span>
           </span>
         </div>
       </div>

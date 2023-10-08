@@ -4,10 +4,16 @@ import { useDispatch } from 'react-redux';
 import { useCurrentLangPack, useUserToken } from '../../store/selectors';
 import { editWord } from '../../store/slicers/dictionary-slice';
 import CardBase from './CardBase';
-import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
 import { useStaticMessage } from '../global-context-provider/context-hooks';
 import { addCard } from '../../connect/server-connections';
+
+export interface IPairWords {
+  id: number | null,
+  nativeWord: string,
+  foreignWord: string,
+  transcription: string,
+}
 
 const defaultPairWords: IPairWords = {
   id: 0,
