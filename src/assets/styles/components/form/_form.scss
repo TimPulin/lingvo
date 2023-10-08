@@ -24,13 +24,12 @@
   .ant-form-item {
     margin: 0;
   }
-}
 
-:where(.form) .button {
-  padding: 3px 5px;
-  border: none;
-  font-size: 25px;
-  color: #fff;
+  .button--trans {
+    padding: 3px 5px;
+    font-size: 25px;
+    color: #fff;
+  }
 }
 
 .card--edit {

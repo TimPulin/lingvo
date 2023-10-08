@@ -4,6 +4,7 @@ import CardContentItem from '../components/cards/CardContentItem';
 import SwiperReact from '../components/swiper-react/SwiperReact';
 import { isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 import { useCardsCollection } from '../store/selectors';
+import MessageOnPage from '../components/message/MessageOnPage';
 
 export default function CardsPage() {
   const isCardModeEdit = false;
@@ -21,13 +22,19 @@ export default function CardsPage() {
   };
 
   if (cardsCollection === null) {
+    // TODO перевести
     return (
-      <div className="content__list content__list--cards-list-page">
-        <p>
-          У вас еще нет карточек в коллекции. Давайте создадим новую карточку
-        </p>
-      </div>
+      <MessageOnPage messageText="Что-то пошло не так. Перезагрузите, пожалуйста, приложение" />
     );
+  }
+
+  if (cardsCollection !== null) {
+    if (cardsCollection.binds.length === 0) {
+      // TODO перевести
+      return (
+        <MessageOnPage messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку" />
+      );
+    }
   }
 
   return (

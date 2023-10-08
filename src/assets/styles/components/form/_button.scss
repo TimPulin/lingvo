@@ -17,6 +17,10 @@
   border: none;
   font-size: 16px;
   color: $color-primary_shade;
+
+  &:active {
+    color: $color-secondary;
+  }
 }
 
 .button--trans.button--warning {
@@ -37,6 +41,10 @@
 @media (min-width: $medium-screen) {
   .button {
     transition-duration: .3s;
+  }
+
+  .button--trans:hover {
+    color: $color-secondary;
   }
 
   .button--outline:hover {
