@@ -41,8 +41,8 @@ export default function CardForm(props: CardFormPropsType) {
         }
       </div>
       <div className="form__footer">
-        <button type="button" className="button" onClick={onCancel}>{CANCEL}</button>
-        <button type="button" className="button" onClick={onSubmit}>{primaryButtonName}</button>
+        <button type="button" className="button button--trans" onClick={onCancel}>{CANCEL}</button>
+        <button type="button" className="button button--trans" onClick={onSubmit}>{primaryButtonName}</button>
       </div>
 
     </form>
