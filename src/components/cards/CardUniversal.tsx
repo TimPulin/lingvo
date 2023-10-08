@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCurrentLangPack } from '../../store/selectors';
-import { addNewWord, editWord } from '../../store/dictionary-slice';
+import { addNewWord, editWord } from '../../store/slicers/dictionary-slice';
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { useCardModeEdit, usePairWordSaved } from './card-context-hooks/card-context-hooks';

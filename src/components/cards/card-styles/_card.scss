@@ -67,6 +67,10 @@
   &__input {
     display: none;
   }
+
+  &__link {
+    @include wrap-absolute;
+  }
 }
 
 
@@ -90,7 +94,6 @@
 }
 
 .card--edit {
-
   .card__content {
     height: 100%;
     line-height: 1.2;
@@ -109,5 +112,37 @@
 .content__list--new-card-page {
   .card {
     z-index: 50;
+  }
+}
+
+.card--collection {
+  // TODO если будут проблемы с отображением, сделать более очевидный вариант
+  //так красивее, но как это работает, я не понял.
+  box-shadow: 5px 5px 1px #0090FF, 5px 5px 1px #fff, 10px 10px 1px #0090FF;
+  // box-shadow: 3px 3px 1px #0080FF, 5px 5px 1px #00a0FF, 7px 7px 1px #0080FF;
+
+
+  .card__body {
+    opacity: 1;
+    border-radius: $border-radius-basic;
+    background-color: var(--color-primary);
+    transform: none;
+    animation: none;
+  }
+
+  .card__title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .card__langs {
+    position: absolute;
+    top: 0;
+    font-size: 20px;
+  }
+
+  .card__description {
+    font-size: 20px;
   }
 }

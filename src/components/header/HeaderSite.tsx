@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useCurrentLangPack, useCurrentPageName } from '../store/selectors';
-import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
-import UserBlock from '../components/user/UserBlock';
+import { useCurrentLangPack, useCurrentPageName } from '../../store/selectors';
+import ArrowLeftIcon from '../icons/ArrowLeftIcon';
+import UserBlock from '../user/UserBlock';
 
 interface IHeaderSiteProps {
   changeIsModalOpen(isOpen:boolean): void;
@@ -11,7 +11,7 @@ interface IHeaderSiteProps {
 export default function HeaderSite(props: IHeaderSiteProps) {
   const navigate = useNavigate();
   const { changeIsModalOpen } = props;
-  const { SETTINGS, MAIN } = useCurrentLangPack();
+  const { SETTINGS, MAIN, COLLECTIONS_PAGE } = useCurrentLangPack();
   const pageName = useCurrentPageName();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,6 +84,15 @@ export default function HeaderSite(props: IHeaderSiteProps) {
                     onClick={() => closeMenu()}
                   >
                     {MAIN}
+                  </Link>
+                </li>
+                <li className="nav__item">
+                  <Link
+                    className="nav__link"
+                    to="/collections"
+                    onClick={() => closeMenu()}
+                  >
+                    {COLLECTIONS_PAGE}
                   </Link>
                 </li>
               </ul>

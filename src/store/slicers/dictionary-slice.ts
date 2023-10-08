@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   IPairWords, DictionaryStateType, dictionary,
-} from '../utils/dictionary/dictionary-types';
+} from '../../utils/dictionary/dictionary-types';
 
 interface ActionType {
   type: string,

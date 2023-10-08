@@ -12,6 +12,17 @@
   transition-property: color, background-color, background-image, box-shadow;
 }
 
+.button--trans {
+  padding-inline: 20px;
+  border: none;
+  font-size: 16px;
+  color: $color-primary_shade;
+}
+
+.button--trans.button--warning {
+  color: #ff3600;
+}
+
 .button--outline {
   border-color: var(--color-primary);
   color: var(--color-primary);

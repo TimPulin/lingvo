@@ -11,7 +11,7 @@ type ActionType = {
 
 const initialState: UserTokenType = {
   /* eslint-disable-next-line */
-  value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoi0KLQtdC50LzRg9GA0LDQtyDQn9GD0LvQuNC9IiwiZW1haWwiOiJ0aW1wdXZrY29tQGdtYWlsLmNvbSIsImlhdCI6MTY5NjEwODQ4NywiZXhwIjoxNjk2MTk0ODg3fQ.o4qgqoZ7q_ZK6Jv6qjDUrG6P8_mn9vf7c0f8Wu38sho',
+  value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoi0KLQtdC50LzRg9GA0LDQtyDQn9GD0LvQuNC9IiwiZW1haWwiOiJ0aW1wdXZrY29tQGdtYWlsLmNvbSIsImlhdCI6MTY5NjYzMTU4NSwiZXhwIjoxNjk4NzA1MTg1fQ.rgMTxRXdMagW8sNrRhWCRCFL_EOjBZD9B3xOXTXqIMk',
 };
 
 export const updateUserTokenSlicer = createSlice({

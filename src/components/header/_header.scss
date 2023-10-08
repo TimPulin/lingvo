@@ -1,4 +1,14 @@
+.header-wrapper {
+  height: 45px;
+}
+
 .header {
+  position: fixed;
+  width: 100%;
+  box-shadow: 0 0 5px 0 $color-grey;
+  background-color: #fff;
+  z-index: 1000;
+
   &__wrap {
     display: flex;
     justify-content: space-between;

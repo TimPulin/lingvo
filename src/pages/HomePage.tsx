@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { updateCurrentPageName } from '../store/current-page-slice';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { useCurrentLangPack } from '../store/selectors';
 
 export default function HomePage() {

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import HeaderSite from '../site/HeaderSite';
+import HeaderSite from '../components/header/HeaderSite';
 import Message from '../components/message/Message';
 
 export default function RootPage() {
@@ -22,7 +22,7 @@ export default function RootPage() {
         onClick={dispatchOverlayClicked}
         aria-hidden="true"
       />
-      <div className={`${classModalOpened()}`}>
+      <div className={`header-wrapper ${classModalOpened()}`}>
         <HeaderSite
           changeIsModalOpen={changeIsModalOpen}
         />

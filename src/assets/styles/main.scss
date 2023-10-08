@@ -7,9 +7,9 @@
 @import './utils/common';
 @import './components/content.scss';
 
-@import './components/form/button';
 @import './components/form/input';
 @import './components/form/form';
+@import './components/form/button';
 
 @import './components/radio-custom';
 @import './components/options-flat';
@@ -33,9 +33,11 @@
 @import '../../components/cards/card-styles/card.scss';
 @import '../../components/cards/card-styles/card-animation.scss';
 
+@import '../../components/collection/collection.scss';
+
 @import '../../components/message/message.scss';
 
 // @import '../../components/swiper/swiper.scss';
 @import '../../components/swiper-react/swiper-react.scss';
 
-@import '../../site/header.scss';
+@import '../../components/header/header.scss';
