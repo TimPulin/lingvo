@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useCurrentLangPack } from '../../store/selectors';
-import { addNewWord, editWord } from '../../store/slicers/dictionary-slice';
+import { useCurrentLangPack, useUserToken } from '../../store/selectors';
+import { editWord } from '../../store/slicers/dictionary-slice';
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
-import { useCardModeEdit, usePairWordSaved } from './card-context-hooks/card-context-hooks';
+import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
 import { useStaticMessage } from '../global-context-provider/context-hooks';
+import { addCard } from '../../connect/server-connections';
 
 const defaultPairWords: IPairWords = {
   id: 0,
@@ -22,6 +23,8 @@ type CardUniversalPropsType = {
 export default function CardUniversal(props: CardUniversalPropsType) {
   const { pairWords = defaultPairWords } = props;
   const langPack = useCurrentLangPack();
+  const userToken = useUserToken();
+  const collectionId = useCurrentCollectionId();
 
   const dispatch = useDispatch();
   const isModeEdit = useCardModeEdit();
@@ -69,13 +72,33 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const onSubmitForeign = (event: React.FormEvent) => {
     event.preventDefault();
     if (isModeEdit) {
-      dispatch(addNewWord(
-        {
-          word: localPairWords,
-          key: 'defaultCollection',
-        },
-      ));
-      setText(langPack.CARD_CHANGES_MADE);
+      const newWord = {
+        phrase: localPairWords.nativeWord,
+        translationPhrase: localPairWords.foreignWord,
+      };
+
+      if (userToken && collectionId) {
+        addCard(userToken, collectionId, newWord)
+          .then(() => {
+            setText(langPack.CARD_CHANGES_MADE);
+          })
+          .catch((error) => {
+            console.log(error);
+            // TODO перевести
+            setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+          });
+      } else {
+        // TODO перевести
+        const tokenWarning = 'Для сохранения карточки необходимо авторизоваться';
+        const idWarning = 'Коллекция карточек не найдена';
+        let warning = '';
+
+        if (userToken == null) warning += tokenWarning;
+        if (collectionId == null) warning += idWarning;
+
+        setText(warning);
+        console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId}`);
+      }
     } else {
       dispatch(editWord(
         {

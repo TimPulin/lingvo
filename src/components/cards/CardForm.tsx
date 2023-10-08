@@ -1,5 +1,6 @@
 import Input from '../form/Input';
 import { useCurrentLangPack } from '../../store/selectors';
+import { useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
 
 type WordType = {
   newWord: string;
@@ -19,6 +20,8 @@ export default function CardForm(props: CardFormPropsType) {
     newWordsList, onSubmit, onCancel, primaryButtonName,
   } = props;
   const { CANCEL } = useCurrentLangPack();
+  const collectionId = useCurrentCollectionId();
+  console.log(collectionId);
 
   function onBodyClick(event: React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();

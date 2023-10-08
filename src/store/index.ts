@@ -4,6 +4,7 @@ import { dictionaryReducer } from './slicers/dictionary-slice';
 import { currentPageNameReducer } from './slicers/current-page-slice';
 import { userTokenReducer } from './slicers/user-token-slice';
 import { languagesListReducer } from './slicers/languages-list-slicer';
+import { currentCardsCollectionReducer } from './slicers/current-cards-collection-slice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     currentPageName: currentPageNameReducer,
     userToken: userTokenReducer,
     languagesList: languagesListReducer,
+    currentCardsCollection: currentCardsCollectionReducer,
   },
 });
 

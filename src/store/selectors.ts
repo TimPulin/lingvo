@@ -29,6 +29,11 @@ export function useUserToken() {
   return useSelector((store:RootStateType) => store.userToken.value);
 }
 
+// TODO проверить, нужна ли типизация DefaultOptionType
 export function useLanguagesList():DefaultOptionType[] {
   return useSelector((store:RootStateType) => store.languagesList.value);
+}
+
+export function useCardsCollection() {
+  return useSelector((store:RootStateType) => store.currentCardsCollection.value);
 }

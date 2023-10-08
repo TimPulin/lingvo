@@ -35,3 +35,8 @@ export type CollectionFormType = {
   languageId: number,
   translationLanguageId: number
 };
+
+export type NewWordType = {
+  phrase: string,
+  translationPhrase: string,
+};
