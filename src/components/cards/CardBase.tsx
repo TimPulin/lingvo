@@ -7,6 +7,7 @@ import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
 import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
 import { HIDE } from '../../utils/constants';
 import CardControlBlock from './CardControlBlock';
+import ThreeDots from './ThreeDots';
 
 const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
@@ -142,24 +143,17 @@ const localOnCancelForeign = (event:React.FormEvent) => {
 formForeign.onCancel = localOnCancelForeign;
 
   return (
-    <div
+    <article
       className={`card ${cardEditMode()}`}
       onClick={turnCard}
       role="button"
       tabIndex={0}
     >
       {/* TODO переделать threedots, чтобы крутился вместе с карточкой (перенести для начала в card__body) */}
-      <div className={`three-dots ${threeDotsHide()}`}>
-        <button
-          type="button"
-          className="three-dots__btn"
-          onClick={onCallControlBlock}
-        >
-          <span className="three-dots__line" />
-          <span className="three-dots__line" />
-          <span className="three-dots__line" />
-        </button>
-      </div>
+      <ThreeDots
+        classHide={threeDotsHide}
+        onClick={onCallControlBlock}
+      />
 
       <div ref={cardBodyRef} className={`card__body ${cardBodyClass()} ${fadeInOutClass()}`}>
 
@@ -187,7 +181,7 @@ formForeign.onCancel = localOnCancelForeign;
           />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

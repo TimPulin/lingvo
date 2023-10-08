@@ -22,7 +22,7 @@ export default function RootPage() {
         onClick={dispatchOverlayClicked}
         aria-hidden="true"
       />
-      <div className={`${classModalOpened()}`}>
+      <div className={`header-wrapper ${classModalOpened()}`}>
         <HeaderSite
           changeIsModalOpen={changeIsModalOpen}
         />

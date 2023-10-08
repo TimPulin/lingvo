@@ -34,15 +34,18 @@ export function getLanguagesList(token:string) {
 
 export function addCollection(token:string, collectionData:CollectionFormType) {
   console.log('key', token);
-  console.log(collectionData);
 
   return axios
-    .post('collections', {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    .post(
+      'collections',
+      {
+        ...collectionData,
       },
-      bodyParameters: collectionData,
-
-    });
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 }

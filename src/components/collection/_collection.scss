@@ -1,0 +1,85 @@
+.collection-form {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+
+  &__languages-list-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    column-gap: 20px;
+  }
+
+  &__label {
+    width: 100%;
+  }
+
+  &__select {
+    width: 100%;
+  }
+}
+
+
+
+.collections {
+  position: relative;
+
+  &__list {
+    @include list-reset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    padding-inline: 10px;
+  }
+
+  &__item {
+    --item-width: calc(var(--screen-width) * 0.7);
+    --item-height: calc(var(--item-width) * 0.6);
+
+    width: var(--item-width);
+    height: var(--item-height);
+  }
+
+  &__wrap-button {
+    position: sticky;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1000;
+  }
+
+  // TODO сделать красивую кнопку. возможно просто "крестик"
+  &__button-new {
+    position: fixed;
+    top: 50px;
+    border: none;
+    z-index: 1000;
+  }
+}
+
+@media (min-width: $small-screen) {
+  .collections__list {
+    align-items: center;
+  }
+
+  .collections__item {
+    --item-width: calc(var(--screen-width) * 0.5);
+  }
+
+  .collections__item:only-child {
+    --item-width: calc(var(--screen-width) * 0.7);
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .collections__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .collections__item {
+    --item-width: calc(var(--screen-width) * 0.3);
+  }
+}

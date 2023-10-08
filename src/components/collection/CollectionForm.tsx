@@ -32,47 +32,47 @@ export default function CollectionForm(props:CollectionFormPropsType) {
   return (
     <div>
       <Form
-        className="form form-cards-collection"
+        className="form collection-form"
         onSubmitCapture={formik.handleSubmit}
         initialValues={{
           languageId: formik.values.languageId,
           translationLanguageId: formik.values.translationLanguageId,
         }}
       >
-        <div className="form-cards-collection__languages-list-wrap">
-          <label className="form-cards-collection__label label">
+        <div className="collection-form__languages-list-wrap">
+          <label className="collection-form__label label">
             <span>Родной язык&nbsp;коллекции</span>
             <Form.Item name="language">
               <Select
-                className="form-cards-collection__select"
+                className="collection-form__select"
                 options={languagesList}
                 showSearch
                 onChange={(value) => { formik.handleChange({ target: { name: 'languageId', value } }); }}
               />
             </Form.Item>
           </label>
-          <label className="form-cards-collection__label label">
+          <label className="collection-form__label label">
             <span>Иностранный язык&nbsp;коллекции</span>
             <Form.Item name="translationLanguage">
               <Select
-                className="form-cards-collection__select"
+                className="collection-form__select"
                 options={languagesList}
                 onChange={(value) => { formik.handleChange({ target: { name: 'translationLanguageId', value } }); }}
               />
             </Form.Item>
           </label>
         </div>
-        <label className="form-cards-collection__label label">
+        <label className="collection-form__label label">
           <span>Название коллекции</span>
           <Input required name="name" value={formik.values.name} onChange={formik.handleChange} />
         </label>
-        <label className="form-cards-collection__label label">
+        <label className="collection-form__label label">
           <span>Описание коллекции</span>
           <Input required name="description" value={formik.values.description} onChange={formik.handleChange} />
         </label>
         <div className="form__footer">
           <button type="button" className="button button--trans button--warning" onClick={formik.handleReset}>{CANCEL}</button>
-          <button type="submit" className="button button--trans button--trans">{SAVE}</button>
+          <button type="submit" className="button button--trans">{SAVE}</button>
         </div>
       </Form>
     </div>

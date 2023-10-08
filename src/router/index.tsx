@@ -6,6 +6,7 @@ import NewCardPage from '../pages/NewCardPage';
 import CardsPage from '../pages/CardsPage';
 import SettingsPage from '../pages/SettingsPage';
 import GlobalContextProvider from '../components/global-context-provider/GlobalContextProvider';
+import CollectionPage from '../pages/CollectionPage';
 
 export const router = createBrowserRouter([
   {
@@ -16,18 +17,30 @@ export const router = createBrowserRouter([
         path: '/',
         element: <HomePage />,
       },
+
       {
         path: '/collections',
         element: <CollectionsListPage />,
       },
+
       {
-        path: '/create-new-collection',
-        element: <NewCollectionPage />,
+        path: '/collections/:id',
+        element: <CollectionPage />,
+        children: [
+          {
+            path: '/collections/:id',
+            element: <CardsPage />,
+          },
+          {
+            path: '/create-new-card',
+            element: <NewCardPage />,
+          },
+        ],
       },
 
       {
-        path: '/create-new-card',
-        element: <NewCardPage />,
+        path: '/create-new-collection',
+        element: <NewCollectionPage />,
       },
 
       {

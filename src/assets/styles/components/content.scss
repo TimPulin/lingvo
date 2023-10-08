@@ -1,17 +1,20 @@
 .content {
-  height: 100%;
-  filter: blur(0);
+  min-height: 100%;
+  padding-top: 50px;
+  /* TODO если плавность blur сохранится, тогда можно будет это свойство удалить */
+  // filter: blur(0); убрал, потому что иначе кнопка button-new (в collection) не становится fixed.
   transition: filter .4s ease-in-out;
 
   &__list {
     --screen-height: calc(100vh - 50px);
-    height: calc(100vh - 50px);
+    min-height: calc(100vh - 50px);
     display: flex;
     align-items: center;
   }
 
   &__item {
     animation: show-item .3s ease-in forwards;
+    width: 100%;
   }
 }
 
@@ -56,7 +59,7 @@
 
 .content__list--single-top {
   align-items: flex-start;
-  padding-top: 50px; // TODO если будет часто встречаться подобное - вынести в общий стиль
+  // padding-top: 50px; // TODO если будет часто встречаться подобное - вынести в общий стиль
 
   .content__item {
     width: 100%;
