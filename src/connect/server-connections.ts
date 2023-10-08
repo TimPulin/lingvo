@@ -1,5 +1,5 @@
 import { axiosInstanceLingvo as axios } from './axios-instance';
-import { CollectionFormType } from '../utils/types';
+import { CollectionFormType, NewWordType } from '../utils/types';
 
 export function getAuthorizationVKToken() {
   return axios
@@ -16,9 +16,7 @@ export function getCollectionsList(token:string) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    .then((response) => response)
-    .catch((error) => { throw new Error(error); });
+    });
 }
 
 export function getLanguagesList(token:string) {
@@ -27,9 +25,16 @@ export function getLanguagesList(token:string) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    .then((response) => response)
-    .catch((error) => { throw new Error(error); });
+    });
+}
+
+export function getCardsCollection(token:string, collectionId:number) {
+  return axios
+    .get(`/collections/${collectionId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 }
 
 export function addCollection(token:string, collectionData:CollectionFormType) {
@@ -40,6 +45,38 @@ export function addCollection(token:string, collectionData:CollectionFormType) {
       'collections',
       {
         ...collectionData,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}
+
+export function addCard(token:string, collectionId:number, newWord:NewWordType) {
+  return axios
+    .post(
+      `/collections/${collectionId}/bind`,
+      {
+        ...newWord,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}
+
+export function editCard(token:string, id:number, newWord:NewWordType) {
+  return axios
+    .post(
+      `/collections/${id}/bind`,
+      {
+        ...newWord,
       },
       {
         headers: {

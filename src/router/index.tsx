@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
             element: <CardsPage />,
           },
           {
-            path: '/create-new-card',
+            path: '/collections/:id/create-new-card',
             element: <NewCardPage />,
           },
         ],

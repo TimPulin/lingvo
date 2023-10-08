@@ -1,31 +1,40 @@
-// import { useDispatch } from 'react-redux';
-// import { updateCurrentPageName } from '../store/slicers/current-page-slice';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
+import { updateCurrentCardsCollection } from '../store/slicers/current-cards-collection-slice';
 import {
   currentCollectionIdContext,
   CurrentCollectionIdType,
 } from '../components/cards/card-context-hooks/card-context-hooks';
-// import {
-//   Outlet, useLoaderData, LoaderFunction, LoaderFunctionArgs,
-// } from 'react-router-dom';
-
-// export const cardsCollectionLoader = (async ({ params }: LoaderFunctionArgs):Promise<CardsCollectionType> => {
-//   let cardsCollection;
-//   if (params.id) {
-//     cardsCollection = await getCardsCollection(params.id);
-//   }
-//   return cardsCollection;
-// });
+import { getCardsCollection } from '../connect/server-connections';
+import { useUserToken } from '../store/selectors';
+import { useStaticMessage } from '../components/global-context-provider/context-hooks';
 
 export default function CollectionPage() {
   const [currentCollectionId, setCurrentCollectionId] = useState<CurrentCollectionIdType>(null);
   const params = useParams();
-  // const dispatch = useDispatch();
+  const userToken = useUserToken();
+  const { setText, setIsShow: setIsStaticMessageShow } = useStaticMessage();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const { id } = params;
     setCurrentCollectionId(Number(id));
+    if (userToken) {
+      getCardsCollection(userToken, Number(id))
+        .then((response) => {
+          dispatch(updateCurrentPageName(response.data.name));
+          dispatch(updateCurrentCardsCollection(response.data));
+        })
+        .catch((error) => {
+          // TODO поставить обработку, показать сообщение
+          console.log(error);
+        });
+    } else {
+      setText('Пожалуйста, авторизуйтесь');
+      setIsStaticMessageShow(true);
+    }
   }, []);
 
   return (
