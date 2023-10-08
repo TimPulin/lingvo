@@ -136,9 +136,12 @@
     font-weight: 500;
   }
 
-  .card__langs {
+  .card__additional-info {
     position: absolute;
-    top: 0;
+    top: 5px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
     font-size: 20px;
   }
 

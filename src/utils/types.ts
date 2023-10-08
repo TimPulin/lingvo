@@ -29,6 +29,49 @@ export type CollectionType = {
 
 export type CollectionsListType = CollectionType[];
 
+// ============================
+
+type PhraseType = {
+  id: number,
+  createdAt: string,
+  value: string,
+  languageId: number
+};
+
+type CollectionLanguageType = {
+  id: number,
+  original: string,
+  russian: string,
+  english: string,
+  iso: string
+};
+
+export type CardType = {
+  collectionId: string,
+  createdAt: string,
+  id: number,
+  phrase: PhraseType,
+  phraseId: number,
+  translationPhrase: PhraseType,
+  translationPhraseId: number,
+  userId: number,
+};
+
+export type CardsListType = CardType[];
+
+export type CardsCollectionType = {
+  id: number,
+  name: 'string',
+  description: 'string',
+  languageId: number,
+  translationLanguageId: number,
+  language: CollectionLanguageType,
+  'translationLanguage': CollectionLanguageType,
+  'binds': CardsListType,
+};
+
+// ============================
+
 export type CollectionFormType = {
   name: string,
   description: string,

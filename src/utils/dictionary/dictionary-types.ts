@@ -1,3 +1,5 @@
+// TODO проверить на необходимость содержания этого файла (при возможности удалить)
+
 export interface IPairWords {
   id: number | null,
   nativeWord: string,
