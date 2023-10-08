@@ -32,7 +32,10 @@ export default function CardsPage() {
     if (cardsCollection.binds.length === 0) {
       // TODO перевести
       return (
-        <MessageOnPage messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку" />
+        <>
+          <MessageOnPage messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку" />
+          <button className="button collections__button-new " type="button" onClick={gotoCreateNewCardPage}>Создать новую карточку</button>
+        </>
       );
     }
   }
