@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardContentItem from '../components/cards/CardContentItem';
+import { useCurrentCollectionId, isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 import SwiperReact from '../components/swiper-react/SwiperReact';
-import { isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 import { useCardsCollection } from '../store/selectors';
 import MessageOnPage from '../components/message/MessageOnPage';
 
@@ -10,6 +10,7 @@ export default function CardsPage() {
   const isCardModeEdit = false;
   const [isPairWordSaved, setIsPairWordSaved] = useState(false);
   const cardsCollection = useCardsCollection();
+  const collectionId = useCurrentCollectionId();
 
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ export default function CardsPage() {
   }), [isPairWordSaved]);
 
   const gotoCreateNewCardPage = () => {
-    navigate('/collections/:id/create-new-card');
+    navigate(`/collections/${collectionId}/create-new-card`);
   };
 
   if (cardsCollection === null) {

@@ -20,6 +20,11 @@
   }
 }
 
+.content--login-page {
+  --screen-height: calc(100vh);
+  padding-top: 0;
+}
+
 .content.modal-opened {
   filter: blur(2px);
 }

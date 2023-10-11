@@ -7,12 +7,18 @@ import CardsPage from '../pages/CardsPage';
 import SettingsPage from '../pages/SettingsPage';
 import GlobalContextProvider from '../components/global-context-provider/GlobalContextProvider';
 import CollectionPage from '../pages/CollectionPage';
+import LoginPage from '../pages/login-page/LoginPage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <GlobalContextProvider />,
     children: [
+      {
+        path: '/login',
+        element: <LoginPage />,
+      },
+
       {
         path: '/',
         element: <HomePage />,

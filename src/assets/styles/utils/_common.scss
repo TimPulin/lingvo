@@ -65,7 +65,7 @@ body {
 }
 
 @mixin multicolor-background-mixin {
-  background: linear-gradient(to Right, $color-primary, $color-secondary 70%);
+  background: linear-gradient(to left, $color-primary, $color-secondary 70%);
 }
 
 .multicolor-text {

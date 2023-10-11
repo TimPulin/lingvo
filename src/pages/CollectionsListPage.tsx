@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getCollectionsList } from '../connect/server-connections';
 import { useCurrentLangPack, useUserToken } from '../store/selectors';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
+import { updateUserToken } from '../store/slicers/user-token-slice';
 import { CollectionsListType, CollectionType } from '../utils/types';
 import CardCollection from '../components/cards/CardCollection';
+import { setLocalStorageUserToken } from '../connect/local-storage-connections';
 
 export default function CollectionsListPage() {
   const [collectionsList, setCollectionsList] = useState<CollectionsListType>([]);
   const userToken = useUserToken();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { COLLECTIONS_PAGE } = useCurrentLangPack();
 
   function getCollectionsListLocal() {
@@ -27,12 +30,21 @@ export default function CollectionsListPage() {
   }
 
   useEffect(() => {
+    const { search } = location;
+    const token = new URLSearchParams(search).get('access_token');
+    if (token) {
+      dispatch(updateUserToken(token));
+      setLocalStorageUserToken(token);
+    }
+  }, []);
+
+  useEffect(() => {
     dispatch(updateCurrentPageName(COLLECTIONS_PAGE));
   }, [COLLECTIONS_PAGE]);
 
   useEffect(() => {
     getCollectionsListLocal();
-  }, []);
+  }, [userToken]);
 
   const gotoCreateCollectionPage = () => {
     navigate('/create-new-collection');
