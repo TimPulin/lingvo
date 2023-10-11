@@ -11,7 +11,7 @@ interface IHeaderSiteProps {
 export default function HeaderSite(props: IHeaderSiteProps) {
   const navigate = useNavigate();
   const { changeIsModalOpen } = props;
-  const { SETTINGS, MAIN, COLLECTIONS_PAGE } = useCurrentLangPack();
+  const { SETTINGS, COLLECTIONS_PAGE } = useCurrentLangPack();
   const pageName = useCurrentPageName();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,28 +71,19 @@ export default function HeaderSite(props: IHeaderSiteProps) {
                 <li className="nav__item">
                   <Link
                     className="nav__link"
-                    to="/settings"
-                    onClick={() => closeMenu()}
-                  >
-                    {SETTINGS}
-                  </Link>
-                </li>
-                <li className="nav__item">
-                  <Link
-                    className="nav__link"
-                    to="/"
-                    onClick={() => closeMenu()}
-                  >
-                    {MAIN}
-                  </Link>
-                </li>
-                <li className="nav__item">
-                  <Link
-                    className="nav__link"
                     to="/collections"
                     onClick={() => closeMenu()}
                   >
                     {COLLECTIONS_PAGE}
+                  </Link>
+                </li>
+                <li className="nav__item">
+                  <Link
+                    className="nav__link"
+                    to="/settings"
+                    onClick={() => closeMenu()}
+                  >
+                    {SETTINGS}
                   </Link>
                 </li>
               </ul>
