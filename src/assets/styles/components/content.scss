@@ -25,9 +25,9 @@
   padding-top: 0;
 }
 
-.content.modal-opened {
-  filter: blur(2px);
-}
+// .content.modal-opened {
+//   filter: blur(2px);
+// }
 
 .content__list--message-on-page {
   height: calc(var(--screen-height) - 50px);
