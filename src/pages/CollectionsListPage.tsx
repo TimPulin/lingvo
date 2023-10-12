@@ -8,6 +8,7 @@ import { updateUserToken } from '../store/slicers/user-token-slice';
 import { CollectionsListType, CollectionType } from '../utils/types';
 import CardCollection from '../components/cards/CardCollection';
 import { setLocalStorageUserToken } from '../connect/local-storage-connections';
+import ButtonPlus from '../components/button-plus/ButtonPlus';
 
 export default function CollectionsListPage() {
   const [collectionsList, setCollectionsList] = useState<CollectionsListType>([]);
@@ -54,10 +55,10 @@ export default function CollectionsListPage() {
     return (
       <div className="content__list">
         <div className="content__item collections">
-          <button className="button collections__button-new " type="button" onClick={gotoCreateCollectionPage}>Создать коллекцию</button>
           <p>
             Мы не нашли у вас коллекции карточек. Давайте создадим вашу первую коллекцию
           </p>
+          <ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateCollectionPage} />
         </div>
       </div>
     );
@@ -66,7 +67,7 @@ export default function CollectionsListPage() {
   return (
     <div className="content__list">
       <div className="content__item collections">
-        <button className="button collections__button-new " type="button" onClick={gotoCreateCollectionPage}>Создать коллекцию</button>
+        <ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateCollectionPage} />
 
         <ul className="collections__list">
           {
