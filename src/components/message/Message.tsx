@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useStaticMessage } from '../global-context-provider/context-hooks';
+import { useStaticMessage, messageShowDuration } from '../global-context-provider/context-hooks';
 
 const MESSAGE_SHOW = 'message--show';
 
@@ -11,7 +11,7 @@ export default function Message() {
   function startTimerToHideMessage() {
     setTimeout(() => {
       setIsShow(false);
-    }, 3000);
+    }, messageShowDuration);
   }
 
   useEffect(() => {

@@ -35,10 +35,11 @@ export default function CardsPage() {
     if (cardsCollection.binds.length === 0) {
       // TODO перевести
       return (
-        <>
-          <MessageOnPage messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку" />
-          <ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateNewCardPage} />
-        </>
+        <MessageOnPage
+          messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку"
+          ElementJSX={<ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateNewCardPage} />}
+        />
+
       );
     }
   }
@@ -47,7 +48,10 @@ export default function CardsPage() {
     <isCardModeEditContext.Provider value={isCardModeEdit}>
       <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="content__list content__list--cards-list-page">
-          <ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateNewCardPage} />
+          <ButtonPlus
+            classAdditional="collections__button-new collections__button-new--fixed"
+            onClickFunction={gotoCreateNewCardPage}
+          />
           <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection.binds} />} />
         </div>
       </isPairWordSavedContext.Provider>

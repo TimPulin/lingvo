@@ -48,7 +48,7 @@ export default function CollectionsListPage() {
   }, [userToken]);
 
   const gotoCreateCollectionPage = () => {
-    navigate('/create-new-collection');
+    navigate('/collections/create-new-collection');
   };
 
   if (collectionsList.length === 0) {
@@ -67,7 +67,8 @@ export default function CollectionsListPage() {
   return (
     <div className="content__list">
       <div className="content__item collections">
-        <ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateCollectionPage} />
+        {/* TODO увеличить index в collections__button-new--fixed */}
+        <ButtonPlus classAdditional="collections__button-new--fixed" onClickFunction={gotoCreateCollectionPage} />
 
         <ul className="collections__list">
           {

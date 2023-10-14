@@ -86,7 +86,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       if (userToken && collectionId) {
         addCard(userToken, collectionId, newWord)
           .then(() => {
-            setText(langPack.CARD_CHANGES_MADE);
+            setText(langPack.CARD_SAVED);
           })
           .catch((error) => {
             console.log(error);
@@ -112,7 +112,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           key: 'defaultCollection',
         },
       ));
-      setText(langPack.CARD_SAVED);
+      setText(langPack.CARD_CHANGES_MADE);
     }
     setIsNewPairWordSaved(true);
     setIsRefresh(true);

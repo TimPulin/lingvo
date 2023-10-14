@@ -2,10 +2,20 @@
 import { useState, useMemo } from 'react';
 import RootPage from '../../pages/RootPage';
 import { StaticMessageContext } from './context-hooks';
+import { isCollectionSavedContext } from './collection-form-context-hook';
 
 export default function GlobalContextProvider() {
+  const [isCollectionSaved, setIsCollectionSaved] = useState(false);
   const [isStaticMessageShow, setIsStaticMessageShow] = useState(false);
   const [staticMessageText, setStaticMessageText] = useState('');
+
+  const collectionSaved = useMemo(() => (
+    {
+      isCollectionSaved,
+      setIsCollectionSaved,
+    }
+  ), [isCollectionSaved, setIsCollectionSaved]);
+
   const staticMessage = useMemo(() => (
     {
       text: staticMessageText,
@@ -17,7 +27,9 @@ export default function GlobalContextProvider() {
 
   return (
     <StaticMessageContext.Provider value={staticMessage}>
-      <RootPage />
+      <isCollectionSavedContext.Provider value={collectionSaved}>
+        <RootPage />
+      </isCollectionSavedContext.Provider>
     </StaticMessageContext.Provider>
   );
 }

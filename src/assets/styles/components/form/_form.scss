@@ -28,8 +28,11 @@
   .button--trans {
     padding: 3px 5px;
     font-size: 25px;
-    color: #fff;
   }
+}
+
+:where(.form) .button--trans {
+  color: #fff;
 }
 
 .card--edit {
