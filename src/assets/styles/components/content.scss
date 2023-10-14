@@ -25,16 +25,15 @@
   padding-top: 0;
 }
 
-.content.modal-opened {
-  filter: blur(2px);
-}
-
 .content__list--message-on-page {
   height: calc(var(--screen-height) - 50px);
 
   .content__item {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    padding-inline: 10px;
   }
 }
 

@@ -19,3 +19,12 @@ export const StaticMessageContext = createContext<StaticMessageContextType>(stat
 export function useStaticMessage() {
   return useContext(StaticMessageContext);
 }
+
+export const messageShowDuration = 3000;
+
+export function staticMessagePromise(functionSet:React.Dispatch<React.SetStateAction<boolean>>, value:boolean) {
+  functionSet(value);
+  return new Promise((resolve) => {
+    setTimeout(() => resolve('message hide'), messageShowDuration);
+  });
+}

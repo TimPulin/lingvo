@@ -55,6 +55,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
             <span>Иностранный язык&nbsp;коллекции</span>
             <Form.Item name="translationLanguage">
               <Select
+                aria-required
                 className="collection-form__select"
                 options={languagesList}
                 onChange={(value) => { formik.handleChange({ target: { name: 'translationLanguageId', value } }); }}
@@ -68,7 +69,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
         </label>
         <label className="collection-form__label label">
           <span>Описание коллекции</span>
-          <Input required name="description" value={formik.values.description} onChange={formik.handleChange} />
+          <Input name="description" value={formik.values.description} onChange={formik.handleChange} />
         </label>
         <div className="form__footer">
           <button type="button" className="button button--trans button--warning" onClick={formik.handleReset}>{CANCEL}</button>

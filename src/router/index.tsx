@@ -30,6 +30,11 @@ export const router = createBrowserRouter([
       },
 
       {
+        path: '/collections/create-new-collection',
+        element: <NewCollectionPage />,
+      },
+
+      {
         path: '/collections/:id',
         element: <CollectionPage />,
         children: [
@@ -42,11 +47,6 @@ export const router = createBrowserRouter([
             element: <NewCardPage />,
           },
         ],
-      },
-
-      {
-        path: '/create-new-collection',
-        element: <NewCollectionPage />,
       },
 
       {

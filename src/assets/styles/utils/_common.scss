@@ -16,11 +16,14 @@ body {
 
 .overlay {
   z-index: -1000;
+  filter: blur(0);
+  transition: backdrop-filter .4s ease-in-out;
 }
 
 .overlay.modal-opened {
   @include wrap-absolute;
   z-index: 900;
+  backdrop-filter: blur(3px);
 }
 
 .container {

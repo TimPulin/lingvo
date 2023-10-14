@@ -7,6 +7,7 @@ import CardBase from './CardBase';
 import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
 import { useStaticMessage } from '../global-context-provider/context-hooks';
 import { addCard } from '../../connect/server-connections';
+import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 
 export interface IPairWords {
   id: number | null,
@@ -36,6 +37,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const isModeEdit = useCardModeEdit();
   const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
   const { setText } = useStaticMessage();
+  const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -86,7 +88,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       if (userToken && collectionId) {
         addCard(userToken, collectionId, newWord)
           .then(() => {
-            setText(langPack.CARD_CHANGES_MADE);
+            setText(langPack.CARD_SAVED);
+            setIsNeedCurrentCollectionUpdate(true);
           })
           .catch((error) => {
             console.log(error);
@@ -112,7 +115,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           key: 'defaultCollection',
         },
       ));
-      setText(langPack.CARD_SAVED);
+      setText(langPack.CARD_CHANGES_MADE);
     }
     setIsNewPairWordSaved(true);
     setIsRefresh(true);

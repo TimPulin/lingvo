@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CardContentItem from '../components/cards/CardContentItem';
 import { useCurrentCollectionId, isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
-import SwiperReact from '../components/swiper-react/SwiperReact';
 import { useCardsCollection } from '../store/selectors';
+
+import CardContentItem from '../components/cards/CardContentItem';
+import SwiperReact from '../components/swiper-react/SwiperReact';
 import MessageOnPage from '../components/message/MessageOnPage';
+import ButtonPlus from '../components/button-plus/ButtonPlus';
 
 export default function CardsPage() {
   const isCardModeEdit = false;
@@ -33,10 +35,11 @@ export default function CardsPage() {
     if (cardsCollection.binds.length === 0) {
       // TODO перевести
       return (
-        <>
-          <MessageOnPage messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку" />
-          <button className="button collections__button-new " type="button" onClick={gotoCreateNewCardPage}>Создать новую карточку</button>
-        </>
+        <MessageOnPage
+          messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку"
+          ElementJSX={<ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateNewCardPage} />}
+        />
+
       );
     }
   }
@@ -45,7 +48,10 @@ export default function CardsPage() {
     <isCardModeEditContext.Provider value={isCardModeEdit}>
       <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="content__list content__list--cards-list-page">
-          <button className="button collections__button-new " type="button" onClick={gotoCreateNewCardPage}>Создать новую карточку</button>
+          <ButtonPlus
+            classAdditional="collections__button-new collections__button-new--fixed"
+            onClickFunction={gotoCreateNewCardPage}
+          />
           <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection.binds} />} />
         </div>
       </isPairWordSavedContext.Provider>

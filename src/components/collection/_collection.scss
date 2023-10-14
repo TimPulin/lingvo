@@ -20,6 +20,10 @@
   }
 }
 
+:where(.collection-form) .button--trans {
+  color: $color-primary_shade;
+}
+
 
 
 .collections {
@@ -50,12 +54,15 @@
     z-index: 1000;
   }
 
-  // TODO сделать красивую кнопку. возможно просто "крестик"
   &__button-new {
-    position: fixed;
-    top: 50px;
     border: none;
-    z-index: 1000;
+    z-index: 900;
+  }
+
+  &__button-new--fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
   }
 }
 

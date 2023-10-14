@@ -38,8 +38,6 @@ export function getCardsCollection(token:string, collectionId:number) {
 }
 
 export function addCollection(token:string, collectionData:CollectionFormType) {
-  console.log('key', token);
-
   return axios
     .post(
       'collections',
