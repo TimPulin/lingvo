@@ -5,12 +5,12 @@ type IsCollectionSavedContextType = {
   setIsCollectionSaved:React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const state = {
+const initialState = {
   isCollectionSaved: false,
   setIsCollectionSaved: () => {},
 };
 
-export const isCollectionSavedContext = createContext<IsCollectionSavedContextType>(state);
+export const isCollectionSavedContext = createContext<IsCollectionSavedContextType>(initialState);
 
 export function useCollectionSaved() {
   return useContext(isCollectionSavedContext);

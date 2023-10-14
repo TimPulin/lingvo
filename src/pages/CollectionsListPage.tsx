@@ -65,6 +65,7 @@ export default function CollectionsListPage() {
   }
 
   return (
+
     <div className="content__list">
       <div className="content__item collections">
         {/* TODO увеличить index в collections__button-new--fixed */}
@@ -81,5 +82,6 @@ export default function CollectionsListPage() {
         </ul>
       </div>
     </div>
+
   );
 }

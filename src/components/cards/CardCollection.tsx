@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CollectionType } from '../../utils/types';
+import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 
 type CardCollectionPropsType = {
   collection: CollectionType;
@@ -7,6 +8,13 @@ type CardCollectionPropsType = {
 
 export default function CardCollection(props:CardCollectionPropsType) {
   const { collection } = props;
+  const navigate = useNavigate();
+  const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
+
+  const goToCollectionPage = () => {
+    setIsNeedCurrentCollectionUpdate(true);
+    navigate(`/collections/${collection.id}`);
+  };
   return (
     <article className="card card--collection">
       <div className="card__body card__body--native">
@@ -27,7 +35,11 @@ export default function CardCollection(props:CardCollectionPropsType) {
           </span>
         </div>
       </div>
-      <Link className="card__link" to={`/collections/${collection.id}`}> </Link>
+      {/* eslint-disable-next-line */}
+      <div
+        className="card__link"
+        onClick={goToCollectionPage}
+      />
     </article>
   );
 }

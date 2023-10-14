@@ -10,15 +10,19 @@ import {
 import { getCardsCollection } from '../connect/server-connections';
 import { useUserToken } from '../store/selectors';
 import { useStaticMessage } from '../components/global-context-provider/context-hooks';
+import { useNeedCurrentCollectionUpdate } from '../components/global-context-provider/update-collection';
 
 export default function CollectionPage() {
   const [currentCollectionId, setCurrentCollectionId] = useState<CurrentCollectionIdType>(null);
   const params = useParams();
+  const dispatch = useDispatch();
   const userToken = useUserToken();
   const { setText, setIsShow: setIsStaticMessageShow } = useStaticMessage();
-  const dispatch = useDispatch();
+  const { isNeedCurrentCollectionUpdate, setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
   useEffect(() => {
+    console.log(isNeedCurrentCollectionUpdate);
+
     const { id } = params;
     setCurrentCollectionId(Number(id));
     if (userToken) {
@@ -26,6 +30,7 @@ export default function CollectionPage() {
         .then((response) => {
           dispatch(updateCurrentPageName(response.data.name));
           dispatch(updateCurrentCardsCollection(response.data));
+          setIsNeedCurrentCollectionUpdate(false);
         })
         .catch((error) => {
           // TODO поставить обработку, показать сообщение
@@ -35,7 +40,7 @@ export default function CollectionPage() {
       setText('Пожалуйста, авторизуйтесь');
       setIsStaticMessageShow(true);
     }
-  }, []);
+  }, [isNeedCurrentCollectionUpdate]);
 
   return (
     <currentCollectionIdContext.Provider value={currentCollectionId}>
