@@ -31,8 +31,10 @@
   }
 }
 
-:where(.form) .button--trans {
-  color: #fff;
+.form--card {
+  .button--trans {
+    color: #fff;
+  }
 }
 
 .card--edit {

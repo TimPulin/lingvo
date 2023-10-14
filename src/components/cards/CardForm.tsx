@@ -25,7 +25,7 @@ export default function CardForm(props: CardFormPropsType) {
   }
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <form className="form form--card" onSubmit={onSubmit}>
       {/* eslint-disable-next-line */}
       <div className="form__body" onClick={onBodyClick}>
         {
