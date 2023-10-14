@@ -1,4 +1,4 @@
-name: Push to S3
+name: Deploy front
 
 on: [push]
 
