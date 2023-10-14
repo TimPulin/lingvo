@@ -1,4 +1,3 @@
-/* eslint-disable-next-line */
 import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
