@@ -37,6 +37,8 @@ export default function SwiperReact(props:SwiperReactPropsType) {
   const getSlideWidth = () => slideWidth * 0.56;
 
   useEffect(() => {
+    console.log(cardsList);
+
     let breakpointsParams:{[key:string]:string | number | boolean} = {slidesPerView: 2};
     if (cardsList.length < 2) {
       breakpointsParams.centeredSlides = true
@@ -76,9 +78,10 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   style={{ height: getSlideWidth() }}
                   key={item.id} ref={slideRef}
                 >
+                  {/* TODO поменять id на cardId */}
                   <CardUniversal
                     pairWords={{
-                      id: item.id,
+                      cardId: item.id,
                       nativeWord: item.phrase.value,
                       foreignWord: item.translationPhrase.value,
                       transcription: '',

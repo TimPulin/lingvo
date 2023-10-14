@@ -7,10 +7,13 @@ type CardControlBlockPropsType = {
   isShow: boolean;
   setIsShow:React.Dispatch<React.SetStateAction<boolean>>;
   onEdit:React.Dispatch<React.SetStateAction<boolean>>;
+  onCardDelete:() => void;
 };
 
 export default function CardControlBlock(props:CardControlBlockPropsType) {
-  const { isShow, setIsShow, onEdit } = props;
+  const {
+    isShow, setIsShow, onEdit, onCardDelete,
+  } = props;
   const { EDIT, DELETE } = useCurrentLangPack();
 
   function closeControlBlock(event: React.TouchEvent | React.MouseEvent) {
@@ -21,6 +24,12 @@ export default function CardControlBlock(props:CardControlBlockPropsType) {
   function onClickEdit(event:React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();
     onEdit(true);
+    setIsShow(false);
+  }
+
+  function onClickDelete(event:React.TouchEvent | React.MouseEvent) {
+    event.stopPropagation();
+    onCardDelete();
     setIsShow(false);
   }
 
@@ -39,7 +48,7 @@ export default function CardControlBlock(props:CardControlBlockPropsType) {
         >
           {EDIT}
         </button>
-        <button className="control-block__button" type="button">{DELETE}</button>
+        <button className="control-block__button" type="button" onClick={onClickDelete}>{DELETE}</button>
       </div>
     </div>
   );
