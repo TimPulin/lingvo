@@ -84,3 +84,16 @@ export function editCard(token:string, id:number, newWord:NewWordType) {
       },
     );
 }
+
+export function deleteCard(token:string, collectionId:number, cardId:number) {
+  return axios
+    .post(
+      `/binds/${collectionId}/${cardId}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}

@@ -22,6 +22,7 @@ type CardBasePropsType = {
   isRefresh: boolean;
   setIsRefresh: React.Dispatch<React.SetStateAction<boolean>>;
   isModeEdit?: boolean;
+  onCardDelete: () => void;
   pairWords: IPairWords;
   formNative: CardFormPropsType;
   formForeign: CardFormPropsType;
@@ -29,7 +30,7 @@ type CardBasePropsType = {
 
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
+    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign, onCardDelete
   } = props;
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
@@ -161,6 +162,7 @@ formForeign.onCancel = localOnCancelForeign;
           isShow={isControlBlockShow}
           setIsShow={setIsControlBlockShow}
           onEdit={setIsEdit}
+          onCardDelete={onCardDelete}
         />
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>

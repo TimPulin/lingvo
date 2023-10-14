@@ -28,8 +28,8 @@ export const dictionarySlice = createSlice({
     editWord: (state: DictionaryStateType, action: ActionType) => {
       const { key, word } = action.payload;
       const newState = { ...state.value };
-      if (word.id) {
-        const editingWordIndex = newState[key].findIndex((currentWord) => currentWord.id === word.id);
+      if (word.cardId) {
+        const editingWordIndex = newState[key].findIndex((currentWord) => currentWord.cardId === word.cardId);
         newState[key][editingWordIndex] = { ...word };
       }
       state.value = newState;
