@@ -69,10 +69,10 @@ export function addCard(token:string, collectionId:number, newWord:NewWordType) 
     );
 }
 
-export function editCard(token:string, id:number, newWord:NewWordType) {
+export function editCard(token:string, collectionId:number, cardId:number, newWord:NewWordType) {
   return axios
     .post(
-      `/collections/${id}/bind`,
+      `/collections/${collectionId}/bind/${cardId}`,
       {
         ...newWord,
       },
@@ -85,10 +85,10 @@ export function editCard(token:string, id:number, newWord:NewWordType) {
     );
 }
 
-export function deleteCard(token:string, collectionId:number, cardId:number) {
+export function deleteCard(token:string, cardId:number) {
   return axios
-    .post(
-      `/binds/${collectionId}/${cardId}`,
+    .delete(
+      `/bind/${cardId}`,
       {
         headers: {
           'Content-type': 'application/json',
@@ -97,3 +97,5 @@ export function deleteCard(token:string, collectionId:number, cardId:number) {
       },
     );
 }
+
+// `/collections/${collectionId}/bind/${cardId}`,
