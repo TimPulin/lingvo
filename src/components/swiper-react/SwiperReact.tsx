@@ -81,7 +81,7 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   {/* TODO поменять id на cardId */}
                   <CardUniversal
                     pairWords={{
-                      cardId: item.id,
+                      cardId: item.phraseId,
                       nativeWord: item.phrase.value,
                       foreignWord: item.translationPhrase.value,
                       transcription: '',
