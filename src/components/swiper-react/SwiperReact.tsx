@@ -78,7 +78,6 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   style={{ height: getSlideWidth() }}
                   key={item.id} ref={slideRef}
                 >
-                  {/* TODO поменять id на cardId */}
                   <CardUniversal
                     pairWords={{
                       cardId: item.phraseId,
