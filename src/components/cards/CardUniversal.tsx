@@ -114,7 +114,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       }
     } else if (userToken && cardId && collectionId) {
       editCard(userToken, collectionId, cardId, newWord)
-        .then(() => {
+        .then((response) => {
+          console.log(response);
           setText(langPack.CARD_CHANGES_MADE);
           setIsNeedCurrentCollectionUpdate(true);
         })
