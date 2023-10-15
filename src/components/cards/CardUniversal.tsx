@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useState, useEffect } from 'react';
 import CardBase from './CardBase';
-import { addCard, deleteCard } from '../../connect/server-connections';
+import { addCard, deleteCard, editCard } from '../../connect/server-connections';
 import { useCurrentLangPack, useUserToken } from '../../store/selectors';
 import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
 import { useStaticMessage } from '../global-context-provider/context-hooks';
@@ -78,12 +78,16 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   const onSubmitForeign = (event: React.FormEvent) => {
+    const newWord = {
+      phrase: localPairWords.nativeWord,
+      translationPhrase: localPairWords.foreignWord,
+    };
     event.preventDefault();
     if (isModeEdit) {
-      const newWord = {
-        phrase: localPairWords.nativeWord,
-        translationPhrase: localPairWords.foreignWord,
-      };
+      // const newWord = {
+      //   phrase: localPairWords.nativeWord,
+      //   translationPhrase: localPairWords.foreignWord,
+      // };
 
       if (userToken && collectionId) {
         addCard(userToken, collectionId, newWord)
@@ -108,8 +112,17 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         setText(warning);
         console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId}`);
       }
-    } else {
-      setText(langPack.CARD_CHANGES_MADE);
+    } else if (userToken && cardId && collectionId) {
+      editCard(userToken, collectionId, cardId, newWord)
+        .then(() => {
+          setText(langPack.CARD_CHANGES_MADE);
+          setIsNeedCurrentCollectionUpdate(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          // TODO перевести
+          setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+        });
     }
     setIsNewPairWordSaved(true);
     setIsRefresh(true);
@@ -128,10 +141,31 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   const onCardDelete = () => {
-    console.log(cardId, 'norm');
-
     if (userToken && cardId && collectionId) {
-      deleteCard(userToken, collectionId, cardId);
+      deleteCard(userToken, cardId)
+        .then((response) => {
+          console.log(response);
+          setText('Карточка тактично удалена');
+          setIsNeedCurrentCollectionUpdate(true);
+          console.log(cardId, 'norm');
+        })
+        .catch((error) => {
+          console.log(error);
+          // TODO перевести
+          setText('Не смогли удалить новую карточку. Видимо, что-то пошло не так');
+        });
+    } else {
+      const tokenWarning = 'Для удаления карточки необходимо авторизоваться';
+      const collectionIdWarning = 'Коллекция карточек не найдена';
+      const cardIdWarning = 'Карточка не найдена';
+      let warning = '';
+
+      if (userToken == null) warning += tokenWarning;
+      if (collectionId == null) warning += collectionIdWarning;
+      if (cardId == null) warning += cardIdWarning;
+
+      setText(warning);
+      console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId} или cardId ${cardId}`);
     }
   };
 
