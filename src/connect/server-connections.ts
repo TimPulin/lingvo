@@ -88,7 +88,7 @@ export function editCard(token:string, collectionId:number, cardId:number, newWo
 export function deleteCard(token:string, cardId:number) {
   return axios
     .delete(
-      `/bind/${cardId}`,
+      `/binds/${cardId}`,
       {
         headers: {
           'Content-type': 'application/json',
