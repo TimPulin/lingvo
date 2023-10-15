@@ -25,18 +25,21 @@ const defaultPairWords: IPairWords = {
 };
 
 type CardUniversalPropsType = {
+  swiperUpdate?: () => void;
   pairWords?: IPairWords;
 };
 
+const initialSwiperUpdate = () => {};
+
 export default function CardUniversal(props: CardUniversalPropsType) {
-  const { pairWords = defaultPairWords } = props;
+  const { pairWords = defaultPairWords, swiperUpdate = initialSwiperUpdate } = props;
   const langPack = useCurrentLangPack();
   const userToken = useUserToken();
   const collectionId = useCurrentCollectionId();
 
   const isModeEdit = useCardModeEdit();
   const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
-  const { setText } = useStaticMessage();
+  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
   const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
   const [isRefresh, setIsRefresh] = useState(false);
@@ -88,7 +91,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       //   phrase: localPairWords.nativeWord,
       //   translationPhrase: localPairWords.foreignWord,
       // };
-
       if (userToken && collectionId) {
         addCard(userToken, collectionId, newWord)
           .then(() => {
@@ -114,15 +116,13 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       }
     } else if (userToken && cardId && collectionId) {
       editCard(userToken, collectionId, cardId, newWord)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           setText(langPack.CARD_CHANGES_MADE);
           setIsNeedCurrentCollectionUpdate(true);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           // TODO перевести
-          setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+          setText('Не смогли сохранить изменения. Видимо, что-то пошло не так');
         });
     }
     setIsNewPairWordSaved(true);
@@ -144,16 +144,19 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const onCardDelete = () => {
     if (userToken && cardId && collectionId) {
       deleteCard(userToken, cardId)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          // TODO перевести
           setText('Карточка тактично удалена');
+          // TODO сделать белый фон сообщения прозрачным или еще что-то придумать - некрасивое отображение сообщения о удалении
+          setIsMessageShow(true);
           setIsNeedCurrentCollectionUpdate(true);
-          console.log(cardId, 'norm');
+          swiperUpdate();
         })
         .catch((error) => {
           console.log(error);
           // TODO перевести
-          setText('Не смогли удалить новую карточку. Видимо, что-то пошло не так');
+          setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
+          setIsMessageShow(true);
         });
     } else {
       const tokenWarning = 'Для удаления карточки необходимо авторизоваться';
@@ -166,6 +169,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       if (cardId == null) warning += cardIdWarning;
 
       setText(warning);
+      setIsMessageShow(true);
       console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId} или cardId ${cardId}`);
     }
   };
@@ -210,6 +214,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 }
 
 CardUniversal.defaultProps = {
+  swiperUpdate: () => {},
   pairWords: {
     id: 3,
     nativeWord: '',
