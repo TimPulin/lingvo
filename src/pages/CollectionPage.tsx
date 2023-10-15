@@ -21,8 +21,6 @@ export default function CollectionPage() {
   const { isNeedCurrentCollectionUpdate, setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
   useEffect(() => {
-    console.log(isNeedCurrentCollectionUpdate);
-
     const { id } = params;
     setCurrentCollectionId(Number(id));
     if (userToken) {
