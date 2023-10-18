@@ -10,6 +10,15 @@ export function getAuthorizationVKToken() {
     .catch((error) => { throw new Error(error); });
 }
 
+export function getUserAvatar(token:string) {
+  return axios
+    .get('/me', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+}
+
 export function getCollectionsList(token:string) {
   return axios
     .get('/collections', {
