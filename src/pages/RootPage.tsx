@@ -5,6 +5,7 @@ import HeaderSite from '../components/header/HeaderSite';
 import Message from '../components/message/Message';
 import { getLocalStorageUserToken } from '../connect/local-storage-connections';
 import { updateUserToken } from '../store/slicers/user-token-slice';
+import CollectionSettingsBar from '../components/collection/CollectionSettingsBar';
 
 export default function RootPage() {
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ export default function RootPage() {
       <div className={`content ${classModalOpened()} ${loginPageClass()}`}>
         <Outlet />
       </div>
+      <CollectionSettingsBar />
     </div>
   );
 }

@@ -1,17 +1,14 @@
-// .swiper--active {
-//   .card {
-//     --turn-duration: 0s;
-//   }
-// }
+.swiper {
+  --card-width: calc(var(--screen-width));
+  --card-height: calc(var(--card-width) * 0.56);
 
-// .swiper-slide-next {
-//   .card {
-//     --turn-duration: 0s;
-//   }
-// }
+  .swiper-slide {
+    height: var(--card-height);
+  }
+}
 
-// .swiper {
-//   .card {
-//     --turn-duration: 0s;
-//   }
-// }
+@media (min-width: $medium-screen) {
+  .swiper {
+    --screen-width: calc(min(var(--medium-screen), 100vh) - 40px);
+  }
+}
