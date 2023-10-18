@@ -11,6 +11,7 @@ import { getCardsCollection } from '../connect/server-connections';
 import { useUserToken } from '../store/selectors';
 import { useStaticMessage } from '../components/global-context-provider/context-hooks';
 import { useNeedCurrentCollectionUpdate } from '../components/global-context-provider/update-collection';
+import CollectionFooter from '../components/collection/CollectionFooter';
 
 export default function CollectionPage() {
   const [currentCollectionId, setCurrentCollectionId] = useState<CurrentCollectionIdType>(null);
@@ -28,6 +29,7 @@ export default function CollectionPage() {
         .then((response) => {
           dispatch(updateCurrentPageName(response.data.name));
           dispatch(updateCurrentCardsCollection(response.data));
+
           setIsNeedCurrentCollectionUpdate(false);
         })
         .catch((error) => {
@@ -43,6 +45,7 @@ export default function CollectionPage() {
   return (
     <currentCollectionIdContext.Provider value={currentCollectionId}>
       <Outlet />
+      <CollectionFooter />
     </currentCollectionIdContext.Provider>
   );
 }
