@@ -39,7 +39,6 @@ export default function CardsPage() {
           messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку"
           ElementJSX={<ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateNewCardPage} />}
         />
-
       );
     }
   }
