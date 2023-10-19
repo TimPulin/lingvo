@@ -9,6 +9,7 @@ import { CollectionsListType, CollectionType } from '../utils/types';
 import CardCollection from '../components/cards/CardCollection';
 import { setLocalStorageUserToken } from '../connect/local-storage-connections';
 import ButtonPlus from '../components/button-plus/ButtonPlus';
+import MessageOnPage from '../components/message/MessageOnPage';
 
 export default function CollectionsListPage() {
   const [collectionsList, setCollectionsList] = useState<CollectionsListType>([]);
@@ -53,14 +54,10 @@ export default function CollectionsListPage() {
 
   if (collectionsList.length === 0) {
     return (
-      <div className="content__list">
-        <div className="content__item collections">
-          <p>
-            Мы не нашли у вас коллекции карточек. Давайте создадим вашу первую коллекцию
-          </p>
-          <ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateCollectionPage} />
-        </div>
-      </div>
+      <MessageOnPage
+        messageText="Мы не нашли у вас коллекции карточек. Давайте создадим вашу первую коллекцию"
+        ElementJSX={<ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateCollectionPage} />}
+      />
     );
   }
 

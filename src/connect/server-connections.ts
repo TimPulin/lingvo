@@ -10,7 +10,7 @@ export function getAuthorizationVKToken() {
     .catch((error) => { throw new Error(error); });
 }
 
-export function getUserAvatar(token:string) {
+export function getUserData(token:string) {
   return axios
     .get('/me', {
       headers: {
