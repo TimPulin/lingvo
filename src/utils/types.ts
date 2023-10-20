@@ -47,14 +47,15 @@ type CollectionLanguageType = {
 };
 
 export type CardType = {
-  collectionId: string,
   createdAt: string,
+  userId: number,
+  collectionId: string,
   id: number,
   phrase: PhraseType,
   phraseId: number,
   translationPhrase: PhraseType,
   translationPhraseId: number,
-  userId: number,
+  pronunciation: string,
 };
 
 export type CardsListType = CardType[];

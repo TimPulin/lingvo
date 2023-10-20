@@ -80,7 +80,7 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                       cardId: item.id,
                       nativeWord: item.phrase.value,
                       foreignWord: item.translationPhrase.value,
-                      transcription: '',
+                      transcription: item.pronunciation,
                     }}
                   />
                 </div>
