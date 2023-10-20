@@ -29,6 +29,7 @@ export default function CollectionPage() {
         .then((response) => {
           dispatch(updateCurrentPageName(response.data.name));
           dispatch(updateCurrentCardsCollection(response.data));
+          console.log(response.data);
 
           setIsNeedCurrentCollectionUpdate(false);
         })

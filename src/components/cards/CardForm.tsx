@@ -19,6 +19,7 @@ export default function CardForm(props: CardFormPropsType) {
     newWordsList, onSubmit, onCancel, primaryButtonName,
   } = props;
   const { CANCEL } = useCurrentLangPack();
+  // console.log(newWordsList);
 
   function onBodyClick(event: React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();

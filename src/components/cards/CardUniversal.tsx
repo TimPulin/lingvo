@@ -84,13 +84,10 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     const newWord = {
       phrase: localPairWords.nativeWord,
       translationPhrase: localPairWords.foreignWord,
+      pronunciation: localPairWords.transcription,
     };
     event.preventDefault();
     if (isModeEdit) {
-      // const newWord = {
-      //   phrase: localPairWords.nativeWord,
-      //   translationPhrase: localPairWords.foreignWord,
-      // };
       if (userToken && collectionId) {
         addCard(userToken, collectionId, newWord)
           .then(() => {

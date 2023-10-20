@@ -11,7 +11,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate('/collection');
+    navigate('/collections');
   }, []);
 
   useEffect(() => {
