@@ -1,3 +1,46 @@
 .button-base {
-  border: none;
+  @include btn-reset;
+  @include link-reset;
+  @include transition-basic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  padding: 5px 8px;
+
+
+  align-self: flex-end;
+  transition-duration: .1s;
+  transition-property: color, background-color, background-image, box-shadow;
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    padding-top: 3px;
+    color: $color-smooth-black;
+  }
+
+  .svg__root {
+    width: 100%;
+    height: 100%;
+    fill: $color-smooth-black;
+  }
+}
+
+.button-base--icon {
+  padding: 0;
+
+  .button-base__icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.button-base--hide {
+  display: none;
 }

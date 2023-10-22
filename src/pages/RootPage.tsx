@@ -1,17 +1,19 @@
-import { Outlet, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import HeaderSite from '../components/header/HeaderSite';
-import Message from '../components/message/Message';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { getLocalStorageUserToken } from '../connect/local-storage-connections';
 import { updateUserToken } from '../store/slicers/user-token-slice';
-import CollectionSettingsBar from '../components/collection/CollectionSettingsBar';
+import HeaderSite from '../components/header/HeaderSite';
+import Message from '../components/message/Message';
+import CollectionActionsBar from '../components/collection/CollectionActionsBar';
 
 export default function RootPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPageLogin, setIsPageLogin] = useState(false);
+
   const classModalOpened = () => (isModalOpen ? 'modal-opened' : '');
 
   const changeIsModalOpen = (isOpen:boolean) => {
@@ -41,6 +43,7 @@ export default function RootPage() {
 
   return (
     <div className="container ">
+      <CollectionActionsBar />
       <div
         className={`overlay ${classModalOpened()}`}
         onClick={dispatchOverlayClicked}
@@ -56,7 +59,6 @@ export default function RootPage() {
       <div className={`content ${classModalOpened()} ${loginPageClass()}`}>
         <Outlet />
       </div>
-      <CollectionSettingsBar />
     </div>
   );
 }

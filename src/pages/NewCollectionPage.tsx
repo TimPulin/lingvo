@@ -24,7 +24,6 @@ export default function CreateCollectionPage() {
     if (userToken) {
       try {
         const response = await addCollection(userToken, collectionData);
-        console.log((response));
         // TODO перевести
         setTextMessage('Новая коллекция сохранена');
         staticMessagePromise(setIsShowMessage, true)

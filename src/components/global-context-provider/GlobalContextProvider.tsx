@@ -4,12 +4,27 @@ import RootPage from '../../pages/RootPage';
 import { StaticMessageContext } from './context-hooks';
 import { isCollectionSavedContext } from './collection-form-context-hook';
 import { IsNeedCurrentCollectionUpdateContext } from './update-collection';
+import { ActionBar } from './action-bar-context-hook';
 
 export default function GlobalContextProvider() {
   const [isCollectionSaved, setIsCollectionSaved] = useState(false);
+
   const [isStaticMessageShow, setIsStaticMessageShow] = useState(false);
   const [staticMessageText, setStaticMessageText] = useState('');
+
   const [isNeedCurrentCollectionUpdate, setIsNeedCurrentCollectionUpdate] = useState(false);
+
+  const [isActionBarOpen, setIsActionBarOpen] = useState(false);
+  const [currentIdForActionBar, setCurrentIdForActionBar] = useState<number | null>(null);
+
+  const actionBarState = useMemo(() => (
+    {
+      isActionBarOpen,
+      setIsActionBarOpen,
+      id: currentIdForActionBar,
+      setId: setCurrentIdForActionBar,
+    }
+  ), [isActionBarOpen, currentIdForActionBar]);
 
   const collectionSaved = useMemo(() => (
     {
@@ -38,7 +53,9 @@ export default function GlobalContextProvider() {
     <StaticMessageContext.Provider value={staticMessage}>
       <isCollectionSavedContext.Provider value={collectionSaved}>
         <IsNeedCurrentCollectionUpdateContext.Provider value={isNeedCurrentCollectionUpdateState}>
-          <RootPage />
+          <ActionBar.Provider value={actionBarState}>
+            <RootPage />
+          </ActionBar.Provider>
         </IsNeedCurrentCollectionUpdateContext.Provider>
       </isCollectionSavedContext.Provider>
     </StaticMessageContext.Provider>

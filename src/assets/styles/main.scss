@@ -18,8 +18,9 @@
 
 @import './components/burger';
 @import './animations/burger-animation';
+@import './components/actions-bar';
 
-@import '../../components/button-plus/button-plus.scss';
+@import '../../components/base/buttons/button-plus/button-plus.scss';
 
 @import '../../components/cards/card-styles/three-dots.scss';
 @import '../../components/cards/card-styles/control-block.scss';
@@ -37,7 +38,6 @@
 
 @import '../../components/collection/collection-styles/collection.scss';
 @import '../../components/collection/collection-styles/collection-footer.scss';
-@import '../../components/collection/collection-styles/collection-settings-bar.scss';
 
 @import '../../components/message/message.scss';
 

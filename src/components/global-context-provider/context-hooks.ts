@@ -7,14 +7,14 @@ type StaticMessageContextType = {
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const staticMessageContextState = {
+const initialState = {
   text: '',
   setText: () => {},
   isShow: false,
   setIsShow: () => {},
 };
 
-export const StaticMessageContext = createContext<StaticMessageContextType>(staticMessageContextState);
+export const StaticMessageContext = createContext<StaticMessageContextType>(initialState);
 
 export function useStaticMessage() {
   return useContext(StaticMessageContext);

@@ -1,0 +1,19 @@
+.button-plus {
+  @include btn-reset;
+  position: relative;
+  width: 45px;
+  height: 45px;
+
+  .svg {
+    &__root {
+      width: 100%;
+      height: 100%;
+      fill: $color-secondary;
+    }
+
+    &:active .svg__root,
+    .svg__root:active {
+      fill: $color-secondary_shade;
+    }
+  }
+}

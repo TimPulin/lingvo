@@ -8,7 +8,7 @@ import { updateUserToken } from '../store/slicers/user-token-slice';
 import { CollectionsListType, CollectionType } from '../utils/types';
 import CardCollection from '../components/cards/CardCollection';
 import { setLocalStorageUserToken } from '../connect/local-storage-connections';
-import ButtonPlus from '../components/button-plus/ButtonPlus';
+import ButtonPlus from '../components/base/buttons/button-plus/ButtonPlus';
 import MessageOnPage from '../components/message/MessageOnPage';
 
 export default function CollectionsListPage() {

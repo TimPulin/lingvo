@@ -62,6 +62,35 @@ export function addCollection(token:string, collectionData:CollectionFormType) {
     );
 }
 
+export function editCollection(token:string, collectionId:number, collectionData:CollectionFormType) {
+  return axios
+    .post(
+      `/collections/${collectionId}`,
+      {
+        ...collectionData,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}
+
+export function deleteCollection(token:string, collectionId:number) {
+  return axios
+    .delete(
+      `/collections/${collectionId}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}
+
 export function addCard(token:string, collectionId:number, newWord:NewWordType) {
   return axios
     .post(
