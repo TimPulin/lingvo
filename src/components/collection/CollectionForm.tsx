@@ -1,6 +1,7 @@
 import { Form, Input, Select } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import { useCurrentLangPack } from '../../store/selectors';
 import { CollectionFormType } from '../../utils/types';
 
@@ -20,12 +21,19 @@ const formInitialState:CollectionFormType = {
 export default function CollectionForm(props:CollectionFormPropsType) {
   const { CANCEL, SAVE } = useCurrentLangPack();
   const { languagesList, formState = formInitialState, onSubmitFunction } = props;
+
   const formik = useFormik({
     initialValues: formState,
     onSubmit(values) {
       onSubmitFunction(values);
     },
   });
+
+  useEffect(() => {
+    if (formState) {
+      formik.setValues(formState);
+    }
+  }, [formState]);
 
   /* TODO языковые переменные */
   /* TODO понять как работает search */
@@ -34,30 +42,29 @@ export default function CollectionForm(props:CollectionFormPropsType) {
       <Form
         className="form collection-form"
         onSubmitCapture={formik.handleSubmit}
-        initialValues={{
-          languageId: formik.values.languageId,
-          translationLanguageId: formik.values.translationLanguageId,
-        }}
       >
         <div className="collection-form__languages-list-wrap">
           <label className="collection-form__label label">
             <span>Родной язык&nbsp;коллекции</span>
-            <Form.Item name="language">
+            <Form.Item>
               <Select
                 className="collection-form__select"
                 options={languagesList}
-                showSearch
+                filterOption={false}
+                value={formik.values.languageId}
                 onChange={(value) => { formik.handleChange({ target: { name: 'languageId', value } }); }}
+                showSearch
               />
             </Form.Item>
           </label>
           <label className="collection-form__label label">
             <span>Иностранный язык&nbsp;коллекции</span>
-            <Form.Item name="translationLanguage">
+            <Form.Item>
               <Select
                 aria-required
                 className="collection-form__select"
                 options={languagesList}
+                value={formik.values.translationLanguageId}
                 onChange={(value) => { formik.handleChange({ target: { name: 'translationLanguageId', value } }); }}
               />
             </Form.Item>

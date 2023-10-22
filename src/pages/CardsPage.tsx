@@ -6,7 +6,7 @@ import { useCardsCollection } from '../store/selectors';
 import CardContentItem from '../components/cards/CardContentItem';
 import SwiperReact from '../components/swiper-react/SwiperReact';
 import MessageOnPage from '../components/message/MessageOnPage';
-import ButtonPlus from '../components/button-plus/ButtonPlus';
+import ButtonPlus from '../components/base/buttons/button-plus/ButtonPlus';
 
 export default function CardsPage() {
   const isCardModeEdit = false;
@@ -47,10 +47,6 @@ export default function CardsPage() {
     <isCardModeEditContext.Provider value={isCardModeEdit}>
       <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="content__list content__list--cards-list-page">
-          <ButtonPlus
-            classAdditional="collections__button-new collections__button-new--fixed"
-            onClickFunction={gotoCreateNewCardPage}
-          />
           <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection.binds} />} />
         </div>
       </isPairWordSavedContext.Provider>

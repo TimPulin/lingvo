@@ -1,0 +1,26 @@
+.actions-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  max-height: 70%;
+  z-index: 1100;
+
+  box-shadow: 0 0 1px 1px $color-grey;
+  border-top-left-radius: $border-radius-basic;
+  border-top-right-radius: $border-radius-basic;
+  background-color: #fff;
+
+  &__body {
+    padding: 10px;
+  }
+
+  &__title {
+    color: $color-grey;
+  }
+}
+
+.action-bar--opened {
+  display: block;
+}
