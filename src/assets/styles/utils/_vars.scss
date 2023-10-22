@@ -7,6 +7,8 @@ $color-secondary: #ff6c00;
 $color-secondary_shade: #ff5900;
 $color-secondary_light: rgba(255, 108, 0, .5);
 
+$color-third: #6b00ff;
+
 $color-smooth-black: #060606;
 $color-grey: #ccc;
 $color-grey_max_light: #eaeaea;
@@ -20,6 +22,9 @@ $page-background: $color-grey_max_light;
   --color-primary_light: rgba(0, 160, 255, .1);
   ;
   --color-secondary: #ff6c00;
+
+  --color-third: #6b00ff;
+
   --page-background: #fff;
   --button-basic-background: #f1f1f1;
   --color-hover: #0068A6;
@@ -33,6 +38,9 @@ $page-background: $color-grey_max_light;
   --color-primary_light: rgba(0, 160, 255, 1);
   ;
   --color-secondary: #ff6c00;
+
+  --color-third: #6b00ff;
+
   --page-background: black;
   --button-basic-background: #f1f1f1;
   --color-hover: #0068A6;

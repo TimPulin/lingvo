@@ -38,7 +38,7 @@
   }
 
   &__item {
-    --item-width: calc(var(--screen-width) * 0.7);
+    --item-width: calc(var(--screen-width) * 0.9);
     --item-height: calc(var(--item-width) * 0.6);
 
     width: var(--item-width);
@@ -65,26 +65,8 @@
 }
 
 @media (min-width: $small-screen) {
-  .collections__list {
-    align-items: center;
-  }
-
   .collections__item {
-    --item-width: calc(var(--screen-width) * 0.5);
-  }
-
-  .collections__item:only-child {
-    --item-width: calc(var(--screen-width) * 0.7);
-  }
-}
-
-@media (min-width: $medium-screen) {
-  .collections__list {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .collections__item {
-    --item-width: calc(var(--screen-width) * 0.3);
+    width: 415px;
+    height: 250px;
   }
 }
