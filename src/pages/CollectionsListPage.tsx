@@ -80,9 +80,12 @@ export default function CollectionsListPage() {
   return (
 
     <div className="content__list">
+      <div className="wrapper-position-fixed">
+        <ButtonPlus classAdditional="button-plus--add-new" onClickFunction={gotoCreateCollectionPage} />
+      </div>
       <div className="content__item collections">
         {/* TODO увеличить index в collections__button-new--fixed */}
-        <ButtonPlus classAdditional="collections__button-new--fixed" onClickFunction={gotoCreateCollectionPage} />
+        {/* <ButtonPlus classAdditional="collections__button-new--fixed" onClickFunction={gotoCreateCollectionPage} /> */}
 
         <ul className="collections__list">
           {

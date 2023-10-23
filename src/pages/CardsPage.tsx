@@ -46,6 +46,9 @@ export default function CardsPage() {
   return (
     <isCardModeEditContext.Provider value={isCardModeEdit}>
       <isPairWordSavedContext.Provider value={pairWordSaved}>
+        <div className="wrapper-position-fixed">
+          <ButtonPlus classAdditional="button-plus--add-new" onClickFunction={gotoCreateNewCardPage} />
+        </div>
         <div className="content__list content__list--cards-list-page">
           <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection.binds} />} />
         </div>

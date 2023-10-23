@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CirclePlusIcon from '../../../icons/CirclePlusIcon';
+import FilledCirclePlusIcon from '../../../icons/FilledCirclePlusIcon';
 
 const BUTTON_TOUCHED = 'button-plus--touched';
 
@@ -23,7 +23,7 @@ export default function ButtonPlus(props: ButtonPlusPropsType) {
       onTouchEnd={() => setIsTouched(false)}
       onClick={onClickFunction}
     >
-      <CirclePlusIcon />
+      <FilledCirclePlusIcon />
     </button>
   );
 }
