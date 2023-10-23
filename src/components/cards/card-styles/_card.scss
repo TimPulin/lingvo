@@ -129,6 +129,7 @@
     13px 13px 1px var(--color-third);
 
   .card__body {
+    --current-color: var(--color-third);
     opacity: 1;
     border-radius: $border-radius-basic;
     background-color: var(--color-third);
