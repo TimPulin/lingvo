@@ -6,8 +6,7 @@ import { CardFormPropsType } from './CardForm';
 import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
 import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
 import { HIDE } from '../../utils/constants';
-import CardControlBlock from './CardControlBlock';
-import ThreeDots from './ThreeDots';
+import CardControlBlock from './card-control-block/CardControlBlock';
 
 const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
@@ -15,7 +14,6 @@ const CARD_BODY_FOREIGN = 'card__body--foreign';
 
 const CARD_CONTENT_NATIVE = 'card__content--native';
 const CARD_CONTENT_FOREIGN = 'card__content--foreign';
-const THREE_DOTS_HIDE = 'three-dots--hide';
 const FADE_IN_OUT_CLASS = 'card__body-fade-in-out'
 
 type CardBasePropsType = {
@@ -40,8 +38,8 @@ export default function CardBase(props: CardBasePropsType) {
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
-  const [isControlBlockShow, setIsControlBlockShow] = useState(false);
   const [isFadeInOutRunning, setIsFadeInOutRunning] = useState(false);
+  const [isCardStartTurn, setIsCardStartTurn] = useState(false);
 
     useEffect(() => {
     setIsEdit(isModeEdit);
@@ -60,23 +58,20 @@ export default function CardBase(props: CardBasePropsType) {
   const nativeContentHide = () => (isContentNative ? '' : HIDE);
   const foreignContentHide = () => (isContentNative ? HIDE : '');
 
-  const threeDotsHide = () => (isControlBlockShow ? THREE_DOTS_HIDE : '' );
-
   const fadeInOutClass = () => (isFadeInOutRunning ? FADE_IN_OUT_CLASS : '');
 
   function turnCard() {
     if (!isSwiperSlideInProgress) {
-      setIsCardNative(!isCardNative);
+      setIsCardStartTurn(true);
+      setTimeout(() => {
+        setIsCardNative(!isCardNative);
+      }, 10);
 
       setTimeout(() => {
         setIsContentNative(!isContentNative);
+        setIsCardStartTurn(false);
       }, 250);
     }
-  }
-
-  function onCallControlBlock(event: React.MouseEvent) {
-    event.stopPropagation();
-    setIsControlBlockShow(true)
   }
 
   function refreshCard() {
@@ -150,20 +145,14 @@ formForeign.onCancel = localOnCancelForeign;
       role="button"
       tabIndex={0}
     >
-      {/* TODO переделать threedots, чтобы крутился вместе с карточкой (перенести для начала в card__body) */}
-      <ThreeDots
-        classHide={threeDotsHide}
-        onClick={onCallControlBlock}
-      />
 
       <div ref={cardBodyRef} className={`card__body ${cardBodyClass()} ${fadeInOutClass()}`}>
 
-        <CardControlBlock
-          isShow={isControlBlockShow}
-          setIsShow={setIsControlBlockShow}
-          onEdit={setIsEdit}
-          onCardDelete={onCardDelete}
-        />
+      <CardControlBlock
+        isCardStartTurn={isCardStartTurn}
+        onEdit={setIsEdit}
+        onDelete={onCardDelete}
+      />
 
         <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
           <div className="card__text">

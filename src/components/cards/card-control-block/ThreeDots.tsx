@@ -1,6 +1,7 @@
 export type ThreeDotsPropsType = {
-  classHide: () => void;
+  classHide: () => string;
   onClick: (event: React.MouseEvent) => void;
+  // isCardStartTurn?: boolean;
 };
 
 export default function ThreeDots(props: ThreeDotsPropsType) {

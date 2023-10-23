@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getCollectionsList } from '../connect/server-connections';
+import { getCollectionsList, deleteCollection } from '../connect/server-connections';
 import { useCurrentLangPack, useUserToken } from '../store/selectors';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { updateUserToken } from '../store/slicers/user-token-slice';
@@ -10,6 +10,7 @@ import CardCollection from '../components/cards/CardCollection';
 import { setLocalStorageUserToken } from '../connect/local-storage-connections';
 import ButtonPlus from '../components/base/buttons/button-plus/ButtonPlus';
 import MessageOnPage from '../components/message/MessageOnPage';
+import { useStaticMessage } from '../components/global-context-provider/context-hooks';
 
 export default function CollectionsListPage() {
   const [collectionsList, setCollectionsList] = useState<CollectionsListType>([]);
@@ -18,6 +19,7 @@ export default function CollectionsListPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { COLLECTIONS_PAGE } = useCurrentLangPack();
+  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
 
   function getCollectionsListLocal() {
     if (userToken) {
@@ -30,6 +32,20 @@ export default function CollectionsListPage() {
         });
     }
   }
+
+  const onCollectionDelete = async (collectionId:number) => {
+    if (userToken) {
+      try {
+        await deleteCollection(userToken, collectionId);
+        // TODO перевести
+        setText('Коллекция аккуратно удалена');
+        setIsMessageShow(true);
+        getCollectionsListLocal();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     const { search } = location;
@@ -72,7 +88,10 @@ export default function CollectionsListPage() {
           {
             collectionsList.map((item:CollectionType) => (
               <li className="collections__item" key={item.id}>
-                <CardCollection collection={item} />
+                <CardCollection
+                  collection={item}
+                  onCollectionDelete={onCollectionDelete}
+                />
               </li>
             ))
           }

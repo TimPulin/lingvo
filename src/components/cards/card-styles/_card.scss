@@ -118,14 +118,21 @@
 .card--collection {
   // TODO если будут проблемы с отображением, сделать более очевидный вариант
   //так красивее, но как это работает, я не понял.
-  box-shadow: 5px 5px 1px #0090FF, 5px 5px 1px #fff, 10px 10px 1px #0090FF;
+  // box-shadow: 5px 5px 1px #0090FF, 5px 5px 1px #fff, 10px 10px 1px #0090FF;
   // box-shadow: 3px 3px 1px #0080FF, 5px 5px 1px #00a0FF, 7px 7px 1px #0080FF;
 
+  box-shadow:
+    3px 3px 1px var(--color-third),
+    4px 4px 1px #fff,
+    8px 8px 1px var(--color-third),
+    9px 9px 1px #fff,
+    13px 13px 1px var(--color-third);
 
   .card__body {
+    --current-color: var(--color-third);
     opacity: 1;
     border-radius: $border-radius-basic;
-    background-color: var(--color-primary);
+    background-color: var(--color-third);
     transform: none;
     animation: none;
   }

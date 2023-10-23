@@ -4,7 +4,7 @@
   right: 0;
   opacity: 1;
   z-index: 20;
-  transition: opacity .3s ease;
+  // transition: opacity .3s ease;
 
   &__btn {
     @include btn-reset;
@@ -42,4 +42,5 @@
 
 .three-dots--hide {
   opacity: 0;
+  display: none;
 }
