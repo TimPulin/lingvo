@@ -5,3 +5,7 @@ export function setLocalStorageUserToken(token:string) {
 export function getLocalStorageUserToken() {
   return localStorage.getItem('userToken');
 }
+
+export function removeLocalStorageUserToken() {
+  return localStorage.removeItem('userToken');
+}

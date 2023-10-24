@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useCurrentLangPack, useCurrentPageName } from '../../store/selectors';
+import { removeLocalStorageUserToken } from '../../connect/local-storage-connections';
 import ArrowLeftIcon from '../icons/ArrowLeftIcon';
 import UserBlock from '../user/UserBlock';
 
@@ -45,6 +46,12 @@ export default function HeaderSite(props: IHeaderSiteProps) {
     navigate(-1);
   }
 
+  const onLogout = () => {
+    removeLocalStorageUserToken();
+    closeMenu();
+    navigate('/login');
+  };
+
   return (
     <header className="header">
       <div className="header__wrap">
@@ -63,7 +70,7 @@ export default function HeaderSite(props: IHeaderSiteProps) {
           <div className={`nav__panel ${navPanelOperateClass()}`}>
 
             <div className="nav__panel-card nav__panel-card--top">
-              <UserBlock />
+              <UserBlock onLogout={onLogout} />
             </div>
 
             <div className="nav__panel-card nav__panel-card--navigation ">
