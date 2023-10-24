@@ -53,6 +53,7 @@ export default function CollectionsListPage() {
     if (token) {
       dispatch(updateUserToken(token));
       setLocalStorageUserToken(token);
+      navigate('/collections');
     }
   }, []);
 
