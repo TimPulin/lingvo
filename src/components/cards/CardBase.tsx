@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import { useState, useEffect, useRef } from 'react';
 import CardEditorBlock from './CardEditorBlock';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
@@ -14,7 +13,7 @@ const CARD_BODY_FOREIGN = 'card__body--foreign';
 
 const CARD_CONTENT_NATIVE = 'card__content--native';
 const CARD_CONTENT_FOREIGN = 'card__content--foreign';
-const FADE_IN_OUT_CLASS = 'card__body-fade-in-out'
+const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
 type CardBasePropsType = {
   isRefresh: boolean;
@@ -28,20 +27,30 @@ type CardBasePropsType = {
 
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign, onCardDelete
+    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign, onCardDelete,
   } = props;
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
 
   const { isPairWordSaved: isNewPairWordSaved } = usePairWordSaved();
   const isSwiperSlideInProgress = useSwiperSlide();
+
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
+
   const [isEdit, setIsEdit] = useState(false);
   const [isFadeInOutRunning, setIsFadeInOutRunning] = useState(false);
   const [isCardStartTurn, setIsCardStartTurn] = useState(false);
 
-    useEffect(() => {
+  const [isCardBodyRotate, setIsCardBodyRotate] = useState(false);
+  const [isCardNativeContentRotate, setIsCardNativeContentRotate] = useState(false);
+  const [isCardForeignContentRotate, setIsCardForeignContentRotate] = useState(false);
+
+  const cardBodyRotateClass = () => (isCardBodyRotate ? 'card__body--rotate' : '');
+  const cardNativeContentRotateClass = () => (isCardNativeContentRotate ? 'card__content--rotate' : '');
+  const cardForeignContentRotateClass = () => (isCardForeignContentRotate ? 'card__content--rotate' : '');
+
+  useEffect(() => {
     setIsEdit(isModeEdit);
   }, [isModeEdit]);
 
@@ -52,8 +61,9 @@ export default function CardBase(props: CardBasePropsType) {
   const cardEditMode = () => (isEdit ? CARD_EDIT : '');
   const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
 
-  const nativeContentClass = () => (isCardNative ? '' : CARD_CONTENT_NATIVE);
-  const foreignContentClass = () => (isCardNative ? CARD_CONTENT_FOREIGN : '');
+  // TODO - проверить на необходимость
+  const nativeContentClass = () => (isCardNative ? CARD_CONTENT_NATIVE : '');
+  const foreignContentClass = () => (isCardNative ? '' : CARD_CONTENT_FOREIGN);
 
   const nativeContentHide = () => (isContentNative ? '' : HIDE);
   const foreignContentHide = () => (isContentNative ? HIDE : '');
@@ -62,13 +72,29 @@ export default function CardBase(props: CardBasePropsType) {
 
   function turnCard() {
     if (!isSwiperSlideInProgress) {
-      setIsCardStartTurn(true);
+      setIsCardBodyRotate(true);
       setTimeout(() => {
-        setIsCardNative(!isCardNative);
-      }, 10);
+        setIsCardBodyRotate(false);
+      }, 500);
 
       setTimeout(() => {
-        setIsContentNative(!isContentNative);
+        setIsCardNative(!isCardNative);
+        if (isCardNative) {
+          setIsCardForeignContentRotate(true);
+        } else {
+          setIsCardNativeContentRotate(true);
+        }
+      }, 250);
+
+      setTimeout(() => {
+        setIsCardForeignContentRotate(false);
+        setIsCardNativeContentRotate(false);
+      }, 500);
+
+      setIsCardStartTurn(true);
+
+      setTimeout(() => {
+        setIsContentNative(!isCardNative);
         setIsCardStartTurn(false);
       }, 250);
     }
@@ -81,15 +107,14 @@ export default function CardBase(props: CardBasePropsType) {
       setIsContentNative(true);
       setIsRefresh(false);
     }, 250);
-
   }
 
   useEffect(() => {
     if (isRefresh) {
       setTimeout(() => {
-        refreshCard()
-      }, 500)
-    };
+        refreshCard();
+      }, 500);
+    }
   }, [isRefresh]);
 
   // чтобы при сохранении карточка не переворачивалась
@@ -100,61 +125,61 @@ export default function CardBase(props: CardBasePropsType) {
   };
   formForeign.onSubmit = localOnSubmitForeign;
 
-function localOnCancel() {
-  if (cardBodyRef.current) {
-    const fadeDurationProp = getComputedStyle(cardBodyRef.current).getPropertyValue('--fade-duration');
-    const animationDuration = Number(fadeDurationProp.slice(0, -1)) * 1000;
+  function localOnCancel() {
+    if (cardBodyRef.current) {
+      const fadeDurationProp = getComputedStyle(cardBodyRef.current).getPropertyValue('--fade-duration');
+      const animationDuration = Number(fadeDurationProp.slice(0, -1)) * 1000;
 
-    setIsFadeInOutRunning(true)
-    setTimeout(() => {
-      setIsEdit(false);
-    }, animationDuration / 2);
+      setIsFadeInOutRunning(true);
+      setTimeout(() => {
+        setIsEdit(false);
+      }, animationDuration / 2);
 
-    setTimeout(() => {
-      setIsFadeInOutRunning(false);
-    }, animationDuration);
+      setTimeout(() => {
+        setIsFadeInOutRunning(false);
+      }, animationDuration);
+    }
   }
-}
 
-const onCancelNative = Object.assign(formNative.onCancel, {});
-const localOnCancelNative = (event:React.FormEvent) => {
-  event.stopPropagation();
-  if (isModeEdit) {
-    onCancelNative(event);
-  } else {
-    localOnCancel();
-  }
-}
-formNative.onCancel = localOnCancelNative;
+  const onCancelNative = Object.assign(formNative.onCancel, {});
+  const localOnCancelNative = (event:React.FormEvent) => {
+    event.stopPropagation();
+    if (isModeEdit) {
+      onCancelNative(event);
+    } else {
+      localOnCancel();
+    }
+  };
+  formNative.onCancel = localOnCancelNative;
 
-const onCancelForeign = Object.assign(formForeign.onCancel, {});
-const localOnCancelForeign = (event:React.FormEvent) => {
-  event.stopPropagation();
-  if (isModeEdit) {
-    onCancelForeign(event);
-  } else {
-    localOnCancel()
-  }
-}
-formForeign.onCancel = localOnCancelForeign;
+  const onCancelForeign = Object.assign(formForeign.onCancel, {});
+  const localOnCancelForeign = (event:React.FormEvent) => {
+    event.stopPropagation();
+    if (isModeEdit) {
+      onCancelForeign(event);
+    } else {
+      localOnCancel();
+    }
+  };
+  formForeign.onCancel = localOnCancelForeign;
 
   return (
+    /* eslint-disable-next-line */
     <article
-      className={`card ${cardEditMode()}`}
+      className={`card ${cardEditMode()} ${cardBodyRotateClass()}`}
       onClick={turnCard}
-      role="button"
       tabIndex={0}
     >
 
       <div ref={cardBodyRef} className={`card__body ${cardBodyClass()} ${fadeInOutClass()}`}>
 
-      <CardControlBlock
-        isCardStartTurn={isCardStartTurn}
-        onEdit={setIsEdit}
-        onDelete={onCardDelete}
-      />
+        <CardControlBlock
+          isCardStartTurn={isCardStartTurn}
+          onEdit={setIsEdit}
+          onDelete={onCardDelete}
+        />
 
-        <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
+        <div className={`card__content ${nativeContentHide()} ${nativeContentClass()} ${cardNativeContentRotateClass()}`}>
           <div className="card__text">
             {pairWords.nativeWord}
           </div>
@@ -162,10 +187,14 @@ formForeign.onCancel = localOnCancelForeign;
             form={formNative}
           />
         </div>
-        <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
+        <div className={`card__content ${foreignContentHide()} ${foreignContentClass()} ${cardForeignContentRotateClass()}`}>
           <div className="card__text">
             <div>{pairWords.foreignWord}</div>
-            <div className='card__transcription'>[{pairWords.transcription}]</div>
+            <div className="card__transcription">
+              [
+              {pairWords.transcription}
+              ]
+            </div>
           </div>
           <CardEditorBlock
             form={formForeign}

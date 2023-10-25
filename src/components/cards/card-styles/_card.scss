@@ -1,5 +1,7 @@
 .card {
   --turn-duration: .5s;
+  // --turn-duration: .0s;
+
 
   height: 100%;
   border-radius: $border-radius-basic;
@@ -34,8 +36,6 @@
 
     font-size: 32px;
     color: #fff;
-
-    transform: rotateX(180deg);
   }
 
   &__body-fade-in-out {
@@ -73,24 +73,23 @@
   }
 }
 
-
+.card__body--rotate {
+  animation: card-body-rotate 0.5s ease-in-out;
+}
 
 .card__body--native {
   --current-color: var(--color-primary);
-  animation: turn-foreign-to-native var(--turn-duration) ease-in-out forwards;
+  background-color: var(--color-primary);
 }
 
 .card__body--foreign {
   --current-color: var(--color-secondary);
-  animation: turn-native-to-foreign var(--turn-duration) ease-in-out forwards;
+  background-color: var(--color-secondary);
+
 }
 
-.card__content--native {
-  animation: turn-content-native var(--turn-duration) ease-in-out forwards;
-}
-
-.card__content--foreign {
-  animation: turn-content-foreign var(--turn-duration) ease-in-out forwards;
+.card__content--rotate {
+  transform: rotateX(180deg);
 }
 
 .card--edit {
@@ -116,10 +115,6 @@
 }
 
 .card--collection {
-  // TODO если будут проблемы с отображением, сделать более очевидный вариант
-  //так красивее, но как это работает, я не понял.
-  // box-shadow: 5px 5px 1px #0090FF, 5px 5px 1px #fff, 10px 10px 1px #0090FF;
-  // box-shadow: 3px 3px 1px #0080FF, 5px 5px 1px #00a0FF, 7px 7px 1px #0080FF;
 
   box-shadow:
     3px 3px 1px var(--color-third),
