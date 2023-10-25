@@ -13,9 +13,8 @@ type SwiperReactPropsType = {
 };
 
 const swiperParams:SwiperOptions = {
-  spaceBetween: 20,
+  spaceBetween: 30,
   loop: true,
-  // nested: true,
   observer: true,
   breakpoints: {
     991: {

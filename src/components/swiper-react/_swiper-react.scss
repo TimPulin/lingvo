@@ -1,14 +1,28 @@
 .swiper {
-  --card-width: calc(var(--screen-width));
+  --card-width: calc(var(--screen-width) - 10px);
   --card-height: calc(var(--card-width) * 0.56);
 
-  .swiper-slide {
+  .swiper-slide-next {
+    .card {
+      --turn-duration: .0s;
+    }
+  }
+
+  .card {
     height: var(--card-height);
+    width: var(--card-width);
+    margin-inline: auto;
   }
 }
 
-@media (min-width: $medium-screen) {
+@media (min-width: $mobile-screen) {
   .swiper {
-    --screen-width: calc(min(var(--medium-screen), 100vh) - 40px);
+    --screen-width: calc(min(540px, 100vh) - 40px);
+
+    .card {
+      height: var(--card-height);
+      width: var(--card-width);
+      margin-inline: auto;
+    }
   }
 }

@@ -31,6 +31,7 @@ export default function CardCollection(props:CardCollectionPropsType) {
     <ControlBlockButton
       onClick={onClickAddCard}
       buttonsText="Add card"
+      key="add_card"
     />
   );
 
