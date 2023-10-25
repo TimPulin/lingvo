@@ -87,6 +87,7 @@
 
 }
 
+// TODO проверить на используемость
 .content__list--single-top {
   align-items: flex-start;
 
@@ -106,11 +107,12 @@
     padding-bottom: 0;
   }
 
-  .content__list--cards-list-page {
-    .content__item {
-      padding-inline: 30px;
-    }
-  }
+  // TODO удалить
+  // .content__list--cards-list-page {
+  //   .content__item {
+  //     padding-inline: 30px;
+  //   }
+  // }
 }
 
 @keyframes hide-item {

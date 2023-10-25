@@ -5,7 +5,7 @@
 .header {
   position: fixed;
   width: 100%;
-  max-width: $medium-screen;
+  max-width: calc($medium-screen - 40px);
   box-shadow: 0 0 5px 0 $color-grey;
   background-color: #fff;
   z-index: 1000;
