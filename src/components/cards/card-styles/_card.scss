@@ -1,7 +1,5 @@
 .card {
-  --turn-duration: .5s;
-  // --turn-duration: .0s;
-
+  --turn-duration: 0.5s;
 
   height: 100%;
   border-radius: $border-radius-basic;
@@ -74,7 +72,7 @@
 }
 
 .card__body--rotate {
-  animation: card-body-rotate 0.5s ease-in-out;
+  animation: card-body-rotate var(--turn-duration) ease-in-out;
 }
 
 .card__body--native {
