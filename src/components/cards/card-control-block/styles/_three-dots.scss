@@ -40,7 +40,31 @@
   }
 }
 
-.three-dots--hide {
-  opacity: 0;
-  display: none;
+.card__body--rotate {
+  .three-dots {
+    animation: three-dots-rotate 0.5s;
+  }
+}
+
+
+@keyframes three-dots-rotate {
+  0% {
+    top: 0;
+    bottom: unset;
+  }
+
+  49% {
+    top: 0;
+    bottom: unset;
+  }
+
+  51% {
+    top: unset;
+    bottom: 0;
+  }
+
+  100% {
+    top: unset;
+    bottom: 0;
+  }
 }
