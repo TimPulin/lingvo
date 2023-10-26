@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useCurrentLangPack } from '../../../store/selectors';
 import ControlBlockButton from './ControlBlockButton';
 
@@ -17,6 +18,7 @@ export default function ControlBlockButtonsList(props:ControlBlockButtonsListPro
     isShow, setIsShow, onEdit, onDelete, JSXList,
   } = props;
   const { EDIT, DELETE } = useCurrentLangPack();
+  const hideClassRef = useRef('');
 
   const closeControlBlock = (event: React.TouchEvent | React.MouseEvent) => {
     event.stopPropagation();
@@ -35,7 +37,22 @@ export default function ControlBlockButtonsList(props:ControlBlockButtonsListPro
     setIsShow(false);
   };
 
-  const activeClass = () => (isShow ? ACTIVE_CLASS : HIDE_CLASS);
+  // СТАРТ блокировка отрисовки
+  // чтобы анимация закрытия блока кнопок не срабатывала при первой отрисовки
+  const componentRenderedRef = useRef(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      componentRenderedRef.current = true;
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    if (componentRenderedRef.current) hideClassRef.current = HIDE_CLASS;
+  }, [isShow]);
+  // ФИНИШ блокировка отрисовки
+
+  const activeClass = () => (isShow ? ACTIVE_CLASS : hideClassRef.current);
   return (
   /* eslint-disable-next-line */
     <div

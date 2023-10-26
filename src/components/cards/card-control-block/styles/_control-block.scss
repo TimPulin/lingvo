@@ -1,7 +1,10 @@
 .control-block {
   --animation-duration: .3s;
-  animation: control-block-hide calc(var(--animation-duration) + .2s) ease forwards;
+  // animation: control-block-hide calc(var(--animation-duration) + .2s) ease forwards;
 
+
+  visibility: hidden;
+  z-index: -1000;
 
   &::after {
     content: '';
@@ -28,7 +31,8 @@
     border-radius: $border-radius-basic;
     font-size: 25px;
     color: #fff;
-    animation: buttons-hide var(--animation-duration) ease forwards;
+    // animation: buttons-hide var(--animation-duration) ease forwards;
+    opacity: 0;
   }
 }
 
@@ -47,6 +51,15 @@
     z-index: -10;
     animation: after-visible var(--animation-duration) ease-in forwards;
   }
+}
+
+.control-block--hide {
+  animation: control-block-hide calc(var(--animation-duration) + .2s) ease forwards;
+
+  .control-block__button {
+    animation: buttons-hide var(--animation-duration) ease forwards;
+  }
+
 }
 
 @keyframes control-block-hide {
