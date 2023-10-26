@@ -11,8 +11,9 @@ const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
 const CARD_BODY_FOREIGN = 'card__body--foreign';
 
-const CARD_CONTENT_NATIVE = 'card__content--native';
-const CARD_CONTENT_FOREIGN = 'card__content--foreign';
+// TODO удалить
+// const CARD_CONTENT_NATIVE = 'card__content--native';
+// const CARD_CONTENT_FOREIGN = 'card__content--foreign';
 const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
 type CardBasePropsType = {
@@ -62,8 +63,8 @@ export default function CardBase(props: CardBasePropsType) {
   const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
 
   // TODO - проверить на необходимость
-  const nativeContentClass = () => (isCardNative ? CARD_CONTENT_NATIVE : '');
-  const foreignContentClass = () => (isCardNative ? '' : CARD_CONTENT_FOREIGN);
+  // const nativeContentClass = () => (isCardNative ? CARD_CONTENT_NATIVE : '');
+  // const foreignContentClass = () => (isCardNative ? '' : CARD_CONTENT_FOREIGN);
 
   const nativeContentHide = () => (isContentNative ? '' : HIDE);
   const foreignContentHide = () => (isContentNative ? HIDE : '');
@@ -73,27 +74,22 @@ export default function CardBase(props: CardBasePropsType) {
   function turnCard() {
     if (!isSwiperSlideInProgress) {
       setIsCardBodyRotate(true);
+      setIsCardStartTurn(true);
+
+      if (isCardNative) {
+        setIsCardForeignContentRotate(true);
+      } else {
+        setIsCardNativeContentRotate(true);
+      }
+
       setTimeout(() => {
         setIsCardBodyRotate(false);
-      }, 500);
-
-      setTimeout(() => {
-        setIsCardNative(!isCardNative);
-        if (isCardNative) {
-          setIsCardForeignContentRotate(true);
-        } else {
-          setIsCardNativeContentRotate(true);
-        }
-      }, 250);
-
-      setTimeout(() => {
         setIsCardForeignContentRotate(false);
         setIsCardNativeContentRotate(false);
       }, 500);
 
-      setIsCardStartTurn(true);
-
       setTimeout(() => {
+        setIsCardNative(!isCardNative);
         setIsContentNative(!isCardNative);
         setIsCardStartTurn(false);
       }, 250);
@@ -179,7 +175,9 @@ export default function CardBase(props: CardBasePropsType) {
           onDelete={onCardDelete}
         />
 
-        <div className={`card__content ${nativeContentHide()} ${nativeContentClass()} ${cardNativeContentRotateClass()}`}>
+        <div className={`card__content ${nativeContentHide()}  ${cardNativeContentRotateClass()}`}>
+          {' '}
+          {/* ${nativeContentClass()} // TODO удалить  */}
           <div className="card__text">
             {pairWords.nativeWord}
           </div>
@@ -187,7 +185,9 @@ export default function CardBase(props: CardBasePropsType) {
             form={formNative}
           />
         </div>
-        <div className={`card__content ${foreignContentHide()} ${foreignContentClass()} ${cardForeignContentRotateClass()}`}>
+        <div className={`card__content ${foreignContentHide()} ${cardForeignContentRotateClass()}`}>
+          {' '}
+          {/*  ${foreignContentClass()} // TODO удалить  */}
           <div className="card__text">
             <div>{pairWords.foreignWord}</div>
             <div className="card__transcription">
