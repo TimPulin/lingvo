@@ -22,7 +22,6 @@ export default function HeaderSite(props: IHeaderSiteProps) {
   function closeMenu() {
     setIsBurgerTransform(false);
     setIsMenuOpen(false);
-    changeIsModalOpen(false);
   }
 
   function setOverlayClickedListener() {
