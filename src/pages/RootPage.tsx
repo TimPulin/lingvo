@@ -57,7 +57,11 @@ export default function RootPage() {
   return (
     <div className="container ">
       <CollectionActionsBar />
-      <Navigation isMenuOpen={isMenuOpen} />
+      <Navigation
+        changeIsModalOpen={changeIsModalOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        isMenuOpen={isMenuOpen}
+      />
       <div
         className={`overlay ${classModalOpened()}`}
         onClick={dispatchOverlayClicked}
