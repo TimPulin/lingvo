@@ -11,3 +11,7 @@ z-index list
 .collection-footer : по умолчанию
 
 .wrapper-position-fixed .button-plus--add-new : 800
+
+.content__list--new-card-page
+  .card : 50
+    

@@ -11,6 +11,9 @@ import CardTranscription from './CardTranscription';
 const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
 const CARD_BODY_FOREIGN = 'card__body--foreign';
+const CARD_BODY_ROTATE = 'card__body--rotate';
+const ROTATE_NATIVE = 'rotate-native';
+const ROTATE_FOREIGN = 'rotate-foreign';
 
 const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
@@ -41,12 +44,9 @@ export default function CardBase(props: CardBasePropsType) {
   const [isFadeInOutRunning, setIsFadeInOutRunning] = useState(false);
 
   const [isCardBodyRotate, setIsCardBodyRotate] = useState(false);
-  const [isCardNativeContentRotate, setIsCardNativeContentRotate] = useState(false);
-  const [isCardForeignContentRotate, setIsCardForeignContentRotate] = useState(false);
+  const rotateClassRef = useRef(`${CARD_BODY_ROTATE} ${ROTATE_FOREIGN}`);
 
-  const cardBodyRotateClass = () => (isCardBodyRotate ? 'card__body--rotate' : '');
-  const cardNativeContentRotateClass = () => (isCardNativeContentRotate ? 'card__content--rotate' : '');
-  const cardForeignContentRotateClass = () => (isCardForeignContentRotate ? 'card__content--rotate' : '');
+  const cardBodyRotateClass = () => (isCardBodyRotate ? rotateClassRef.current : '');
 
   useEffect(() => {
     setIsEdit(isModeEdit);
@@ -66,18 +66,15 @@ export default function CardBase(props: CardBasePropsType) {
 
   function turnCard() {
     if (!isSwiperSlideInProgress) {
-      setIsCardBodyRotate(true);
-
       if (isCardNative) {
-        setIsCardForeignContentRotate(true);
+        rotateClassRef.current = `${CARD_BODY_ROTATE} ${ROTATE_FOREIGN}`;
       } else {
-        setIsCardNativeContentRotate(true);
+        rotateClassRef.current = `${CARD_BODY_ROTATE} ${ROTATE_NATIVE}`;
       }
+      setIsCardBodyRotate(true);
 
       setTimeout(() => {
         setIsCardBodyRotate(false);
-        setIsCardForeignContentRotate(false);
-        setIsCardNativeContentRotate(false);
       }, 500);
 
       setTimeout(() => {
@@ -165,7 +162,7 @@ export default function CardBase(props: CardBasePropsType) {
           onDelete={onCardDelete}
         />
 
-        <div className={`card__content ${nativeContentHide()}  ${cardNativeContentRotateClass()}`}>
+        <div className={`card__content card__content--native ${nativeContentHide()}`}>
           <div className="card__text">
             {pairWords.nativeWord}
           </div>
@@ -173,15 +170,10 @@ export default function CardBase(props: CardBasePropsType) {
             form={formNative}
           />
         </div>
-        <div className={`card__content ${foreignContentHide()} ${cardForeignContentRotateClass()}`}>
+        <div className={`card__content card__content--foreign ${foreignContentHide()}`}>
           <div className="card__text">
             <div>{pairWords.foreignWord}</div>
             <CardTranscription transcription={pairWords.transcription} />
-            {/* <div className="card__transcription">
-              [
-              {pairWords.transcription}
-              ]
-            </div> */}
           </div>
           <CardEditorBlock
             form={formForeign}
