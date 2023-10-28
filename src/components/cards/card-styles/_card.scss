@@ -75,6 +75,18 @@
   animation: card-body-rotate var(--turn-duration) ease-in-out;
 }
 
+.card__body--rotate.rotate-native {
+  .card__content--native {
+    transform: rotateX(180deg);
+  }
+}
+
+.card__body--rotate.rotate-foreign {
+  .card__content--foreign {
+    transform: rotateX(180deg);
+  }
+}
+
 .card__body--native {
   --current-color: var(--color-primary);
   background-color: var(--color-primary);
@@ -83,12 +95,11 @@
 .card__body--foreign {
   --current-color: var(--color-secondary);
   background-color: var(--color-secondary);
-
 }
 
-.card__content--rotate {
-  transform: rotateX(180deg);
-}
+// .card__content--rotate {
+//   transform: rotateX(180deg);
+// }
 
 .card--edit {
   .card__content {
