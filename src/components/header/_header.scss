@@ -1,14 +1,17 @@
 .header-wrapper {
+  position: fixed;
+  left: 0;
+  width: 100%;
   height: 45px;
+  z-index: 1000;
 }
 
 .header {
-  position: fixed;
   width: 100%;
-  max-width: calc($medium-screen - 40px);
+  max-width: calc($medium-screen);
+  margin: 0 auto;
   box-shadow: 0 0 5px 0 $color-grey;
   background-color: #fff;
-  z-index: 1000;
 
   &__wrap {
     display: flex;
@@ -44,9 +47,3 @@
 .modal-opened .header__compass {
   filter: blur(2px);
 }
-
-// @media (min-width: $medium-screen) {
-//   .header__wrap {
-//     padding-inline: 0;
-//   }
-// }

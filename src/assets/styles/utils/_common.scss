@@ -8,10 +8,9 @@ body {
   font-weight: 400;
 }
 
-
 .app {
-  height: 100vh;
-  background-color: var(--page-background);
+  min-height: 100vh;
+  background-color: var(--body-background);
 }
 
 .overlay {
@@ -33,11 +32,13 @@ body {
   max-width: $medium-screen;
   min-height: 100%;
   overflow: hidden;
+  background-color: var(--page-background);
 }
 
 @media (min-width: $medium-screen) {
   .container {
     padding: 0 20px;
+    // border-radius: $border-radius-basic;
   }
 }
 
