@@ -3,15 +3,18 @@ import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getLocalStorageUserToken } from '../connect/local-storage-connections';
 import { updateUserToken } from '../store/slicers/user-token-slice';
+
 import HeaderSite from '../components/header/HeaderSite';
 import Message from '../components/message/Message';
 import CollectionActionsBar from '../components/collection/CollectionActionsBar';
+import Navigation from '../components/navigation/Navigation';
 
 export default function RootPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLogin, setIsPageLogin] = useState(false);
 
   const classModalOpened = () => (isModalOpen ? 'modal-opened' : '');
@@ -19,6 +22,14 @@ export default function RootPage() {
   const changeIsModalOpen = (isOpen:boolean) => {
     setIsModalOpen(isOpen);
   };
+
+  useEffect(() => {
+    /* eslint-disable-next-line */
+    const bodyApp = document.getElementById('body');
+    if (isModalOpen) {
+      bodyApp?.classList.add('modal-opened');
+    }
+  }, [isModalOpen]);
 
   const headerHideClass = () => (isPageLogin ? 'hide' : '');
   const loginPageClass = () => (isPageLogin ? 'content--login-page' : '');
@@ -44,6 +55,7 @@ export default function RootPage() {
   return (
     <div className="container ">
       <CollectionActionsBar />
+      <Navigation isMenuOpen={isMenuOpen} />
       <div
         className={`overlay ${classModalOpened()}`}
         onClick={dispatchOverlayClicked}
@@ -52,6 +64,7 @@ export default function RootPage() {
       <div className={`header-wrapper ${classModalOpened()} ${headerHideClass()}`}>
         <HeaderSite
           changeIsModalOpen={changeIsModalOpen}
+          setIsMenuOpen={setIsMenuOpen}
         />
       </div>
       <Message />

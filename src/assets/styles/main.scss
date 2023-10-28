@@ -25,7 +25,7 @@
 @import '../../components/cards/card-control-block/styles/three-dots.scss';
 @import '../../components/cards/card-control-block/styles/control-block.scss';
 
-@import './components/navigation';
+@import '../../components/navigation/navigation.scss';
 @import './animations/nav-animation';
 
 @import './components/main-screen'; // TODO проверить на необходимость

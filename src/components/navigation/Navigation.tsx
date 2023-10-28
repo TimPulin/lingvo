@@ -3,9 +3,16 @@ import { useCurrentLangPack } from '../../store/selectors';
 import { removeLocalStorageUserToken } from '../../connect/local-storage-connections';
 import UserBlock from '../user/UserBlock';
 
-export default function Navigation() {
+type NavigationPropsType = {
+  isMenuOpen:boolean
+};
+
+export default function Navigation(props:NavigationPropsType) {
   const { COLLECTIONS_PAGE, SETTINGS } = useCurrentLangPack();
   const navigate = useNavigate();
+
+  const navPanelOperateClass = () => (props.isMenuOpen ? 'nav__panel--open' : '');
+
   const closeMenu = () => {
     console.log('norm');
   };
@@ -18,9 +25,7 @@ export default function Navigation() {
 
   return (
     <nav className="nav">
-      {/* <div className={`nav__panel ${navPanelOperateClass()}`}> */}
-      <div className="nav__panel">
-
+      <div className={`nav__panel ${navPanelOperateClass()}`}>
         <div className="nav__panel-card nav__panel-card--top">
           <UserBlock onLogout={onLogout} />
         </div>

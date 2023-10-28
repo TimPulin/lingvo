@@ -20,6 +20,10 @@
   }
 }
 
+.content.modal-opened {
+  overflow: hidden;
+}
+
 .content--login-page {
   --screen-height: calc(100vh);
   padding-top: 0;
