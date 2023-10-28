@@ -1,25 +1,23 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useCurrentLangPack, useCurrentPageName } from '../../store/selectors';
-import { removeLocalStorageUserToken } from '../../connect/local-storage-connections';
+import { useCurrentPageName } from '../../store/selectors';
+
 import ArrowLeftIcon from '../icons/ArrowLeftIcon';
-import UserBlock from '../user/UserBlock';
 
 interface IHeaderSiteProps {
   changeIsModalOpen(isOpen:boolean): void;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function HeaderSite(props: IHeaderSiteProps) {
   const navigate = useNavigate();
-  const { changeIsModalOpen } = props;
-  const { SETTINGS, COLLECTIONS_PAGE } = useCurrentLangPack();
+  const { changeIsModalOpen, setIsMenuOpen } = props;
+
   const pageName = useCurrentPageName();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBurgerTransform, setIsBurgerTransform] = useState(false);
 
   const burgerAnimationClasses = () => (isBurgerTransform ? 'burger--vertical-line' : '');
-  const navPanelOperateClass = () => (isMenuOpen ? 'nav__panel--open' : '');
 
   function closeMenu() {
     setIsBurgerTransform(false);
@@ -46,12 +44,6 @@ export default function HeaderSite(props: IHeaderSiteProps) {
     navigate(-1);
   }
 
-  const onLogout = () => {
-    removeLocalStorageUserToken();
-    closeMenu();
-    navigate('/login');
-  };
-
   return (
     <header className="header">
       <div className="header__wrap">
@@ -66,50 +58,18 @@ export default function HeaderSite(props: IHeaderSiteProps) {
           <h1 className="header__page-title multicolor-text">{pageName}</h1>
         </div>
 
-        <nav className="nav">
-          <div className={`nav__panel ${navPanelOperateClass()}`}>
-
-            <div className="nav__panel-card nav__panel-card--top">
-              <UserBlock onLogout={onLogout} />
-            </div>
-
-            <div className="nav__panel-card nav__panel-card--navigation ">
-              <ul className="nav__list">
-                <li className="nav__item">
-                  <Link
-                    className="nav__link"
-                    to="/collections"
-                    onClick={() => closeMenu()}
-                  >
-                    {COLLECTIONS_PAGE}
-                  </Link>
-                </li>
-                <li className="nav__item">
-                  <Link
-                    className="nav__link"
-                    to="/settings"
-                    onClick={() => closeMenu()}
-                  >
-                    {SETTINGS}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="burger">
-            <button
-              type="button"
-              className={`burger__btn ${burgerAnimationClasses()}`}
-              aria-label="open-navigation"
-              onClick={handleBurgerClick}
-            >
-              <span key={1} className="burger__line" />
-              <span key={2} className="burger__line" />
-              <span key={3} className="burger__line" />
-            </button>
-          </div>
-        </nav>
+        <div className="burger">
+          <button
+            type="button"
+            className={`burger__btn ${burgerAnimationClasses()}`}
+            aria-label="open-navigation"
+            onClick={handleBurgerClick}
+          >
+            <span key={1} className="burger__line" />
+            <span key={2} className="burger__line" />
+            <span key={3} className="burger__line" />
+          </button>
+        </div>
       </div>
     </header>
   );
