@@ -28,6 +28,8 @@ export default function RootPage() {
     const bodyApp = document.getElementById('body');
     if (isModalOpen) {
       bodyApp?.classList.add('modal-opened');
+    } else {
+      bodyApp?.classList.remove('modal-opened');
     }
   }, [isModalOpen]);
 
