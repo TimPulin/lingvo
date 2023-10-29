@@ -58,8 +58,6 @@ export default function RootPage() {
     <div className="container ">
       <CollectionActionsBar />
       <Navigation
-        changeIsModalOpen={changeIsModalOpen}
-        setIsMenuOpen={setIsMenuOpen}
         isMenuOpen={isMenuOpen}
       />
       <div
