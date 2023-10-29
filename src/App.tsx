@@ -10,6 +10,8 @@ function App() {
   const userToken = useUserToken();
   const dispatch = useDispatch();
 
+  /* TODO типизировать CollectionLanguageListType */
+
   useEffect(() => {
     if (userToken) {
       getLanguagesList(userToken)
