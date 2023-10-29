@@ -105,6 +105,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
                 aria-required
                 className="collection-form__select"
                 options={localForeignLanguageList}
+                filterOption={false}
                 value={formik.values.translationLanguageId}
                 onSearch={onSearchSelectForeignLanguage}
                 onChange={(value) => { formik.handleChange({ target: { name: 'translationLanguageId', value } }); }}
