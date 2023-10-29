@@ -14,7 +14,6 @@ body {
 
 .app {
   min-height: 100vh;
-  background-color: var(--body-background);
 }
 
 .overlay {
@@ -40,6 +39,10 @@ body {
 }
 
 @media (min-width: $medium-screen) {
+  .app {
+    background-color: var(--body-background);
+  }
+
   .container {
     padding: 0 20px;
     // border-radius: $border-radius-basic;
