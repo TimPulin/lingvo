@@ -1,6 +1,6 @@
 .content {
   --screen-height: calc(100vh - 50px);
-  min-height: var(--screen-height);
+  min-height: 100vh;
   padding-top: 55px;
   /* TODO если плавность blur сохранится, тогда можно будет это свойство удалить */
   // filter: blur(0); убрал, потому что иначе кнопка button-new (в collection) не становится fixed.
@@ -25,12 +25,12 @@
 }
 
 .content--login-page {
-  --screen-height: calc(100vh);
+  --screen-height: 100vh;
   padding-top: 0;
 }
 
 .content__list--message-on-page {
-  height: calc(var(--screen-height) - 50px);
+  min-height: calc(var(--screen-height) - 50px);
 
   .content__item {
     display: flex;
