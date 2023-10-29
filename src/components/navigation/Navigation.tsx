@@ -5,8 +5,6 @@ import UserBlock from '../user/UserBlock';
 
 type NavigationPropsType = {
   isMenuOpen:boolean
-  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  changeIsModalOpen(isOpen:boolean): void;
 };
 
 export default function Navigation(props:NavigationPropsType) {
@@ -16,8 +14,7 @@ export default function Navigation(props:NavigationPropsType) {
   const navPanelOperateClass = () => (props.isMenuOpen ? 'nav__panel--open' : '');
 
   const closeMenu = () => {
-    props.setIsMenuOpen(false);
-    props.changeIsModalOpen(false);
+    document.dispatchEvent(new CustomEvent('overlay-clicked', { bubbles: true }));
   };
 
   const onLogout = () => {
