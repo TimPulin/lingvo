@@ -46,6 +46,8 @@ type CollectionLanguageType = {
   iso: string
 };
 
+export type CollectionLanguageListType = CollectionLanguageType[];
+
 export type CardType = {
   createdAt: string,
   userId: number,

@@ -4,6 +4,7 @@ import RootPage from '../../pages/RootPage';
 import { StaticMessageContext } from './context-hooks';
 import { isCollectionSavedContext } from './collection-form-context-hook';
 import { IsNeedCurrentCollectionUpdateContext } from './update-collection';
+import { IsDataLoading } from './loading-context-hook';
 import { ActionBar } from './action-bar-context-hook';
 
 export default function GlobalContextProvider() {
@@ -17,14 +18,7 @@ export default function GlobalContextProvider() {
   const [isActionBarOpen, setIsActionBarOpen] = useState(false);
   const [currentIdForActionBar, setCurrentIdForActionBar] = useState<number | null>(null);
 
-  const actionBarState = useMemo(() => (
-    {
-      isActionBarOpen,
-      setIsActionBarOpen,
-      id: currentIdForActionBar,
-      setId: setCurrentIdForActionBar,
-    }
-  ), [isActionBarOpen, currentIdForActionBar]);
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   const collectionSaved = useMemo(() => (
     {
@@ -49,12 +43,30 @@ export default function GlobalContextProvider() {
     }
   ), [isNeedCurrentCollectionUpdate, setIsNeedCurrentCollectionUpdate]);
 
+  const actionBarState = useMemo(() => (
+    {
+      isActionBarOpen,
+      setIsActionBarOpen,
+      id: currentIdForActionBar,
+      setId: setCurrentIdForActionBar,
+    }
+  ), [isActionBarOpen, currentIdForActionBar]);
+
+  const dataLoadingState = useMemo(() => (
+    {
+      isDataLoading,
+      setIsDataLoading,
+    }
+  ), [isDataLoading]);
+
   return (
     <StaticMessageContext.Provider value={staticMessage}>
       <isCollectionSavedContext.Provider value={collectionSaved}>
         <IsNeedCurrentCollectionUpdateContext.Provider value={isNeedCurrentCollectionUpdateState}>
           <ActionBar.Provider value={actionBarState}>
-            <RootPage />
+            <IsDataLoading.Provider value={dataLoadingState}>
+              <RootPage />
+            </IsDataLoading.Provider>
           </ActionBar.Provider>
         </IsNeedCurrentCollectionUpdateContext.Provider>
       </isCollectionSavedContext.Provider>

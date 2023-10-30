@@ -14,4 +14,6 @@ z-index list
 
 .content__list--new-card-page
   .card : 50
-    
+
+.loader-overlay : 1100  
+    &__spinner : 1300

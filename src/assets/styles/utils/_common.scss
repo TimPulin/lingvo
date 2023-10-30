@@ -17,7 +17,7 @@ body {
 }
 
 .overlay {
-  z-index: -1000;
+  z-index: -9999;
   filter: blur(0);
   transition: backdrop-filter .4s ease-in-out;
 }

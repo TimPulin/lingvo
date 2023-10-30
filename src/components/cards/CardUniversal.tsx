@@ -7,15 +7,7 @@ import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './car
 import { useStaticMessage } from '../global-context-provider/context-hooks';
 import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
-
-// TODO удалить  { editWord } from '../../store/slicers/dictionary-slice';
-
-// export interface IPairWords {
-//   cardId: number | null,
-//   nativeWord: string,
-//   foreignWord: string,
-//   transcription: string,
-// }
+import { useDataLoading } from '../global-context-provider/loading-context-hook';
 
 const defaultPairWords: IPairWords = {
   cardId: 0,
@@ -41,6 +33,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
   const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
   const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
+  const { setIsDataLoading } = useDataLoading();
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -80,7 +73,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     event.preventDefault();
   };
 
-  const onSubmitForeign = (event: React.FormEvent) => {
+  const onSubmitForeign = async (event: React.FormEvent) => {
     const newWord = {
       phrase: localPairWords.nativeWord,
       translationPhrase: localPairWords.foreignWord,
@@ -89,16 +82,18 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     event.preventDefault();
     if (isModeEdit) {
       if (userToken && collectionId) {
-        addCard(userToken, collectionId, newWord)
-          .then(() => {
-            setText(langPack.CARD_SAVED);
-            setIsNeedCurrentCollectionUpdate(true);
-          })
-          .catch((error) => {
-            console.log(error);
-            // TODO перевести
-            setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
-          });
+        try {
+          setIsDataLoading(true);
+          await addCard(userToken, collectionId, newWord);
+          setText(langPack.CARD_SAVED);
+          setIsNeedCurrentCollectionUpdate(true);
+        } catch (error) {
+          console.log(error);
+          // TODO перевести
+          setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+        } finally {
+          setIsDataLoading(false);
+        }
       } else {
         // TODO перевести
         const tokenWarning = 'Для сохранения карточки необходимо авторизоваться';
@@ -112,15 +107,17 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId}`);
       }
     } else if (userToken && cardId && collectionId) {
-      editCard(userToken, collectionId, cardId, newWord)
-        .then(() => {
-          setText(langPack.CARD_CHANGES_MADE);
-          setIsNeedCurrentCollectionUpdate(true);
-        })
-        .catch(() => {
-          // TODO перевести
-          setText('Не смогли сохранить изменения. Видимо, что-то пошло не так');
-        });
+      try {
+        setIsDataLoading(true);
+        await editCard(userToken, collectionId, cardId, newWord);
+        setText(langPack.CARD_CHANGES_MADE);
+        setIsNeedCurrentCollectionUpdate(true);
+      } catch (error) {
+        // TODO перевести
+        setText('Не смогли сохранить изменения. Видимо, что-то пошло не так');
+      } finally {
+        setIsDataLoading(false);
+      }
     }
     setIsNewPairWordSaved(true);
     setIsRefresh(true);
@@ -138,23 +135,22 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     _setTranscription('');
   };
 
-  const onCardDelete = () => {
+  const onCardDelete = async () => {
     if (userToken && cardId && collectionId) {
-      deleteCard(userToken, cardId)
-        .then(() => {
-          // TODO перевести
-          setText('Карточка тактично удалена');
-          // TODO сделать белый фон сообщения прозрачным или еще что-то придумать - некрасивое отображение сообщения о удалении
-          setIsMessageShow(true);
-          setIsNeedCurrentCollectionUpdate(true);
-          swiperUpdate();
-        })
-        .catch((error) => {
-          console.log(error);
-          // TODO перевести
-          setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
-          setIsMessageShow(true);
-        });
+      try {
+        await deleteCard(userToken, cardId);
+        // TODO перевести
+        setText('Карточка тактично удалена');
+        // TODO сделать белый фон сообщения прозрачным или еще что-то придумать - некрасивое отображение сообщения о удалении
+        setIsMessageShow(true);
+        setIsNeedCurrentCollectionUpdate(true);
+        swiperUpdate();
+      } catch (error) {
+        console.log(error);
+        // TODO перевести
+        setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
+        setIsMessageShow(true);
+      }
     } else {
       const tokenWarning = 'Для удаления карточки необходимо авторизоваться';
       const collectionIdWarning = 'Коллекция карточек не найдена';
