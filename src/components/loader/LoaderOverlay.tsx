@@ -7,9 +7,12 @@ export default function LoaderOverlay() {
   const { isDataLoading } = useDataLoading();
 
   const isShow = () => (isDataLoading ? CLASS_SHOW : '');
+
   return (
     <div className={`loader-overlay ${isShow()}`}>
       <LoaderSpinner />
     </div>
   );
 }
+
+// ${CLASS_SHOW}

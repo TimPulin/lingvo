@@ -33,3 +33,7 @@ export function useLanguagesList():DefaultOptionType[] {
 export function useCardsCollection() {
   return useSelector((store:RootStateType) => store.currentCardsCollection.value);
 }
+
+export function useUserData() {
+  return useSelector((store:RootStateType) => store.userData.value);
+}

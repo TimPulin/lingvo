@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getLocalStorageUserToken } from '../connect/local-storage-connections';
 import { updateUserToken } from '../store/slicers/user-token-slice';
+import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 
 import HeaderSite from '../components/header/HeaderSite';
 import Message from '../components/message/Message';
 import CollectionActionsBar from '../components/collection/CollectionActionsBar';
 import Navigation from '../components/navigation/Navigation';
+import LoaderOverlay from '../components/loader/LoaderOverlay';
 
 export default function RootPage() {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ export default function RootPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLogin, setIsPageLogin] = useState(false);
+  const { isDataLoading } = useDataLoading();
 
   const classModalOpened = () => (isModalOpen ? 'modal-opened' : '');
 
@@ -26,12 +29,12 @@ export default function RootPage() {
   useEffect(() => {
     /* eslint-disable-next-line */
     const bodyApp = document.getElementById('body');
-    if (isModalOpen) {
+    if (isModalOpen || isDataLoading) {
       bodyApp?.classList.add('modal-opened');
     } else {
       bodyApp?.classList.remove('modal-opened');
     }
-  }, [isModalOpen]);
+  }, [isModalOpen, isDataLoading]);
 
   const headerHideClass = () => (isPageLogin ? 'hide' : '');
   const loginPageClass = () => (isPageLogin ? 'content--login-page' : '');
@@ -65,6 +68,7 @@ export default function RootPage() {
         onClick={dispatchOverlayClicked}
         aria-hidden="true"
       />
+      {/* <LoaderOverlay /> */}
       <div className={`header-wrapper ${classModalOpened()} ${headerHideClass()}`}>
         <HeaderSite
           changeIsModalOpen={changeIsModalOpen}
@@ -74,6 +78,7 @@ export default function RootPage() {
       <Message />
 
       <div className={`content ${classModalOpened()} ${loginPageClass()}`}>
+        <LoaderOverlay />
         <Outlet />
       </div>
     </div>

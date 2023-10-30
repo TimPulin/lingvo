@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { cloneDeep } from 'lodash';
 
 type UserDataType = {
-  username: string;
-  avatar: string;
+  userName: string;
+  userAvatar: string;
 };
 
 type StateType = {
@@ -19,8 +19,8 @@ const IMG_PATH_DEFAULT = '/images/icons/icon-user-default.png';
 
 const initialState:StateType = {
   value: {
-    username: '',
-    avatar: IMG_PATH_DEFAULT,
+    userName: '',
+    userAvatar: IMG_PATH_DEFAULT,
   },
 };
 
@@ -29,6 +29,7 @@ const updateUserDataSlicer = createSlice({
   initialState,
   reducers: {
     updateUserData: (state:StateType, action:ActionType) => {
+      if (action.payload.userAvatar === '') action.payload.userAvatar = IMG_PATH_DEFAULT;
       const copiedPayload = cloneDeep(action.payload);
       state.value = copiedPayload;
     },

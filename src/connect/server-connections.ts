@@ -135,5 +135,3 @@ export function deleteCard(token:string, cardId:number) {
       },
     );
 }
-
-// `/collections/${collectionId}/bind/${cardId}`,

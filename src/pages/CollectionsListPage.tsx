@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getCollectionsList, deleteCollection } from '../connect/server-connections';
 import { useCurrentLangPack, useUserToken } from '../store/selectors';
+import { useStaticMessage } from '../components/global-context-provider/context-hooks';
+import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
+
+import { getCollectionsList, deleteCollection } from '../connect/server-connections';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { updateUserToken } from '../store/slicers/user-token-slice';
-import { CollectionsListType, CollectionType } from '../utils/types';
-import CardCollection from '../components/cards/CardCollection';
 import { setLocalStorageUserToken } from '../connect/local-storage-connections';
+import { CollectionsListType, CollectionType } from '../utils/types';
+
 import ButtonPlus from '../components/base/buttons/button-plus/ButtonPlus';
 import MessageOnPage from '../components/message/MessageOnPage';
-import { useStaticMessage } from '../components/global-context-provider/context-hooks';
+import CardCollection from '../components/cards/CardCollection';
 
 export default function CollectionsListPage() {
   const [collectionsList, setCollectionsList] = useState<CollectionsListType>([]);
@@ -19,23 +22,28 @@ export default function CollectionsListPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { COLLECTIONS_PAGE } = useCurrentLangPack();
-  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
 
-  function getCollectionsListLocal() {
+  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
+  const { isDataLoading, setIsDataLoading } = useDataLoading();
+
+  const getCollectionsListLocal = async () => {
     if (userToken) {
-      getCollectionsList(userToken)
-        .then((response) => {
-          setCollectionsList(response.data.data);
-        })
-        .catch((error) => {
-          console.log(error); /* TODO обработать ошибку */
-        });
+      try {
+        setIsDataLoading(true);
+        const response = await getCollectionsList(userToken);
+        setCollectionsList(response.data.data);
+      } catch (error) {
+        console.log(error); /* TODO обработать ошибку */
+      } finally {
+        setIsDataLoading(false);
+      }
     }
-  }
+  };
 
   const onCollectionDelete = async (collectionId:number) => {
     if (userToken) {
       try {
+        setIsDataLoading(true);
         await deleteCollection(userToken, collectionId);
         // TODO перевести
         setText('Коллекция аккуратно удалена');
@@ -43,6 +51,8 @@ export default function CollectionsListPage() {
         getCollectionsListLocal();
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsDataLoading(false);
       }
     }
   };
@@ -69,7 +79,7 @@ export default function CollectionsListPage() {
     navigate('/collections/create-new-collection');
   };
 
-  if (collectionsList.length === 0) {
+  if (collectionsList.length === 0 && !isDataLoading) {
     return (
       <MessageOnPage
         messageText="Мы не нашли у вас коллекции карточек. Давайте создадим вашу первую коллекцию"
@@ -79,15 +89,11 @@ export default function CollectionsListPage() {
   }
 
   return (
-
     <div className="content__list">
       <div className="wrapper-position-fixed">
         <ButtonPlus classAdditional="button-plus--add-new" onClickFunction={gotoCreateCollectionPage} />
       </div>
       <div className="content__item collections">
-        {/* TODO увеличить index в collections__button-new--fixed */}
-        {/* <ButtonPlus classAdditional="collections__button-new--fixed" onClickFunction={gotoCreateCollectionPage} /> */}
-
         <ul className="collections__list">
           {
             collectionsList.map((item:CollectionType) => (
