@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useStaticMessage, messageShowDuration } from '../global-context-provider/context-hooks';
+import ButtonClose from '../base/buttons/button-close/ButtonClose';
 
 const MESSAGE_SHOW = 'message--show';
 const MESSAGE_HIDE = 'message--hide';
@@ -17,10 +18,14 @@ export default function Message() {
     }, 500);
   }
 
+  function hideMessage() {
+    setClassHide(MESSAGE_HIDE);
+    resetClassHide();
+  }
+
   function startTimerToHideMessage() {
     setTimeout(() => {
-      setClassHide(MESSAGE_HIDE);
-      resetClassHide();
+      hideMessage();
     }, messageShowDuration);
   }
 
@@ -31,12 +36,18 @@ export default function Message() {
     }
   }, [isShow]);
 
+  const onClose = () => {
+    hideMessage();
+  };
+
   return (
     <div className={`message ${classShow()} ${classHide}`}>
       <div className="message__body">
+        <ButtonClose
+          onClose={onClose}
+        />
         <div className="message__text">
           {text}
-          {' '}
         </div>
       </div>
     </div>

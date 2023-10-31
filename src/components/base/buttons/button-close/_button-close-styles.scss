@@ -1,0 +1,52 @@
+.button-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  outline: 1px solid transparent;
+  transition:
+    box-shadow .1s ease-in,
+    outline .3s ease-in;
+
+  .button-base__icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .svg {
+    &__root {
+      fill: var(--close-button-color);
+    }
+  }
+
+  &:active {
+    box-shadow: 0 0 5px 1px var(--close-button-color);
+  }
+
+  &:active .svg__root,
+  .svg__root:active {
+    fill: var(--close-button-color);
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .button-close {
+
+    &:hover {
+      outline: 1px solid var(--close-button-color);
+    }
+
+    &:active {
+      box-shadow: 0 0 5px 1px var(--close-button-color);
+      outline: 1px solid var(--close-button-color);
+    }
+
+    &:hover .svg__root,
+    .svg__root:hover {
+      fill: var(--close-button-color);
+    }
+
+  }
+
+
+}
