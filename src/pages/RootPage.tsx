@@ -75,9 +75,8 @@ export default function RootPage() {
           setIsMenuOpen={setIsMenuOpen}
         />
       </div>
-      <Message />
-
       <div className={`content ${classModalOpened()} ${loginPageClass()}`}>
+        <Message />
         <LoaderOverlay />
         <Outlet />
       </div>

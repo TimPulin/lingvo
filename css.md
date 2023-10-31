@@ -17,3 +17,5 @@ z-index list
 
 .loader-overlay : 1100  
     &__spinner : 1300
+
+.message : 150    
