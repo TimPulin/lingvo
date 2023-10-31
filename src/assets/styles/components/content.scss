@@ -111,13 +111,6 @@
     --item-width: calc(var(--screen-width) * 0.75);
     padding-bottom: 0;
   }
-
-  // TODO удалить
-  // .content__list--cards-list-page {
-  //   .content__item {
-  //     padding-inline: 30px;
-  //   }
-  // }
 }
 
 @keyframes hide-item {

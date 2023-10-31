@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentCollectionId, isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 import { useCardsCollection } from '../store/selectors';
+import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 
 import CardContentItem from '../components/cards/CardContentItem';
 import SwiperReact from '../components/swiper-react/SwiperReact';
@@ -13,7 +14,7 @@ export default function CardsPage() {
   const [isPairWordSaved, setIsPairWordSaved] = useState(false);
   const cardsCollection = useCardsCollection();
   const collectionId = useCurrentCollectionId();
-
+  const { isDataLoading } = useDataLoading();
   const navigate = useNavigate();
 
   const pairWordSaved = useMemo(() => ({
@@ -32,7 +33,7 @@ export default function CardsPage() {
   }
 
   if (cardsCollection !== null) {
-    if (cardsCollection.binds.length === 0) {
+    if (cardsCollection.binds.length === 0 && !isDataLoading) {
       // TODO перевести
       return (
         <MessageOnPage
