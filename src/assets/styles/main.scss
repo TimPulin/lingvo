@@ -8,6 +8,8 @@
 @import './components/content.scss';
 
 @import '../../components/base/button-base.scss';
+@import '../../components/base/buttons/button-plus/button-plus.scss';
+@import '../../components/base/buttons/button-close/button-close-styles';
 
 @import './components/form/input';
 @import './components/form/form';
@@ -20,7 +22,7 @@
 @import './animations/burger-animation';
 @import './components/actions-bar';
 
-@import '../../components/base/buttons/button-plus/button-plus.scss';
+
 
 @import '../../components/cards/card-control-block/styles/three-dots.scss';
 @import '../../components/cards/card-control-block/styles/control-block.scss';
