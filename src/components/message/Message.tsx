@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useStaticMessage, messageShowDuration } from '../global-context-provider/context-hooks';
 
 const MESSAGE_SHOW = 'message--show';
@@ -6,41 +6,37 @@ const MESSAGE_HIDE = 'message--hide';
 
 export default function Message() {
   const { text, isShow, setIsShow } = useStaticMessage();
-  const classHideRef = useRef('');
+  const [classHide, setClassHide] = useState('');
 
-  const classShow = () => (isShow ? MESSAGE_SHOW : classHideRef.current);
+  const classShow = () => (isShow ? MESSAGE_SHOW : '');
+
+  function resetClassHide() {
+    setTimeout(() => {
+      setIsShow(false);
+      setClassHide('');
+    }, 500);
+  }
 
   function startTimerToHideMessage() {
     setTimeout(() => {
-      setIsShow(false);
+      setClassHide(MESSAGE_HIDE);
+      resetClassHide();
     }, messageShowDuration);
   }
 
-  // СТАРТ блокировка отрисовки
-  // чтобы анимация закрытия блока кнопок не срабатывала при первой отрисовки
-  const componentRenderedRef = useRef(false);
-
   useEffect(() => {
-    setTimeout(() => {
-      componentRenderedRef.current = true;
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    if (isShow) startTimerToHideMessage();
-    if (componentRenderedRef.current) {
-      classHideRef.current = MESSAGE_HIDE;
-      componentRenderedRef.current = false;
+    if (isShow) {
+      setIsShow(true);
+      startTimerToHideMessage();
     }
   }, [isShow]);
 
   return (
-    <div className={`message ${classShow()}`}>
+    <div className={`message ${classShow()} ${classHide}`}>
       <div className="message__body">
         <div className="message__text">
           {text}
           {' '}
-          Тестовый текст
         </div>
       </div>
     </div>

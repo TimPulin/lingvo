@@ -138,10 +138,10 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const onCardDelete = async () => {
     if (userToken && cardId && collectionId) {
       try {
+        setIsDataLoading(true);
         await deleteCard(userToken, cardId);
         // TODO перевести
         setText('Карточка тактично удалена');
-        // TODO сделать белый фон сообщения прозрачным или еще что-то придумать - некрасивое отображение сообщения о удалении
         setIsMessageShow(true);
         setIsNeedCurrentCollectionUpdate(true);
         swiperUpdate();
@@ -150,6 +150,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         // TODO перевести
         setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
         setIsMessageShow(true);
+      } finally {
+        setIsDataLoading(false);
       }
     } else {
       const tokenWarning = 'Для удаления карточки необходимо авторизоваться';
