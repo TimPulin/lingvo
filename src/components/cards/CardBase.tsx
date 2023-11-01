@@ -20,7 +20,7 @@ const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 type CardBasePropsType = {
   isRefresh: boolean;
   setIsRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-  isModeEdit?: boolean;
+  isModeNewCard?: boolean;
   onCardDelete: () => void;
   pairWords: IPairWords;
   formNative: CardFormPropsType;
@@ -29,7 +29,7 @@ type CardBasePropsType = {
 
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign, onCardDelete,
+    isRefresh, setIsRefresh, isModeNewCard = false, pairWords, formNative, formForeign, onCardDelete,
   } = props;
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
@@ -49,11 +49,11 @@ export default function CardBase(props: CardBasePropsType) {
   const cardBodyRotateClass = () => (isCardBodyRotate ? rotateClassRef.current : '');
 
   useEffect(() => {
-    setIsEdit(isModeEdit);
-  }, [isModeEdit]);
+    setIsEdit(isModeNewCard);
+  }, [isModeNewCard]);
 
   useEffect(() => {
-    if (isNewPairWordSaved && !isModeEdit) setIsEdit(false);
+    if (isNewPairWordSaved && !isModeNewCard) setIsEdit(false);
   }, [isNewPairWordSaved]);
 
   const cardEditMode = () => (isEdit ? CARD_EDIT : '');
@@ -128,7 +128,7 @@ export default function CardBase(props: CardBasePropsType) {
   const onCancelNative = Object.assign(formNative.onCancel, {});
   const localOnCancelNative = (event:React.FormEvent) => {
     event.stopPropagation();
-    if (isModeEdit) {
+    if (isModeNewCard) {
       onCancelNative(event);
     } else {
       localOnCancel();
@@ -139,7 +139,7 @@ export default function CardBase(props: CardBasePropsType) {
   const onCancelForeign = Object.assign(formForeign.onCancel, {});
   const localOnCancelForeign = (event:React.FormEvent) => {
     event.stopPropagation();
-    if (isModeEdit) {
+    if (isModeNewCard) {
       onCancelForeign(event);
     } else {
       localOnCancel();
@@ -185,7 +185,7 @@ export default function CardBase(props: CardBasePropsType) {
 }
 
 CardBase.defaultProps = {
-  isModeEdit: false,
+  isModeNewCard: false,
 };
 
 // TODO вычислить максимальное количество знаков для карточки

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { useCurrentLangPack } from '../store/selectors';
-import { useCurrentCollectionId, isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
+import { useCurrentCollectionId, isCardModeNewCardContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 import CardContentItem from '../components/cards/CardContentItem';
 import CardUniversal from '../components/cards/CardUniversal';
 
@@ -23,7 +23,7 @@ export default function NewCardPage() {
   }, [NEW_CARD_PAGE]);
 
   return (
-    <isCardModeEditContext.Provider value={isCardModeEdit}>
+    <isCardModeNewCardContext.Provider value={isCardModeEdit}>
       <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="content__list content__list--new-card-page">
           <CardContentItem ElementJSX={<CardUniversal />} />
@@ -34,6 +34,6 @@ export default function NewCardPage() {
           </div>
         </div>
       </isPairWordSavedContext.Provider>
-    </isCardModeEditContext.Provider>
+    </isCardModeNewCardContext.Provider>
   );
 }

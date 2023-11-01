@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import CardBase from './CardBase';
 import { addCard, deleteCard, editCard } from '../../connect/server-connections';
 import { useCurrentLangPack, useUserToken } from '../../store/selectors';
-import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
+import { useCardModeNewCard, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
 import { useStaticMessage } from '../global-context-provider/context-hooks';
 import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
@@ -29,7 +29,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const userToken = useUserToken();
   const collectionId = useCurrentCollectionId();
 
-  const isModeEdit = useCardModeEdit();
+  const isModeNewCard = useCardModeNewCard();
   const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
   const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
   const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
@@ -80,11 +80,13 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       pronunciation: localPairWords.transcription,
     };
     event.preventDefault();
-    if (isModeEdit) {
+    console.log(isModeNewCard);
+
+    if (isModeNewCard) {
       if (userToken && collectionId) {
         try {
           setIsDataLoading(true);
-          await addCard(userToken, collectionId, newWord);
+          await addCard(userToken, collectionId, newWord);//
           setText(langPack.CARD_SAVED);
           setIsNeedCurrentCollectionUpdate(true);
         } catch (error) {
@@ -173,7 +175,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     <CardBase
       isRefresh={isRefresh}
       setIsRefresh={setIsRefresh}
-      isModeEdit={isModeEdit}
+      isModeNewCard={isModeNewCard}
       onCardDelete={onCardDelete}
       pairWords={pairWords}
       formNative={

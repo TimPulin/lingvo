@@ -1,14 +1,14 @@
 import { createContext, useContext } from 'react';
 
 // ==============
-type IsCardModeEditContextType = boolean;
+type IsCardModeNewCardContextType = boolean;
 
-const isCardModeEditState = false;
+const isCardModeNewCardState = false;
 
-export const isCardModeEditContext = createContext<IsCardModeEditContextType>(isCardModeEditState);
+export const isCardModeNewCardContext = createContext<IsCardModeNewCardContextType>(isCardModeNewCardState);
 
-export function useCardModeEdit() {
-  return useContext(isCardModeEditContext);
+export function useCardModeNewCard() {
+  return useContext(isCardModeNewCardContext);
 }
 
 // ==============

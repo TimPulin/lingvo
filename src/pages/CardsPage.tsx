@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCurrentCollectionId, isCardModeEditContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
+import { useCurrentCollectionId, isCardModeNewCardContext, isPairWordSavedContext } from '../components/cards/card-context-hooks/card-context-hooks';
 import { useCardsCollection } from '../store/selectors';
 import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 
@@ -45,7 +45,7 @@ export default function CardsPage() {
   }
 
   return (
-    <isCardModeEditContext.Provider value={isCardModeEdit}>
+    <isCardModeNewCardContext.Provider value={isCardModeEdit}>
       <isPairWordSavedContext.Provider value={pairWordSaved}>
         <div className="wrapper-position-fixed">
           <ButtonPlus classAdditional="button-plus--add-new" onClickFunction={gotoCreateNewCardPage} />
@@ -54,6 +54,6 @@ export default function CardsPage() {
           <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection.binds} />} />
         </div>
       </isPairWordSavedContext.Provider>
-    </isCardModeEditContext.Provider>
+    </isCardModeNewCardContext.Provider>
   );
 }
