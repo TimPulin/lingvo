@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { updateCurrentCardsCollection } from '../store/slicers/current-cards-collection-slice';
 import {
   currentCollectionIdContext,
   CurrentCollectionIdType,
+  isCardModeEditCloseContext,
+  isCardModeNewCardContext,
 } from '../components/cards/card-context-hooks/card-context-hooks';
 import { getCardsCollection } from '../connect/server-connections';
 import { useUserToken } from '../store/selectors';
@@ -15,6 +17,17 @@ import { useDataLoading } from '../components/global-context-provider/loading-co
 
 export default function CollectionPage() {
   const [currentCollectionId, setCurrentCollectionId] = useState<CurrentCollectionIdType>(null);
+  const [isCardModeEditClose, setIsCardModeEditClose] = useState(false);
+  const [isCardModeNewCard, setIsCardModeNewCard] = useState(false);
+
+  const isCardModeEditCloseState = useMemo(() => ({
+    isCardModeEditClose, setIsCardModeEditClose,
+  }), [isCardModeEditClose]);
+
+  const isCardModeNewCardState = useMemo(() => ({
+    isCardModeNewCard, setIsCardModeNewCard,
+  }), [isCardModeEditClose]);
+
   const params = useParams();
   const dispatch = useDispatch();
   const userToken = useUserToken();
@@ -51,7 +64,11 @@ export default function CollectionPage() {
 
   return (
     <currentCollectionIdContext.Provider value={currentCollectionId}>
-      <Outlet />
+      <isCardModeEditCloseContext.Provider value={isCardModeEditCloseState}>
+        <isCardModeNewCardContext.Provider value={isCardModeNewCardState}>
+          <Outlet />
+        </isCardModeNewCardContext.Provider>
+      </isCardModeEditCloseContext.Provider>
     </currentCollectionIdContext.Provider>
   );
 }

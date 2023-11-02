@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
-import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
+import { useIsCardModeEditClose } from './card-context-hooks/card-context-hooks';
 import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
 import { HIDE } from '../../utils/constants';
 import CardEditorBlock from './CardEditorBlock';
@@ -34,13 +34,13 @@ export default function CardBase(props: CardBasePropsType) {
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
 
-  const { isPairWordSaved: isNewPairWordSaved } = usePairWordSaved();
+  const { isCardModeEditClose: isNewPairWordSaved } = useIsCardModeEditClose();
   const isSwiperSlideInProgress = useSwiperSlide();
 
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
 
-  const [isEdit, setIsEdit] = useState(false);
+  const [isModeEditCard, setIsModeEditCard] = useState(false);
   const [isFadeInOutRunning, setIsFadeInOutRunning] = useState(false);
 
   const [isCardBodyRotate, setIsCardBodyRotate] = useState(false);
@@ -49,14 +49,14 @@ export default function CardBase(props: CardBasePropsType) {
   const cardBodyRotateClass = () => (isCardBodyRotate ? rotateClassRef.current : '');
 
   useEffect(() => {
-    setIsEdit(isModeNewCard);
+    setIsModeEditCard(isModeNewCard);
   }, [isModeNewCard]);
 
   useEffect(() => {
-    if (isNewPairWordSaved && !isModeNewCard) setIsEdit(false);
+    if (isNewPairWordSaved && !isModeNewCard) setIsModeEditCard(false);
   }, [isNewPairWordSaved]);
 
-  const cardEditMode = () => (isEdit ? CARD_EDIT : '');
+  const cardEditMode = () => (isModeEditCard ? CARD_EDIT : '');
   const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
 
   const nativeContentHide = () => (isContentNative ? '' : HIDE);
@@ -116,7 +116,7 @@ export default function CardBase(props: CardBasePropsType) {
 
       setIsFadeInOutRunning(true);
       setTimeout(() => {
-        setIsEdit(false);
+        setIsModeEditCard(false);
       }, animationDuration / 2);
 
       setTimeout(() => {
@@ -158,7 +158,7 @@ export default function CardBase(props: CardBasePropsType) {
       <div ref={cardBodyRef} className={`card__body ${cardBodyClass()} ${fadeInOutClass()}`}>
 
         <CardControlBlock
-          onEdit={setIsEdit}
+          onEdit={setIsModeEditCard}
           onDelete={onCardDelete}
         />
 

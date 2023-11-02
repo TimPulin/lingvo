@@ -1,9 +1,15 @@
 import { createContext, useContext } from 'react';
 
 // ==============
-type IsCardModeNewCardContextType = boolean;
+type IsCardModeNewCardContextType = {
+  isCardModeNewCard: boolean;
+  setIsCardModeNewCard: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const isCardModeNewCardState = false;
+const isCardModeNewCardState = {
+  isCardModeNewCard: false,
+  setIsCardModeNewCard: () => {},
+};
 
 export const isCardModeNewCardContext = createContext<IsCardModeNewCardContextType>(isCardModeNewCardState);
 
@@ -13,20 +19,20 @@ export function useCardModeNewCard() {
 
 // ==============
 
-type IsPairWordSavedType = {
-  isPairWordSaved: boolean;
-  setIsPairWordSaved: React.Dispatch<React.SetStateAction<boolean>>;
+type IsCardModeEditCloseType = {
+  isCardModeEditClose: boolean;
+  setIsCardModeEditClose: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const isPairWordSavedState = {
-  isPairWordSaved: false,
-  setIsPairWordSaved: () => {},
+const isCardModeEditCloseState = {
+  isCardModeEditClose: false,
+  setIsCardModeEditClose: () => {},
 };
 
-export const isPairWordSavedContext = createContext<IsPairWordSavedType>(isPairWordSavedState);
+export const isCardModeEditCloseContext = createContext<IsCardModeEditCloseType>(isCardModeEditCloseState);
 
-export function usePairWordSaved() {
-  return useContext(isPairWordSavedContext);
+export function useIsCardModeEditClose() {
+  return useContext(isCardModeEditCloseContext);
 }
 
 // ==============
