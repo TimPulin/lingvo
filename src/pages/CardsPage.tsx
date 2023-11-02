@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useEffect } from 'react';
 import {
   useCurrentCollectionId,
   useCardModeNewCard,
@@ -15,22 +16,27 @@ import ButtonPlus from '../components/base/buttons/button-plus/ButtonPlus';
 
 export default function CardsPage() {
   const { setIsCardModeNewCard } = useCardModeNewCard();
-  setIsCardModeNewCard(false);
 
   const cardsCollection = useCardsCollection();
   const collectionId = useCurrentCollectionId();
   const { isDataLoading } = useDataLoading();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setIsCardModeNewCard(false);
+  }, []);
+
   const gotoCreateNewCardPage = () => {
     navigate(`/collections/${collectionId}/create-new-card`);
   };
 
   if (cardsCollection === null) {
+    if (!isDataLoading) {
     // TODO перевести
-    return (
-      <MessageOnPage messageText="Что-то пошло не так. Перезагрузите, пожалуйста, приложение" />
-    );
+      return (
+        <MessageOnPage messageText="Что-то пошло не так. Перезагрузите, пожалуйста, приложение" />
+      );
+    } return null;
   }
 
   if (cardsCollection !== null) {

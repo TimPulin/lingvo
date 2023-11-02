@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentLangPack, useUserToken } from '../../store/selectors';
 
-import { useCardModeNewCard, useIsCardModeEditClose, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
-import { useStaticMessage } from '../global-context-provider/context-hooks';
+import { useCardModeNewCard, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
+import { useStaticMessage } from '../global-context-provider/message-context';
 import { useDataLoading } from '../global-context-provider/loading-context-hook';
 import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 
@@ -36,12 +36,12 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const collectionId = useCurrentCollectionId();
 
   const { isCardModeNewCard } = useCardModeNewCard();
-  const { setIsCardModeEditClose } = useIsCardModeEditClose();
+
   const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
   const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
   const { setIsDataLoading } = useDataLoading();
 
-  const [isRefresh, setIsRefresh] = useState(false);
+  const isTurnCardToNativeRef = useRef(false);
 
   const [nativeWord, _setNativeWord] = useState<string>('');
   const [foreignWord, _setForeignWord] = useState<string>('');
@@ -65,6 +65,9 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const setTranscription = (value:string) => {
     _setTranscription(value);
   };
+
+  useEffect(() => {
+  }, [isCardModeNewCard]);
 
   useEffect(() => {
     if (pairWords) {
@@ -92,15 +95,19 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         try {
           setIsDataLoading(true);
           await addCard(userToken, collectionId, newWord);//
+          isTurnCardToNativeRef.current = true;
           setText(langPack.CARD_SAVED);
-          setIsNeedCurrentCollectionUpdate(true);
+          setIsMessageShow(true);
+          setTimeout(() => {
+            isTurnCardToNativeRef.current = false;
+          }, 100);
         } catch (error) {
           console.log(error);
           // TODO перевести
           setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+          setIsMessageShow(true);
         } finally {
           setIsDataLoading(false);
-          setIsMessageShow(true);
         }
       } else {
         // TODO перевести
@@ -119,17 +126,16 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         setIsDataLoading(true);
         await editCard(userToken, collectionId, cardId, newWord); // userToken
         setText(langPack.CARD_CHANGES_MADE);
+        setIsMessageShow(true);
         // setIsNeedCurrentCollectionUpdate(true);
       } catch (error) {
         // TODO перевести
         setText('Не смогли сохранить изменения. Видимо, что-то пошло не так');
+        setIsMessageShow(true);
       } finally {
         setIsDataLoading(false);
-        setIsMessageShow(true);
       }
     }
-    setIsCardModeEditClose(true);
-    setIsRefresh(true);
     _setNativeWord('');
     _setForeignWord('');
     _setTranscription('');
@@ -146,16 +152,16 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         await deleteCard(userToken, cardId);
         // TODO перевести
         setText('Карточка тактично удалена');
-
+        setIsMessageShow(true);
         setIsNeedCurrentCollectionUpdate(true);
         swiperUpdate();
       } catch (error) {
         console.log(error);
         // TODO перевести
         setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
+        setIsMessageShow(true);
       } finally {
         setIsDataLoading(false);
-        setIsMessageShow(true);
       }
     } else {
       const tokenWarning = 'Для удаления карточки необходимо авторизоваться';
@@ -175,10 +181,9 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   return (
     <CardBase
-      isRefresh={isRefresh}
-      setIsRefresh={setIsRefresh}
       isModeNewCard={isCardModeNewCard}
       onCardDelete={onCardDelete}
+      isTurnCardToNative={isTurnCardToNativeRef.current}
       pairWords={pairWords}
       formNative={
         {

@@ -6,27 +6,22 @@ import { updateCurrentCardsCollection } from '../store/slicers/current-cards-col
 import {
   currentCollectionIdContext,
   CurrentCollectionIdType,
-  isCardModeEditCloseContext,
   isCardModeNewCardContext,
 } from '../components/cards/card-context-hooks/card-context-hooks';
 import { getCardsCollection } from '../connect/server-connections';
 import { useUserToken } from '../store/selectors';
-import { useStaticMessage } from '../components/global-context-provider/context-hooks';
+import { useStaticMessage } from '../components/global-context-provider/message-context';
 import { useNeedCurrentCollectionUpdate } from '../components/global-context-provider/update-collection';
 import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 
 export default function CollectionPage() {
   const [currentCollectionId, setCurrentCollectionId] = useState<CurrentCollectionIdType>(null);
-  const [isCardModeEditClose, setIsCardModeEditClose] = useState(false);
-  const [isCardModeNewCard, setIsCardModeNewCard] = useState(false);
 
-  const isCardModeEditCloseState = useMemo(() => ({
-    isCardModeEditClose, setIsCardModeEditClose,
-  }), [isCardModeEditClose]);
+  const [isCardModeNewCard, setIsCardModeNewCard] = useState(false);
 
   const isCardModeNewCardState = useMemo(() => ({
     isCardModeNewCard, setIsCardModeNewCard,
-  }), [isCardModeEditClose]);
+  }), [isCardModeNewCard, setIsCardModeNewCard]);
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -64,11 +59,9 @@ export default function CollectionPage() {
 
   return (
     <currentCollectionIdContext.Provider value={currentCollectionId}>
-      <isCardModeEditCloseContext.Provider value={isCardModeEditCloseState}>
-        <isCardModeNewCardContext.Provider value={isCardModeNewCardState}>
-          <Outlet />
-        </isCardModeNewCardContext.Provider>
-      </isCardModeEditCloseContext.Provider>
+      <isCardModeNewCardContext.Provider value={isCardModeNewCardState}>
+        <Outlet />
+      </isCardModeNewCardContext.Provider>
     </currentCollectionIdContext.Provider>
   );
 }

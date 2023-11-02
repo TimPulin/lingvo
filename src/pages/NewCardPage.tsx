@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { useCurrentLangPack } from '../store/selectors';
@@ -8,10 +8,13 @@ import { useCurrentCollectionId, useCardModeNewCard } from '../components/cards/
 
 import CardContentItem from '../components/cards/CardContentItem';
 import CardUniversal from '../components/cards/CardUniversal';
+import ButtonBase from '../components/base/ButtonBase';
+import { useNeedCurrentCollectionUpdate } from '../components/global-context-provider/update-collection';
 
 export default function NewCardPage() {
+  const navigate = useNavigate();
   const { setIsCardModeNewCard } = useCardModeNewCard();
-  setIsCardModeNewCard(true);
+  const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
   const dispatch = useDispatch();
   const { NEW_CARD_PAGE } = useCurrentLangPack();
@@ -21,12 +24,25 @@ export default function NewCardPage() {
     dispatch(updateCurrentPageName(NEW_CARD_PAGE));
   }, [NEW_CARD_PAGE]);
 
+  useEffect(() => {
+    setIsCardModeNewCard(true);
+  }, []);
+
+  const gotoCollectionPage = () => {
+    navigate(`/collections/${collectionId}`);
+    setIsNeedCurrentCollectionUpdate(true);
+  };
+
   return (
     <div className="content__list content__list--new-card-page">
       <CardContentItem ElementJSX={<CardUniversal />} />
       <div className="content__item">
         <div className="button-wrap">
-          <Link className="button button--trans" to={`/collections/${collectionId}`}>Вернуться к коллекции</Link>
+          <ButtonBase
+            onClickFunction={gotoCollectionPage}
+            text="Вернуться к коллекции"
+            classAdditional="button button--trans"
+          />
         </div>
       </div>
     </div>

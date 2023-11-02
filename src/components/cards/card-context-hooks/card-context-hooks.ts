@@ -19,24 +19,6 @@ export function useCardModeNewCard() {
 
 // ==============
 
-type IsCardModeEditCloseType = {
-  isCardModeEditClose: boolean;
-  setIsCardModeEditClose: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const isCardModeEditCloseState = {
-  isCardModeEditClose: false,
-  setIsCardModeEditClose: () => {},
-};
-
-export const isCardModeEditCloseContext = createContext<IsCardModeEditCloseType>(isCardModeEditCloseState);
-
-export function useIsCardModeEditClose() {
-  return useContext(isCardModeEditCloseContext);
-}
-
-// ==============
-
 export type CurrentCollectionIdType = number | null;
 
 const currentCollectionIdState = null;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCurrentLangPack, useUserToken } from '../store/selectors';
-import { useStaticMessage } from '../components/global-context-provider/context-hooks';
+import { useStaticMessage } from '../components/global-context-provider/message-context';
 import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 
 import { getCollectionsList, deleteCollection } from '../connect/server-connections';
