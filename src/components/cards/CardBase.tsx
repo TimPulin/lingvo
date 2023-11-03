@@ -74,7 +74,7 @@ export default function CardBase(props: CardBasePropsType) {
       setTimeout(() => {
         setIsCardNative(!isCurrentSideNative);
         setIsContentNative(!isCurrentSideNative);
-      }, 251);
+      }, 250);
     }
   }
 

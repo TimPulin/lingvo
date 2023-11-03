@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import {
   useCurrentCollectionId,
   useCardModeNewCard,
-} from '../components/cards/card-context-hooks/card-context-hooks';
+} from '../components/collection-page-context-provider/card-context-hooks';
 
 import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 import { useCardsCollection } from '../store/selectors';
@@ -52,16 +52,13 @@ export default function CardsPage() {
   }
 
   return (
-
     <>
-
-      <div className="wrapper-position-fixed">
-        <ButtonPlus classAdditional="button-plus--add-new" onClickFunction={gotoCreateNewCardPage} />
-      </div>
       <div className="content__list content__list--cards-list-page">
         <CardContentItem ElementJSX={<SwiperReact cardsList={cardsCollection.binds} />} />
       </div>
+      <div className="wrapper-position-fixed">
+        <ButtonPlus classAdditional="button-plus--add-new" onClickFunction={gotoCreateNewCardPage} />
+      </div>
     </>
-
   );
 }

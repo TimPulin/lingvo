@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentLangPack, useUserToken } from '../../store/selectors';
 
-import { useCardModeNewCard, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
+import { useCardModeNewCard, useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
 import { useStaticMessage } from '../global-context-provider/message-context';
 import { useDataLoading } from '../global-context-provider/loading-context-hook';
 import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
@@ -33,7 +33,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   const langPack = useCurrentLangPack();
   const userToken = useUserToken();
-  const collectionId = useCurrentCollectionId();
+  const { currentCollectionId } = useCurrentCollectionId();
 
   const { isCardModeNewCard } = useCardModeNewCard();
 
@@ -91,10 +91,10 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     event.preventDefault();
 
     if (isCardModeNewCard) {
-      if (userToken && collectionId) {
+      if (userToken && currentCollectionId) {
         try {
           setIsDataLoading(true);
-          await addCard(userToken, collectionId, newWord);//
+          await addCard(userToken, currentCollectionId, newWord);//
           isTurnCardToNativeRef.current = true;
           setText(langPack.CARD_SAVED);
           setIsMessageShow(true);
@@ -116,15 +116,15 @@ export default function CardUniversal(props: CardUniversalPropsType) {
         let warning = '';
 
         if (userToken == null) warning += tokenWarning;
-        if (collectionId == null) warning += idWarning;
+        if (currentCollectionId == null) warning += idWarning;
 
         setText(warning);
-        console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId}`);
+        console.log(`проблема с userToken: ${userToken} или collectionId: ${currentCollectionId}`);
       }
-    } else if (userToken && cardId && collectionId) {
+    } else if (userToken && cardId && currentCollectionId) {
       try {
         setIsDataLoading(true);
-        await editCard(userToken, collectionId, cardId, newWord); // userToken
+        await editCard(userToken, currentCollectionId, cardId, newWord); // userToken
         setText(langPack.CARD_CHANGES_MADE);
         setIsMessageShow(true);
         // setIsNeedCurrentCollectionUpdate(true);
@@ -142,11 +142,11 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   const onCancel = () => {
-    navigate(`/collections/${collectionId}`);
+    navigate(`/collections/${currentCollectionId}`);
   };
 
   const onCardDelete = async () => {
-    if (userToken && cardId && collectionId) {
+    if (userToken && cardId && currentCollectionId) {
       try {
         setIsDataLoading(true);
         await deleteCard(userToken, cardId);
@@ -170,12 +170,12 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       let warning = '';
 
       if (userToken == null) warning += tokenWarning;
-      if (collectionId == null) warning += collectionIdWarning;
+      if (currentCollectionId == null) warning += collectionIdWarning;
       if (cardId == null) warning += cardIdWarning;
 
       setText(warning);
       setIsMessageShow(true);
-      console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId} или cardId ${cardId}`);
+      console.log(`проблема с userToken: ${userToken} или collectionId: ${currentCollectionId} или cardId ${cardId}`);
     }
   };
 

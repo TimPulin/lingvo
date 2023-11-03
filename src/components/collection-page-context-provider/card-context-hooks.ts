@@ -19,9 +19,15 @@ export function useCardModeNewCard() {
 
 // ==============
 
-export type CurrentCollectionIdType = number | null;
+export type CurrentCollectionIdType = {
+  currentCollectionId: null | number;
+  setCurrentCollectionId: React.Dispatch<React.SetStateAction<null | number>>
+};
 
-const currentCollectionIdState = null;
+const currentCollectionIdState = {
+  currentCollectionId: null,
+  setCurrentCollectionId: () => {},
+};
 
 export const currentCollectionIdContext = createContext<CurrentCollectionIdType>(currentCollectionIdState);
 

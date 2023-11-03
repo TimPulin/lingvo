@@ -1,21 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import { useCurrentCollectionId } from '../cards/card-context-hooks/card-context-hooks';
+import { useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
 import ButtonSettings from '../base/buttons/ButtonSettings';
 import ButtonPlus from '../base/buttons/button-plus/ButtonPlus';
 import { useActionBar } from '../global-context-provider/action-bar-context-hook';
 
 export default function CollectionFooter() {
   const navigate = useNavigate();
-  const collectionId = useCurrentCollectionId();
+  const { currentCollectionId } = useCurrentCollectionId();
   const { setId: setCurrentCollectionId, setIsActionBarOpen } = useActionBar();
 
   const openCollectionActionsBar = () => {
-    setCurrentCollectionId(collectionId);
+    setCurrentCollectionId(currentCollectionId);
     setIsActionBarOpen(true);
   };
 
   const gotoCreateNewCardPage = () => {
-    navigate(`/collections/${collectionId}/create-new-card`);
+    navigate(`/collections/${currentCollectionId}/create-new-card`);
   };
 
   return (

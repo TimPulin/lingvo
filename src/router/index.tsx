@@ -9,6 +9,7 @@ import GlobalContextProvider from '../components/global-context-provider/GlobalC
 import CollectionPage from '../pages/CollectionPage';
 import LoginPage from '../pages/login-page/LoginPage';
 import EditCollectionPage from '../pages/EditCollectionPage';
+import CollectionPageContextProvider from '../components/collection-page-context-provider/CollectionPageContextProvider';
 
 export const router = createBrowserRouter([
   {
@@ -37,19 +38,25 @@ export const router = createBrowserRouter([
 
       {
         path: '/collections/:id',
-        element: <CollectionPage />,
+        element: <CollectionPageContextProvider />,
         children: [
           {
             path: '/collections/:id',
-            element: <CardsPage />,
-          },
-          {
-            path: '/collections/:id/create-new-card',
-            element: <NewCardPage />,
-          },
-          {
-            path: '/collections/:id/edit-collection',
-            element: <EditCollectionPage />,
+            element: <CollectionPage />,
+            children: [
+              {
+                path: '/collections/:id',
+                element: <CardsPage />,
+              },
+              {
+                path: '/collections/:id/create-new-card',
+                element: <NewCardPage />,
+              },
+              {
+                path: '/collections/:id/edit-collection',
+                element: <EditCollectionPage />,
+              },
+            ],
           },
         ],
       },

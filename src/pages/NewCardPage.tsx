@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { useCurrentLangPack } from '../store/selectors';
 
-import { useCurrentCollectionId, useCardModeNewCard } from '../components/cards/card-context-hooks/card-context-hooks';
+import { useCurrentCollectionId, useCardModeNewCard } from '../components/collection-page-context-provider/card-context-hooks';
 
 import CardContentItem from '../components/cards/CardContentItem';
 import CardUniversal from '../components/cards/CardUniversal';
