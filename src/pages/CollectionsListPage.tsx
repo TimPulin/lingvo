@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import { useCurrentLangPack, useUserToken } from '../store/selectors';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
+import { updateUserToken } from '../store/slicers/user-token-slice';
+
 import { useStaticMessage } from '../components/global-context-provider/message-context';
 import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 
 import { getCollectionsList, deleteCollection } from '../connect/server-connections';
-import { updateCurrentPageName } from '../store/slicers/current-page-slice';
-import { updateUserToken } from '../store/slicers/user-token-slice';
 import { setLocalStorageUserToken } from '../connect/local-storage-connections';
+
 import { CollectionsListType, CollectionType } from '../utils/types';
 
 import ButtonPlus from '../components/base/buttons/button-plus/ButtonPlus';

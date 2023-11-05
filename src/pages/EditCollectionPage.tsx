@@ -32,7 +32,7 @@ export default function EditCollectionPage() {
         // TODO перевести
         setTextMessage('Изменения сохранены');
         staticMessagePromise(setIsShowMessage, true)
-          .then(() => navigate(`/collections/${response.data.id}`));
+          .then(() => navigate(`/collection/${response.data.id}`));
       } catch (error) {
         console.log(error);
       }

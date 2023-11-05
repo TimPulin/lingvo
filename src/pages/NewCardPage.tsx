@@ -1,24 +1,56 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateCurrentPageName } from '../store/slicers/current-page-slice';
-import { useCurrentLangPack } from '../store/selectors';
 
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
+import { useCurrentLangPack, useUserToken } from '../store/selectors';
+
+import { useStaticMessage } from '../components/global-context-provider/message-context';
+import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
 import { useCurrentCollectionId, useCardModeNewCard } from '../components/collection-page-context-provider/card-context-hooks';
 
-import CardContentItem from '../components/cards/CardContentItem';
+import { addCard } from '../connect/server-connections';
+
 import CardUniversal from '../components/cards/CardUniversal';
 import ButtonBase from '../components/base/ButtonBase';
-import { useNeedCurrentCollectionUpdate } from '../components/global-context-provider/update-collection';
+
+import { OnSaveCardArgumentsType } from '../utils/types';
+import { GetCardsCollectionLocalType } from './CollectionPage';
 
 export default function NewCardPage() {
   const navigate = useNavigate();
-  const { setIsCardModeNewCard } = useCardModeNewCard();
-  const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
-
   const dispatch = useDispatch();
+  const getCardsCollectionLocal:GetCardsCollectionLocalType = useOutletContext();
+
+  const userToken = useUserToken();
+  const langPack = useCurrentLangPack();
+  const { setIsCardModeNewCard } = useCardModeNewCard();
+  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
+
   const { NEW_CARD_PAGE } = useCurrentLangPack();
-  const collectionId = useCurrentCollectionId();
+  const { currentCollectionId } = useCurrentCollectionId();
+  const { setIsDataLoading } = useDataLoading();
+
+  function showMessage(textMessage:string) {
+    setText(textMessage);
+    setIsMessageShow(true);
+  }
+
+  const onSaveCard = async ({ newWord }:OnSaveCardArgumentsType) => {
+    if (userToken && currentCollectionId && newWord) {
+      try {
+        setIsDataLoading(true);
+        await addCard(userToken, currentCollectionId, newWord);
+        showMessage(langPack.CARD_SAVED);
+      } catch (error) {
+        console.log(error);
+        // TODO перевести
+        showMessage('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+      } finally {
+        setIsDataLoading(false);
+      }
+    }
+  };
 
   useEffect(() => {
     dispatch(updateCurrentPageName(NEW_CARD_PAGE));
@@ -29,13 +61,15 @@ export default function NewCardPage() {
   }, []);
 
   const gotoCollectionPage = () => {
-    navigate(`/collections/${collectionId}`);
-    setIsNeedCurrentCollectionUpdate(true);
+    navigate(`/collection/${currentCollectionId}`);
+    if (userToken && currentCollectionId) getCardsCollectionLocal(userToken, currentCollectionId);
   };
 
   return (
     <div className="content__list content__list--new-card-page">
-      <CardContentItem ElementJSX={<CardUniversal />} />
+      <div className="content__item">
+        <CardUniversal onSaveCard={onSaveCard} />
+      </div>
       <div className="content__item">
         <div className="button-wrap">
           <ButtonBase

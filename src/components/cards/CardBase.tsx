@@ -19,7 +19,7 @@ const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
 type CardBasePropsType = {
   isModeNewCard?: boolean;
-  onCardDelete: () => void;
+  onDeleteCard: () => void;
   isTurnCardToNative: boolean;
   pairWords: IPairWords;
   formNative: CardFormPropsType;
@@ -28,7 +28,7 @@ type CardBasePropsType = {
 
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isModeNewCard = false, pairWords, formNative, formForeign, onCardDelete, isTurnCardToNative: turnCardToNative,
+    isModeNewCard = false, pairWords, formNative, formForeign, onDeleteCard: onCardDelete, isTurnCardToNative: turnCardToNative,
   } = props;
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
@@ -94,7 +94,7 @@ export default function CardBase(props: CardBasePropsType) {
 
       setTimeout(() => {
         setIsFadeInOutRunning(false);
-        turnCard(false);
+        if (!isCardNative) turnCard(false);
       }, animationDuration);
     }
   }

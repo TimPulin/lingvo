@@ -14,11 +14,11 @@
   z-index: -9999;
   transition: opacity .2s ease;
 
+
   &::after {
     content: '';
     @include wrap-absolute;
-    background-color: #fff;
-    opacity: .9;
+    backdrop-filter: blur(3px);
   }
 
   &__body {

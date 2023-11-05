@@ -1,7 +1,7 @@
 // COLOR VARS
 $color-primary: #00a0ff;
 $color-primary_shade: #0068A6;
-$color-primary_light: rgba(0, 160, 255, 1);
+$color-primary_light: #e5f6fe;
 ;
 $color-secondary: #ff6c00;
 $color-secondary_shade: #ff5900;
@@ -19,7 +19,7 @@ $page-background: $color-grey_max_light;
 [data-lingvo-cards-theme="light"] {
   --color-primary: #00a0ff;
   --color-primary_shade: #0068A6;
-  --color-primary_light: #00a0ff1a;
+  --color-primary_light: #e5f6fe;
 
   --color-secondary: #ff6c00;
 
@@ -37,7 +37,7 @@ $page-background: $color-grey_max_light;
 
 [data-lingvo-cards-theme="dark"] {
   --color-primary: #00a0ff;
-  --color-primary_light: rgba(0, 160, 255, 1);
+  --color-primary_light: #e5f6fe;
   ;
   --color-secondary: #ff6c00;
 

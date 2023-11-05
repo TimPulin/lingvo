@@ -86,3 +86,16 @@ export type NewWordType = {
   phrase: string,
   translationPhrase: string,
 };
+
+// =============================
+
+export type OnSaveCardArgumentsType = {
+  newWord: NewWordType;
+  cardId?: number;
+};
+
+// ==============================
+
+export type OnDeleteCardArgumentsType = {
+  cardId: number;
+};

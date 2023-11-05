@@ -1,11 +1,16 @@
 import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
 import { router } from './router';
+
 import { getLanguagesList, getUserData } from './connect/server-connections';
+
 import { useUserToken } from './store/selectors';
 import { setLanguagesList } from './store/slicers/languages-list-slicer';
 import { updateUserData } from './store/slicers/user-data-slice';
+
+import { useDataLoading } from './components/global-context-provider/loading-context-hook';
 
 // type ResponseType = {
 //   status: number,
@@ -15,6 +20,7 @@ import { updateUserData } from './store/slicers/user-data-slice';
 function App() {
   const userToken = useUserToken();
   const dispatch = useDispatch();
+  const { setIsDataLoading } = useDataLoading();
 
   /* TODO типизировать CollectionLanguageListType */
 
@@ -36,6 +42,9 @@ function App() {
     if (userToken) {
       const getLanguagesListPromise = makePromise(getLanguagesList(userToken));
       const getUserDataPromise = makePromise(getUserData(userToken));
+
+      setIsDataLoading(true);
+
       Promise.all([getLanguagesListPromise, getUserDataPromise])
         .then(([languagesListResponse, userDataResponse]) => {
           if (languagesListResponse.status === 200) {
@@ -57,18 +66,8 @@ function App() {
           } else {
             console.log(userDataResponse.status);
           }
-        });
-
-      // getLanguagesList(userToken)
-      //   .then((response:any) => {
-      //     const list = response.data.data;
-      //     const languagesList = list.map((item:any) => ({
-      //       label: item.english,
-      //       value: item.id,
-      //     }));
-
-      //     dispatch(setLanguagesList(languagesList));
-      //   });
+        })
+        .finally(() => setIsDataLoading(false));
     }
   }, [userToken]);
 

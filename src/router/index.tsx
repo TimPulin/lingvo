@@ -37,23 +37,23 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: '/collections/:id',
+        path: 'collection',
         element: <CollectionPageContextProvider />,
         children: [
           {
-            path: '/collections/:id',
+            path: '/collection/:id',
             element: <CollectionPage />,
             children: [
               {
-                path: '/collections/:id',
+                path: '/collection/:id',
                 element: <CardsPage />,
               },
               {
-                path: '/collections/:id/create-new-card',
+                path: '/collection/:id/create-new-card',
                 element: <NewCardPage />,
               },
               {
-                path: '/collections/:id/edit-collection',
+                path: '/collection/:id/edit-collection',
                 element: <EditCollectionPage />,
               },
             ],

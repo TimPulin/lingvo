@@ -6,10 +6,12 @@ import {
 } from 'react';
 import CardUniversal from '../cards/CardUniversal';
 import { SwiperSlideInProgressContext } from './swiper-react-context-hooks';
-import { CardsListType } from '../../utils/types';
+import { CardsListType, OnSaveCardArgumentsType } from '../../utils/types';
 
 type SwiperReactPropsType = {
   cardsList:CardsListType;
+  onSaveCard?: (args: OnSaveCardArgumentsType) => void;
+  onDeleteCard?:(cardId:number) => void;
 };
 
 const swiperParams:SwiperOptions = {
@@ -22,11 +24,12 @@ const swiperParams:SwiperOptions = {
     },
   },
 };
+const initialEmptyFunction = () => {};
 
 const SWIPER_ACTIVE = 'swiper--active';
 
 export default function SwiperReact(props:SwiperReactPropsType) {
-  const { cardsList } = props;
+  const { cardsList, onSaveCard = initialEmptyFunction, onDeleteCard = initialEmptyFunction } = props;
 
   const [isSwiperSlideInProgress, setIsSwiperSlideInProgress] = useState(false);
   const swiperSlide = useMemo(() => isSwiperSlideInProgress, [isSwiperSlideInProgress]);
@@ -74,6 +77,8 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   key={item.id}
                 >
                   <CardUniversal
+                    onSaveCard={onSaveCard}
+                    onDeleteCard={onDeleteCard}
                     pairWords={{
                       // cardId: item.phraseId,
                       cardId: item.id,
@@ -91,3 +96,8 @@ export default function SwiperReact(props:SwiperReactPropsType) {
     </SwiperSlideInProgressContext.Provider>
   );
 }
+
+SwiperReact.defaultProps = {
+  onSaveCard: () => {},
+  onDeleteCard: () => {},
+};

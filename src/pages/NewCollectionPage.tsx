@@ -31,7 +31,7 @@ export default function CreateCollectionPage() {
         // TODO перевести
         setTextMessage('Новая коллекция сохранена');
         staticMessagePromise(setIsShowMessage, true)
-          .then(() => navigate(`/collections/${response.data.id}`));
+          .then(() => navigate(`/collection/${response.data.id}`));
       } catch (error) {
         console.log(error);
       } finally {
