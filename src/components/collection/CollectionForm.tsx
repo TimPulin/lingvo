@@ -8,7 +8,9 @@ import { CollectionFormType } from '../../utils/types';
 export type CollectionFormPropsType = {
   languagesList:DefaultOptionType[];
   formState?: CollectionFormType;
+  modeEditCollection?: boolean;
   onSubmitFunction: (collectionData:CollectionFormType) => void;
+  onResetFunction: () => void;
 };
 
 const formInitialState:CollectionFormType = {
@@ -20,14 +22,21 @@ const formInitialState:CollectionFormType = {
 
 export default function CollectionForm(props:CollectionFormPropsType) {
   const { CANCEL, SAVE } = useCurrentLangPack();
-  const { languagesList, formState = formInitialState, onSubmitFunction } = props;
+  const {
+    languagesList, formState = formInitialState, onSubmitFunction, onResetFunction, modeEditCollection = false,
+  } = props;
   const [localNativeLanguageList, setLocalNativeLanguageList] = useState(languagesList);
   const [localForeignLanguageList, setLocalForeignLanguageList] = useState(languagesList);
+
+  const disableLanguageSelect = () => (modeEditCollection);
 
   const formik = useFormik({
     initialValues: formState,
     onSubmit(values) {
       onSubmitFunction(values);
+    },
+    onReset() {
+      onResetFunction();
     },
   });
 
@@ -94,6 +103,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
                 onSearch={onSearchSelectNativeLanguage}
                 onChange={(value) => { formik.handleChange({ target: { name: 'languageId', value } }); }}
                 showSearch
+                disabled={disableLanguageSelect()}
               />
             </Form.Item>
           </label>
@@ -110,6 +120,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
                 onSearch={onSearchSelectForeignLanguage}
                 onChange={(value) => { formik.handleChange({ target: { name: 'translationLanguageId', value } }); }}
                 showSearch
+                disabled={disableLanguageSelect()}
               />
             </Form.Item>
           </label>
@@ -135,4 +146,5 @@ export default function CollectionForm(props:CollectionFormPropsType) {
 
 CollectionForm.defaultProps = {
   formState: formInitialState,
+  modeEditCollection: false,
 };

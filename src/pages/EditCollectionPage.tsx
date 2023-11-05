@@ -28,15 +28,22 @@ export default function EditCollectionPage() {
   const editCurrentCollection = async (collectionData: CollectionFormType) => {
     if (userToken && currentCollection) {
       try {
-        const response = await editCollection(userToken, currentCollection.id, collectionData);
+        await editCollection(userToken, currentCollection.id, collectionData);
         // TODO перевести
         setTextMessage('Изменения сохранены');
         staticMessagePromise(setIsShowMessage, true)
-          .then(() => navigate(`/collection/${response.data.id}`));
+          // .then(() => navigate(`/collection/${response.data.id}`));
+          .then(() => {
+            navigate('/collections');
+          });
       } catch (error) {
         console.log(error);
       }
     }
+  };
+
+  const onResetCollectionForm = () => {
+    navigate('/collections');
   };
 
   return (
@@ -46,6 +53,8 @@ export default function EditCollectionPage() {
           languagesList={languagesList}
           formState={collectionFormState}
           onSubmitFunction={editCurrentCollection}
+          onResetFunction={onResetCollectionForm}
+          modeEditCollection
         />
       </div>
     </div>

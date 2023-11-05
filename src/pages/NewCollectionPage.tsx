@@ -40,11 +40,16 @@ export default function CreateCollectionPage() {
     }
   };
 
+  const onResetCollectionForm = () => {
+    navigate('/collections');
+  };
+
   return (
     <div className="content__list content__list--single-top">
       <div className="content__item">
         <CollectionForm
           onSubmitFunction={addNewCollection}
+          onResetFunction={onResetCollectionForm}
           languagesList={languagesList}
         />
       </div>
