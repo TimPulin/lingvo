@@ -22,6 +22,10 @@
 
   &__page-title {
     @include reset;
+    max-width: calc(var(--screen-real-width) - 80px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   // TODO проверить - удалить
@@ -33,5 +37,10 @@
 .compass {
   &__button {
     @include btn-reset;
+  }
+
+  .svg__root {
+    width: 25px;
+    height: 25px;
   }
 }

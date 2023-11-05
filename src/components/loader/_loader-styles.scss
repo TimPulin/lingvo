@@ -19,7 +19,7 @@
     border-radius: 50%;
     position: relative;
     text-indent: -9999em;
-    animation: mulShdSpin 1.1s infinite ease;
+    // animation: mulShdSpin 1.1s infinite ease;
     transform: translateZ(0);
     z-index: 1300;
   }
@@ -27,6 +27,10 @@
 
 .loader-overlay--show {
   z-index: 1100;
+
+  .loader-overlay__spinner {
+    animation: mulShdSpin 1.1s infinite ease;
+  }
 }
 
 @keyframes mulShdSpin {

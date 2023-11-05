@@ -2,7 +2,7 @@
 export default function ArrowLeftIcon() {
   return (
     <span className="svg">
-      <svg className="svg__root" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="svg__root" width="16" height="16" viewBox="4 4 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           className="svg__path"
           fillRule="evenodd"
