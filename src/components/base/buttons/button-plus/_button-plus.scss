@@ -25,9 +25,10 @@
 .wrapper-position-fixed {
   position: fixed;
   bottom: 0;
-  margin-inline: auto;
+  left: 50%;
   width: 100%;
   max-width: $medium-screen;
+  transform: translateX(-50%);
 
   z-index: 800;
 

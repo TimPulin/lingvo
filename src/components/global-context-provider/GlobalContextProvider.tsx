@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useState, useMemo } from 'react';
 import RootPage from '../../pages/RootPage';
-import { StaticMessageContext } from './context-hooks';
+import { StaticMessageContext } from './message-context';
 import { isCollectionSavedContext } from './collection-form-context-hook';
 import { IsNeedCurrentCollectionUpdateContext } from './update-collection';
 import { IsDataLoading } from './loading-context-hook';

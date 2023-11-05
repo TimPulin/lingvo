@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCurrentLangPack } from '../../store/selectors';
+
+import { useCardModeNewCard, useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
+
+import { OnSaveCardArgumentsType } from '../../utils/types';
+
 import CardBase from './CardBase';
-import { addCard, deleteCard, editCard } from '../../connect/server-connections';
-import { useCurrentLangPack, useUserToken } from '../../store/selectors';
-import { useCardModeEdit, usePairWordSaved, useCurrentCollectionId } from './card-context-hooks/card-context-hooks';
-import { useStaticMessage } from '../global-context-provider/context-hooks';
-import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
-import { useDataLoading } from '../global-context-provider/loading-context-hook';
 
 const defaultPairWords: IPairWords = {
   cardId: 0,
@@ -17,25 +18,28 @@ const defaultPairWords: IPairWords = {
 };
 
 type CardUniversalPropsType = {
-  swiperUpdate?: () => void;
   pairWords?: IPairWords;
+  onSaveCard?: (args: OnSaveCardArgumentsType) => void;
+  onDeleteCard?: (cardId:number) => void;
 };
 
-const initialSwiperUpdate = () => {};
+const initialEmptyFunction = () => {};
 
 export default function CardUniversal(props: CardUniversalPropsType) {
-  const { pairWords = defaultPairWords, swiperUpdate = initialSwiperUpdate } = props;
+  const {
+    pairWords = defaultPairWords,
+    onSaveCard = initialEmptyFunction,
+    onDeleteCard = initialEmptyFunction,
+  } = props;
+
+  const navigate = useNavigate();
+
   const langPack = useCurrentLangPack();
-  const userToken = useUserToken();
-  const collectionId = useCurrentCollectionId();
+  const { currentCollectionId } = useCurrentCollectionId();
 
-  const isModeEdit = useCardModeEdit();
-  const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
-  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
-  const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
-  const { setIsDataLoading } = useDataLoading();
+  const { isCardModeNewCard } = useCardModeNewCard();
 
-  const [isRefresh, setIsRefresh] = useState(false);
+  const isTurnCardToNativeRef = useRef(false);
 
   const [nativeWord, _setNativeWord] = useState<string>('');
   const [foreignWord, _setForeignWord] = useState<string>('');
@@ -61,6 +65,9 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   useEffect(() => {
+  }, [isCardModeNewCard]);
+
+  useEffect(() => {
     if (pairWords) {
       setNativeWord(pairWords.nativeWord);
       setForeignWord(pairWords.foreignWord);
@@ -74,107 +81,41 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   const onSubmitForeign = async (event: React.FormEvent) => {
+    event.preventDefault();
     const newWord = {
       phrase: localPairWords.nativeWord,
       translationPhrase: localPairWords.foreignWord,
       pronunciation: localPairWords.transcription,
     };
-    event.preventDefault();
-    if (isModeEdit) {
-      if (userToken && collectionId) {
-        try {
-          setIsDataLoading(true);
-          await addCard(userToken, collectionId, newWord);
-          setText(langPack.CARD_SAVED);
-          setIsNeedCurrentCollectionUpdate(true);
-        } catch (error) {
-          console.log(error);
-          // TODO перевести
-          setText('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
-        } finally {
-          setIsDataLoading(false);
-        }
-      } else {
-        // TODO перевести
-        const tokenWarning = 'Для сохранения карточки необходимо авторизоваться';
-        const idWarning = 'Коллекция карточек не найдена';
-        let warning = '';
 
-        if (userToken == null) warning += tokenWarning;
-        if (collectionId == null) warning += idWarning;
-
-        setText(warning);
-        console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId}`);
-      }
-    } else if (userToken && cardId && collectionId) {
-      try {
-        setIsDataLoading(true);
-        await editCard(userToken, collectionId, cardId, newWord);
-        setText(langPack.CARD_CHANGES_MADE);
-        setIsNeedCurrentCollectionUpdate(true);
-      } catch (error) {
-        // TODO перевести
-        setText('Не смогли сохранить изменения. Видимо, что-то пошло не так');
-      } finally {
-        setIsDataLoading(false);
-      }
-    }
-    setIsNewPairWordSaved(true);
-    setIsRefresh(true);
-    _setNativeWord('');
-    _setForeignWord('');
-    _setTranscription('');
-  };
-
-  const onCancelNative = () => {
-    _setNativeWord('');
-  };
-
-  const onCancelForeign = () => {
-    _setForeignWord('');
-    _setTranscription('');
-  };
-
-  const onCardDelete = async () => {
-    if (userToken && cardId && collectionId) {
-      try {
-        setIsDataLoading(true);
-        await deleteCard(userToken, cardId);
-        // TODO перевести
-        setText('Карточка тактично удалена');
-        setIsMessageShow(true);
-        setIsNeedCurrentCollectionUpdate(true);
-        swiperUpdate();
-      } catch (error) {
-        console.log(error);
-        // TODO перевести
-        setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
-        setIsMessageShow(true);
-      } finally {
-        setIsDataLoading(false);
-      }
+    if (cardId) {
+      onSaveCard({ newWord, cardId });
     } else {
-      const tokenWarning = 'Для удаления карточки необходимо авторизоваться';
-      const collectionIdWarning = 'Коллекция карточек не найдена';
-      const cardIdWarning = 'Карточка не найдена';
-      let warning = '';
-
-      if (userToken == null) warning += tokenWarning;
-      if (collectionId == null) warning += collectionIdWarning;
-      if (cardId == null) warning += cardIdWarning;
-
-      setText(warning);
-      setIsMessageShow(true);
-      console.log(`проблема с userToken: ${userToken} или collectionId: ${collectionId} или cardId ${cardId}`);
+      // TODO сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
+      onSaveCard({ newWord });
+      isTurnCardToNativeRef.current = true;
+      setTimeout(() => {
+        isTurnCardToNativeRef.current = false;
+        _setNativeWord('');
+        _setForeignWord('');
+        _setTranscription('');
+      }, 100);
     }
+  };
+
+  const onCancel = () => {
+    navigate(`/collection/${currentCollectionId}`);
+  };
+
+  const onCardDeleteLocal = async () => {
+    if (cardId) onDeleteCard(cardId);
   };
 
   return (
     <CardBase
-      isRefresh={isRefresh}
-      setIsRefresh={setIsRefresh}
-      isModeEdit={isModeEdit}
-      onCardDelete={onCardDelete}
+      isModeNewCard={isCardModeNewCard}
+      onDeleteCard={onCardDeleteLocal}
+      isTurnCardToNative={isTurnCardToNativeRef.current}
       pairWords={pairWords}
       formNative={
         {
@@ -185,7 +126,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           ],
           primaryButtonName: langPack.FORWARD,
           onSubmit: onSubmitNative,
-          onCancel: onCancelNative,
+          onCancel,
         }
       }
       formForeign={
@@ -200,7 +141,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           ],
           primaryButtonName: langPack.SAVE,
           onSubmit: onSubmitForeign,
-          onCancel: onCancelForeign,
+          onCancel,
         }
       }
     />
@@ -209,7 +150,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 }
 
 CardUniversal.defaultProps = {
-  swiperUpdate: () => {},
+  onSaveCard: () => {},
+  onDeleteCard: () => {},
   pairWords: {
     id: 3,
     nativeWord: '',

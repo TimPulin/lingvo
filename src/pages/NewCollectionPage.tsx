@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentLangPack, useLanguagesList, useUserToken } from '../store/selectors';
-import { useStaticMessage, staticMessagePromise } from '../components/global-context-provider/context-hooks';
+import { useStaticMessage, staticMessagePromise } from '../components/global-context-provider/message-context';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { addCollection } from '../connect/server-connections';
 import { useDataLoading } from '../components/global-context-provider/loading-context-hook';
@@ -31,7 +31,7 @@ export default function CreateCollectionPage() {
         // TODO перевести
         setTextMessage('Новая коллекция сохранена');
         staticMessagePromise(setIsShowMessage, true)
-          .then(() => navigate(`/collections/${response.data.id}`));
+          .then(() => navigate(`/collection/${response.data.id}`));
       } catch (error) {
         console.log(error);
       } finally {

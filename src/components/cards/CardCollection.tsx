@@ -16,15 +16,15 @@ export default function CardCollection(props:CardCollectionPropsType) {
 
   const goToCollectionPage = () => {
     setIsNeedCurrentCollectionUpdate(true);
-    navigate(`/collections/${collection.id}`);
+    navigate(`/collection/${collection.id}`);
   };
 
   const onCollectionEdit = () => {
-    navigate(`/collections/${collection.id}/edit-collection`);
+    navigate(`/collection/${collection.id}/edit-collection`);
   };
 
   const onClickAddCard = () => {
-    navigate(`/collections/${collection.id}/create-new-card`);
+    navigate(`/collection/${collection.id}/create-new-card`);
   };
 
   const buttonAddCard = () => (

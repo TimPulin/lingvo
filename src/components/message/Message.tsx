@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useStaticMessage, messageShowDuration } from '../global-context-provider/context-hooks';
+import { useStaticMessage, messageShowDuration } from '../global-context-provider/message-context';
 import ButtonClose from '../base/buttons/button-close/ButtonClose';
 
 const MESSAGE_SHOW = 'message--show';
