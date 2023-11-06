@@ -57,7 +57,7 @@ $mobile-screen: 575px;
 
 :root {
   --medium-screen: 991px;
-  --screen-width: min(100vw, 100vh);
+  --screen-width: 100vmin;
   --screen-real-width: 100vw;
 }
 
