@@ -61,8 +61,40 @@
 
 
   &__transcription {
+    position: relative;
+    margin-top: 10px;
+    padding: 5px 3px 6px;
+    border-inline: 2px solid #fff;
     font-size: 25px;
+
+    .card__transcription-bracket {
+      position: absolute;
+      display: inline-block;
+      width: 10px;
+      border-top: 2px solid #fff;
+    }
+
+    .card__transcription-bracket:nth-child(1) {
+      top: 0;
+      left: 0;
+    }
+
+    .card__transcription-bracket:nth-child(2) {
+      top: 0;
+      right: 0;
+    }
+
+    .card__transcription-bracket:nth-child(3) {
+      bottom: 0;
+      right: 0;
+    }
+
+    .card__transcription-bracket:nth-child(4) {
+      bottom: 0;
+      left: 0;
+    }
   }
+
 
   &__input {
     display: none;
