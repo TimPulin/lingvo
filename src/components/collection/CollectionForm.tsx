@@ -128,12 +128,12 @@ export default function CollectionForm(props:CollectionFormPropsType) {
         <label className="collection-form__label label">
           {/* TODO перевести */}
           <span>Название коллекции</span>
-          <Input required name="name" value={formik.values.name} onChange={formik.handleChange} maxLength={50} />
+          <Input required name="name" value={formik.values.name} onChange={formik.handleChange} maxLength={40} />
         </label>
         <label className="collection-form__label label">
           {/* TODO перевести */}
           <span>Описание коллекции</span>
-          <Input name="description" value={formik.values.description} onChange={formik.handleChange} maxLength={100} />
+          <Input name="description" value={formik.values.description} onChange={formik.handleChange} maxLength={80} />
         </label>
         <div className="form__footer">
           <button type="button" className="button button--trans button--warning" onClick={formik.handleReset}>{CANCEL}</button>

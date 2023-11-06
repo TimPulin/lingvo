@@ -51,11 +51,11 @@
     width: 100%;
     max-height: 100%;
     overflow: hidden;
+    overflow-wrap: anywhere;
     line-height: 1.1;
   }
 
   &__text {
-    overflow-wrap: anywhere;
     text-align: center;
   }
 
@@ -176,6 +176,7 @@
   }
 
   .card__title {
+    margin-bottom: 10px;
     text-align: center;
     font-size: 28px;
     font-weight: 500;
@@ -191,6 +192,27 @@
   }
 
   .card__description {
+    margin: 0;
     font-size: 20px;
+  }
+}
+
+@media (max-width:460px) {
+  .card {
+    &__content {
+      padding-top: 20px;
+    }
+  }
+}
+
+@media (max-width:390px) {
+  .card--collection {
+    .card__title {
+      font-size: calc((var(--screen-width) - 320px)/(390 - 320) * (28 - 23) + 23px);
+    }
+
+    .card__description {
+      font-size: calc((var(--screen-width) - 320px)/(390 - 320) * (18 - 15) + 15px);
+    }
   }
 }
