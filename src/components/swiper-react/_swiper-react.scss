@@ -12,17 +12,34 @@
     height: var(--card-height);
     width: var(--card-width);
     margin-inline: auto;
+
+    &__text {
+      font-size: 32px;
+      ;
+    }
   }
 }
 
+
+
 @media (min-width: $mobile-screen) {
   .swiper {
-    --screen-width: calc(min(540px, 100vh) - 40px);
+    --screen-width: calc(min(565px, 100vh) - 40px);
 
     .card {
       height: var(--card-height);
       width: var(--card-width);
       margin-inline: auto;
+    }
+  }
+}
+
+@media (max-width:575px) {
+  .swiper {
+    .card {
+      &__text {
+        font-size: calc((var(--screen-width) - 320px)/(574 - 320) * (32 - 18) + 18px);
+      }
     }
   }
 }

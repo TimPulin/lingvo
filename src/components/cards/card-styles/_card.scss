@@ -55,8 +55,10 @@
   }
 
   &__text {
+    overflow-wrap: anywhere;
     text-align: center;
   }
+
 
   &__transcription {
     font-size: 25px;
