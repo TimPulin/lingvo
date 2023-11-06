@@ -34,9 +34,9 @@ export default function CardForm(props: CardFormPropsType) {
             <Input
               placeholderText={item.placeholderText}
               value={item.newWord}
+              maxLength={70}
               updateFunction={item.updateFunction}
               key={item.placeholderText}
-
             />
           ))
         }

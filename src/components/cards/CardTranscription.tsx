@@ -8,9 +8,11 @@ export default function CardTranscription(props:CardTranscriptionPropsType) {
   }
   return (
     <div className="card__transcription">
-      [
+      <span className="card__transcription-bracket" />
+      <span className="card__transcription-bracket" />
+      <span className="card__transcription-bracket" />
+      <span className="card__transcription-bracket" />
       {props.transcription}
-      ]
     </div>
   );
 }
