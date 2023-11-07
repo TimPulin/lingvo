@@ -14,6 +14,8 @@ const CARD_BODY_FOREIGN = 'card__body--foreign';
 const CARD_BODY_ROTATE = 'card__body--rotate';
 const ROTATE_NATIVE = 'rotate-native';
 const ROTATE_FOREIGN = 'rotate-foreign';
+const TEXT_MAX = 'card__text--max';
+const MAX_LETTERS_AMOUNT = 70;
 
 const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
@@ -57,6 +59,14 @@ export default function CardBase(props: CardBasePropsType) {
   const foreignContentHide = () => (isContentNative ? HIDE : '');
 
   const fadeInOutClass = () => (isFadeInOutRunning ? FADE_IN_OUT_CLASS : '');
+
+  const classTextMax = () => {
+    const currentLettersAmount = pairWords.foreignWord.length + pairWords.transcription.length;
+    if (currentLettersAmount <= MAX_LETTERS_AMOUNT) {
+      return TEXT_MAX;
+    }
+    return '';
+  };
 
   function turnCard(isCurrentSideNative:boolean) {
     if (!isSwiperSlideInProgress) {
@@ -158,7 +168,7 @@ export default function CardBase(props: CardBasePropsType) {
           />
         </div>
         <div className={`card__content card__content--foreign ${foreignContentHide()}`}>
-          <div className="card__text">
+          <div className={`card__text ${classTextMax}`}>
             <div>{pairWords.foreignWord}</div>
             <CardTranscription transcription={pairWords.transcription} />
           </div>
