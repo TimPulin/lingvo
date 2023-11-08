@@ -1,0 +1,30 @@
+.pwa-block {
+  padding: 20px;
+
+  &__button {
+    border: none;
+    background-color: #fff;
+    color: var(--color-secondary);
+    box-shadow: 0 0 5px 0 var(--color-secondary);
+
+    &:active {
+      background-color: var(--color-secondary);
+      color: #fff;
+      box-shadow: none;
+    }
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .pwa-block {
+    &__button {
+      &:hover {
+        box-shadow: 0 0 10px 0 var(--color-secondary);
+      }
+
+      &:active {
+        box-shadow: none;
+      }
+    }
+  }
+}
