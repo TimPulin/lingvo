@@ -20,7 +20,7 @@ export default function RootPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLogin, setIsPageLogin] = useState(false);
-  const [isPWABlockShow, setIsPWABlockShow] = useState(false);
+  // const [isPWABlockShow, setIsPWABlockShow] = useState(false);
   const [installEvent, setInstallEvent] = useState<any>(null);
 
   const classModalOpened = () => (isModalOpen ? 'modal-opened' : '');
@@ -32,14 +32,14 @@ export default function RootPage() {
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', (event:any) => {
       event.preventDefault();
-      setIsPWABlockShow(true);
+      // setIsPWABlockShow(true);
       setInstallEvent(event);
     });
   }, []);
 
   const installPWA = () => {
     installEvent.prompt('установить приложение?');
-    installEvent.userChoice.then((response:any) => console.log('install', response));
+    // installEvent.userChoice.then(() => setIsPWABlockShow(false));
   };
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function RootPage() {
         <Message />
         <LoaderOverlay />
         <PWABlock
-          isPWABlockShow={isPWABlockShow}
+          // isPWABlockShow={isPWABlockShow}
           onClickFunction={installPWA}
         />
         <Outlet />

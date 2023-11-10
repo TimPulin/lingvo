@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCurrentLangPack } from '../../store/selectors';
 import { removeLocalStorageUserToken } from '../../connect/local-storage-connections';
 import UserBlock from '../user/UserBlock';
+import { PWA_READY_UPDATE } from '../../utils/constants';
+import { RegistrationType } from '../../service-worker/register-service-worker';
 
 type NavigationPropsType = {
   isMenuOpen:boolean
@@ -10,6 +13,9 @@ type NavigationPropsType = {
 export default function Navigation(props:NavigationPropsType) {
   const { COLLECTIONS_PAGE, SETTINGS } = useCurrentLangPack();
   const navigate = useNavigate();
+
+  const [isButtonUpdatePWAShow, setIsButtonUpdatePWAShow] = useState(false);
+  const [updatePWAEvent, setUpdatePWAEvent] = useState<null | any>(null);
 
   const navPanelOperateClass = () => (props.isMenuOpen ? 'nav__panel--open' : '');
 
@@ -23,6 +29,28 @@ export default function Navigation(props:NavigationPropsType) {
     navigate('/login');
   };
 
+  const buttonStyle = {
+    display: 'none',
+  };
+
+  useEffect(() => {
+    document.addEventListener(PWA_READY_UPDATE, (event:CustomEventInit<RegistrationType>) => {
+      setIsButtonUpdatePWAShow(true);
+      setUpdatePWAEvent(event.detail.registration);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isButtonUpdatePWAShow) buttonStyle.display = 'inline-block';
+  }, [isButtonUpdatePWAShow]);
+
+  const updatePWA = () => {
+    console.log(updatePWAEvent);
+
+    // window.location.reload();
+    if (updatePWAEvent) updatePWAEvent.waiting.postMessage({ type: 'SKIP_WAITING' });
+  };
+
   return (
     <nav className="nav">
       <div className={`nav__panel ${navPanelOperateClass()}`}>
@@ -32,6 +60,19 @@ export default function Navigation(props:NavigationPropsType) {
 
         <div className="nav__panel-card nav__panel-card--navigation ">
           <ul className="nav__list">
+            {isButtonUpdatePWAShow === true
+                && (
+                  <li className="nav__item">
+                    <button
+                      type="button"
+                      className="button button--trans"
+                      onClick={updatePWA}
+                    >
+                      Обновить приложение
+                    </button>
+                  </li>
+                )}
+
             <li className="nav__item">
               <Link
                 className="nav__link"
