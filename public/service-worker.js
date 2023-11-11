@@ -1,14 +1,9 @@
-const CACHE_NAME = 'lingvocards-network-or-cache-v1';
-const SW_VERSION = '1.0.0';
-
-const test = () => {
-  console.log('normvvvvv');
-}
-
+const CACHE_NAME = 'lingvocards-cache-v1';
+const SW_VERSION = '10.0.6';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE)
+    caches.open(CACHE_NAME)
       .then((cache) => {
         return cache.addAll([
           'img/background'
@@ -17,7 +12,7 @@ self.addEventListener('install', (event) => {
 })
 
 self.addEventListener('message', (event) => {
-  if (event.data && event.type === 'SKIP_WAITING') {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 })
@@ -37,5 +32,3 @@ self.addEventListener('activate', () => {
 self.addEventListener('fetch', () => {
   console.log('fetching');
 })
-
-// const TIMEOUT = 400;

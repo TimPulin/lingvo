@@ -14,7 +14,7 @@ export default function Navigation(props:NavigationPropsType) {
   const navigate = useNavigate();
 
   const [isButtonUpdatePWAShow, setIsButtonUpdatePWAShow] = useState(false);
-  const [updatePWAEvent, setUpdatePWAEvent] = useState<null | any>(null);
+  const [updatePWAEvent, setUpdatePWAEvent] = useState<null | ServiceWorkerRegistration>(null);
 
   const navPanelOperateClass = () => (props.isMenuOpen ? 'nav__panel--open' : '');
 
@@ -33,7 +33,7 @@ export default function Navigation(props:NavigationPropsType) {
   };
 
   useEffect(() => {
-    document.addEventListener(PWA_READY_UPDATE, (event:any) => {
+    document.addEventListener(PWA_READY_UPDATE, (event:CustomEventInit) => {
       setIsButtonUpdatePWAShow(true);
       setUpdatePWAEvent(event.detail.registration);
     });
@@ -44,10 +44,10 @@ export default function Navigation(props:NavigationPropsType) {
   }, [isButtonUpdatePWAShow]);
 
   const updatePWA = () => {
-    console.log(updatePWAEvent);
-
-    // window.location.reload();
-    if (updatePWAEvent) updatePWAEvent.waiting.postMessage({ type: 'SKIP_WAITING' });
+    window.location.reload();
+    if (updatePWAEvent !== null && updatePWAEvent?.waiting !== null) {
+      updatePWAEvent.waiting.postMessage({ type: 'SKIP_WAITING' });
+    }
   };
 
   return (
@@ -64,7 +64,7 @@ export default function Navigation(props:NavigationPropsType) {
                   <li className="nav__item">
                     <button
                       type="button"
-                      className="button button--trans"
+                      className="button button--trans button--pwa-update"
                       onClick={updatePWA}
                     >
                       Обновить приложение
