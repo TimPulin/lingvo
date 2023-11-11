@@ -12,10 +12,7 @@ import { updateUserData } from './store/slicers/user-data-slice';
 
 import { useDataLoading } from './components/global-context-provider/loading-context-hook';
 
-// type ResponseType = {
-//   status: number,
-//   response: any,
-// };
+import { registerServiceWorker } from './register-service-worker';
 
 function App() {
   const userToken = useUserToken();
@@ -70,6 +67,10 @@ function App() {
         .finally(() => setIsDataLoading(false));
     }
   }, [userToken]);
+
+  useEffect(() => {
+    registerServiceWorker();
+  }, []);
 
   return (
     <div data-lingvo-cards-theme="light" className="app">

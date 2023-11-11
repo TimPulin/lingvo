@@ -60,9 +60,12 @@
   &__link {
     @include link-reset;
     @include background;
-    background-size: 16px;
+    display: inline-block;
+    width: 100%;
+    // TODO проверить и в случае ненужности - удалить
+    // background-size: 16px;
     font-size: 18px;
-    line-height: 100%;
+    line-height: 150%;
     color: var(--link-color);
     outline: none;
 
@@ -75,6 +78,13 @@
         fill: var(--color-hover);
       }
     }
+  }
+
+  .button--pwa-update {
+    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+    font-size: 18px;
   }
 }
 

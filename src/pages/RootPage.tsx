@@ -10,20 +10,34 @@ import Message from '../components/message/Message';
 import CollectionActionsBar from '../components/collection/CollectionActionsBar';
 import Navigation from '../components/navigation/Navigation';
 import LoaderOverlay from '../components/loader/LoaderOverlay';
+import PWABlock from '../components/pwa-block/PWABlock';
 
 export default function RootPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isDataLoading } = useDataLoading();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLogin, setIsPageLogin] = useState(false);
-  const { isDataLoading } = useDataLoading();
+
+  const [installEvent, setInstallEvent] = useState<any>(null);
 
   const classModalOpened = () => (isModalOpen ? 'modal-opened' : '');
 
   const changeIsModalOpen = (isOpen:boolean) => {
     setIsModalOpen(isOpen);
+  };
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (event:any) => {
+      event.preventDefault();
+      setInstallEvent(event);
+    });
+  }, []);
+
+  const installPWA = () => {
+    installEvent.prompt('установить приложение?');
   };
 
   useEffect(() => {
@@ -68,7 +82,6 @@ export default function RootPage() {
         onClick={dispatchOverlayClicked}
         aria-hidden="true"
       />
-      {/* <LoaderOverlay /> */}
       <div className={`header-wrapper ${classModalOpened()} ${headerHideClass()}`}>
         <HeaderSite
           changeIsModalOpen={changeIsModalOpen}
@@ -78,6 +91,9 @@ export default function RootPage() {
       <div className={`content ${classModalOpened()} ${loginPageClass()}`}>
         <Message />
         <LoaderOverlay />
+        <PWABlock
+          onClickFunction={installPWA}
+        />
         <Outlet />
       </div>
     </div>

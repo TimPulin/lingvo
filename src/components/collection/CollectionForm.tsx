@@ -20,6 +20,8 @@ const formInitialState:CollectionFormType = {
   translationLanguageId: 3,
 };
 
+// const blacklist = /['";{}[]]/;
+
 export default function CollectionForm(props:CollectionFormPropsType) {
   const { CANCEL, SAVE } = useCurrentLangPack();
   const {
@@ -128,7 +130,13 @@ export default function CollectionForm(props:CollectionFormPropsType) {
         <label className="collection-form__label label">
           {/* TODO перевести */}
           <span>Название коллекции</span>
-          <Input required name="name" value={formik.values.name} onChange={formik.handleChange} maxLength={40} />
+          <Input
+            required
+            name="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            maxLength={40}
+          />
         </label>
         <label className="collection-form__label label">
           {/* TODO перевести */}
