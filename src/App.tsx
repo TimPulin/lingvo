@@ -12,7 +12,7 @@ import { updateUserData } from './store/slicers/user-data-slice';
 
 import { useDataLoading } from './components/global-context-provider/loading-context-hook';
 
-import { register } from './service-worker/register-service-worker';
+import { registerServiceWorker } from './register-service-worker';
 
 function App() {
   const userToken = useUserToken();
@@ -69,7 +69,7 @@ function App() {
   }, [userToken]);
 
   useEffect(() => {
-    register();
+    registerServiceWorker();
   }, []);
 
   return (

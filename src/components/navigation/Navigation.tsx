@@ -4,7 +4,6 @@ import { useCurrentLangPack } from '../../store/selectors';
 import { removeLocalStorageUserToken } from '../../connect/local-storage-connections';
 import UserBlock from '../user/UserBlock';
 import { PWA_READY_UPDATE } from '../../utils/constants';
-import { RegistrationType } from '../../service-worker/register-service-worker';
 
 type NavigationPropsType = {
   isMenuOpen:boolean
@@ -34,7 +33,7 @@ export default function Navigation(props:NavigationPropsType) {
   };
 
   useEffect(() => {
-    document.addEventListener(PWA_READY_UPDATE, (event:CustomEventInit<RegistrationType>) => {
+    document.addEventListener(PWA_READY_UPDATE, (event:any) => {
       setIsButtonUpdatePWAShow(true);
       setUpdatePWAEvent(event.detail.registration);
     });
