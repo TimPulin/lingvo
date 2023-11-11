@@ -2,6 +2,10 @@ import { Workbox } from 'workbox-window';
 
 const SW_URL = './service-worker.js';
 
+function makeNewCustomEvent() {
+
+}
+
 export function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     const wb = new Workbox(SW_URL);
@@ -11,7 +15,6 @@ export function registerServiceWorker() {
         if (registration.waiting) {
           makeNewCustomEvent(['pwa-updated: ', registration]);
           console.log('waiting: ', registration);
-          makeNewCustomEvent([registration, 'pwa-ready-work-offline']);
         }
       })
       .catch((error) => {
