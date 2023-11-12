@@ -1,5 +1,5 @@
 .pwa-block {
-  padding: 20px;
+  padding-block: 20px;
 
   &__button {
     border: none;
@@ -26,5 +26,11 @@
         box-shadow: none;
       }
     }
+  }
+}
+
+@media (max-width: $medium-screen) {
+  .pwa-block {
+    padding-inline: 10px;
   }
 }

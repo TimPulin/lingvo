@@ -22,7 +22,9 @@
     overflow-y: auto;
     z-index: 1100;
 
-    animation: nav-move-backward .4s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%)
   }
 
   &__panel-card {
@@ -43,10 +45,16 @@
     border-top-right-radius: 0;
   }
 
+  &__panel--close {
+    animation: nav-move-backward .4s ease-in-out forwards;
+    // animation: nav-move-backward .4s ease-in-out;
+
+  }
 
   &__panel--open {
     display: flex;
     animation: nav-move-forward .4s ease forwards;
+
   }
 
   &__list {
@@ -62,8 +70,6 @@
     @include background;
     display: inline-block;
     width: 100%;
-    // TODO проверить и в случае ненужности - удалить
-    // background-size: 16px;
     font-size: 18px;
     line-height: 150%;
     color: var(--link-color);

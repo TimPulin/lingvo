@@ -9,12 +9,16 @@ type NavigationPropsType = {
   isMenuOpen:boolean
 };
 
+const NAV_PANEL_CLOSE = 'nav__panel--close';
+
 export default function Navigation(props:NavigationPropsType) {
   const { COLLECTIONS_PAGE, SETTINGS } = useCurrentLangPack();
   const navigate = useNavigate();
 
   const [isButtonUpdatePWAShow, setIsButtonUpdatePWAShow] = useState(false);
   const [updatePWAEvent, setUpdatePWAEvent] = useState<null | ServiceWorkerRegistration>(null);
+  const [isPageFirstRender, setIsPageFirstRender] = useState(false);
+  const [navPanelCloseClass, setNavPanelCloseClass] = useState<string | null>(null);
 
   const navPanelOperateClass = () => (props.isMenuOpen ? 'nav__panel--open' : '');
 
@@ -28,20 +32,31 @@ export default function Navigation(props:NavigationPropsType) {
     navigate('/login');
   };
 
-  const buttonStyle = {
-    display: 'none',
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      setIsPageFirstRender(true);
+    }, 100);
+  }, []);
+
+  useEffect(() => {
+    if (isPageFirstRender && props.isMenuOpen) {
+      setNavPanelCloseClass(NAV_PANEL_CLOSE);
+      setIsPageFirstRender(false);
+    }
+  }, [props.isMenuOpen]);
 
   useEffect(() => {
     document.addEventListener(PWA_READY_UPDATE, (event:CustomEventInit) => {
       setIsButtonUpdatePWAShow(true);
       setUpdatePWAEvent(event.detail.registration);
     });
-  }, []);
 
-  useEffect(() => {
-    if (isButtonUpdatePWAShow) buttonStyle.display = 'inline-block';
-  }, [isButtonUpdatePWAShow]);
+    window.addEventListener('beforeinstallprompt', () => {
+      document.addEventListener(PWA_READY_UPDATE, () => {
+        setIsButtonUpdatePWAShow(false);
+      });
+    });
+  }, []);
 
   const updatePWA = () => {
     window.location.reload();
@@ -52,14 +67,14 @@ export default function Navigation(props:NavigationPropsType) {
 
   return (
     <nav className="nav">
-      <div className={`nav__panel ${navPanelOperateClass()}`}>
+      <div className={`nav__panel ${navPanelOperateClass()} ${navPanelCloseClass}`}>
         <div className="nav__panel-card nav__panel-card--top">
           <UserBlock onLogout={onLogout} />
         </div>
 
         <div className="nav__panel-card nav__panel-card--navigation ">
           <ul className="nav__list">
-            {isButtonUpdatePWAShow === true
+            {isButtonUpdatePWAShow
                 && (
                   <li className="nav__item">
                     <button

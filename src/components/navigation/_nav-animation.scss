@@ -13,13 +13,7 @@
 }
 
 @keyframes nav-move-backward {
-  00% {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(5);
-  }
-
-  15% {
+  0% {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
