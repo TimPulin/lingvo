@@ -88,30 +88,30 @@ export const dataLangs = {
 
   hebrew: {
     // страницы
-    MAIN_PAGE: 'to_be_done',
-    CARDS_PAGE: 'to_be_done',
-    NEW_CARD_PAGE: 'to_be_done',
-    SETTING_PAGE: 'to_be_done',
+    MAIN_PAGE: 'בית',
+    CARDS_PAGE: 'כרטיסי אוסף קלפי אוסף',
+    NEW_CARD_PAGE: 'כרטיס חדש קלפי אוסף',
+    SETTING_PAGE: 'הגדרת',
     COLLECTIONS_PAGE: 'to_be_done',
     NEW_COLLECTION_PAGE: 'to_be_done',
 
-    MAIN: 'to_be_done',
-    CREATE_NEW_CARD: 'to_be_done',
-    CARDS: 'to_be_done',
-    SETTINGS: 'to_be_done',
-    LANGUAGE: 'to_be_done',
+    MAIN: 'בית',
+    CREATE_NEW_CARD: 'להתחיל קלף חדש להתחיל כרטיס חדש',
+    CARDS: 'קלפים  כרטיסים',
+    SETTINGS: 'הגדרת',
+    LANGUAGE: 'שפה',
 
-    NATIVE: 'to_be_done',
-    FOREIGN: 'to_be_done',
+    NATIVE: 'שפת אם',
+    FOREIGN: 'שפה זרה',
     TRANSCRIPTION: 'to_be_done',
-    CANCEL: 'to_be_done',
-    SAVE: 'to_be_done',
-    FORWARD: 'to_be_done',
-    EDIT: 'to_be_done',
+    CANCEL: 'לְבטל',
+    SAVE: 'להציל',
+    FORWARD: 'הלאה',
+    EDIT: 'לשנות לערוך',
     DELETE: 'to_be_done',
 
     // ФРАЗЫ
-    CARD_CHANGES_MADE: 'to_be_done',
-    CARD_SAVED: 'to_be_done',
+    CARD_CHANGES_MADE: 'הוכנסו שינויים',
+    CARD_SAVED: 'הקלף החדש נשמר בהצלחה הכרטיס החדש נשמר בהצלחה',
   },
 };
