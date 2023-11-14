@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCardsCollection, useLanguagesList, useUserToken } from '../store/selectors';
+import {
+  useCardsCollection, useCurrentLangPack, useLanguagesList, useUserToken,
+} from '../store/selectors';
 import { editCollection } from '../connect/server-connections';
 import { useStaticMessage, staticMessagePromise } from '../components/global-context-provider/message-context';
 import { CollectionFormType } from '../utils/types';
@@ -11,6 +13,7 @@ export default function EditCollectionPage() {
   const languagesList = useLanguagesList();
   const currentCollection = useCardsCollection();
   const userToken = useUserToken();
+  const { CHANGE_SAVED } = useCurrentLangPack();
   const { setText: setTextMessage, setIsShow: setIsShowMessage } = useStaticMessage();
   const [collectionFormState, setCollectionFormState] = useState<CollectionFormType | undefined>(undefined);
 
@@ -29,10 +32,8 @@ export default function EditCollectionPage() {
     if (userToken && currentCollection) {
       try {
         await editCollection(userToken, currentCollection.id, collectionData);
-        // TODO перевести
-        setTextMessage('Изменения сохранены');
+        setTextMessage(CHANGE_SAVED);
         staticMessagePromise(setIsShowMessage, true)
-          // .then(() => navigate(`/collection/${response.data.id}`));
           .then(() => {
             navigate('/collections');
           });

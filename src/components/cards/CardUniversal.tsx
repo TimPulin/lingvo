@@ -91,7 +91,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     if (cardId) {
       onSaveCard({ newWord, cardId });
     } else {
-      // TODO сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
+      // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
       onSaveCard({ newWord });
       isTurnCardToNativeRef.current = true;
       setTimeout(() => {

@@ -1,5 +1,6 @@
 import EditIcon from '../../icons/EditIcon';
 import ButtonBase from '../ButtonBase';
+import { useCurrentLangPack } from '../../../store/selectors';
 
 type ButtonEditPropsType = {
   classAdditional?: string;
@@ -8,8 +9,8 @@ type ButtonEditPropsType = {
 };
 
 export default function ButtonEdit(props:ButtonEditPropsType) {
-  // TODO перевести
-  const { text = 'Редактировать' } = props;
+  const { EDIT } = useCurrentLangPack();
+  const { text = EDIT } = props;
   return (
     <ButtonBase
       classAdditional={props.classAdditional}

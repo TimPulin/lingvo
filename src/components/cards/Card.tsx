@@ -71,7 +71,6 @@ export default function Card() {
             role="button"
             tabIndex={0}
           >
-            {/* <Input /> */}
             <button type="button" className="button">Save</button>
           </div>
         </div>
@@ -86,7 +85,6 @@ export default function Card() {
             role="button"
             tabIndex={0}
           >
-            {/* <Input /> */}
             <button type="button" className="button">Save</button>
           </div>
         </div>
@@ -94,5 +92,3 @@ export default function Card() {
     </div>
   );
 }
-
-// TODO вычислить максимальное количество знаков для карточки

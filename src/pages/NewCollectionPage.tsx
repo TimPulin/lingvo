@@ -13,7 +13,7 @@ import CollectionForm from '../components/collection/CollectionForm';
 export default function CreateCollectionPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { NEW_COLLECTION_PAGE } = useCurrentLangPack();
+  const { NEW_COLLECTION_PAGE, NEW_COLLECTION_SAVED } = useCurrentLangPack();
   const languagesList = useLanguagesList();
   const userToken = useUserToken();
   const { setIsShow: setIsShowMessage, setText: setTextMessage } = useStaticMessage();
@@ -28,8 +28,7 @@ export default function CreateCollectionPage() {
       try {
         setIsDataLoading(true);
         const response = await addCollection(userToken, collectionData);
-        // TODO перевести
-        setTextMessage('Новая коллекция сохранена');
+        setTextMessage(NEW_COLLECTION_SAVED);
         staticMessagePromise(setIsShowMessage, true)
           .then(() => navigate(`/collection/${response.data.id}`));
       } catch (error) {

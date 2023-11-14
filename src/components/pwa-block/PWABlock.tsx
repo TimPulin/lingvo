@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useCurrentLangPack } from '../../store/selectors';
 
 type PWABlockPropsType = {
   onClickFunction: () => void;
-  // isPWABlockShow: boolean;
 };
 
 export default function PWABlock(props:PWABlockPropsType) {
   const [isShow, setIsShow] = useState(false);
+  const { INSTALL_APP } = useCurrentLangPack();
 
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', (event:any) => {
@@ -25,13 +26,12 @@ export default function PWABlock(props:PWABlockPropsType) {
       <div className="content__list">
         <div className="content__item">
           <div className="pwa-block">
-            {/* TODO перевести */}
             <button
               type="button"
               className="button pwa-block__button"
               onClick={onClick}
             >
-              Установить приложение
+              {INSTALL_APP}
             </button>
           </div>
         </div>

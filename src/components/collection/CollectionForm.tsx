@@ -20,8 +20,6 @@ const formInitialState:CollectionFormType = {
   translationLanguageId: 3,
 };
 
-// const blacklist = /['";{}[]]/;
-
 export default function CollectionForm(props:CollectionFormPropsType) {
   const { CANCEL, SAVE } = useCurrentLangPack();
   const {
@@ -29,6 +27,9 @@ export default function CollectionForm(props:CollectionFormPropsType) {
   } = props;
   const [localNativeLanguageList, setLocalNativeLanguageList] = useState(languagesList);
   const [localForeignLanguageList, setLocalForeignLanguageList] = useState(languagesList);
+  const {
+    NATIVE_LANGUAGE_COLLECTION, FOREIGN_LANGUAGE_COLLECTION, COLLECTION_NAME, COLLECTION_DESCRIPTION,
+  } = useCurrentLangPack();
 
   const disableLanguageSelect = () => (modeEditCollection);
 
@@ -94,8 +95,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
       >
         <div className="collection-form__languages-list-wrap">
           <label className="collection-form__label label">
-            {/* TODO перевести */}
-            <span>Родной язык&nbsp;коллекции</span>
+            <span>{NATIVE_LANGUAGE_COLLECTION}</span>
             <Form.Item>
               <Select
                 className="collection-form__select"
@@ -110,8 +110,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
             </Form.Item>
           </label>
           <label className="collection-form__label label">
-            {/* TODO перевести */}
-            <span>Иностранный язык&nbsp;коллекции</span>
+            <span>{FOREIGN_LANGUAGE_COLLECTION}</span>
             <Form.Item>
               <Select
                 aria-required
@@ -128,8 +127,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
           </label>
         </div>
         <label className="collection-form__label label">
-          {/* TODO перевести */}
-          <span>Название коллекции</span>
+          <span>{COLLECTION_NAME}</span>
           <Input
             required
             name="name"
@@ -139,8 +137,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
           />
         </label>
         <label className="collection-form__label label">
-          {/* TODO перевести */}
-          <span>Описание коллекции</span>
+          <span>{COLLECTION_DESCRIPTION}</span>
           <Input name="description" value={formik.values.description} onChange={formik.handleChange} maxLength={80} />
         </label>
         <div className="form__footer">

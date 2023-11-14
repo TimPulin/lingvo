@@ -56,13 +56,18 @@
           font-size: calc((var(--screen-width) - 320px)/(460 - 320) * (32 - 18) + 18px);
         }
 
-        .card__text--max {
-          font-size: calc((var(--screen-width) - 320px)/(460 - 320) * (32 - 26) + 26px);
-        }
-
         .card__transcription {
           font-size: calc((var(--screen-width) - 320px)/(460 - 320) * (25 - 16) + 16px);
         }
+
+        .card__text--max {
+          font-size: 32px;
+
+          .card__transcription {
+            font-size: 25px;
+          }
+        }
+
       }
     }
   }

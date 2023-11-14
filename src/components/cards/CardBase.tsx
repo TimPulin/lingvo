@@ -15,7 +15,7 @@ const CARD_BODY_ROTATE = 'card__body--rotate';
 const ROTATE_NATIVE = 'rotate-native';
 const ROTATE_FOREIGN = 'rotate-foreign';
 const TEXT_MAX = 'card__text--max';
-const MAX_LETTERS_AMOUNT = 70;
+const MAX_LETTERS_AMOUNT = 32;
 
 const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
@@ -168,7 +168,7 @@ export default function CardBase(props: CardBasePropsType) {
           />
         </div>
         <div className={`card__content card__content--foreign ${foreignContentHide()}`}>
-          <div className={`card__text ${classTextMax}`}>
+          <div className={`card__text ${classTextMax()}`}>
             <div>{pairWords.foreignWord}</div>
             <CardTranscription transcription={pairWords.transcription} />
           </div>
@@ -184,5 +184,3 @@ export default function CardBase(props: CardBasePropsType) {
 CardBase.defaultProps = {
   isModeNewCard: false,
 };
-
-// TODO вычислить максимальное количество знаков для карточки
