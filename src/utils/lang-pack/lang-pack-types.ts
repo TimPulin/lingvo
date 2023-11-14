@@ -24,6 +24,27 @@ export interface ILangPack {
   // ФРАЗЫ
   CARD_CHANGES_MADE: string,
   CARD_SAVED: string,
+
+  COLLECTION:string,
+  NATIVE_LANGUAGE_COLLECTION:string,
+  FOREIGN_LANGUAGE_COLLECTION:string,
+  COLLECTION_NAME:string,
+  COLLECTION_DESCRIPTION:string,
+  INSTALL_COLLECTION:string,
+
+  CANT_SAVE_CHANGE: string,
+  CARD_DELETED: string,
+  CANT_DELETE_CARD: string,
+  RELOAD_APP: string,
+  CREATE_CARD: string,
+  GO_BACK_TO_PAGE_COLLECTION: string,
+  PLEASE_AUTHORIZATION: string,
+  COLLECTION_DELETED: string,
+  CHANGE_SAVED: string,
+  CANT_CHANGE_NEW_CARD: string,
+  NEW_COLLECTION_SAVED: string,
+  WELCOME: string,
+  INSTALL_APP: string,
 }
 
 export enum Languages {

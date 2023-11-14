@@ -31,6 +31,8 @@ export default function NewCardPage() {
   const { currentCollectionId } = useCurrentCollectionId();
   const { setIsDataLoading } = useDataLoading();
 
+  const { CANT_CHANGE_NEW_CARD } = useCurrentLangPack();
+
   function showMessage(textMessage:string) {
     setText(textMessage);
     setIsMessageShow(true);
@@ -44,8 +46,7 @@ export default function NewCardPage() {
         showMessage(langPack.CARD_SAVED);
       } catch (error) {
         console.log(error);
-        // TODO перевести
-        showMessage('Не смогли сохранить новую карточку. Видимо, что-то пошло не так');
+        showMessage(CANT_CHANGE_NEW_CARD);
       } finally {
         setIsDataLoading(false);
       }

@@ -2,8 +2,6 @@
   --screen-height: calc(100vh - 50px);
   min-height: 100vh;
   padding-top: 55px;
-  /* TODO если плавность blur сохранится, тогда можно будет это свойство удалить */
-  // filter: blur(0); убрал, потому что иначе кнопка button-new (в collection) не становится fixed.
   transition: filter .4s ease-in-out;
 
   &__list {

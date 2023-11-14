@@ -6,7 +6,7 @@ import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import { updateCurrentCardsCollection } from '../store/slicers/current-cards-collection-slice';
 
 import { getCardsCollection } from '../connect/server-connections';
-import { useUserToken } from '../store/selectors';
+import { useCurrentLangPack, useUserToken } from '../store/selectors';
 
 import { useStaticMessage } from '../components/global-context-provider/message-context';
 import { IsDataLoading, useDataLoading } from '../components/global-context-provider/loading-context-hook';
@@ -26,6 +26,8 @@ export default function CollectionPage() {
   const { setIsDataLoading } = useDataLoading();
 
   const { setCurrentCollectionId } = useCurrentCollectionId();
+
+  const { GO_BACK_TO_PAGE_COLLECTION, PLEASE_AUTHORIZATION } = useCurrentLangPack();
 
   function showMessage(textMessage:string) {
     setText(textMessage);
@@ -54,15 +56,13 @@ export default function CollectionPage() {
     if (Number(id)) {
       setCurrentCollectionId(Number(id));
     } else if (!IsDataLoading) {
-    // TODO перевести
-      showMessage('Что-то пошло не так. Пожалуйста, вернитесь на страницу Коллекций');
+      showMessage(GO_BACK_TO_PAGE_COLLECTION);
     }
 
     if (userToken && Number(id)) {
       getCardsCollectionLocal(userToken, Number(id));
     } else if (!IsDataLoading) {
-      // TODO перевести
-      showMessage('Пожалуйста, авторизуйтесь');
+      showMessage(PLEASE_AUTHORIZATION);
     }
   }, [userToken]);
 

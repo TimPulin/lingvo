@@ -34,6 +34,10 @@ export default function CardsPage() {
   const { currentCollectionId } = useCurrentCollectionId();
   const { isDataLoading, setIsDataLoading } = useDataLoading();
 
+  const {
+    CANT_SAVE_CHANGE, CARD_DELETED, CANT_DELETE_CARD, RELOAD_APP, CREATE_CARD,
+  } = useCurrentLangPack();
+
   const gotoCreateNewCardPage = () => {
     navigate(`/collection/${currentCollectionId}/create-new-card`);
   };
@@ -50,8 +54,7 @@ export default function CardsPage() {
         await editCard(userToken, currentCollectionId, cardId, newWord); // userToken
         getCardsCollectionLocal(userToken, currentCollectionId, langPack.CARD_CHANGES_MADE);
       } catch (error) {
-        // TODO перевести
-        showMessage('Не смогли сохранить изменения. Видимо, что-то пошло не так');
+        showMessage(CANT_SAVE_CHANGE);
         setIsDataLoading(false);
       }
     }
@@ -62,13 +65,11 @@ export default function CardsPage() {
       try {
         setIsDataLoading(true);
         await deleteCard(userToken, cardId);
-        // TODO перевести
-        getCardsCollectionLocal(userToken, currentCollectionId, 'Карточка тактично удалена');
+        getCardsCollectionLocal(userToken, currentCollectionId, CARD_DELETED);
       } catch (error) {
         console.log(error);
         setIsDataLoading(false);
-        // TODO перевести
-        setText('Не смогли удалить карточку. Видимо, что-то пошло не так');
+        setText(CANT_DELETE_CARD);
         setIsMessageShow(true);
       }
     } else {
@@ -93,19 +94,17 @@ export default function CardsPage() {
 
   if (cardsCollection === null) {
     if (!isDataLoading) {
-    // TODO перевести
       return (
-        <MessageOnPage messageText="Что-то пошло не так. Перезагрузите, пожалуйста, приложение" />
+        <MessageOnPage messageText={RELOAD_APP} />
       );
     } return null;
   }
 
   if (cardsCollection !== null) {
     if (cardsCollection.binds.length === 0 && !isDataLoading) {
-      // TODO перевести
       return (
         <MessageOnPage
-          messageText="У вас еще нет карточек в коллекции. Давайте создадим новую карточку"
+          messageText={CREATE_CARD}
           ElementJSX={<ButtonPlus classAdditional="collections__button-new" onClickFunction={gotoCreateNewCardPage} />}
         />
       );

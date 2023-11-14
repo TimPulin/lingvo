@@ -24,7 +24,7 @@ export default function CollectionsListPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { COLLECTIONS_PAGE } = useCurrentLangPack();
+  const { COLLECTIONS_PAGE, COLLECTION_DELETED } = useCurrentLangPack();
 
   const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
   const { isDataLoading, setIsDataLoading } = useDataLoading();
@@ -48,8 +48,7 @@ export default function CollectionsListPage() {
       try {
         setIsDataLoading(true);
         await deleteCollection(userToken, collectionId);
-        // TODO перевести
-        setText('Коллекция аккуратно удалена');
+        setText(COLLECTION_DELETED);
         setIsMessageShow(true);
         getCollectionsListLocal();
       } catch (error) {

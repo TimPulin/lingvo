@@ -26,6 +26,27 @@ export const dataLangs = {
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Изменения внесены',
     CARD_SAVED: 'Новая карточка успешно сохранена',
+
+    COLLECTION: 'Коллекция',
+    NATIVE_LANGUAGE_COLLECTION: 'Родной язык коллекции',
+    FOREIGN_LANGUAGE_COLLECTION: 'Иностранный язык коллекции',
+    COLLECTION_NAME: 'Название коллекции',
+    COLLECTION_DESCRIPTION: 'Описание коллекции',
+    INSTALL_COLLECTION: 'Установить приложение',
+
+    CANT_SAVE_CHANGE: 'Не смогли сохранить изменения. Видимо, что-то пошло не так',
+    CARD_DELETED: 'Карточка тактично удалена',
+    CANT_DELETE_CARD: 'Не смогли удалить карточку. Видимо, что-то пошло не так',
+    RELOAD_APP: 'Что-то пошло не так. Перезагрузите, пожалуйста, приложение',
+    CREATE_CARD: 'У вас еще нет карточек в коллекции. Давайте создадим новую карточку',
+    GO_BACK_TO_PAGE_COLLECTION: 'Что-то пошло не так. Пожалуйста, вернитесь на страницу Коллекций',
+    PLEASE_AUTHORIZATION: 'Пожалуйста, авторизуйтесь',
+    COLLECTION_DELETED: 'Коллекция аккуратно удалена',
+    CHANGE_SAVED: 'Изменения сохранены',
+    CANT_CHANGE_NEW_CARD: 'Не смогли сохранить новую карточку. Видимо, что-то пошло не так',
+    NEW_COLLECTION_SAVED: 'Новая коллекция сохранена',
+    WELCOME: 'Добро пожаловать',
+    INSTALL_APP: 'Установить приложение',
   },
 
   en: {
@@ -55,6 +76,28 @@ export const dataLangs = {
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'The changes were carefully made',
     CARD_SAVED: 'New card carefully saved',
+
+    // новое
+    COLLECTION: 'to_be_done',
+    NATIVE_LANGUAGE_COLLECTION: 'to_be_done',
+    FOREIGN_LANGUAGE_COLLECTION: 'to_be_done',
+    COLLECTION_NAME: 'to_be_done',
+    COLLECTION_DESCRIPTION: 'to_be_done',
+    INSTALL_COLLECTION: 'to_be_done',
+
+    CANT_SAVE_CHANGE: 'to_be_done',
+    CARD_DELETED: 'to_be_done',
+    CANT_DELETE_CARD: 'to_be_done',
+    RELOAD_APP: 'to_be_done',
+    CREATE_CARD: 'to_be_done',
+    GO_BACK_TO_PAGE_COLLECTION: 'to_be_done',
+    PLEASE_AUTHORIZATION: 'to_be_done',
+    COLLECTION_DELETED: 'to_be_done',
+    CHANGE_SAVED: 'to_be_done',
+    CANT_CHANGE_NEW_CARD: 'to_be_done',
+    NEW_COLLECTION_SAVED: 'to_be_done',
+    WELCOME: 'to_be_done',
+    INSTALL_APP: 'to_be_done',
   },
 
   esl: {
@@ -84,6 +127,28 @@ export const dataLangs = {
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Tarjeta modificada',
     CARD_SAVED: 'Nueva tarjeta guardada',
+
+    // новое
+    COLLECTION: 'to_be_done',
+    NATIVE_LANGUAGE_COLLECTION: 'to_be_done',
+    FOREIGN_LANGUAGE_COLLECTION: 'to_be_done',
+    COLLECTION_NAME: 'to_be_done',
+    COLLECTION_DESCRIPTION: 'to_be_done',
+    INSTALL_COLLECTION: 'to_be_done',
+
+    CANT_SAVE_CHANGE: 'to_be_done',
+    CARD_DELETED: 'to_be_done',
+    CANT_DELETE_CARD: 'to_be_done',
+    RELOAD_APP: 'to_be_done',
+    CREATE_CARD: 'to_be_done',
+    GO_BACK_TO_PAGE_COLLECTION: 'to_be_done',
+    PLEASE_AUTHORIZATION: 'to_be_done',
+    COLLECTION_DELETED: 'to_be_done',
+    CHANGE_SAVED: 'to_be_done',
+    CANT_CHANGE_NEW_CARD: 'to_be_done',
+    NEW_COLLECTION_SAVED: 'to_be_done',
+    WELCOME: 'to_be_done',
+    INSTALL_APP: 'to_be_done',
   },
 
   hebrew: {
@@ -113,5 +178,27 @@ export const dataLangs = {
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'הוכנסו שינויים',
     CARD_SAVED: 'הקלף החדש נשמר בהצלחה הכרטיס החדש נשמר בהצלחה',
+
+    // новое
+    COLLECTION: 'to_be_done',
+    NATIVE_LANGUAGE_COLLECTION: 'to_be_done',
+    FOREIGN_LANGUAGE_COLLECTION: 'to_be_done',
+    COLLECTION_NAME: 'to_be_done',
+    COLLECTION_DESCRIPTION: 'to_be_done',
+    INSTALL_COLLECTION: 'to_be_done',
+
+    CANT_SAVE_CHANGE: 'to_be_done',
+    CARD_DELETED: 'to_be_done',
+    CANT_DELETE_CARD: 'to_be_done',
+    RELOAD_APP: 'to_be_done',
+    CREATE_CARD: 'to_be_done',
+    GO_BACK_TO_PAGE_COLLECTION: 'to_be_done',
+    PLEASE_AUTHORIZATION: 'to_be_done',
+    COLLECTION_DELETED: 'to_be_done',
+    CHANGE_SAVED: 'to_be_done',
+    CANT_CHANGE_NEW_CARD: 'to_be_done',
+    NEW_COLLECTION_SAVED: 'to_be_done',
+    WELCOME: 'to_be_done',
+    INSTALL_APP: 'to_be_done',
   },
 };
