@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import { AxiosResponse } from 'axios';
 import { router } from './router';
 
 import { getLanguagesList, getUserData } from './connect/server-connections';
@@ -14,16 +15,16 @@ import { useDataLoading } from './components/global-context-provider/loading-con
 
 import { registerServiceWorker } from './register-service-worker';
 
+import { CollectionLanguagePromiseType } from './utils/types';
+
 function App() {
   const userToken = useUserToken();
   const dispatch = useDispatch();
   const { setIsDataLoading } = useDataLoading();
 
-  /* TODO типизировать CollectionLanguageListType */
-
-  function makePromise(localPromise:any) {
+  function makePromise(localPromise: Promise<AxiosResponse<any, CollectionLanguagePromiseType>>) {
     return localPromise
-      .then((response:any) => ({
+      .then((response:CollectionLanguagePromiseType) => ({
         status: response.status,
         response,
       }))
@@ -44,6 +45,8 @@ function App() {
 
       Promise.all([getLanguagesListPromise, getUserDataPromise])
         .then(([languagesListResponse, userDataResponse]) => {
+          console.log(languagesListResponse);
+
           if (languagesListResponse.status === 200) {
             const list = languagesListResponse.response.data.data;
             const languagesList = list.map((item:any) => ({
