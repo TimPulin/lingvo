@@ -1,0 +1,70 @@
+.three-dots {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 1;
+  z-index: 20;
+  // transition: opacity .3s ease;
+
+  &__btn {
+    @include btn-reset;
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+  }
+
+  &__line {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 0 0 #fff;
+    transition: box-shadow .2s ease;
+  }
+
+  &__line:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+.card--edit {
+  .three-dots {
+    display: none;
+  }
+}
+
+.three-dots:active {
+  .three-dots__line {
+    box-shadow: 0 0 4px 2px #fff;
+  }
+}
+
+.card__body--rotate {
+  .three-dots {
+    animation: three-dots-rotate 0.5s;
+  }
+}
+
+
+@keyframes three-dots-rotate {
+  0% {
+    top: 0;
+    bottom: unset;
+  }
+
+  49% {
+    top: 0;
+    bottom: unset;
+  }
+
+  51% {
+    top: unset;
+    bottom: 0;
+  }
+
+  100% {
+    top: unset;
+    bottom: 0;
+  }
+}

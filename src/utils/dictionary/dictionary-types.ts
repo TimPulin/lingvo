@@ -1,5 +1,7 @@
+// // TODO проверить на необходимость содержания этого файла (при возможности удалить)
+
 export interface IPairWords {
-  id: number | null,
+  cardId: number | null,
   nativeWord: string,
   foreignWord: string,
   transcription: string,
@@ -22,7 +24,7 @@ export type DictionaryStateType = {
 export const dictionary: DictionaryType = {
   defaultCollection: [
     {
-      id: 1,
+      cardId: 1,
       nativeWord: 'тест',
       foreignWord: 'test',
       transcription: 'тест',

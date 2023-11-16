@@ -1,0 +1,42 @@
+.header-wrapper {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 45px;
+  z-index: 900;
+}
+
+.header {
+  width: 100%;
+  max-width: calc($medium-screen);
+  margin: 0 auto;
+  box-shadow: 0 0 5px 0 $color-grey;
+  background-color: #fff;
+
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 5px;
+    min-height: 48px;
+  }
+
+  &__page-title {
+    @include reset;
+    max-width: calc(var(--screen-real-width) - 80px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.compass {
+  &__button {
+    @include btn-reset;
+  }
+
+  .svg__root {
+    width: 25px;
+    height: 25px;
+  }
+}

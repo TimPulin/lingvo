@@ -1,0 +1,44 @@
+.login-page {
+  min-height: var(--screen-height);
+  display: grid;
+  grid-template-columns: 1 fr;
+  grid-template-rows: 35vh 65vh;
+  background-color: #fff;
+
+  &__top {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 10px;
+    width: 100%;
+  }
+
+  &__column--img {
+    width: 50%;
+    padding-right: 20px;
+    background-image: url('../../../public/images/icons/icon-lingvo.png');
+    background-position: calc(100% - 20px) center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__logo-text {
+    margin: 0;
+  }
+
+  &__title {
+    color: $color-primary_shade;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .img {
+    // max-height: 100%;
+    max-width: 100%;
+  }
+}

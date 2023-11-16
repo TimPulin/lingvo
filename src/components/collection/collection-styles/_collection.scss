@@ -1,0 +1,72 @@
+.collection-form {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+
+  &__languages-list-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    column-gap: 20px;
+  }
+
+  &__label {
+    width: 100%;
+  }
+
+  &__select {
+    width: 100%;
+  }
+}
+
+:where(.collection-form) .button--trans {
+  color: $color-primary_shade;
+}
+
+.collections {
+  position: relative;
+
+  &__list {
+    @include list-reset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    padding-inline: 10px;
+  }
+
+  &__item {
+    --item-width: calc(var(--screen-width) * 0.9);
+    --item-height: calc(var(--item-width) * 0.6);
+
+    width: var(--item-width);
+    height: var(--item-height);
+  }
+
+  &__wrap-button {
+    position: sticky;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1000;
+  }
+
+  &__button-new {
+    border: none;
+    z-index: 900;
+  }
+
+  &__button-new--fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+@media (min-width: $small-screen) {
+  .collections__item {
+    width: 415px;
+    height: 250px;
+  }
+}

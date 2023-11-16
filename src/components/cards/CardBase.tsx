@@ -1,26 +1,28 @@
-/* eslint-disable*/
 import { useState, useEffect, useRef } from 'react';
+import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
+
+import { HIDE } from '../../utils/constants';
 import CardEditorBlock from './CardEditorBlock';
+import CardControlBlock from './card-control-block/CardControlBlock';
+import CardTranscription from './CardTranscription';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
-import { usePairWordSaved } from './card-context-hooks/card-context-hooks';
-import { useSwiperSlide } from '../swiper-react/swiper-react-context-hooks';
-import { HIDE } from '../../utils/constants';
-import CardControlBlock from './CardControlBlock';
 
 const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
 const CARD_BODY_FOREIGN = 'card__body--foreign';
+const CARD_BODY_ROTATE = 'card__body--rotate';
+const ROTATE_NATIVE = 'rotate-native';
+const ROTATE_FOREIGN = 'rotate-foreign';
+const TEXT_MAX = 'card__text--max';
+const MAX_LETTERS_AMOUNT = 32;
 
-const CARD_CONTENT_NATIVE = 'card__content--native';
-const CARD_CONTENT_FOREIGN = 'card__content--foreign';
-const THREE_DOTS_HIDE = 'three-dots--hide';
-const FADE_IN_OUT_CLASS = 'card__body-fade-in-out'
+const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
 type CardBasePropsType = {
-  isRefresh: boolean;
-  setIsRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-  isModeEdit?: boolean;
+  isModeNewCard?: boolean;
+  onDeleteCard: () => void;
+  isTurnCardToNative: boolean;
   pairWords: IPairWords;
   formNative: CardFormPropsType;
   formForeign: CardFormPropsType;
@@ -28,148 +30,136 @@ type CardBasePropsType = {
 
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isRefresh, setIsRefresh, isModeEdit = false, pairWords, formNative, formForeign,
+    isModeNewCard = false, pairWords, formNative, formForeign, onDeleteCard: onCardDelete, isTurnCardToNative: turnCardToNative,
   } = props;
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
 
-  const { isPairWordSaved: isNewPairWordSaved } = usePairWordSaved();
   const isSwiperSlideInProgress = useSwiperSlide();
+
   const [isCardNative, setIsCardNative] = useState(true);
   const [isContentNative, setIsContentNative] = useState(true);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isControlBlockShow, setIsControlBlockShow] = useState(false);
+
+  const [isModeEditCard, setIsModeEditCard] = useState(false);
   const [isFadeInOutRunning, setIsFadeInOutRunning] = useState(false);
 
-    useEffect(() => {
-    setIsEdit(isModeEdit);
-  }, [isModeEdit]);
+  const [isCardBodyRotate, setIsCardBodyRotate] = useState(false);
+  const rotateClassRef = useRef(`${CARD_BODY_ROTATE} ${ROTATE_FOREIGN}`);
+
+  const cardBodyRotateClass = () => (isCardBodyRotate ? rotateClassRef.current : '');
 
   useEffect(() => {
-    if (isNewPairWordSaved && !isModeEdit) setIsEdit(false);
-  }, [isNewPairWordSaved]);
+    setIsModeEditCard(isModeNewCard);
+  }, [isModeNewCard]);
 
-  const cardEditMode = () => (isEdit ? CARD_EDIT : '');
+  const cardEditMode = () => (isModeEditCard ? CARD_EDIT : '');
   const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
-
-  const nativeContentClass = () => (isCardNative ? '' : CARD_CONTENT_NATIVE);
-  const foreignContentClass = () => (isCardNative ? CARD_CONTENT_FOREIGN : '');
 
   const nativeContentHide = () => (isContentNative ? '' : HIDE);
   const foreignContentHide = () => (isContentNative ? HIDE : '');
 
-  const threeDotsHide = () => (isControlBlockShow ? THREE_DOTS_HIDE : '' );
-
   const fadeInOutClass = () => (isFadeInOutRunning ? FADE_IN_OUT_CLASS : '');
 
-  function turnCard() {
+  const classTextMax = () => {
+    const currentLettersAmount = pairWords.foreignWord.length + pairWords.transcription.length;
+    if (currentLettersAmount <= MAX_LETTERS_AMOUNT) {
+      return TEXT_MAX;
+    }
+    return '';
+  };
+
+  function turnCard(isCurrentSideNative:boolean) {
     if (!isSwiperSlideInProgress) {
-      setIsCardNative(!isCardNative);
+      if (isCurrentSideNative) {
+        rotateClassRef.current = `${CARD_BODY_ROTATE} ${ROTATE_FOREIGN}`;
+      } else {
+        rotateClassRef.current = `${CARD_BODY_ROTATE} ${ROTATE_NATIVE}`;
+      }
+      setIsCardBodyRotate(true);
 
       setTimeout(() => {
-        setIsContentNative(!isContentNative);
+        setIsCardBodyRotate(false);
+      }, 500);
+
+      setTimeout(() => {
+        setIsCardNative(!isCurrentSideNative);
+        setIsContentNative(!isCurrentSideNative);
       }, 250);
     }
   }
 
-  function onCallControlBlock(event: React.MouseEvent) {
-    event.stopPropagation();
-    setIsControlBlockShow(true)
-  }
-
-  function refreshCard() {
-    setIsCardNative(true);
-
-    setTimeout(() => {
-      setIsContentNative(true);
-      setIsRefresh(false);
-    }, 250);
-
-  }
-
   useEffect(() => {
-    if (isRefresh) {
+    if (turnCardToNative) turnCard(false);
+  }, [turnCardToNative]);
+
+  function closeModeEdit() {
+    if (cardBodyRef.current) {
+      const fadeDurationProp = getComputedStyle(cardBodyRef.current).getPropertyValue('--fade-duration');
+      const animationDuration = Number(fadeDurationProp.slice(0, -1)) * 1000;
+
+      setIsFadeInOutRunning(true);
       setTimeout(() => {
-        refreshCard()
-      }, 500)
-    };
-  }, [isRefresh]);
+        setIsModeEditCard(false);
+      }, animationDuration / 2);
+
+      setTimeout(() => {
+        setIsFadeInOutRunning(false);
+        if (!isCardNative) turnCard(false);
+      }, animationDuration);
+    }
+  }
 
   // чтобы при сохранении карточка не переворачивалась
   const onSubmitForeign = Object.assign(formForeign.onSubmit, {});
   const localOnSubmitForeign = (event: React.FormEvent) => {
     event.stopPropagation();
-    onSubmitForeign(event);
+    if (isModeNewCard) {
+      onSubmitForeign(event);
+    } else {
+      closeModeEdit();
+      onSubmitForeign(event);
+    }
   };
   formForeign.onSubmit = localOnSubmitForeign;
 
-function localOnCancel() {
-  if (cardBodyRef.current) {
-    const fadeDurationProp = getComputedStyle(cardBodyRef.current).getPropertyValue('--fade-duration');
-    const animationDuration = Number(fadeDurationProp.slice(0, -1)) * 1000;
+  const onCancelNative = Object.assign(formNative.onCancel, {});
+  const localOnCancelNative = (event:React.FormEvent) => {
+    event.stopPropagation();
+    if (isModeNewCard) {
+      onCancelNative(event);
+    } else {
+      closeModeEdit();
+    }
+  };
+  formNative.onCancel = localOnCancelNative;
 
-    setIsFadeInOutRunning(true)
-    setTimeout(() => {
-      setIsEdit(false);
-    }, animationDuration / 2);
-
-    setTimeout(() => {
-      setIsFadeInOutRunning(false);
-    }, animationDuration);
-  }
-}
-
-const onCancelNative = Object.assign(formNative.onCancel, {});
-const localOnCancelNative = (event:React.FormEvent) => {
-  event.stopPropagation();
-  if (isModeEdit) {
-    onCancelNative(event);
-  } else {
-    localOnCancel();
-  }
-}
-formNative.onCancel = localOnCancelNative;
-
-const onCancelForeign = Object.assign(formForeign.onCancel, {});
-const localOnCancelForeign = (event:React.FormEvent) => {
-  event.stopPropagation();
-  if (isModeEdit) {
-    onCancelForeign(event);
-  } else {
-    localOnCancel()
-  }
-}
-formForeign.onCancel = localOnCancelForeign;
+  const onCancelForeign = Object.assign(formForeign.onCancel, {});
+  const localOnCancelForeign = (event:React.FormEvent) => {
+    event.stopPropagation();
+    if (isModeNewCard) {
+      onCancelForeign(event);
+    } else {
+      closeModeEdit();
+    }
+  };
+  formForeign.onCancel = localOnCancelForeign;
 
   return (
-    <div
-      className={`card ${cardEditMode()}`}
-      onClick={turnCard}
-      role="button"
+    /* eslint-disable-next-line */
+    <article
+      className={`card ${cardEditMode()} ${cardBodyRotateClass()}`}
+      onClick={() => turnCard(isCardNative)}
       tabIndex={0}
     >
-      {/* TODO переделать threedots, чтобы крутился вместе с карточкой (перенести для начала в card__body) */}
-      <div className={`three-dots ${threeDotsHide()}`}>
-        <button
-          type="button"
-          className="three-dots__btn"
-          onClick={onCallControlBlock}
-        >
-          <span className="three-dots__line" />
-          <span className="three-dots__line" />
-          <span className="three-dots__line" />
-        </button>
-      </div>
 
       <div ref={cardBodyRef} className={`card__body ${cardBodyClass()} ${fadeInOutClass()}`}>
 
         <CardControlBlock
-          isShow={isControlBlockShow}
-          setIsShow={setIsControlBlockShow}
-          onEdit={setIsEdit}
+          onEdit={setIsModeEditCard}
+          onDelete={onCardDelete}
         />
 
-        <div className={`card__content ${nativeContentHide()} ${nativeContentClass()}`}>
+        <div className={`card__content card__content--native ${nativeContentHide()}`}>
           <div className="card__text">
             {pairWords.nativeWord}
           </div>
@@ -177,22 +167,20 @@ formForeign.onCancel = localOnCancelForeign;
             form={formNative}
           />
         </div>
-        <div className={`card__content ${foreignContentHide()} ${foreignContentClass()}`}>
-          <div className="card__text">
+        <div className={`card__content card__content--foreign ${foreignContentHide()}`}>
+          <div className={`card__text ${classTextMax()}`}>
             <div>{pairWords.foreignWord}</div>
-            <div className='card__transcription'>[{pairWords.transcription}]</div>
+            <CardTranscription transcription={pairWords.transcription} />
           </div>
           <CardEditorBlock
             form={formForeign}
           />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 CardBase.defaultProps = {
-  isModeEdit: false,
+  isModeNewCard: false,
 };
-
-// TODO вычислить максимальное количество знаков для карточки

@@ -80,6 +80,7 @@
         "depth": 3
       }
     ],
-    "jsx-a11y/no-noninteractive-tabindex": 0
+    "jsx-a11y/no-noninteractive-tabindex": 0,
+    "react-hooks/exhaustive-deps": 0
   }
 }

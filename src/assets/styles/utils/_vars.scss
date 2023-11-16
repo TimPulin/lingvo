@@ -1,11 +1,15 @@
 // COLOR VARS
 $color-primary: #00a0ff;
 $color-primary_shade: #0068A6;
-$color-primary_light: rgba(0, 160, 255, 1);
+$color-primary_light: #e5f6fe;
 ;
 $color-secondary: #ff6c00;
+$color-secondary_shade: #ff5900;
 $color-secondary_light: rgba(255, 108, 0, .5);
 
+$color-third: #6b00ff;
+
+$color-smooth-black: #060606;
 $color-grey: #ccc;
 $color-grey_max_light: #eaeaea;
 
@@ -15,22 +19,31 @@ $page-background: $color-grey_max_light;
 [data-lingvo-cards-theme="light"] {
   --color-primary: #00a0ff;
   --color-primary_shade: #0068A6;
-  --color-primary_light: rgba(0, 160, 255, .1);
-  ;
+  --color-primary_light: #e5f6fe;
+
   --color-secondary: #ff6c00;
+
+  --color-third: #6b00ff;
+
+  --body-background: #ccc;
   --page-background: #fff;
   --button-basic-background: #f1f1f1;
   --color-hover: #0068A6;
   --link-color: #000;
+  --close-button-color: rgba(0, 0, 0, .7);
 }
 
 
 
 [data-lingvo-cards-theme="dark"] {
   --color-primary: #00a0ff;
-  --color-primary_light: rgba(0, 160, 255, 1);
+  --color-primary_shade: #0068A6;
+  --color-primary_light: #e5f6fe;
   ;
   --color-secondary: #ff6c00;
+
+  --color-third: #6b00ff;
+
   --page-background: black;
   --button-basic-background: #f1f1f1;
   --color-hover: #0068A6;
@@ -45,7 +58,7 @@ $mobile-screen: 575px;
 
 :root {
   --medium-screen: 991px;
-  --screen-width: min(100vw, 100vh);
+  --screen-width: 100vmin;
   --screen-real-width: 100vw;
 }
 

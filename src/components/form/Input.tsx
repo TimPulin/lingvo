@@ -4,12 +4,15 @@ type InputPropsType = {
   value: string | number;
   updateFunction: (value: string | number) => void;
   placeholderText?: string;
+  maxLength?:number | undefined;
 };
 
 const FOCUS_CLASS = 'custom-input--filled';
 
 export default function Input(props: InputPropsType) {
-  const { value, updateFunction, placeholderText } = props;
+  const {
+    value, updateFunction, placeholderText, maxLength = undefined,
+  } = props;
   const [isFocus, setIsFocus] = useState(false);
   const focusClass = () => (isFocus ? FOCUS_CLASS : '');
 
@@ -52,6 +55,7 @@ export default function Input(props: InputPropsType) {
         className="custom-input__input"
         type="text"
         value={value}
+        maxLength={maxLength}
         onChange={onInput}
         onFocus={onFocus}
       />
@@ -61,4 +65,5 @@ export default function Input(props: InputPropsType) {
 
 Input.defaultProps = {
   placeholderText: '',
+  maxLength: undefined,
 };

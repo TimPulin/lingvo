@@ -7,23 +7,28 @@
 @import './utils/common';
 @import './components/content.scss';
 
-@import './components/form/button';
+@import '../../components/base/button-base.scss';
+@import '../../components/base/buttons/button-plus/button-plus.scss';
+@import '../../components/base/buttons/button-close/button-close-styles';
+
 @import './components/form/input';
 @import './components/form/form';
+@import './components/form/button';
 
 @import './components/radio-custom';
 @import './components/options-flat';
 
 @import './components/burger';
 @import './animations/burger-animation';
+@import './components/actions-bar';
 
-@import '../../components/button-plus/button-plus.scss';
 
-@import '../../components/cards/card-styles/three-dots.scss';
-@import '../../components/cards/card-styles/control-block.scss';
 
-@import './components/navigation';
-@import './animations/nav-animation';
+@import '../../components/cards/card-control-block/styles/three-dots.scss';
+@import '../../components/cards/card-control-block/styles/control-block.scss';
+
+@import '../../components/navigation/navigation.scss';
+@import '../../components/navigation/nav-animation.scss';
 
 @import './components/main-screen'; // TODO проверить на необходимость
 
@@ -33,9 +38,16 @@
 @import '../../components/cards/card-styles/card.scss';
 @import '../../components/cards/card-styles/card-animation.scss';
 
+@import '../../components/loader/loader-styles.scss';
+
+@import '../../components/collection/collection-styles/collection.scss';
+@import '../../components/collection/collection-styles/collection-footer.scss';
+
 @import '../../components/message/message.scss';
 
 // @import '../../components/swiper/swiper.scss';
 @import '../../components/swiper-react/swiper-react.scss';
 
-@import '../../site/header.scss';
+@import '../../components/header/header.scss';
+@import '../../pages/login-page/login-page';
+@import '../../components/pwa-block/pwa-block.scss';

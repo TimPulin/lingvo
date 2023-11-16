@@ -1,26 +1,51 @@
-import { useEffect } from 'react';
-import { useStaticMessage } from '../global-context-provider/context-hooks';
+import { useEffect, useState } from 'react';
+import { useStaticMessage, messageShowDuration } from '../global-context-provider/message-context';
+import ButtonClose from '../base/buttons/button-close/ButtonClose';
 
 const MESSAGE_SHOW = 'message--show';
+const MESSAGE_HIDE = 'message--hide';
 
 export default function Message() {
   const { text, isShow, setIsShow } = useStaticMessage();
+  const [classHide, setClassHide] = useState('');
 
   const classShow = () => (isShow ? MESSAGE_SHOW : '');
 
-  function startTimerToHideMessage() {
+  function resetClassHide() {
     setTimeout(() => {
       setIsShow(false);
-    }, 3000);
+      setClassHide('');
+    }, 500);
+  }
+
+  function hideMessage() {
+    setClassHide(MESSAGE_HIDE);
+    resetClassHide();
+  }
+
+  function startTimerToHideMessage() {
+    setTimeout(() => {
+      hideMessage();
+    }, messageShowDuration);
   }
 
   useEffect(() => {
-    if (isShow) startTimerToHideMessage();
+    if (isShow) {
+      setIsShow(true);
+      startTimerToHideMessage();
+    }
   }, [isShow]);
 
+  const onClose = () => {
+    hideMessage();
+  };
+
   return (
-    <div className={`message ${classShow()}`}>
+    <div className={`message ${classShow()} ${classHide}`}>
       <div className="message__body">
+        <ButtonClose
+          onClose={onClose}
+        />
         <div className="message__text">
           {text}
         </div>
@@ -28,3 +53,5 @@ export default function Message() {
     </div>
   );
 }
+
+// ${MESSAGE_SHOW}

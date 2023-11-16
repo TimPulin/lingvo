@@ -6,18 +6,44 @@
     column-gap: 10px;
   }
 
-  .svg-icon {
+  &__link {
+    @include list-reset;
+    @include link-reset;
     display: inline-block;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 $color-primary_shade;
+    transition: box-shadow .3s ease;
 
-    .svg__root {
-      height: 30px;
-      width: 30px;
+    &:active {
+      box-shadow: 0 0 5px 0px $color-primary_shade;
     }
   }
 
-  .svg-icon--google {
-    .svg__root {
-      width: 25px;
+  &__title {
+    color: #333;
+  }
+}
+
+.socials--login-page {
+  display: flex;
+  justify-content: center;
+
+  .socials__list {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  .socials__title {
+    padding-left: 10px;
+  }
+
+  .socials__link {
+    border-radius: 0;
+    box-shadow: none;
+    transition: color .2s ease;
+
+    &:active .socials__title {
+      color: $color-primary_shade;
     }
   }
 }

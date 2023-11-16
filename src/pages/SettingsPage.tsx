@@ -1,9 +1,9 @@
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { useEffect } from 'react';
-import { updateCurrentPageName } from '../store/current-page-slice';
+import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import RadioBlock from '../components/radio/RadioBlock';
 import { RootStateType } from '../store';
-import { updateCurrentLang } from '../store/current-lang-slice';
+import { updateCurrentLang } from '../store/slicers/current-lang-slice';
 import { Languages } from '../utils/lang-pack/lang-pack-types';
 import { useCurrentLangPack } from '../store/selectors';
 
@@ -12,11 +12,13 @@ const radioPropertiesList = [
     name: 'lang',
     label: 'Русский',
     value: Languages.RU,
+    id: 82,
   },
   {
     name: 'lang',
     label: 'English',
     value: Languages.EN,
+    id: 28,
   },
   {
     name: 'lang',
@@ -27,6 +29,7 @@ const radioPropertiesList = [
     name: 'lang',
     label: 'עברית',
     value: Languages.HBW,
+    id: 38,
   },
 ];
 

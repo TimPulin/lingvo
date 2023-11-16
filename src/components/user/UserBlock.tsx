@@ -1,14 +1,26 @@
-import SocialsList from '../socials/SocialsList';
+import { useUserData } from '../../store/selectors';
+import ButtonBase from '../base/ButtonBase';
+import ExitIcon from '../icons/ExitIcon';
 
-export default function UserBlock() {
+type UserBlockPropsType = {
+  onLogout: () => void;
+};
+
+export default function UserBlock(props:UserBlockPropsType) {
+  const { userName, userAvatar } = useUserData();
+
   return (
     <div className="user">
+      <span className="user__logout-block">
+        <ButtonBase
+          onClickFunction={props.onLogout}
+          ElementJSX={<ExitIcon />}
+        />
+      </span>
       <div className="user__icon-block">
-        <img className="user__img" src="./images/icons/icon-user-default.png" alt="" />
+        <img className="user__img" src={userAvatar} alt="user avatar" />
       </div>
-      <div className="user__login">
-        <SocialsList />
-      </div>
+      <div>{userName}</div>
     </div>
   );
 }

@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCurrentLangPack } from '../../store/selectors';
-import { addNewWord, editWord } from '../../store/dictionary-slice';
+
+import { useCardModeNewCard, useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
+
+import { OnSaveCardArgumentsType } from '../../utils/types';
+
 import CardBase from './CardBase';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
-import { useCardModeEdit, usePairWordSaved } from './card-context-hooks/card-context-hooks';
-import { useStaticMessage } from '../global-context-provider/context-hooks';
 
 const defaultPairWords: IPairWords = {
-  id: 0,
+  cardId: 0,
   nativeWord: '',
   foreignWord: '',
   transcription: '',
@@ -17,25 +19,34 @@ const defaultPairWords: IPairWords = {
 
 type CardUniversalPropsType = {
   pairWords?: IPairWords;
+  onSaveCard?: (args: OnSaveCardArgumentsType) => void;
+  onDeleteCard?: (cardId:number) => void;
 };
 
+const initialEmptyFunction = () => {};
+
 export default function CardUniversal(props: CardUniversalPropsType) {
-  const { pairWords = defaultPairWords } = props;
+  const {
+    pairWords = defaultPairWords,
+    onSaveCard = initialEmptyFunction,
+    onDeleteCard = initialEmptyFunction,
+  } = props;
+
+  const navigate = useNavigate();
+
   const langPack = useCurrentLangPack();
+  const { currentCollectionId } = useCurrentCollectionId();
 
-  const dispatch = useDispatch();
-  const isModeEdit = useCardModeEdit();
-  const { setIsPairWordSaved: setIsNewPairWordSaved } = usePairWordSaved();
-  const { setText } = useStaticMessage();
+  const { isCardModeNewCard } = useCardModeNewCard();
 
-  const [isRefresh, setIsRefresh] = useState(false);
+  const isTurnCardToNativeRef = useRef(false);
 
   const [nativeWord, _setNativeWord] = useState<string>('');
   const [foreignWord, _setForeignWord] = useState<string>('');
   const [transcription, _setTranscription] = useState<string>('');
-  const [id, setId] = useState<number | null>(null);
+  const [cardId, setCardId] = useState<number | null>(null);
   const localPairWords = {
-    id,
+    cardId,
     nativeWord,
     foreignWord,
     transcription,
@@ -54,11 +65,14 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   };
 
   useEffect(() => {
+  }, [isCardModeNewCard]);
+
+  useEffect(() => {
     if (pairWords) {
       setNativeWord(pairWords.nativeWord);
       setForeignWord(pairWords.foreignWord);
       setTranscription(pairWords.transcription);
-      if (pairWords.id) setId(pairWords.id);
+      if (pairWords.cardId) setCardId(pairWords.cardId);
     }
   }, [pairWords]);
 
@@ -66,46 +80,42 @@ export default function CardUniversal(props: CardUniversalPropsType) {
     event.preventDefault();
   };
 
-  const onSubmitForeign = (event: React.FormEvent) => {
+  const onSubmitForeign = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (isModeEdit) {
-      dispatch(addNewWord(
-        {
-          word: localPairWords,
-          key: 'defaultCollection',
-        },
-      ));
-      setText(langPack.CARD_CHANGES_MADE);
+    const newWord = {
+      phrase: localPairWords.nativeWord,
+      translationPhrase: localPairWords.foreignWord,
+      pronunciation: localPairWords.transcription,
+    };
+
+    if (cardId) {
+      onSaveCard({ newWord, cardId });
     } else {
-      dispatch(editWord(
-        {
-          word: localPairWords,
-          key: 'defaultCollection',
-        },
-      ));
-      setText(langPack.CARD_SAVED);
+      // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
+      onSaveCard({ newWord });
+      isTurnCardToNativeRef.current = true;
+      setTimeout(() => {
+        isTurnCardToNativeRef.current = false;
+        _setNativeWord('');
+        _setForeignWord('');
+        _setTranscription('');
+      }, 100);
     }
-    setIsNewPairWordSaved(true);
-    setIsRefresh(true);
-    _setNativeWord('');
-    _setForeignWord('');
-    _setTranscription('');
   };
 
-  const onCancelNative = () => {
-    _setNativeWord('');
+  const onCancel = () => {
+    navigate(`/collection/${currentCollectionId}`);
   };
 
-  const onCancelForeign = () => {
-    _setForeignWord('');
-    _setTranscription('');
+  const onCardDeleteLocal = async () => {
+    if (cardId) onDeleteCard(cardId);
   };
 
   return (
     <CardBase
-      isRefresh={isRefresh}
-      setIsRefresh={setIsRefresh}
-      isModeEdit={isModeEdit}
+      isModeNewCard={isCardModeNewCard}
+      onDeleteCard={onCardDeleteLocal}
+      isTurnCardToNative={isTurnCardToNativeRef.current}
       pairWords={pairWords}
       formNative={
         {
@@ -116,7 +126,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           ],
           primaryButtonName: langPack.FORWARD,
           onSubmit: onSubmitNative,
-          onCancel: onCancelNative,
+          onCancel,
         }
       }
       formForeign={
@@ -131,7 +141,7 @@ export default function CardUniversal(props: CardUniversalPropsType) {
           ],
           primaryButtonName: langPack.SAVE,
           onSubmit: onSubmitForeign,
-          onCancel: onCancelForeign,
+          onCancel,
         }
       }
     />
@@ -140,6 +150,8 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 }
 
 CardUniversal.defaultProps = {
+  onSaveCard: () => {},
+  onDeleteCard: () => {},
   pairWords: {
     id: 3,
     nativeWord: '',

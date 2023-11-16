@@ -1,5 +1,5 @@
 .card {
-  --turn-duration: .5s;
+  --turn-duration: 0.5s;
 
   height: 100%;
   border-radius: $border-radius-basic;
@@ -34,8 +34,6 @@
 
     font-size: 32px;
     color: #fff;
-
-    transform: rotateX(180deg);
   }
 
   &__body-fade-in-out {
@@ -53,6 +51,7 @@
     width: 100%;
     max-height: 100%;
     overflow: hidden;
+    overflow-wrap: anywhere;
     line-height: 1.1;
   }
 
@@ -60,37 +59,80 @@
     text-align: center;
   }
 
+
   &__transcription {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 3px 6px;
+    border-inline: 2px solid #fff;
     font-size: 25px;
+
+    .card__transcription-bracket {
+      position: absolute;
+      display: inline-block;
+      width: 10px;
+      border-top: 2px solid #fff;
+    }
+
+    .card__transcription-bracket:nth-child(1) {
+      top: 0;
+      left: 0;
+    }
+
+    .card__transcription-bracket:nth-child(2) {
+      top: 0;
+      right: 0;
+    }
+
+    .card__transcription-bracket:nth-child(3) {
+      bottom: 0;
+      right: 0;
+    }
+
+    .card__transcription-bracket:nth-child(4) {
+      bottom: 0;
+      left: 0;
+    }
   }
+
 
   &__input {
     display: none;
   }
+
+  &__link {
+    @include wrap-absolute;
+  }
 }
 
+.card__body--rotate {
+  animation: card-body-rotate var(--turn-duration) ease-in-out;
+}
 
+.card__body--rotate.rotate-native {
+  .card__content--native {
+    transform: rotateX(180deg);
+  }
+}
+
+.card__body--rotate.rotate-foreign {
+  .card__content--foreign {
+    transform: rotateX(180deg);
+  }
+}
 
 .card__body--native {
   --current-color: var(--color-primary);
-  animation: turn-foreign-to-native var(--turn-duration) ease-in-out forwards;
+  background-color: var(--color-primary);
 }
 
 .card__body--foreign {
   --current-color: var(--color-secondary);
-  animation: turn-native-to-foreign var(--turn-duration) ease-in-out forwards;
-}
-
-.card__content--native {
-  animation: turn-content-native var(--turn-duration) ease-in-out forwards;
-}
-
-.card__content--foreign {
-  animation: turn-content-foreign var(--turn-duration) ease-in-out forwards;
+  background-color: var(--color-secondary);
 }
 
 .card--edit {
-
   .card__content {
     height: 100%;
     line-height: 1.2;
@@ -109,5 +151,65 @@
 .content__list--new-card-page {
   .card {
     z-index: 50;
+  }
+}
+
+.card--collection {
+
+  box-shadow:
+    3px 3px 1px var(--color-third),
+    4px 4px 1px #fff,
+    8px 8px 1px var(--color-third),
+    9px 9px 1px #fff,
+    13px 13px 1px var(--color-third);
+
+  .card__body {
+    --current-color: var(--color-third);
+    opacity: 1;
+    border-radius: $border-radius-basic;
+    background-color: var(--color-third);
+    transform: none;
+    animation: none;
+  }
+
+  .card__title {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .card__additional-info {
+    position: absolute;
+    top: 5px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 20px;
+  }
+
+  .card__description {
+    margin: 0;
+    font-size: 20px;
+  }
+}
+
+@media (max-width:460px) {
+  .card {
+    &__content {
+      padding-top: 20px;
+    }
+  }
+}
+
+@media (max-width:390px) {
+  .card--collection {
+    .card__title {
+      font-size: calc((var(--screen-width) - 320px)/(390 - 320) * (28 - 23) + 23px);
+    }
+
+    .card__description {
+      font-size: calc((var(--screen-width) - 320px)/(390 - 320) * (18 - 15) + 15px);
+    }
   }
 }

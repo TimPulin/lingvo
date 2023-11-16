@@ -12,6 +12,21 @@
   transition-property: color, background-color, background-image, box-shadow;
 }
 
+.button--trans {
+  padding-inline: 20px;
+  border: none;
+  font-size: 16px;
+  color: $color-primary_shade;
+
+  &:active {
+    color: $color-primary;
+  }
+}
+
+.button--trans.button--warning {
+  color: #ff3600;
+}
+
 .button--outline {
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -26,6 +41,10 @@
 @media (min-width: $medium-screen) {
   .button {
     transition-duration: .3s;
+  }
+
+  .button--trans:hover {
+    color: $color-secondary;
   }
 
   .button--outline:hover {

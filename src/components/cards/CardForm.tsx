@@ -19,13 +19,14 @@ export default function CardForm(props: CardFormPropsType) {
     newWordsList, onSubmit, onCancel, primaryButtonName,
   } = props;
   const { CANCEL } = useCurrentLangPack();
+  // console.log(newWordsList);
 
   function onBodyClick(event: React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();
   }
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <form className="form form--card" onSubmit={onSubmit}>
       {/* eslint-disable-next-line */}
       <div className="form__body" onClick={onBodyClick}>
         {
@@ -33,16 +34,16 @@ export default function CardForm(props: CardFormPropsType) {
             <Input
               placeholderText={item.placeholderText}
               value={item.newWord}
+              maxLength={70}
               updateFunction={item.updateFunction}
               key={item.placeholderText}
-
             />
           ))
         }
       </div>
       <div className="form__footer">
-        <button type="button" className="button" onClick={onCancel}>{CANCEL}</button>
-        <button type="button" className="button" onClick={onSubmit}>{primaryButtonName}</button>
+        <button type="button" className="button button--trans" onClick={onCancel}>{CANCEL}</button>
+        <button type="button" className="button button--trans" onClick={onSubmit}>{primaryButtonName}</button>
       </div>
 
     </form>
