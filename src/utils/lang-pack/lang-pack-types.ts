@@ -30,7 +30,6 @@ export interface ILangPack {
   FOREIGN_LANGUAGE_COLLECTION:string,
   COLLECTION_NAME:string,
   COLLECTION_DESCRIPTION:string,
-  INSTALL_COLLECTION:string,
 
   CANT_SAVE_CHANGE: string,
   CARD_DELETED: string,

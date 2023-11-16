@@ -12,11 +12,13 @@ const radioPropertiesList = [
     name: 'lang',
     label: 'Русский',
     value: Languages.RU,
+    id: 82,
   },
   {
     name: 'lang',
     label: 'English',
     value: Languages.EN,
+    id: 28,
   },
   {
     name: 'lang',
@@ -27,6 +29,7 @@ const radioPropertiesList = [
     name: 'lang',
     label: 'עברית',
     value: Languages.HBW,
+    id: 38,
   },
 ];
 

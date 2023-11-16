@@ -44,6 +44,12 @@ export default function CollectionForm(props:CollectionFormPropsType) {
   });
 
   useEffect(() => {
+    setLocalNativeLanguageList(languagesList);
+    setLocalForeignLanguageList(languagesList);
+    console.log(languagesList);
+  }, [languagesList]);
+
+  useEffect(() => {
     if (formState) {
       formik.setValues(formState);
     }

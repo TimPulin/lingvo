@@ -31,6 +31,10 @@ export type CollectionsListType = CollectionType[];
 
 // ============================
 
+export type PaginationType = {
+  count: number,
+};
+
 type PhraseType = {
   id: number,
   createdAt: string,
@@ -71,6 +75,15 @@ export type CardsCollectionType = {
   language: CollectionLanguageType,
   'translationLanguage': CollectionLanguageType,
   'binds': CardsListType,
+};
+
+export type CollectionLanguagePromiseType = {
+  status: number,
+  data: {
+    data: CollectionLanguageListType,
+    pagination: PaginationType
+  },
+
 };
 
 // ============================
