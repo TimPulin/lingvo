@@ -42,7 +42,7 @@ type PhraseType = {
   languageId: number
 };
 
-type CollectionLanguageType = {
+export type CollectionLanguageType = {
   id: number,
   original: string,
   russian: string,
@@ -84,6 +84,18 @@ export type CollectionLanguagePromiseType = {
     pagination: PaginationType
   },
 
+};
+
+export type UserType = {
+  avatar: string,
+  username: string,
+  id: number,
+  language: CollectionLanguageType,
+};
+
+export type UserPromiseType = {
+  status: number,
+  data: UserType
 };
 
 // ============================

@@ -10,6 +10,22 @@ export function getUserData(token:string) {
     });
 }
 
+export function updateUserLanguage(token:string, languageId:number) {
+  return axios
+    .post(
+      '/me',
+      {
+        languageId,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}
+
 export function getCollectionsList(token:string) {
   return axios
     .get('/collections', {

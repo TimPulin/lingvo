@@ -8,6 +8,11 @@ import { dataLangs } from '../utils/lang-pack/lang-pack-basic';
 import { DictionaryType } from '../utils/dictionary/dictionary-types';
 import { RootStateType } from './index';
 
+export function useCurrentLang():Languages {
+  const currentLang:Languages = useSelector((store: RootStateType) => store.currentLang.value);
+  return currentLang;
+}
+
 export function useCurrentLangPack():ILangPack {
   const currentLang:Languages = useSelector((store: RootStateType) => store.currentLang.value);
   return dataLangs[currentLang];

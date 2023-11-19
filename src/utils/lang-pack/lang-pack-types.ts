@@ -53,6 +53,38 @@ export enum Languages {
   HBW = 'hebrew',
 }
 
+export const langToLangIdAdaptor = (langCode:Languages) => {
+  let id:number;
+  switch (langCode) {
+  /* eslint-disable-next-line */
+    case Languages.RU: id = 82;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    case Languages.EN: id = 28;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    case Languages.ESL: id = 15;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    case Languages.HBW: id = 38;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    default: id = 28;
+  }
+  return id;
+};
+
+export const langIdToLangAdaptor = {
+  82: Languages.RU,
+  28: Languages.EN,
+  115: Languages.ESL,
+  38: Languages.HBW,
+};
+
 export type DataLangType = {
   [key in Languages]?: ILangPack;
 };

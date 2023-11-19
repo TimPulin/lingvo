@@ -6,6 +6,7 @@ interface IRadioBlockProps {
   list: IRadioBaseList[];
   componentClass: string;
   currentLang: string;
+  // FIXME поставить дженерик
   onChange(value: string | number): void;
 }
 
