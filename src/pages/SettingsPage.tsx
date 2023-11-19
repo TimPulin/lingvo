@@ -1,11 +1,13 @@
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
+
 import { useEffect } from 'react';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
 import RadioBlock from '../components/radio/RadioBlock';
-import { RootStateType } from '../store';
+
 import { updateCurrentLang } from '../store/slicers/current-lang-slice';
-import { Languages } from '../utils/lang-pack/lang-pack-types';
-import { useCurrentLangPack } from '../store/selectors';
+import { Languages, langToLangIdAdaptor } from '../utils/lang-pack/lang-pack-types';
+import { useCurrentLang, useCurrentLangPack, useUserToken } from '../store/selectors';
+import { updateUserLanguage } from '../connect/server-connections';
 
 const radioPropertiesList = [
   {
@@ -24,6 +26,7 @@ const radioPropertiesList = [
     name: 'lang',
     label: 'Español',
     value: Languages.ESL,
+    id: 115,
   },
   {
     name: 'lang',
@@ -34,11 +37,18 @@ const radioPropertiesList = [
 ];
 
 function SettingsPage(props: any) {
-  // TODO разобраться, почему не использовал useCurrentLangPack()
-  const currentLang = useSelector((store: RootStateType) => store.currentLang.value);
+  const currentLang = useCurrentLang();
+  const userToken = useUserToken();
 
-  const getSelectedLang = (itemValue: string | number) => {
-    props.updateCurrentLang(itemValue);
+  const updateUserLang = (itemValue: Languages) => {
+    const langId = langToLangIdAdaptor(itemValue);
+
+    if (userToken !== null) {
+      updateUserLanguage(userToken, langId)
+        .then(() => {
+          props.updateCurrentLang(itemValue);
+        });
+    }
   };
   const dispatch = useDispatch();
 
@@ -56,7 +66,7 @@ function SettingsPage(props: any) {
           componentClass="options-flat"
           list={radioPropertiesList}
           currentLang={currentLang}
-          onChange={getSelectedLang}
+          onChange={updateUserLang}
         />
       </div>
     </div>

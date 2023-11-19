@@ -2,7 +2,7 @@ import { Form, Input, Select } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
-import { useCurrentLangPack } from '../../store/selectors';
+import { useCurrentLangPack, useUserData } from '../../store/selectors';
 import { CollectionFormType } from '../../utils/types';
 
 export type CollectionFormPropsType = {
@@ -16,11 +16,13 @@ export type CollectionFormPropsType = {
 const formInitialState:CollectionFormType = {
   name: '',
   description: '',
-  languageId: 2,
-  translationLanguageId: 3,
+  languageId: 28,
+  translationLanguageId: 28,
 };
 
 export default function CollectionForm(props:CollectionFormPropsType) {
+  const { languageId: userCurrentLanguageId } = useUserData();
+
   const { CANCEL, SAVE } = useCurrentLangPack();
   const {
     languagesList, formState = formInitialState, onSubmitFunction, onResetFunction, modeEditCollection = false,
@@ -44,9 +46,12 @@ export default function CollectionForm(props:CollectionFormPropsType) {
   });
 
   useEffect(() => {
+    formInitialState.languageId = userCurrentLanguageId;
+  }, [userCurrentLanguageId]);
+
+  useEffect(() => {
     setLocalNativeLanguageList(languagesList);
     setLocalForeignLanguageList(languagesList);
-    console.log(languagesList);
   }, [languagesList]);
 
   useEffect(() => {

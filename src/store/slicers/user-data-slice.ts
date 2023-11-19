@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash';
 type UserDataType = {
   userName: string;
   userAvatar: string;
+  languageId: number;
 };
 
 type StateType = {
@@ -21,6 +22,7 @@ const initialState:StateType = {
   value: {
     userName: '',
     userAvatar: IMG_PATH_DEFAULT,
+    languageId: 28,
   },
 };
 
