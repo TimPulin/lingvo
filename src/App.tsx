@@ -45,8 +45,6 @@ function App() {
 
       Promise.all([getLanguagesListPromise, getUserDataPromise])
         .then(([languagesListResponse, userDataResponse]) => {
-          console.log(languagesListResponse);
-
           if (languagesListResponse.status === 200) {
             const list = languagesListResponse.response.data.data;
             const languagesList = list.map((item:any) => ({
@@ -62,6 +60,7 @@ function App() {
             dispatch(updateUserData({
               userName: userDataResponse.response.data.username,
               userAvatar: userDataResponse.response.data.avatar,
+              languageId: userDataResponse.response.data.language.id,
             }));
           } else {
             console.log(userDataResponse.status);

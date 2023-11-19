@@ -24,6 +24,7 @@ const radioPropertiesList = [
     name: 'lang',
     label: 'Español',
     value: Languages.ESL,
+    id: 115,
   },
   {
     name: 'lang',
@@ -36,6 +37,8 @@ const radioPropertiesList = [
 function SettingsPage(props: any) {
   // TODO разобраться, почему не использовал useCurrentLangPack()
   const currentLang = useSelector((store: RootStateType) => store.currentLang.value);
+
+  console.log('currentLang: ', currentLang);
 
   const getSelectedLang = (itemValue: string | number) => {
     props.updateCurrentLang(itemValue);

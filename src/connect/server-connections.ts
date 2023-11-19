@@ -1,15 +1,6 @@
 import { axiosInstanceLingvo as axios } from './axios-instance';
 import { CollectionFormType, NewWordType } from '../utils/types';
 
-// export function getAuthorizationVKToken() {
-//   return axios
-//     .get('/auth/login/')
-//     .then((response) => {
-//       console.log(response);
-//     })
-//     .catch((error) => { throw new Error(error); });
-// }
-
 export function getUserData(token:string) {
   return axios
     .get('/me', {
