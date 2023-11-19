@@ -56,6 +56,7 @@ function App() {
               value: item.id,
             }));
             dispatch(setLanguagesList(languagesList));
+            console.log(languagesList);
           } else {
             console.log(languagesListResponse.response.status);
           }

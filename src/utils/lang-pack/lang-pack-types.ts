@@ -65,7 +65,7 @@ export const langToLangIdAdaptor = (langCode:Languages) => {
     /* eslint-disable-next-line */
       break;
     /* eslint-disable-next-line */
-    case Languages.ESL: id = 15;
+    case Languages.ESL: id = 115;
     /* eslint-disable-next-line */
       break;
     /* eslint-disable-next-line */
