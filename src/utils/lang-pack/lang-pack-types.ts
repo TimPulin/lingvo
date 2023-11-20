@@ -21,7 +21,6 @@ export interface ILangPack {
   EDIT: string,
   DELETE: string,
   ADD_CARD: string,
-
   // ФРАЗЫ
   CARD_CHANGES_MADE: string,
   CARD_SAVED: string,
@@ -41,7 +40,7 @@ export interface ILangPack {
   PLEASE_AUTHORIZATION: string,
   COLLECTION_DELETED: string,
   CHANGE_SAVED: string,
-  CANT_SAVED_NEW_CARD: string,
+  CANT_SAVE_NEW_CARD: string,
   NEW_COLLECTION_SAVED: string,
   WELCOME: string,
   INSTALL_APP: string,
