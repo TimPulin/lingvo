@@ -42,6 +42,7 @@ function SettingsPage(props: any) {
 
   const updateUserLang = (itemValue: Languages) => {
     const langId = langToLangIdAdaptor(itemValue);
+    console.log(langId);
 
     if (userToken !== null) {
       updateUserLanguage(userToken, langId)
