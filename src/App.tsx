@@ -56,11 +56,14 @@ function App() {
               value: item.id,
             }));
             dispatch(setLanguagesList(languagesList));
+            console.log(languagesList);
           } else {
             console.log(languagesListResponse.response.status);
           }
 
           if (userDataResponse.response.status === 200) {
+            console.log(userDataResponse);
+
             const userData: UserType = userDataResponse.response.data;
             dispatch(updateUserData({
               userName: userData.username,

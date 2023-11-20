@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { CollectionType } from '../../utils/types';
 import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 import CardControlBlock from './card-control-block/CardControlBlock';
-import ButtonAddCard from '../base/buttons/ButtonAddCard';
+import ControlBlockButton from './card-control-block/ControlBlockButton';
 
 type CardCollectionPropsType = {
   collection: CollectionType;
@@ -12,6 +12,7 @@ type CardCollectionPropsType = {
 export default function CardCollection(props:CardCollectionPropsType) {
   const { collection, onCollectionDelete } = props;
   const navigate = useNavigate();
+
   const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
   const goToCollectionPage = () => {
@@ -27,6 +28,14 @@ export default function CardCollection(props:CardCollectionPropsType) {
     navigate(`/collection/${collection.id}/create-new-card`);
   };
 
+  const buttonAddCard = () => (
+    <ControlBlockButton
+      onClick={onClickAddCard}
+      buttonsText="Add card"
+      key="add_card"
+    />
+  );
+
   return (
     <article className="card card--collection">
       <div className="card__body">
@@ -34,7 +43,7 @@ export default function CardCollection(props:CardCollectionPropsType) {
         <CardControlBlock
           onEdit={onCollectionEdit}
           onDelete={() => onCollectionDelete(collection.id)}
-          JSXList={[<ButtonAddCard onClickAddCard={onClickAddCard} />]}
+          JSXList={[buttonAddCard]}
         />
         <div className="card__content">
           <h2 className="card__title">
