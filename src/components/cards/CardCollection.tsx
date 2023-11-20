@@ -3,6 +3,7 @@ import { CollectionType } from '../../utils/types';
 import { useNeedCurrentCollectionUpdate } from '../global-context-provider/update-collection';
 import CardControlBlock from './card-control-block/CardControlBlock';
 import ControlBlockButton from './card-control-block/ControlBlockButton';
+import { useCurrentLangPack } from '../../store/selectors';
 
 type CardCollectionPropsType = {
   collection: CollectionType;
@@ -12,6 +13,7 @@ type CardCollectionPropsType = {
 export default function CardCollection(props:CardCollectionPropsType) {
   const { collection, onCollectionDelete } = props;
   const navigate = useNavigate();
+  const { ADD_CARD } = useCurrentLangPack();
 
   const { setIsNeedCurrentCollectionUpdate } = useNeedCurrentCollectionUpdate();
 
@@ -31,7 +33,7 @@ export default function CardCollection(props:CardCollectionPropsType) {
   const buttonAddCard = () => (
     <ControlBlockButton
       onClick={onClickAddCard}
-      buttonsText="Add card"
+      buttonsText={ADD_CARD}
       key="add_card"
     />
   );
