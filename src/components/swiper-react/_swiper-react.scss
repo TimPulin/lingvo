@@ -2,12 +2,6 @@
   --card-width: calc(var(--screen-width) - 10px);
   --card-height: calc(var(--card-width) * 0.56);
 
-  .swiper-slide-next {
-    .card {
-      --turn-duration: .0s;
-    }
-  }
-
   .card {
     height: var(--card-height);
     width: var(--card-width);
