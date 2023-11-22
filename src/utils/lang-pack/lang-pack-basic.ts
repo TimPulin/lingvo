@@ -49,6 +49,8 @@ export const dataLangs = {
     WELCOME: 'Добро пожаловать',
     PLEASE_AUTHORIZATION: 'Пожалуйста, авторизуйтесь',
     INSTALL_APP: 'Установить приложение',
+
+    FEEDBACK: 'Обратная связь',
   },
 
   en: {
@@ -102,6 +104,8 @@ export const dataLangs = {
     WELCOME: 'Welcome',
     PLEASE_AUTHORIZATION: 'Please log in',
     INSTALL_APP: 'Install application',
+
+    FEEDBACK: 'Feedback',
   },
 
   esl: {
@@ -155,6 +159,8 @@ export const dataLangs = {
     WELCOME: 'Bienvenido/ Bienvenida',
     PLEASE_AUTHORIZATION: 'Por favor inicia sesión',
     INSTALL_APP: 'Instalar aplicación',
+
+    FEEDBACK: 'Comentarios',
   },
 
   hebrew: {
@@ -208,5 +214,7 @@ export const dataLangs = {
     WELCOME: 'ברוך הבא',
     PLEASE_AUTHORIZATION: 'נא להיכנס',
     INSTALL_APP: 'התקן אפליקציה',
+
+    FEEDBACK: '',
   },
 };

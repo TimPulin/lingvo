@@ -37,13 +37,16 @@ export interface ILangPack {
   RELOAD_APP: string,
   CREATE_CARD: string,
   GO_BACK_TO_PAGE_COLLECTION: string,
-  PLEASE_AUTHORIZATION: string,
   COLLECTION_DELETED: string,
   CHANGE_SAVED: string,
   CANT_SAVE_NEW_CARD: string,
   NEW_COLLECTION_SAVED: string,
+
   WELCOME: string,
+  PLEASE_AUTHORIZATION: string,
   INSTALL_APP: string,
+
+  FEEDBACK: string,
 }
 
 export enum Languages {
