@@ -41,6 +41,7 @@ export default function SwiperReact(props:SwiperReactPropsType) {
     if (cardsList.length < 2) {
       breakpointsParams.centeredSlides = true;
     }
+
     if (swiperParams.breakpoints) swiperParams.breakpoints[991] = breakpointsParams;
 
     swiperRef.current = new Swipe('.swiper', swiperParams);

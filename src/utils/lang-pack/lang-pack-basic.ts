@@ -215,6 +215,6 @@ export const dataLangs = {
     PLEASE_AUTHORIZATION: 'נא להיכנס',
     INSTALL_APP: 'התקן אפליקציה',
 
-    FEEDBACK: '',
+    FEEDBACK: '', // TODO
   },
 };
