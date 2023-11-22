@@ -4,6 +4,7 @@ import { useCurrentLangPack } from '../../store/selectors';
 import { removeLocalStorageUserToken } from '../../connect/local-storage-connections';
 import UserBlock from '../user/UserBlock';
 import { PWA_READY_UPDATE } from '../../utils/constants';
+import MailIcon from '../icons/MailIcon';
 
 type NavigationPropsType = {
   isMenuOpen:boolean
@@ -12,7 +13,7 @@ type NavigationPropsType = {
 const NAV_PANEL_CLOSE = 'nav__panel--close';
 
 export default function Navigation(props:NavigationPropsType) {
-  const { COLLECTIONS_PAGE, SETTINGS } = useCurrentLangPack();
+  const { COLLECTIONS_PAGE, SETTINGS, FEEDBACK } = useCurrentLangPack();
   const navigate = useNavigate();
 
   const [isButtonUpdatePWAShow, setIsButtonUpdatePWAShow] = useState(false);
@@ -104,6 +105,16 @@ export default function Navigation(props:NavigationPropsType) {
               >
                 {SETTINGS}
               </Link>
+            </li>
+            <li className="nav__item">
+              <a
+                className="nav__link nav__link--mail"
+                href="mailto:lingvocards.feedback@gmail.com"
+              >
+                <MailIcon />
+                {' '}
+                {FEEDBACK}
+              </a>
             </li>
           </ul>
         </div>
