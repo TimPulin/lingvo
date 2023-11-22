@@ -1,12 +1,12 @@
 // доступные css классы: options-flat, options-flat--row (отрисовывается в ряд)
 
-import { v4 as getUniqId } from 'uuid';
 import RadioBase, { IRadioBaseList } from './RadioBase';
 
 interface IRadioBlockProps {
   list: IRadioBaseList[];
   componentClass: string;
   currentLang: string;
+  // FIXME поставить дженерик
   onChange(value: string | number): void;
 }
 
@@ -15,17 +15,11 @@ export default function RadioBlock(props: IRadioBlockProps) {
     list, componentClass, currentLang, onChange,
   } = props;
 
-  list.map((item) => ({
-    ...item,
-    id: getUniqId(),
-  }
-  ));
-
   return (
     <div className={componentClass}>
       <ul className="options-flat__list">
         {list.map((item) => (
-          <li className="options-flat__item" key={getUniqId()}>
+          <li className="options-flat__item" key={item.value}>
             <RadioBase
               name={item.name}
               label={item.label}

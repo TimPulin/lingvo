@@ -74,15 +74,27 @@
     line-height: 150%;
     color: var(--link-color);
     outline: none;
+    transition: .3s ease;
 
-    &:hover,
     &:active {
       color: var(--color-hover);
       background-color: inherit;
 
-      .svg {
+      .svg__root {
         fill: var(--color-hover);
       }
+    }
+  }
+
+  &__link--mail {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 5px;
+
+    .svg__root {
+      width: 27px;
+      height: 27px;
+      fill: var(--link-color)
     }
   }
 
@@ -98,6 +110,17 @@
   .nav {
     .nav__panel {
       right: -15px;
+    }
+
+    &__link {
+      &:hover {
+        color: var(--color-hover);
+        background-color: inherit;
+
+        .svg__root {
+          fill: var(--color-hover);
+        }
+      }
     }
   }
 }

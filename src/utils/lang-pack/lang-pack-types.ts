@@ -20,7 +20,7 @@ export interface ILangPack {
   FORWARD: string,
   EDIT: string,
   DELETE: string,
-
+  ADD_CARD: string,
   // ФРАЗЫ
   CARD_CHANGES_MADE: string,
   CARD_SAVED: string,
@@ -37,13 +37,16 @@ export interface ILangPack {
   RELOAD_APP: string,
   CREATE_CARD: string,
   GO_BACK_TO_PAGE_COLLECTION: string,
-  PLEASE_AUTHORIZATION: string,
   COLLECTION_DELETED: string,
   CHANGE_SAVED: string,
-  CANT_CHANGE_NEW_CARD: string,
+  CANT_SAVE_NEW_CARD: string,
   NEW_COLLECTION_SAVED: string,
+
   WELCOME: string,
+  PLEASE_AUTHORIZATION: string,
   INSTALL_APP: string,
+
+  FEEDBACK: string,
 }
 
 export enum Languages {
@@ -52,6 +55,38 @@ export enum Languages {
   ESL = 'esl',
   HBW = 'hebrew',
 }
+
+export const langToLangIdAdaptor = (langCode:Languages) => {
+  let id:number;
+  switch (langCode) {
+  /* eslint-disable-next-line */
+    case Languages.RU: id = 82;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    case Languages.EN: id = 28;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    case Languages.ESL: id = 115;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    case Languages.HBW: id = 38;
+    /* eslint-disable-next-line */
+      break;
+    /* eslint-disable-next-line */
+    default: id = 28;
+  }
+  return id;
+};
+
+export const langIdToLangAdaptor = {
+  82: Languages.RU,
+  28: Languages.EN,
+  115: Languages.ESL,
+  38: Languages.HBW,
+};
 
 export type DataLangType = {
   [key in Languages]?: ILangPack;

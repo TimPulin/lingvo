@@ -31,7 +31,7 @@ export default function NewCardPage() {
   const { currentCollectionId } = useCurrentCollectionId();
   const { setIsDataLoading } = useDataLoading();
 
-  const { CANT_CHANGE_NEW_CARD } = useCurrentLangPack();
+  const { CANT_SAVE_NEW_CARD } = useCurrentLangPack();
 
   function showMessage(textMessage:string) {
     setText(textMessage);
@@ -46,7 +46,7 @@ export default function NewCardPage() {
         showMessage(langPack.CARD_SAVED);
       } catch (error) {
         console.log(error);
-        showMessage(CANT_CHANGE_NEW_CARD);
+        showMessage(CANT_SAVE_NEW_CARD);
       } finally {
         setIsDataLoading(false);
       }

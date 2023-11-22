@@ -22,6 +22,7 @@ export const dataLangs = {
     FORWARD: 'Далее',
     EDIT: 'Редактировать',
     DELETE: 'Удалить',
+    ADD_CARD: 'Добавить карточку',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Изменения внесены',
@@ -33,19 +34,23 @@ export const dataLangs = {
     COLLECTION_NAME: 'Название коллекции',
     COLLECTION_DESCRIPTION: 'Описание коллекции',
 
+    // СООБЩЕНИЯ
     CANT_SAVE_CHANGE: 'Не смогли сохранить изменения. Видимо, что-то пошло не так',
     CARD_DELETED: 'Карточка тактично удалена',
     CANT_DELETE_CARD: 'Не смогли удалить карточку. Видимо, что-то пошло не так',
     RELOAD_APP: 'Что-то пошло не так. Перезагрузите, пожалуйста, приложение',
     CREATE_CARD: 'У вас еще нет карточек в коллекции. Давайте создадим новую карточку',
     GO_BACK_TO_PAGE_COLLECTION: 'Что-то пошло не так. Пожалуйста, вернитесь на страницу Коллекций',
-    PLEASE_AUTHORIZATION: 'Пожалуйста, авторизуйтесь',
     COLLECTION_DELETED: 'Коллекция аккуратно удалена',
     CHANGE_SAVED: 'Изменения сохранены',
-    CANT_CHANGE_NEW_CARD: 'Не смогли сохранить новую карточку. Видимо, что-то пошло не так',
+    CANT_SAVE_NEW_CARD: 'Не смогли сохранить новую карточку. Видимо, что-то пошло не так',
     NEW_COLLECTION_SAVED: 'Новая коллекция сохранена',
+
     WELCOME: 'Добро пожаловать',
+    PLEASE_AUTHORIZATION: 'Пожалуйста, авторизуйтесь',
     INSTALL_APP: 'Установить приложение',
+
+    FEEDBACK: 'Обратная связь',
   },
 
   en: {
@@ -71,6 +76,7 @@ export const dataLangs = {
     FORWARD: 'Forward',
     EDIT: 'Edit',
     DELETE: 'Delete',
+    ADD_CARD: 'Add card',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'The changes were carefully made',
@@ -83,19 +89,23 @@ export const dataLangs = {
     COLLECTION_NAME: 'Name your collection',
     COLLECTION_DESCRIPTION: 'Describe your collection',
 
+    // СООБЩЕНИЯ
     CANT_SAVE_CHANGE: 'Impossible to save the changes. Something went wrong.',
     CARD_DELETED: 'A card has been deleted',
     CANT_DELETE_CARD: 'Impossible to delete the card. Something went wrong.',
     RELOAD_APP: 'Something went wrong. Please reload the application.',
     CREATE_CARD: 'Your collection is empty so far. Let’s create a new card.',
     GO_BACK_TO_PAGE_COLLECTION: 'Something went wrong. Please go back to your collection',
-    PLEASE_AUTHORIZATION: 'to_be_done',
     COLLECTION_DELETED: 'A collection has been deleted',
     CHANGE_SAVED: 'Changes saved',
-    CANT_CHANGE_NEW_CARD: 'Impossible to save a new card. Something went wrong',
+    CANT_SAVE_NEW_CARD: 'Impossible to save a new card. Something went wrong',
     NEW_COLLECTION_SAVED: 'New collection saved',
+
     WELCOME: 'Welcome',
+    PLEASE_AUTHORIZATION: 'Please log in',
     INSTALL_APP: 'Install application',
+
+    FEEDBACK: 'Feedback',
   },
 
   esl: {
@@ -121,6 +131,7 @@ export const dataLangs = {
     FORWARD: 'Reenviar',
     EDIT: 'Edita',
     DELETE: 'Borra',
+    ADD_CARD: 'Crear tarjeta',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Tarjeta modificada',
@@ -133,19 +144,23 @@ export const dataLangs = {
     COLLECTION_NAME: 'Nombra la colección',
     COLLECTION_DESCRIPTION: 'Describe la colección',
 
+    // СООБЩЕНИЯ
     CANT_SAVE_CHANGE: 'Es imposible guardar los cambios. Algo salió mal.',
     CARD_DELETED: 'La tarjeta eliminada',
     CANT_DELETE_CARD: 'Es imposible eliminar la tarjeta. Algo salió mal',
     RELOAD_APP: 'Algo salió mal. Por favor reinicia la aplicación.',
     CREATE_CARD: 'La colección está vacía. Vamos a crear una nueva tarjeta',
     GO_BACK_TO_PAGE_COLLECTION: 'Algo salió mal. Por favor regresa a la página de la colección',
-    PLEASE_AUTHORIZATION: 'Por favor inicia sesión',
     COLLECTION_DELETED: 'La colección eliminada',
     CHANGE_SAVED: 'Cambios guardados',
-    CANT_CHANGE_NEW_CARD: 'Es imposible guardar la nueva tarjeta. Algo salió mal',
+    CANT_SAVE_NEW_CARD: 'Es imposible guardar la nueva tarjeta. Algo salió mal',
     NEW_COLLECTION_SAVED: 'Nueva colección guardada',
+
     WELCOME: 'Bienvenido/ Bienvenida',
+    PLEASE_AUTHORIZATION: 'Por favor inicia sesión',
     INSTALL_APP: 'Instalar aplicación',
+
+    FEEDBACK: 'Comentarios',
   },
 
   hebrew: {
@@ -154,8 +169,8 @@ export const dataLangs = {
     CARDS_PAGE: 'כרטיסי אוסף קלפי אוסף',
     NEW_CARD_PAGE: 'כרטיס חדש קלפי אוסף',
     SETTING_PAGE: 'הגדרת',
-    COLLECTIONS_PAGE: 'to_be_done',
-    NEW_COLLECTION_PAGE: 'to_be_done',
+    COLLECTIONS_PAGE: 'אוספים',
+    NEW_COLLECTION_PAGE: 'אוסף חדש',
 
     MAIN: 'בית',
     CREATE_NEW_CARD: 'להתחיל קלף חדש להתחיל כרטיס חדש',
@@ -165,36 +180,41 @@ export const dataLangs = {
 
     NATIVE: 'שפת אם',
     FOREIGN: 'שפה זרה',
-    TRANSCRIPTION: 'to_be_done',
+    TRANSCRIPTION: 'תעתיק',
     CANCEL: 'לְבטל',
     SAVE: 'להציל',
     FORWARD: 'הלאה',
     EDIT: 'לשנות לערוך',
-    DELETE: 'to_be_done',
+    DELETE: 'לסלק',
+    ADD_CARD: 'להתחיל כרטיס',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'הוכנסו שינויים',
     CARD_SAVED: 'הקלף החדש נשמר בהצלחה הכרטיס החדש נשמר בהצלחה',
 
     // новое
-    COLLECTION: 'to_be_done',
-    NATIVE_LANGUAGE_COLLECTION: 'to_be_done',
-    FOREIGN_LANGUAGE_COLLECTION: 'to_be_done',
-    COLLECTION_NAME: 'to_be_done',
-    COLLECTION_DESCRIPTION: 'to_be_done',
+    COLLECTION: 'אוסף',
+    NATIVE_LANGUAGE_COLLECTION: 'שפת האם של האוסף',
+    FOREIGN_LANGUAGE_COLLECTION: 'שפת הזרה של האוסף',
+    COLLECTION_NAME: 'שם האוסף',
+    COLLECTION_DESCRIPTION: 'תיאור האוסף',
 
-    CANT_SAVE_CHANGE: 'to_be_done',
-    CARD_DELETED: 'to_be_done',
-    CANT_DELETE_CARD: 'to_be_done',
-    RELOAD_APP: 'to_be_done',
-    CREATE_CARD: 'to_be_done',
-    GO_BACK_TO_PAGE_COLLECTION: 'to_be_done',
-    PLEASE_AUTHORIZATION: 'to_be_done',
-    COLLECTION_DELETED: 'to_be_done',
-    CHANGE_SAVED: 'to_be_done',
-    CANT_CHANGE_NEW_CARD: 'to_be_done',
-    NEW_COLLECTION_SAVED: 'to_be_done',
-    WELCOME: 'to_be_done',
-    INSTALL_APP: 'to_be_done',
+    // СООБЩЕНИЯ
+    CANT_SAVE_CHANGE: 'לא הצלחנו לשמור את השינויים. כנראה שמשהו השתבש',
+    CARD_DELETED: 'הכרטיס הוסר בטקט',
+    CANT_DELETE_CARD: 'לא הצלחנו להסיר את הכרטיס. כנראה שמשהו השתבש',
+    RELOAD_APP: 'משהו השתבש. אנא הפעל מחדש את היישום',
+    CREATE_CARD: 'עדיין אין לך כרטיסים באוסף שלך. בואו ניצור כרטיס חדש',
+    GO_BACK_TO_PAGE_COLLECTION: 'משהו השתבש. נא לחזור לדף האוספים',
+    COLLECTION_DELETED: 'האוסף הוסר בזהירות',
+    CHANGE_SAVED: 'שינויים נשמרו',
+    CANT_SAVE_NEW_CARD: 'לא הצלחנו לשמור את הכרטיס החדש. כנראה שמשהו השתבש',
+    NEW_COLLECTION_SAVED: 'אוסף חדש נשמר',
+
+    WELCOME: 'ברוך הבא',
+    PLEASE_AUTHORIZATION: 'נא להיכנס',
+    INSTALL_APP: 'התקן אפליקציה',
+
+    FEEDBACK: '', // TODO
   },
 };
