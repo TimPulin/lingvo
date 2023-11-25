@@ -101,7 +101,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
   return (
     <div>
       <Form
-        className="form collection-form"
+        className="form form--page collection-form"
         onSubmitCapture={formik.handleSubmit}
       >
         <div className="collection-form__languages-list-wrap">

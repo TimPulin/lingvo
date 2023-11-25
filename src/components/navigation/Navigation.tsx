@@ -107,14 +107,15 @@ export default function Navigation(props:NavigationPropsType) {
               </Link>
             </li>
             <li className="nav__item">
-              <a
+              <Link
                 className="nav__link nav__link--mail"
-                href="mailto:lingvocards.feedback@gmail.com"
+                to="/feedback"
+                onClick={() => closeMenu()}
               >
                 <MailIcon />
                 {' '}
                 {FEEDBACK}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

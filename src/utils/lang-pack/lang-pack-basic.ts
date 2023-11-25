@@ -7,6 +7,7 @@ export const dataLangs = {
     SETTING_PAGE: 'Настройки',
     COLLECTIONS_PAGE: 'Коллекции',
     NEW_COLLECTION_PAGE: 'Новая коллекция',
+    FEEDBACK_PAGE: 'Обратная связь',
 
     MAIN: 'Главная',
     CREATE_NEW_CARD: 'Создать новую карточку',
@@ -61,6 +62,7 @@ export const dataLangs = {
     SETTING_PAGE: 'Settings',
     COLLECTIONS_PAGE: 'Collections',
     NEW_COLLECTION_PAGE: 'New collection',
+    FEEDBACK_PAGE: 'Feedback',
 
     MAIN: 'Main',
     CREATE_NEW_CARD: 'Create new card',
@@ -116,6 +118,7 @@ export const dataLangs = {
     SETTING_PAGE: 'Ajustes',
     COLLECTIONS_PAGE: 'Colecciones',
     NEW_COLLECTION_PAGE: 'Nueva Coleccione',
+    FEEDBACK_PAGE: 'Comentarios',
 
     MAIN: 'Principal',
     CREATE_NEW_CARD: 'Crear una nueva tarjeta',
@@ -171,6 +174,7 @@ export const dataLangs = {
     SETTING_PAGE: 'הגדרת',
     COLLECTIONS_PAGE: 'אוספים',
     NEW_COLLECTION_PAGE: 'אוסף חדש',
+    FEEDBACK_PAGE: 'משוב',
 
     MAIN: 'בית',
     CREATE_NEW_CARD: 'להתחיל קלף חדש להתחיל כרטיס חדש',
@@ -215,6 +219,6 @@ export const dataLangs = {
     PLEASE_AUTHORIZATION: 'נא להיכנס',
     INSTALL_APP: 'התקן אפליקציה',
 
-    FEEDBACK: '', // TODO
+    FEEDBACK: 'משוב',
   },
 };

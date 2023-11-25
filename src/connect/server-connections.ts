@@ -1,5 +1,6 @@
 import { axiosInstanceLingvo as axios } from './axios-instance';
 import { CollectionFormType, NewWordType } from '../utils/types';
+import { FeedbackFormType } from '../components/feedback/FeedbackForm';
 
 export function getUserData(token:string) {
   return axios
@@ -141,4 +142,8 @@ export function deleteCard(token:string, cardId:number) {
         },
       },
     );
+}
+
+export function sendFeedback(token:string, message:FeedbackFormType) {
+  console.log(message, token);
 }

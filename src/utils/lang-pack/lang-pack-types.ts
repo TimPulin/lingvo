@@ -5,6 +5,7 @@ export interface ILangPack {
   SETTING_PAGE: string,
   COLLECTIONS_PAGE: string,
   NEW_COLLECTION_PAGE: string,
+  FEEDBACK_PAGE: string,
 
   MAIN: string,
   CREATE_NEW_CARD: string,
