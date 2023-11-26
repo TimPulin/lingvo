@@ -1,5 +1,6 @@
 import { axiosInstanceLingvo as axios } from './axios-instance';
 import { CollectionFormType, NewWordType } from '../utils/types';
+import { FeedbackFormType } from '../components/feedback/FeedbackForm';
 
 export function getUserData(token:string) {
   return axios
@@ -134,6 +135,22 @@ export function deleteCard(token:string, cardId:number) {
   return axios
     .delete(
       `/binds/${cardId}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+}
+
+export function sendFeedback(token:string, message:FeedbackFormType) {
+  return axios
+    .post(
+      '/feedback/send',
+      {
+        message: message.messageText,
+      },
       {
         headers: {
           'Content-type': 'application/json',

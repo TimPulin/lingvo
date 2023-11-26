@@ -23,15 +23,14 @@ export default function NewCardPage() {
   const getCardsCollectionLocal:GetCardsCollectionLocalType = useOutletContext();
 
   const userToken = useUserToken();
-  const langPack = useCurrentLangPack();
   const { setIsCardModeNewCard } = useCardModeNewCard();
   const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
 
-  const { NEW_CARD_PAGE } = useCurrentLangPack();
+  const {
+    NEW_CARD_PAGE, CARD_SAVED, CANT_SAVE_NEW_CARD, BACK_TO_COLLECTION,
+  } = useCurrentLangPack();
   const { currentCollectionId } = useCurrentCollectionId();
   const { setIsDataLoading } = useDataLoading();
-
-  const { CANT_SAVE_NEW_CARD } = useCurrentLangPack();
 
   function showMessage(textMessage:string) {
     setText(textMessage);
@@ -43,7 +42,7 @@ export default function NewCardPage() {
       try {
         setIsDataLoading(true);
         await addCard(userToken, currentCollectionId, newWord);
-        showMessage(langPack.CARD_SAVED);
+        showMessage(CARD_SAVED);
       } catch (error) {
         console.log(error);
         showMessage(CANT_SAVE_NEW_CARD);
@@ -75,7 +74,7 @@ export default function NewCardPage() {
         <div className="button-wrap">
           <ButtonBase
             onClickFunction={gotoCollectionPage}
-            text="Вернуться к коллекции"
+            text={BACK_TO_COLLECTION}
             classAdditional="button button--trans"
           />
         </div>

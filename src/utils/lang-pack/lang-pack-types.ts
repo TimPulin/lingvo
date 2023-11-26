@@ -5,6 +5,7 @@ export interface ILangPack {
   SETTING_PAGE: string,
   COLLECTIONS_PAGE: string,
   NEW_COLLECTION_PAGE: string,
+  FEEDBACK_PAGE: string,
 
   MAIN: string,
   CREATE_NEW_CARD: string,
@@ -21,6 +22,10 @@ export interface ILangPack {
   EDIT: string,
   DELETE: string,
   ADD_CARD: string,
+
+  BACK_TO_COLLECTION: string,
+  BACK_TO_COLLECTIONS_LIST: string,
+
   // ФРАЗЫ
   CARD_CHANGES_MADE: string,
   CARD_SAVED: string,
@@ -46,7 +51,13 @@ export interface ILangPack {
   PLEASE_AUTHORIZATION: string,
   INSTALL_APP: string,
 
+  // feedback
   FEEDBACK: string,
+  SENDER: string,
+  FEEDBACKMESSAGE_MESSAGE_THEME: string,
+  FEEDBACKMESSAGE_MESSAGE: string,
+  FEEDBACKMESSAGE_MESSAGE_SEND: string,
+  FEEDBACKMESSAGE_MESSAGE_DNT_SEND: string,
 }
 
 export enum Languages {
