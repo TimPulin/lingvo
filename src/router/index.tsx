@@ -10,7 +10,7 @@ import CollectionPage from '../pages/CollectionPage';
 import LoginPage from '../pages/login-page/LoginPage';
 import EditCollectionPage from '../pages/EditCollectionPage';
 import CollectionPageContextProvider from '../components/collection-page-context-provider/CollectionPageContextProvider';
-import FeedbackPage from '../pages/FeedBackPage';
+import FeedbackPage from '../pages/feedback-page/FeedBackPage';
 
 export const router = createBrowserRouter([
   {

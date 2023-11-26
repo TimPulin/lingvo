@@ -16,6 +16,7 @@ import ButtonBase from '../components/base/ButtonBase';
 
 import { OnSaveCardArgumentsType } from '../utils/types';
 import { GetCardsCollectionLocalType } from './CollectionPage';
+import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
 
 export default function NewCardPage() {
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ export default function NewCardPage() {
             onClickFunction={gotoCollectionPage}
             text={BACK_TO_COLLECTION}
             classAdditional="button button--trans"
+            ElementJSX={<ArrowLeftIcon />}
           />
         </div>
       </div>

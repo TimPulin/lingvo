@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import FeedbackForm, { FeedbackFormType } from '../components/feedback/FeedbackForm';
-import { sendFeedback } from '../connect/server-connections';
-import { useCurrentLangPack, useUserToken } from '../store/selectors';
-import { updateCurrentPageName } from '../store/slicers/current-page-slice';
-import { useStaticMessage, staticMessagePromise } from '../components/global-context-provider/message-context';
-import ButtonBase from '../components/base/ButtonBase';
+import FeedbackForm, { FeedbackFormType } from '../../components/feedback/FeedbackForm';
+import { sendFeedback } from '../../connect/server-connections';
+import { useCurrentLangPack, useUserToken } from '../../store/selectors';
+import { updateCurrentPageName } from '../../store/slicers/current-page-slice';
+import { useStaticMessage, staticMessagePromise } from '../../components/global-context-provider/message-context';
+import ButtonBase from '../../components/base/ButtonBase';
+import ArrowLeftIcon from '../../components/icons/ArrowLeftIcon';
 
 export default function FeedbackPage() {
   const navigate = useNavigate();
@@ -57,11 +58,12 @@ export default function FeedbackPage() {
           onResetFunction={onResetMessageForm}
         />
         <div className="content__item">
-          <div className="button-wrap">
+          <div className="button-wrap button-wrap--feedback-page">
             <ButtonBase
               onClickFunction={gotoCollectionsPage}
               text={BACK_TO_COLLECTIONS_LIST}
               classAdditional="button button--trans"
+              ElementJSX={<ArrowLeftIcon />}
             />
           </div>
         </div>
