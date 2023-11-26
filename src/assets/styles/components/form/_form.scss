@@ -32,6 +32,15 @@
 }
 
 .form--card {
+  .button {
+    transition-property: text-shadow;
+
+    &:active {
+      color: #fff;
+      text-shadow: 0 0 5px #fff
+    }
+  }
+
   .button--trans {
     color: #fff;
   }
@@ -45,4 +54,20 @@
 
 .form--page {
   row-gap: 20px;
+}
+
+@media (min-width: $medium-screen) {
+  .form--card {
+    .button {
+      &:hover {
+        color: #fff;
+        text-shadow: 0 0 1px #fff;
+      }
+
+      &:active {
+        color: #fff;
+        text-shadow: 0 0 3px #fff
+      }
+    }
+  }
 }
