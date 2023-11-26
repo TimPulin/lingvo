@@ -5,19 +5,43 @@ import FeedbackForm, { FeedbackFormType } from '../components/feedback/FeedbackF
 import { sendFeedback } from '../connect/server-connections';
 import { useCurrentLangPack, useUserToken } from '../store/selectors';
 import { updateCurrentPageName } from '../store/slicers/current-page-slice';
+import { useStaticMessage, staticMessagePromise } from '../components/global-context-provider/message-context';
+import ButtonBase from '../components/base/ButtonBase';
 
 export default function FeedbackPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userToken = useUserToken();
-  const { FEEDBACK_PAGE } = useCurrentLangPack();
+  const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
+  const {
+    FEEDBACK_PAGE, FEEDBACKMESSAGE_MESSAGE_SEND, FEEDBACKMESSAGE_MESSAGE_DNT_SEND, BACK_TO_COLLECTIONS_LIST,
+  } = useCurrentLangPack();
 
-  const sendFeedBackLocal = (message:FeedbackFormType) => {
-    if (userToken) sendFeedback(userToken, message);
+  function showMessage(textMessage:string) {
+    setText(textMessage);
+    setIsMessageShow(true);
+  }
+
+  const sendFeedBackLocal = async (message:FeedbackFormType) => {
+    if (userToken) {
+      try {
+        await sendFeedback(userToken, message);
+        showMessage(FEEDBACKMESSAGE_MESSAGE_SEND);
+        setText(FEEDBACKMESSAGE_MESSAGE_SEND);
+        staticMessagePromise(setIsMessageShow, true)
+          .then(() => navigate(-1));
+      } catch (error) {
+        showMessage(FEEDBACKMESSAGE_MESSAGE_DNT_SEND);
+        console.log(error);
+      }
+    }
   };
 
   const onResetMessageForm = () => {
     navigate(-1);
+  };
+  const gotoCollectionsPage = () => {
+    navigate('/collections');
   };
 
   useEffect(() => {
@@ -32,10 +56,16 @@ export default function FeedbackPage() {
           onSubmitFunction={sendFeedBackLocal}
           onResetFunction={onResetMessageForm}
         />
+        <div className="content__item">
+          <div className="button-wrap">
+            <ButtonBase
+              onClickFunction={gotoCollectionsPage}
+              text={BACK_TO_COLLECTIONS_LIST}
+              classAdditional="button button--trans"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
-// TODO когда заработает - удалить
-// href="mailto:lingvocards.feedback@gmail.com"

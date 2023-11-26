@@ -145,5 +145,17 @@ export function deleteCard(token:string, cardId:number) {
 }
 
 export function sendFeedback(token:string, message:FeedbackFormType) {
-  console.log(message, token);
+  return axios
+    .post(
+      '/feedback/send',
+      {
+        message: message.messageText,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 }

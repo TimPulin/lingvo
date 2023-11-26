@@ -17,7 +17,9 @@ export type FeedbackFormType = {
 
 export default function FeedbackForm(props:FeedbackFormPropsType) {
   const { onSubmitFunction, onResetFunction } = props;
-  const { CANCEL, SAVE } = useCurrentLangPack();
+  const {
+    CANCEL, SAVE, SENDER, FEEDBACKMESSAGE_MESSAGE_THEME, FEEDBACKMESSAGE_MESSAGE,
+  } = useCurrentLangPack();
   const { TextArea } = Input;
   const { userName } = useUserData();
 
@@ -47,9 +49,9 @@ export default function FeedbackForm(props:FeedbackFormPropsType) {
     >
       <Form.Item>
         <label className="collection-form__label label">
-          <span>Отправитель</span>
+          <span>{SENDER}</span>
           <Input
-            required
+            disabled
             name="userName"
             maxLength={40}
             value={formik.values.userName}
@@ -59,7 +61,10 @@ export default function FeedbackForm(props:FeedbackFormPropsType) {
       </Form.Item>
       <Form.Item>
         <label className="collection-form__label label">
-          <span>Тема</span>
+          <span>
+            {FEEDBACKMESSAGE_MESSAGE_THEME}
+            {' '}
+          </span>
           <Input
             required
             name="messageSubject"
@@ -71,7 +76,10 @@ export default function FeedbackForm(props:FeedbackFormPropsType) {
       </Form.Item>
       <Form.Item>
         <label className="collection-form__label label">
-          <span>Сообщение</span>
+          <span>
+            {FEEDBACKMESSAGE_MESSAGE}
+            {' '}
+          </span>
           <TextArea
             required
             name="messageText"

@@ -25,6 +25,9 @@ export const dataLangs = {
     DELETE: 'Удалить',
     ADD_CARD: 'Добавить карточку',
 
+    BACK_TO_COLLECTION: 'Вернуться к коллекции',
+    BACK_TO_COLLECTIONS_LIST: 'Вернуться к списку коллекций',
+
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Изменения внесены',
     CARD_SAVED: 'Новая карточка успешно сохранена',
@@ -52,6 +55,11 @@ export const dataLangs = {
     INSTALL_APP: 'Установить приложение',
 
     FEEDBACK: 'Обратная связь',
+    SENDER: 'Отправитель',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Тема сообщения',
+    FEEDBACKMESSAGE_MESSAGE: 'Сообщение',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Сообщение успешно отправлено',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Не смогли отправить сообщение. Попробуйте позже',
   },
 
   en: {
@@ -79,6 +87,9 @@ export const dataLangs = {
     EDIT: 'Edit',
     DELETE: 'Delete',
     ADD_CARD: 'Add card',
+
+    BACK_TO_COLLECTION: 'Back to collection',
+    BACK_TO_COLLECTIONS_LIST: 'Back to collections',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'The changes were carefully made',
@@ -108,6 +119,11 @@ export const dataLangs = {
     INSTALL_APP: 'Install application',
 
     FEEDBACK: 'Feedback',
+    SENDER: 'Sender',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject',
+    FEEDBACKMESSAGE_MESSAGE: 'Message',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Couldn\'t send a message. Try later',
   },
 
   esl: {
@@ -136,11 +152,15 @@ export const dataLangs = {
     DELETE: 'Borra',
     ADD_CARD: 'Crear tarjeta',
 
+    // TODO добавить
+    BACK_TO_COLLECTION: 'Back to collection',
+    BACK_TO_COLLECTIONS_LIST: 'Back to collections',
+    // TODO добавить END
+
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Tarjeta modificada',
     CARD_SAVED: 'Nueva tarjeta guardada',
 
-    // новое
     COLLECTION: 'Colección',
     NATIVE_LANGUAGE_COLLECTION: 'Tu idioma',
     FOREIGN_LANGUAGE_COLLECTION: 'Idioma que aprendes',
@@ -164,6 +184,13 @@ export const dataLangs = {
     INSTALL_APP: 'Instalar aplicación',
 
     FEEDBACK: 'Comentarios',
+    // TODO добавить
+    SENDER: 'Sender',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject',
+    FEEDBACKMESSAGE_MESSAGE: 'Message',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Couldn\'t send a message. Try later',
+    // TODO добавить END
   },
 
   hebrew: {
@@ -191,6 +218,10 @@ export const dataLangs = {
     EDIT: 'לשנות לערוך',
     DELETE: 'לסלק',
     ADD_CARD: 'להתחיל כרטיס',
+    // TODO добавить
+    BACK_TO_COLLECTION: 'Back to collection',
+    BACK_TO_COLLECTIONS_LIST: 'Back to collections',
+    // TODO добавить END
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'הוכנסו שינויים',
@@ -220,5 +251,12 @@ export const dataLangs = {
     INSTALL_APP: 'התקן אפליקציה',
 
     FEEDBACK: 'משוב',
+    // TODO добавить
+    SENDER: 'Sender',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject',
+    FEEDBACKMESSAGE_MESSAGE: 'Message',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Couldn\'t send a message. Try later',
+    // TODO добавить END
   },
 };

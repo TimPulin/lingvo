@@ -21,10 +21,12 @@ export function useStaticMessage() {
 }
 
 export const messageShowDuration = 3000;
+export const messageAnimationDuration = 500;
+const messageHideDuration = 200;
 
 export function staticMessagePromise(functionSet:React.Dispatch<React.SetStateAction<boolean>>, value:boolean) {
   functionSet(value);
   return new Promise((resolve) => {
-    setTimeout(() => resolve('message hide'), messageShowDuration);
+    setTimeout(() => resolve('message hide'), messageShowDuration + messageAnimationDuration + messageHideDuration);
   });
 }

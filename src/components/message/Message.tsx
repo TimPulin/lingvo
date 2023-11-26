@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useStaticMessage, messageShowDuration } from '../global-context-provider/message-context';
+import { useStaticMessage, messageShowDuration, messageAnimationDuration } from '../global-context-provider/message-context';
 import ButtonClose from '../base/buttons/button-close/ButtonClose';
 
 const MESSAGE_SHOW = 'message--show';
@@ -15,7 +15,7 @@ export default function Message() {
     setTimeout(() => {
       setIsShow(false);
       setClassHide('');
-    }, 500);
+    }, messageAnimationDuration);
   }
 
   function hideMessage() {
