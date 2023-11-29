@@ -88,8 +88,8 @@ export const dataLangs = {
     DELETE: 'Delete',
     ADD_CARD: 'Add card',
 
-    BACK_TO_COLLECTION: 'Back to collection',
-    BACK_TO_COLLECTIONS_LIST: 'Back to collections',
+    BACK_TO_COLLECTION: 'Go back to the collection',
+    BACK_TO_COLLECTIONS_LIST: 'Go back to the collections',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'The changes were carefully made',
@@ -120,10 +120,10 @@ export const dataLangs = {
 
     FEEDBACK: 'Feedback',
     SENDER: 'Sender',
-    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject of the message',
     FEEDBACKMESSAGE_MESSAGE: 'Message',
-    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent',
-    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Couldn\'t send a message. Try later',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent successfully',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Impossible to send the message. Try again later',
   },
 
   esl: {
@@ -152,10 +152,8 @@ export const dataLangs = {
     DELETE: 'Borra',
     ADD_CARD: 'Crear tarjeta',
 
-    // TODO добавить
-    BACK_TO_COLLECTION: 'Back to collection',
-    BACK_TO_COLLECTIONS_LIST: 'Back to collections',
-    // TODO добавить END
+    BACK_TO_COLLECTION: 'Volver a la colección',
+    BACK_TO_COLLECTIONS_LIST: 'Volver a las colecciones',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Tarjeta modificada',
@@ -184,13 +182,11 @@ export const dataLangs = {
     INSTALL_APP: 'Instalar aplicación',
 
     FEEDBACK: 'Comentarios',
-    // TODO добавить
-    SENDER: 'Sender',
-    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject',
-    FEEDBACKMESSAGE_MESSAGE: 'Message',
-    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent',
-    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Couldn\'t send a message. Try later',
-    // TODO добавить END
+    SENDER: 'Enviador',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Tema del mensaje',
+    FEEDBACKMESSAGE_MESSAGE: 'Mensaje',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Mensaje enviado exitosamente',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Es imposible enviar el mensaje. Por favor intenta  más tarde',
   },
 
   hebrew: {
