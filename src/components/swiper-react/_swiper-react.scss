@@ -2,6 +2,34 @@
   --card-width: calc(var(--screen-width) - 10px);
   --card-height: calc(var(--card-width) * 0.56);
 
+  &__button {
+    position: absolute;
+    top: 50%;
+    display: none;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    .svg__root {
+      fill: var(--color-grey_dark);
+    }
+
+    &:hover {
+      .svg__root {
+        fill: $color-primary;
+      }
+    }
+
+    &:active {
+      .svg__root {
+        fill: $color-primary_shade;
+      }
+    }
+  }
+
+  &__button--prev {
+    right: 0;
+  }
+
   .card {
     height: var(--card-height);
     width: var(--card-width);
@@ -11,6 +39,12 @@
       font-size: 32px;
       ;
     }
+  }
+}
+
+@media (min-width:$medium-screen) {
+  .swiper__button {
+    display: block;
   }
 }
 

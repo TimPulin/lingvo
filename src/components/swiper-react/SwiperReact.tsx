@@ -7,6 +7,9 @@ import {
 import CardUniversal from '../cards/CardUniversal';
 import { SwiperSlideInProgressContext } from './swiper-react-context-hooks';
 import { CardsListType, OnSaveCardArgumentsType } from '../../utils/types';
+import ButtonBase from '../base/ButtonBase';
+import ArrowCarrotLeftIcon from '../icons/ArrowCarrotLeftIcon';
+import ArrowCarrotRightIcon from '../icons/ArrowCarrotRightIcon';
 
 type SwiperReactPropsType = {
   cardsList:CardsListType;
@@ -56,6 +59,14 @@ export default function SwiperReact(props:SwiperReactPropsType) {
     }
   }
 
+  const slideNext = () => {
+    if (swiperRef.current !== null) swiperRef.current.slideNext();
+  };
+
+  const slidePrev = () => {
+    if (swiperRef.current !== null) swiperRef.current.slidePrev();
+  };
+
   useEffect(() => {
     swiperInit();
 
@@ -92,6 +103,10 @@ export default function SwiperReact(props:SwiperReactPropsType) {
               ))
             }
           </div>
+
+          <ButtonBase classAdditional="swiper__button" onClickFunction={slideNext} ElementJSX={<ArrowCarrotLeftIcon />} />
+          <ButtonBase classAdditional="swiper__button swiper__button--prev" onClickFunction={slidePrev} ElementJSX={<ArrowCarrotRightIcon />} />
+
         </div>
       </div>
     </SwiperSlideInProgressContext.Provider>
