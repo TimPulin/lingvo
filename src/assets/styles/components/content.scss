@@ -74,6 +74,16 @@
     justify-content: center;
   }
 
+  .content__item--form-style-radio {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .form--classic {
+    justify-content: flex-start;
+    width: var(--item-width);
+  }
+
   .card {
     width: var(--item-width);
     height: var(--item-height);
