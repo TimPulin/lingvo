@@ -1,5 +1,6 @@
 import Input from '../form/Input';
 import { useCurrentLangPack } from '../../store/selectors';
+import InputCustom from '../form/input-custom-temp/InputCustom';
 
 type WordType = {
   newWord: string;
@@ -30,6 +31,10 @@ export default function CardForm(props: CardFormPropsType) {
     if (onSubmit !== null) onSubmit(event);
   };
 
+  const updateFunctionTemp = () => {
+    console.log('norm');
+  };
+
   return (
     <form className="form form--card" onSubmit={onSubmitLocal}>
       {/* eslint-disable-next-line */}
@@ -45,6 +50,7 @@ export default function CardForm(props: CardFormPropsType) {
             />
           ))
         }
+        <InputCustom value="" placeholderText="test" updateFunction={updateFunctionTemp} name="temp" />
       </div>
       <div className="form__footer">
         <button type="button" className="button button--trans" onClick={onCancel}>{CANCEL}</button>
