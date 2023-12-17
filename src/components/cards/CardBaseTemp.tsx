@@ -37,7 +37,7 @@ const defaultPairWords: IPairWords = {
   transcription: '',
 };
 
-export default function CardBase(props: CardBasePropsType) {
+export default function CardBaseTemp(props: CardBasePropsType) {
   const {
     isModeNewCard = false, pairWords = defaultPairWords, formNative, formForeign, onDeleteCard = emptyFunc, isTurnCardToNative: turnCardToNative,
   } = props;
@@ -192,7 +192,7 @@ export default function CardBase(props: CardBasePropsType) {
   );
 }
 
-CardBase.defaultProps = {
+CardBaseTemp.defaultProps = {
   isModeNewCard: false,
   onDeleteCard: emptyFunc,
   pairWords: defaultPairWords,

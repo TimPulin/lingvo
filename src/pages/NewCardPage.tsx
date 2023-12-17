@@ -20,6 +20,7 @@ import { OnSaveCardArgumentsType } from '../utils/types';
 import { GetCardsCollectionLocalType } from './CollectionPage';
 import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
 import CardClassicForm from '../components/cards/CardClassicForm';
+import CardBaseTemp from '../components/cards/CardBaseTemp';
 
 /* TODO перевести */
 const formStyleOptions = [
@@ -37,7 +38,7 @@ export default function NewCardPage() {
   const { setText, setIsShow: setIsMessageShow } = useStaticMessage();
 
   const {
-    NEW_CARD_PAGE, CARD_SAVED, CANT_SAVE_NEW_CARD, BACK_TO_COLLECTION,
+    NEW_CARD_PAGE, CARD_SAVED, CANT_SAVE_NEW_CARD, BACK_TO_COLLECTION, NATIVE, FOREIGN, TRANSCRIPTION, FORWARD, SAVE,
   } = useCurrentLangPack();
   const { currentCollectionId } = useCurrentCollectionId();
   const { setIsDataLoading } = useDataLoading();
@@ -81,6 +82,28 @@ export default function NewCardPage() {
     setFormStyle(event.target.value);
   };
 
+  const isTurnCardToNative = true;
+
+  const setNativeWord = () => {
+    console.log('setNative');
+  };
+
+  const setForeignWord = () => {
+    console.log('setNative');
+  };
+
+  const setTranscription = () => {
+    console.log('setNative');
+  };
+
+  const onSubmitForeign = () => {
+    console.log('setNative');
+  };
+
+  const onCancel = () => {
+    console.log('setNative');
+  };
+
   return (
     <div className="content__list content__list--new-card-page">
       <div className="content__item">
@@ -96,6 +119,41 @@ export default function NewCardPage() {
         {formStyle === 0 && <CardUniversal onSaveCard={onSaveCard} />}
         {formStyle === 1 && <CardClassicForm />}
 
+      </div>
+      <div className="content__item">
+        {formStyle === 0 && (
+          <CardBaseTemp
+            isTurnCardToNative={isTurnCardToNative}
+            isModeNewCard
+            formNative={
+              {
+                newWordsList: [
+                  {
+                    newWord: 'nativeWord', updateFunction: setNativeWord, placeholderText: NATIVE,
+                  },
+                ],
+                primaryButtonName: FORWARD,
+                onSubmit: null,
+                onCancel,
+              }
+            }
+            formForeign={
+              {
+                newWordsList: [
+                  {
+                    newWord: 'foreignWord', updateFunction: setForeignWord, placeholderText: FOREIGN,
+                  },
+                  {
+                    newWord: 'transcription', updateFunction: setTranscription, placeholderText: TRANSCRIPTION,
+                  },
+                ],
+                primaryButtonName: SAVE,
+                onSubmit: onSubmitForeign,
+                onCancel,
+              }
+            }
+          />
+        )}
       </div>
       <div className="content__item">
         <div className="button-wrap">

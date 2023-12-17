@@ -10,13 +10,14 @@ type WordType = {
 export type CardFormPropsType = {
   newWordsList: WordType;
   primaryButtonName?: string;
-  onSubmit(event: React.FormEvent):void;
-  onCancel(event: React.FormEvent):void;
+  onSubmit: ((event: React.FormEvent) => void) | null;
+  onCancel: (event: React.FormEvent) => void;
+  onClickNext?: ((event: React.FormEvent) => void) | null
 };
 
 export default function CardForm(props: CardFormPropsType) {
   const {
-    newWordsList, onSubmit, onCancel, primaryButtonName,
+    newWordsList, onSubmit, onCancel, onClickNext = null, primaryButtonName,
   } = props;
   const { CANCEL } = useCurrentLangPack();
   // console.log(newWordsList);
@@ -25,8 +26,12 @@ export default function CardForm(props: CardFormPropsType) {
     event.stopPropagation();
   }
 
+  const onSubmitLocal = (event: any) => {
+    if (onSubmit !== null) onSubmit(event);
+  };
+
   return (
-    <form className="form form--card" onSubmit={onSubmit}>
+    <form className="form form--card" onSubmit={onSubmitLocal}>
       {/* eslint-disable-next-line */}
       <div className="form__body" onClick={onBodyClick}>
         {
@@ -43,7 +48,14 @@ export default function CardForm(props: CardFormPropsType) {
       </div>
       <div className="form__footer">
         <button type="button" className="button button--trans" onClick={onCancel}>{CANCEL}</button>
-        <button type="button" className="button button--trans" onClick={onSubmit}>{primaryButtonName}</button>
+        {
+          onClickNext
+          && <button type="button" className="button button--trans" onClick={onClickNext}>{primaryButtonName}</button>
+        }
+        {
+          onClickNext === null
+          && <button type="submit" className="button button--trans">{primaryButtonName}</button>
+        }
       </div>
 
     </form>
@@ -52,4 +64,5 @@ export default function CardForm(props: CardFormPropsType) {
 
 CardForm.defaultProps = {
   primaryButtonName: 'Save',
+  onClickNext: null,
 };
