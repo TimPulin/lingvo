@@ -12,14 +12,13 @@ import { useCurrentCollectionId, useCardModeNewCard } from '../components/collec
 
 import { addCard } from '../connect/server-connections';
 
-import CardUniversal from '../components/cards/CardUniversal';
 import ButtonBase from '../components/base/ButtonBase';
 import RadioAntGroup from '../components/radio/radio-ant-group/RadioAntGroup';
 
 import { OnSaveCardArgumentsType } from '../utils/types';
 import { GetCardsCollectionLocalType } from './CollectionPage';
 import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
-import CardClassicForm from '../components/cards/CardClassicForm';
+import NewCardPageForm from '../components/NewCardPageForm';
 
 /* TODO перевести */
 const formStyleOptions = [
@@ -82,22 +81,6 @@ export default function NewCardPage() {
     setFormStyle(event.target.value);
   };
 
-  // const onSubmitForeign = async (formValue: IPairWords) => {
-  //   onSaveCard(formValue);
-  //   // if (cardId) {
-  //   // } else {
-  //   //   // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
-  //   //   onSaveCard({ newWord });
-  //   //   isTurnCardToNativeRef.current = true;
-  //   //   setTimeout(() => {
-  //   //     isTurnCardToNativeRef.current = false;
-  //   //     _setNativeWord('');
-  //   //     _setForeignWord('');
-  //   //     _setTranscription('');
-  //   //   }, 100);
-  //   // }
-  // };
-
   return (
     <div className="content__list content__list--new-card-page">
       <div className="content__item">
@@ -109,11 +92,11 @@ export default function NewCardPage() {
           />
         </div>
       </div>
-      <div className="content__item">
-        {formStyle === 0 && <CardUniversal onEditCard={onSaveCard} />}
-        {formStyle === 1 && <CardClassicForm />}
+      <NewCardPageForm
+        onSaveCard={onSaveCard}
+        formStyle={formStyle}
 
-      </div>
+      />
       <div className="content__item">
         <div className="button-wrap">
           <ButtonBase

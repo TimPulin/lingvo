@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import { useCurrentLangPack, useUserData } from '../../store/selectors';
 import { CollectionFormType } from '../../utils/types';
+import FormFooter from '../form/FormFooter';
 
 export type CollectionFormPropsType = {
   languagesList:DefaultOptionType[];
@@ -23,7 +24,6 @@ const formInitialState:CollectionFormType = {
 export default function CollectionForm(props:CollectionFormPropsType) {
   const { languageId: userCurrentLanguageId } = useUserData();
 
-  const { CANCEL, SAVE } = useCurrentLangPack();
   const {
     languagesList, formState = formInitialState, onSubmitFunction, onResetFunction, modeEditCollection = false,
   } = props;
@@ -151,10 +151,7 @@ export default function CollectionForm(props:CollectionFormPropsType) {
           <span>{COLLECTION_DESCRIPTION}</span>
           <Input name="description" value={formik.values.description} onChange={formik.handleChange} maxLength={80} />
         </label>
-        <div className="form__footer">
-          <button type="button" className="button button--trans button--warning" onClick={formik.handleReset}>{CANCEL}</button>
-          <button type="submit" className="button button--trans">{SAVE}</button>
-        </div>
+        <FormFooter onCancel={formik.handleReset} />
       </Form>
     </div>
   );

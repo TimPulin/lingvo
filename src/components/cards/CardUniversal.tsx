@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useCurrentLangPack } from '../../store/selectors';
 
-import { useCardModeNewCard, useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
+import { useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
 
 import { OnSaveCardArgumentsType } from '../../utils/types';
 
@@ -38,8 +38,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
   const langPack = useCurrentLangPack();
   const { currentCollectionId } = useCurrentCollectionId();
 
-  const { isCardModeNewCard } = useCardModeNewCard();
-
   const formik = useFormik({
     initialValues: defaultPairWords,
     onSubmit: (formValue: IPairWords) => {
@@ -48,22 +46,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
       }
     },
   });
-
-  // const onSubmitForeign = async (formValue: IPairWords) => {
-  //   onSaveCard(formValue);
-  //   // if (cardId) {
-  //   // } else {
-  //   //   // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
-  //   //   onSaveCard({ newWord });
-  //   //   isTurnCardToNativeRef.current = true;
-  //   //   setTimeout(() => {
-  //   //     isTurnCardToNativeRef.current = false;
-  //   //     _setNativeWord('');
-  //   //     _setForeignWord('');
-  //   //     _setTranscription('');
-  //   //   }, 100);
-  //   // }
-  // };
 
   useEffect(() => {
     if (pairWords) {
@@ -81,7 +63,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   return (
     <CardBase
-      isModeNewCard={isCardModeNewCard}
       onDeleteCard={onCardDeleteLocal}
       pairWords={pairWords}
       formNative={

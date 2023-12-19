@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-// import Input from '../form/Input';
-import { ChangeEventHandler, useEffect } from 'react';
+
+import { ChangeEventHandler } from 'react';
 import { useCurrentLangPack } from '../../store/selectors';
-import InputCustom from '../form/input-custom-temp/InputCustom';
+import InputCustom from '../form/input-custom/InputCustom';
 
 type WordType = {
   newWord: string;
@@ -37,15 +37,10 @@ export default function CardForm(props: CardFormPropsType) {
     if (onSubmit !== null) onSubmit(event);
   };
 
-  useEffect(() => {
-    if (onClickNext) console.log(onClickNext);
-  }, [onClickNext]);
-
   return (
     <form
       className="form form--card"
       onSubmit={onSubmitLocal}
-      // onClick={(event) => event.preventDefault()}
     >
       <div className="form__body" onClick={onBodyClick}>
         {
@@ -57,7 +52,6 @@ export default function CardForm(props: CardFormPropsType) {
               maxLength={70}
               updateFunction={item.updateFunction}
               key={item.placeholderText}
-
             />
           ))
         }
