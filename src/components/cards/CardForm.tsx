@@ -1,66 +1,84 @@
-import Input from '../form/Input';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+// import Input from '../form/Input';
+import { ChangeEventHandler, useEffect } from 'react';
 import { useCurrentLangPack } from '../../store/selectors';
 import InputCustom from '../form/input-custom-temp/InputCustom';
 
 type WordType = {
   newWord: string;
-  updateFunction(value: string | number): void;
+  updateFunction: ChangeEventHandler<HTMLInputElement>;
   placeholderText: string;
+  inputName: string;
 }[];
 
 export type CardFormPropsType = {
   newWordsList: WordType;
   primaryButtonName?: string;
-  onSubmit: ((event: React.FormEvent) => void) | null;
+  onSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | null;
   onCancel: (event: React.FormEvent) => void;
-  onClickNext?: ((event: React.FormEvent) => void) | null
+  onClickNext?: ((event: React.FormEvent) => void) | null;
 };
 
 export default function CardForm(props: CardFormPropsType) {
   const {
-    newWordsList, onSubmit, onCancel, onClickNext = null, primaryButtonName,
+    primaryButtonName, newWordsList, onSubmit, onCancel, onClickNext = null,
   } = props;
   const { CANCEL } = useCurrentLangPack();
-  // console.log(newWordsList);
 
   function onBodyClick(event: React.TouchEvent | React.MouseEvent) {
     event.stopPropagation();
   }
 
   const onSubmitLocal = (event: any) => {
+    event.stopPropagation();
+    event.preventDefault();
     if (onSubmit !== null) onSubmit(event);
   };
 
-  const updateFunctionTemp = () => {
-    console.log('norm');
-  };
+  useEffect(() => {
+    if (onClickNext) console.log(onClickNext);
+  }, [onClickNext]);
 
   return (
-    <form className="form form--card" onSubmit={onSubmitLocal}>
-      {/* eslint-disable-next-line */}
+    <form
+      className="form form--card"
+      onSubmit={onSubmitLocal}
+      // onClick={(event) => event.preventDefault()}
+    >
       <div className="form__body" onClick={onBodyClick}>
         {
           newWordsList.map((item) => (
-            <Input
+            <InputCustom
               placeholderText={item.placeholderText}
+              name={item.inputName}
               value={item.newWord}
               maxLength={70}
               updateFunction={item.updateFunction}
               key={item.placeholderText}
+
             />
           ))
         }
-        <InputCustom value="" placeholderText="test" updateFunction={updateFunctionTemp} name="temp" />
       </div>
       <div className="form__footer">
         <button type="button" className="button button--trans" onClick={onCancel}>{CANCEL}</button>
         {
           onClickNext
-          && <button type="button" className="button button--trans" onClick={onClickNext}>{primaryButtonName}</button>
+          && (
+            <button type="button" className="button button--trans" onClick={onClickNext}>
+              {primaryButtonName}
+            </button>
+          )
         }
         {
           onClickNext === null
-          && <button type="submit" className="button button--trans">{primaryButtonName}</button>
+          && (
+            <button type="submit" className="button button--trans" onClick={(event) => event.stopPropagation()}>
+              {primaryButtonName}
+            </button>
+          )
         }
       </div>
 

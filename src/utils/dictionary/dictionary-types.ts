@@ -1,10 +1,12 @@
 // // TODO проверить на необходимость содержания этого файла (при возможности удалить)
 
-export interface IPairWords {
+import { NewWordType } from '../types';
+
+export interface IPairWords extends NewWordType {
   cardId: number | null,
-  nativeWord: string,
-  foreignWord: string,
-  transcription: string,
+  // nativeWord: string,
+  // foreignWord: string,
+  // transcription: string,
 }
 
 export interface IPairWordsInfo extends IPairWords {
@@ -21,13 +23,14 @@ export type DictionaryStateType = {
   value: DictionaryType;
 };
 
+// TODO проверить на удаление
 export const dictionary: DictionaryType = {
   defaultCollection: [
     {
       cardId: 1,
-      nativeWord: 'тест',
-      foreignWord: 'test',
-      transcription: 'тест',
+      phrase: 'тест',
+      translationPhrase: 'test',
+      pronunciation: 'тест',
     },
   ],
 };

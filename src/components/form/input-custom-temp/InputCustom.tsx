@@ -1,11 +1,11 @@
 import { Input } from 'antd';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEventHandler } from 'react';
 
 type InputPropsType = {
   name: string;
   value: string | number;
-  updateFunction: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  updateFunction: ChangeEventHandler<HTMLInputElement>;
   placeholderText?: string;
   maxLength?:number | undefined;
 };

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { useCurrentLangPack } from '../../store/selectors';
 
 import { useCardModeNewCard, useCurrentCollectionId } from '../collection-page-context-provider/card-context-hooks';
@@ -12,14 +13,14 @@ import { IPairWords } from '../../utils/dictionary/dictionary-types';
 
 const defaultPairWords: IPairWords = {
   cardId: 0,
-  nativeWord: '',
-  foreignWord: '',
-  transcription: '',
+  phrase: '',
+  translationPhrase: '',
+  pronunciation: '',
 };
 
 type CardUniversalPropsType = {
   pairWords?: IPairWords;
-  onSaveCard?: (args: OnSaveCardArgumentsType) => void;
+  onEditCard: (args: OnSaveCardArgumentsType) => void;
   onDeleteCard?: (cardId:number) => void;
 };
 
@@ -28,7 +29,7 @@ const initialEmptyFunction = () => {};
 export default function CardUniversal(props: CardUniversalPropsType) {
   const {
     pairWords = defaultPairWords,
-    onSaveCard = initialEmptyFunction,
+    onEditCard,
     onDeleteCard = initialEmptyFunction,
   } = props;
 
@@ -39,108 +40,84 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 
   const { isCardModeNewCard } = useCardModeNewCard();
 
-  const isTurnCardToNativeRef = useRef(false);
+  const formik = useFormik({
+    initialValues: defaultPairWords,
+    onSubmit: (formValue: IPairWords) => {
+      if (pairWords.cardId) {
+        onEditCard({ newWord: formValue, cardId: pairWords.cardId });
+      }
+    },
+  });
 
-  const [nativeWord, _setNativeWord] = useState<string>('');
-  const [foreignWord, _setForeignWord] = useState<string>('');
-  const [transcription, _setTranscription] = useState<string>('');
-  const [cardId, setCardId] = useState<number | null>(null);
-  const localPairWords = {
-    cardId,
-    nativeWord,
-    foreignWord,
-    transcription,
-  };
-
-  const setNativeWord = (value:string) => {
-    _setNativeWord(value);
-  };
-
-  const setForeignWord = (value:string) => {
-    _setForeignWord(value);
-  };
-
-  const setTranscription = (value:string) => {
-    _setTranscription(value);
-  };
-
-  useEffect(() => {
-  }, [isCardModeNewCard]);
+  // const onSubmitForeign = async (formValue: IPairWords) => {
+  //   onSaveCard(formValue);
+  //   // if (cardId) {
+  //   // } else {
+  //   //   // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
+  //   //   onSaveCard({ newWord });
+  //   //   isTurnCardToNativeRef.current = true;
+  //   //   setTimeout(() => {
+  //   //     isTurnCardToNativeRef.current = false;
+  //   //     _setNativeWord('');
+  //   //     _setForeignWord('');
+  //   //     _setTranscription('');
+  //   //   }, 100);
+  //   // }
+  // };
 
   useEffect(() => {
     if (pairWords) {
-      setNativeWord(pairWords.nativeWord);
-      setForeignWord(pairWords.foreignWord);
-      setTranscription(pairWords.transcription);
-      if (pairWords.cardId) setCardId(pairWords.cardId);
+      formik.setValues(pairWords);
     }
   }, [pairWords]);
-
-  const onSubmitNative = (event: React.FormEvent) => {
-    event.preventDefault();
-  };
-
-  const onSubmitForeign = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const newWord = {
-      phrase: localPairWords.nativeWord,
-      translationPhrase: localPairWords.foreignWord,
-      pronunciation: localPairWords.transcription,
-    };
-
-    if (cardId) {
-      onSaveCard({ newWord, cardId });
-    } else {
-      // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
-      onSaveCard({ newWord });
-      isTurnCardToNativeRef.current = true;
-      setTimeout(() => {
-        isTurnCardToNativeRef.current = false;
-        _setNativeWord('');
-        _setForeignWord('');
-        _setTranscription('');
-      }, 100);
-    }
-  };
 
   const onCancel = () => {
     navigate(`/collection/${currentCollectionId}`);
   };
 
   const onCardDeleteLocal = async () => {
-    if (cardId) onDeleteCard(cardId);
+    if (pairWords.cardId) onDeleteCard(pairWords.cardId);
   };
 
   return (
     <CardBase
       isModeNewCard={isCardModeNewCard}
       onDeleteCard={onCardDeleteLocal}
-      isTurnCardToNative={isTurnCardToNativeRef.current}
       pairWords={pairWords}
       formNative={
         {
           newWordsList: [
             {
-              newWord: nativeWord, updateFunction: setNativeWord, placeholderText: langPack.NATIVE,
+              newWord: formik.values.phrase,
+              updateFunction: formik.handleChange,
+              placeholderText: langPack.NATIVE,
+              inputName: 'phrase',
             },
           ],
           primaryButtonName: langPack.FORWARD,
-          onSubmit: onSubmitNative,
+          onSubmit: (event) => { event.preventDefault(); },
           onCancel,
+          onClickNext: () => {},
         }
       }
       formForeign={
         {
           newWordsList: [
             {
-              newWord: foreignWord, updateFunction: setForeignWord, placeholderText: langPack.FOREIGN,
+              newWord: formik.values.translationPhrase,
+              updateFunction: formik.handleChange,
+              placeholderText: langPack.FOREIGN,
+              inputName: 'translationPhrase',
             },
             {
-              newWord: transcription, updateFunction: setTranscription, placeholderText: langPack.TRANSCRIPTION,
+              newWord: formik.values.pronunciation,
+              updateFunction: formik.handleChange,
+              placeholderText: langPack.TRANSCRIPTION,
+              inputName: 'pronunciation',
             },
           ],
           primaryButtonName: langPack.SAVE,
-          onSubmit: onSubmitForeign,
+          onSubmit: formik.handleSubmit,
           onCancel,
         }
       }
@@ -150,12 +127,6 @@ export default function CardUniversal(props: CardUniversalPropsType) {
 }
 
 CardUniversal.defaultProps = {
-  onSaveCard: () => {},
   onDeleteCard: () => {},
-  pairWords: {
-    id: 3,
-    nativeWord: '',
-    foreignWord: '',
-    transcription: '',
-  },
+  pairWords: defaultPairWords,
 };

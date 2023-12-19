@@ -82,26 +82,20 @@ export default function NewCardPage() {
     setFormStyle(event.target.value);
   };
 
-  // const isTurnCardToNative = true;
-
-  // const setNativeWord = () => {
-  //   console.log('setNative');
-  // };
-
-  // const setForeignWord = () => {
-  //   console.log('setNative');
-  // };
-
-  // const setTranscription = () => {
-  //   console.log('setNative');
-  // };
-
-  // const onSubmitForeign = () => {
-  //   console.log('setNative');
-  // };
-
-  // const onCancel = () => {
-  //   console.log('setNative');
+  // const onSubmitForeign = async (formValue: IPairWords) => {
+  //   onSaveCard(formValue);
+  //   // if (cardId) {
+  //   // } else {
+  //   //   // FIXME сделать так, чтобы onSaveCard возвращала промис и включать isTurnCardToNativeRef только на response
+  //   //   onSaveCard({ newWord });
+  //   //   isTurnCardToNativeRef.current = true;
+  //   //   setTimeout(() => {
+  //   //     isTurnCardToNativeRef.current = false;
+  //   //     _setNativeWord('');
+  //   //     _setForeignWord('');
+  //   //     _setTranscription('');
+  //   //   }, 100);
+  //   // }
   // };
 
   return (
@@ -116,7 +110,7 @@ export default function NewCardPage() {
         </div>
       </div>
       <div className="content__item">
-        {formStyle === 0 && <CardUniversal onSaveCard={onSaveCard} />}
+        {formStyle === 0 && <CardUniversal onEditCard={onSaveCard} />}
         {formStyle === 1 && <CardClassicForm />}
 
       </div>
