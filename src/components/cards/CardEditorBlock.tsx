@@ -9,7 +9,9 @@ export default function CardEditorBlock(props: CardEditorBlockPropsType) {
   return (
     <div
       className="card__input"
-      onMouseUp={(event) => event.stopPropagation()}
+      onMouseUp={(event) => {
+        event.stopPropagation(); event.preventDefault();
+      }}
       role="button"
       tabIndex={-1}
     >
@@ -18,6 +20,7 @@ export default function CardEditorBlock(props: CardEditorBlockPropsType) {
         primaryButtonName={form.primaryButtonName}
         onSubmit={form.onSubmit}
         onCancel={form.onCancel}
+        onClickNext={form.onClickNext}
       />
     </div>
   );

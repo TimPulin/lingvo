@@ -13,7 +13,7 @@ import ArrowCarrotRightIcon from '../icons/ArrowCarrotRightIcon';
 
 type SwiperReactPropsType = {
   cardsList:CardsListType;
-  onSaveCard?: (args: OnSaveCardArgumentsType) => void;
+  onEditCard: (args: OnSaveCardArgumentsType) => void;
   onDeleteCard?:(cardId:number) => void;
 };
 
@@ -32,7 +32,7 @@ const initialEmptyFunction = () => {};
 const SWIPER_ACTIVE = 'swiper--active';
 
 export default function SwiperReact(props:SwiperReactPropsType) {
-  const { cardsList, onSaveCard = initialEmptyFunction, onDeleteCard = initialEmptyFunction } = props;
+  const { cardsList, onEditCard, onDeleteCard = initialEmptyFunction } = props;
 
   const [isSwiperSlideInProgress, setIsSwiperSlideInProgress] = useState(false);
   const swiperSlide = useMemo(() => isSwiperSlideInProgress, [isSwiperSlideInProgress]);
@@ -89,14 +89,14 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   key={item.id}
                 >
                   <CardUniversal
-                    onSaveCard={onSaveCard}
+                    onEditCard={onEditCard}
                     onDeleteCard={onDeleteCard}
                     pairWords={{
                       // cardId: item.phraseId,
                       cardId: item.id,
-                      nativeWord: item.phrase.value,
-                      foreignWord: item.translationPhrase.value,
-                      transcription: item.pronunciation,
+                      phrase: item.phrase.value,
+                      translationPhrase: item.translationPhrase.value,
+                      pronunciation: item.pronunciation,
                     }}
                   />
                 </div>
@@ -114,6 +114,5 @@ export default function SwiperReact(props:SwiperReactPropsType) {
 }
 
 SwiperReact.defaultProps = {
-  onSaveCard: () => {},
   onDeleteCard: () => {},
 };

@@ -7,6 +7,8 @@ import CardControlBlock from './card-control-block/CardControlBlock';
 import CardTranscription from './CardTranscription';
 import { IPairWords } from '../../utils/dictionary/dictionary-types';
 import { CardFormPropsType } from './CardForm';
+import { useDataLoading } from '../global-context-provider/loading-context-hook';
+import { useCardModeNewCard } from '../collection-page-context-provider/card-context-hooks';
 
 const CARD_EDIT = 'card--edit';
 const CARD_BODY_NATIVE = 'card__body--native';
@@ -20,18 +22,33 @@ const MAX_LETTERS_AMOUNT = 32;
 const FADE_IN_OUT_CLASS = 'card__body-fade-in-out';
 
 type CardBasePropsType = {
-  isModeNewCard?: boolean;
-  onDeleteCard: () => void;
-  isTurnCardToNative: boolean;
-  pairWords: IPairWords;
+  onDeleteCard?: () => void;
+  isTurnCardToNative?: boolean;
+  pairWords?: IPairWords;
   formNative: CardFormPropsType;
   formForeign: CardFormPropsType;
 };
 
+const emptyFunc = () => {};
+
+const defaultPairWords: IPairWords = {
+  cardId: 0,
+  phrase: '',
+  translationPhrase: '',
+  pronunciation: '',
+};
+
 export default function CardBase(props: CardBasePropsType) {
   const {
-    isModeNewCard = false, pairWords, formNative, formForeign, onDeleteCard: onCardDelete, isTurnCardToNative: turnCardToNative,
+    isTurnCardToNative = false,
+    pairWords = defaultPairWords,
+    formNative, formForeign,
+    onDeleteCard = emptyFunc,
   } = props;
+
+  const { isCardModeNewCard } = useCardModeNewCard();
+  const { isDataLoading } = useDataLoading();
+  const [waitingForDataLoading, setWaitingForDataLoading] = useState(false);
 
   const cardBodyRef = useRef<HTMLDivElement>(null);
 
@@ -49,8 +66,8 @@ export default function CardBase(props: CardBasePropsType) {
   const cardBodyRotateClass = () => (isCardBodyRotate ? rotateClassRef.current : '');
 
   useEffect(() => {
-    setIsModeEditCard(isModeNewCard);
-  }, [isModeNewCard]);
+    setIsModeEditCard(isCardModeNewCard);
+  }, [isCardModeNewCard]);
 
   const cardEditMode = () => (isModeEditCard ? CARD_EDIT : '');
   const cardBodyClass = () => (isCardNative ? CARD_BODY_NATIVE : CARD_BODY_FOREIGN);
@@ -61,7 +78,7 @@ export default function CardBase(props: CardBasePropsType) {
   const fadeInOutClass = () => (isFadeInOutRunning ? FADE_IN_OUT_CLASS : '');
 
   const classTextMax = () => {
-    const currentLettersAmount = pairWords.foreignWord.length + pairWords.transcription.length;
+    const currentLettersAmount = pairWords.translationPhrase.length + pairWords.pronunciation.length;
     if (currentLettersAmount <= MAX_LETTERS_AMOUNT) {
       return TEXT_MAX;
     }
@@ -89,8 +106,8 @@ export default function CardBase(props: CardBasePropsType) {
   }
 
   useEffect(() => {
-    if (turnCardToNative) turnCard(false);
-  }, [turnCardToNative]);
+    if (isTurnCardToNative) turnCard(false);
+  }, [isTurnCardToNative]);
 
   function closeModeEdit() {
     if (cardBodyRef.current) {
@@ -109,23 +126,33 @@ export default function CardBase(props: CardBasePropsType) {
     }
   }
 
-  // чтобы при сохранении карточка не переворачивалась
-  const onSubmitForeign = Object.assign(formForeign.onSubmit, {});
-  const localOnSubmitForeign = (event: React.FormEvent) => {
-    event.stopPropagation();
-    if (isModeNewCard) {
-      onSubmitForeign(event);
-    } else {
+  useEffect(() => {
+    if (waitingForDataLoading && !isDataLoading) {
       closeModeEdit();
-      onSubmitForeign(event);
+      setWaitingForDataLoading(false);
     }
-  };
-  formForeign.onSubmit = localOnSubmitForeign;
+  }, [isDataLoading]);
+
+  // чтобы при сохранении карточка не переворачивалась
+  if (formForeign.onSubmit !== null) {
+    const onSubmitForeign = Object.assign(formForeign.onSubmit, {});
+    const localOnSubmitForeign = (event: React.FormEvent<HTMLFormElement>) => {
+      event.stopPropagation();
+      event.preventDefault();
+      if (isCardModeNewCard) {
+        onSubmitForeign(event);
+      } else {
+        onSubmitForeign(event);
+        setWaitingForDataLoading(true);
+      }
+    };
+    formForeign.onSubmit = localOnSubmitForeign;
+  }
 
   const onCancelNative = Object.assign(formNative.onCancel, {});
   const localOnCancelNative = (event:React.FormEvent) => {
     event.stopPropagation();
-    if (isModeNewCard) {
+    if (isCardModeNewCard) {
       onCancelNative(event);
     } else {
       closeModeEdit();
@@ -136,7 +163,7 @@ export default function CardBase(props: CardBasePropsType) {
   const onCancelForeign = Object.assign(formForeign.onCancel, {});
   const localOnCancelForeign = (event:React.FormEvent) => {
     event.stopPropagation();
-    if (isModeNewCard) {
+    if (isCardModeNewCard) {
       onCancelForeign(event);
     } else {
       closeModeEdit();
@@ -156,12 +183,12 @@ export default function CardBase(props: CardBasePropsType) {
 
         <CardControlBlock
           onEdit={setIsModeEditCard}
-          onDelete={onCardDelete}
+          onDelete={onDeleteCard}
         />
 
         <div className={`card__content card__content--native ${nativeContentHide()}`}>
           <div className="card__text">
-            {pairWords.nativeWord}
+            {pairWords.phrase}
           </div>
           <CardEditorBlock
             form={formNative}
@@ -169,8 +196,8 @@ export default function CardBase(props: CardBasePropsType) {
         </div>
         <div className={`card__content card__content--foreign ${foreignContentHide()}`}>
           <div className={`card__text ${classTextMax()}`}>
-            <div>{pairWords.foreignWord}</div>
-            <CardTranscription transcription={pairWords.transcription} />
+            <div>{pairWords.translationPhrase}</div>
+            <CardTranscription transcription={pairWords.pronunciation} />
           </div>
           <CardEditorBlock
             form={formForeign}
@@ -182,5 +209,7 @@ export default function CardBase(props: CardBasePropsType) {
 }
 
 CardBase.defaultProps = {
-  isModeNewCard: false,
+  isTurnCardToNative: false,
+  onDeleteCard: emptyFunc,
+  pairWords: defaultPairWords,
 };

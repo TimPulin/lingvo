@@ -47,16 +47,17 @@ export default function CardsPage() {
     setIsMessageShow(true);
   }
 
-  const onEditCard = async ({ newWord, cardId }:OnSaveCardArgumentsType) => {
+  const onEditCard = ({ newWord, cardId }:OnSaveCardArgumentsType) => {
     if (userToken && cardId && currentCollectionId && newWord) {
-      try {
-        setIsDataLoading(true);
-        await editCard(userToken, currentCollectionId, cardId, newWord); // userToken
-        getCardsCollectionLocal(userToken, currentCollectionId, langPack.CARD_CHANGES_MADE);
-      } catch (error) {
-        showMessage(CANT_SAVE_CHANGE);
-        setIsDataLoading(false);
-      }
+      setIsDataLoading(true);
+      editCard(userToken, currentCollectionId, cardId, newWord)
+        .then(() => {
+          getCardsCollectionLocal(userToken, currentCollectionId, langPack.CARD_CHANGES_MADE);
+        })
+        .catch(() => {
+          showMessage(CANT_SAVE_CHANGE);
+          setIsDataLoading(false);
+        });
     }
   };
 
@@ -116,7 +117,7 @@ export default function CardsPage() {
       <div className="content__list content__list--cards-list-page">
         <div className="content__item ">
           <SwiperReact
-            onSaveCard={onEditCard}
+            onEditCard={onEditCard}
             onDeleteCard={onDeleteCard}
             cardsList={cardsCollection.binds}
           />

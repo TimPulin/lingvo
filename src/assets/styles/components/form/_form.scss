@@ -8,6 +8,7 @@
   height: 100%;
 
   &__body {
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -19,6 +20,10 @@
   &__footer {
     display: flex;
     justify-content: space-between;
+  }
+
+  &__label {
+    width: 100%;
   }
 
   .ant-form-item {
