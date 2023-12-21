@@ -18,7 +18,7 @@ import RadioAntGroup from '../components/radio/radio-ant-group/RadioAntGroup';
 import { OnSaveCardArgumentsType } from '../utils/types';
 import { GetCardsCollectionLocalType } from './CollectionPage';
 import ArrowLeftIcon from '../components/icons/ArrowLeftIcon';
-import NewCardPageForm from '../components/NewCardPageForm';
+import NewCardPageForm from '../components/new-card-page-form/NewCardPageForm';
 
 /* TODO перевести */
 const formStyleOptions = [
