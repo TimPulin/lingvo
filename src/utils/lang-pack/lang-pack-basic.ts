@@ -7,6 +7,7 @@ export const dataLangs = {
     SETTING_PAGE: 'Настройки',
     COLLECTIONS_PAGE: 'Коллекции',
     NEW_COLLECTION_PAGE: 'Новая коллекция',
+    FEEDBACK_PAGE: 'Обратная связь',
 
     MAIN: 'Главная',
     CREATE_NEW_CARD: 'Создать новую карточку',
@@ -23,6 +24,9 @@ export const dataLangs = {
     EDIT: 'Редактировать',
     DELETE: 'Удалить',
     ADD_CARD: 'Добавить карточку',
+
+    BACK_TO_COLLECTION: 'Вернуться к коллекции',
+    BACK_TO_COLLECTIONS_LIST: 'Вернуться к списку коллекций',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Изменения внесены',
@@ -51,6 +55,11 @@ export const dataLangs = {
     INSTALL_APP: 'Установить приложение',
 
     FEEDBACK: 'Обратная связь',
+    SENDER: 'Отправитель',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Тема сообщения',
+    FEEDBACKMESSAGE_MESSAGE: 'Сообщение',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Сообщение успешно отправлено',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Не смогли отправить сообщение. Попробуйте позже',
   },
 
   en: {
@@ -61,6 +70,7 @@ export const dataLangs = {
     SETTING_PAGE: 'Settings',
     COLLECTIONS_PAGE: 'Collections',
     NEW_COLLECTION_PAGE: 'New collection',
+    FEEDBACK_PAGE: 'Feedback',
 
     MAIN: 'Main',
     CREATE_NEW_CARD: 'Create new card',
@@ -77,6 +87,9 @@ export const dataLangs = {
     EDIT: 'Edit',
     DELETE: 'Delete',
     ADD_CARD: 'Add card',
+
+    BACK_TO_COLLECTION: 'Go back to the collection',
+    BACK_TO_COLLECTIONS_LIST: 'Go back to the collections',
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'The changes were carefully made',
@@ -106,6 +119,11 @@ export const dataLangs = {
     INSTALL_APP: 'Install application',
 
     FEEDBACK: 'Feedback',
+    SENDER: 'Sender',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject of the message',
+    FEEDBACKMESSAGE_MESSAGE: 'Message',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent successfully',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Impossible to send the message. Try again later',
   },
 
   esl: {
@@ -116,6 +134,7 @@ export const dataLangs = {
     SETTING_PAGE: 'Ajustes',
     COLLECTIONS_PAGE: 'Colecciones',
     NEW_COLLECTION_PAGE: 'Nueva Coleccione',
+    FEEDBACK_PAGE: 'Comentarios',
 
     MAIN: 'Principal',
     CREATE_NEW_CARD: 'Crear una nueva tarjeta',
@@ -133,11 +152,13 @@ export const dataLangs = {
     DELETE: 'Borra',
     ADD_CARD: 'Crear tarjeta',
 
+    BACK_TO_COLLECTION: 'Volver a la colección',
+    BACK_TO_COLLECTIONS_LIST: 'Volver a las colecciones',
+
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'Tarjeta modificada',
     CARD_SAVED: 'Nueva tarjeta guardada',
 
-    // новое
     COLLECTION: 'Colección',
     NATIVE_LANGUAGE_COLLECTION: 'Tu idioma',
     FOREIGN_LANGUAGE_COLLECTION: 'Idioma que aprendes',
@@ -161,6 +182,11 @@ export const dataLangs = {
     INSTALL_APP: 'Instalar aplicación',
 
     FEEDBACK: 'Comentarios',
+    SENDER: 'Enviador',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Tema del mensaje',
+    FEEDBACKMESSAGE_MESSAGE: 'Mensaje',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Mensaje enviado exitosamente',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Es imposible enviar el mensaje. Por favor intenta  más tarde',
   },
 
   hebrew: {
@@ -171,6 +197,7 @@ export const dataLangs = {
     SETTING_PAGE: 'הגדרת',
     COLLECTIONS_PAGE: 'אוספים',
     NEW_COLLECTION_PAGE: 'אוסף חדש',
+    FEEDBACK_PAGE: 'משוב',
 
     MAIN: 'בית',
     CREATE_NEW_CARD: 'להתחיל קלף חדש להתחיל כרטיס חדש',
@@ -187,6 +214,10 @@ export const dataLangs = {
     EDIT: 'לשנות לערוך',
     DELETE: 'לסלק',
     ADD_CARD: 'להתחיל כרטיס',
+    // TODO добавить
+    BACK_TO_COLLECTION: 'Back to collection',
+    BACK_TO_COLLECTIONS_LIST: 'Back to collections',
+    // TODO добавить END
 
     // ФРАЗЫ
     CARD_CHANGES_MADE: 'הוכנסו שינויים',
@@ -215,6 +246,13 @@ export const dataLangs = {
     PLEASE_AUTHORIZATION: 'נא להיכנס',
     INSTALL_APP: 'התקן אפליקציה',
 
-    FEEDBACK: '', // TODO
+    FEEDBACK: 'משוב',
+    // TODO добавить
+    SENDER: 'Sender',
+    FEEDBACKMESSAGE_MESSAGE_THEME: 'Subject',
+    FEEDBACKMESSAGE_MESSAGE: 'Message',
+    FEEDBACKMESSAGE_MESSAGE_SEND: 'Message sent',
+    FEEDBACKMESSAGE_MESSAGE_DNT_SEND: 'Couldn\'t send a message. Try later',
+    // TODO добавить END
   },
 };

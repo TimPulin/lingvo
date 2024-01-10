@@ -7,10 +7,13 @@ import {
 import CardUniversal from '../cards/CardUniversal';
 import { SwiperSlideInProgressContext } from './swiper-react-context-hooks';
 import { CardsListType, OnSaveCardArgumentsType } from '../../utils/types';
+import ButtonBase from '../base/ButtonBase';
+import ArrowCarrotLeftIcon from '../icons/ArrowCarrotLeftIcon';
+import ArrowCarrotRightIcon from '../icons/ArrowCarrotRightIcon';
 
 type SwiperReactPropsType = {
   cardsList:CardsListType;
-  onSaveCard?: (args: OnSaveCardArgumentsType) => void;
+  onEditCard: (args: OnSaveCardArgumentsType) => void;
   onDeleteCard?:(cardId:number) => void;
 };
 
@@ -29,7 +32,7 @@ const initialEmptyFunction = () => {};
 const SWIPER_ACTIVE = 'swiper--active';
 
 export default function SwiperReact(props:SwiperReactPropsType) {
-  const { cardsList, onSaveCard = initialEmptyFunction, onDeleteCard = initialEmptyFunction } = props;
+  const { cardsList, onEditCard, onDeleteCard = initialEmptyFunction } = props;
 
   const [isSwiperSlideInProgress, setIsSwiperSlideInProgress] = useState(false);
   const swiperSlide = useMemo(() => isSwiperSlideInProgress, [isSwiperSlideInProgress]);
@@ -56,6 +59,14 @@ export default function SwiperReact(props:SwiperReactPropsType) {
     }
   }
 
+  const slideNext = () => {
+    if (swiperRef.current !== null) swiperRef.current.slideNext();
+  };
+
+  const slidePrev = () => {
+    if (swiperRef.current !== null) swiperRef.current.slidePrev();
+  };
+
   useEffect(() => {
     swiperInit();
 
@@ -78,20 +89,24 @@ export default function SwiperReact(props:SwiperReactPropsType) {
                   key={item.id}
                 >
                   <CardUniversal
-                    onSaveCard={onSaveCard}
+                    onEditCard={onEditCard}
                     onDeleteCard={onDeleteCard}
                     pairWords={{
                       // cardId: item.phraseId,
                       cardId: item.id,
-                      nativeWord: item.phrase.value,
-                      foreignWord: item.translationPhrase.value,
-                      transcription: item.pronunciation,
+                      phrase: item.phrase.value,
+                      translationPhrase: item.translationPhrase.value,
+                      pronunciation: item.pronunciation,
                     }}
                   />
                 </div>
               ))
             }
           </div>
+
+          <ButtonBase classAdditional="swiper__button" onClickFunction={slideNext} ElementJSX={<ArrowCarrotLeftIcon />} />
+          <ButtonBase classAdditional="swiper__button swiper__button--prev" onClickFunction={slidePrev} ElementJSX={<ArrowCarrotRightIcon />} />
+
         </div>
       </div>
     </SwiperSlideInProgressContext.Provider>
@@ -99,6 +114,5 @@ export default function SwiperReact(props:SwiperReactPropsType) {
 }
 
 SwiperReact.defaultProps = {
-  onSaveCard: () => {},
   onDeleteCard: () => {},
 };

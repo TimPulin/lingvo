@@ -107,10 +107,11 @@ export type CollectionFormType = {
   translationLanguageId: number
 };
 
-export type NewWordType = {
+export interface NewWordType {
   phrase: string,
   translationPhrase: string,
-};
+  pronunciation: string,
+}
 
 // =============================
 

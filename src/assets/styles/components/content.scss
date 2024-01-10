@@ -10,6 +10,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding-top: 20px; // TODO поставил как в стиле content__list--single-top. Если отрисовка нормальная везде - удалить стиль content__list--single-top
     padding-bottom: 20px;
   }
 
@@ -70,7 +71,18 @@
 
   .content__item {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .content__item--form-style-radio {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .form--classic {
+    justify-content: flex-start;
+    width: var(--item-width);
   }
 
   .card {
@@ -90,8 +102,8 @@
 
 }
 
-// TODO проверить на используемость
 .content__list--single-top {
+  padding-top: 20px;
   align-items: flex-start;
 
   .content__item {
